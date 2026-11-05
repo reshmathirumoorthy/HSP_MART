@@ -1,0 +1,340 @@
+.section {
+  padding-block: clamp(3rem, 6vw, 5rem);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.inner {
+  width: min(100% - 2rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.headingBlock {
+  display: grid;
+  gap: 0.65rem;
+  max-width: 40rem;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--text-overline);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-brand-dark);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-brand-dark);
+}
+
+.lead {
+  margin: 0;
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 42rem;
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--color-brand);
+  color: var(--color-white);
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: var(--shadow-card);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.viewAll:hover {
+  background: var(--color-brand-dark);
+}
+
+.carouselWrapper {
+  position: relative;
+  min-width: 0;
+}
+
+.grid {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.5rem;
+  min-width: 0;
+  scroll-behavior: smooth;
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: min(17rem, 100%);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card-lg);
+  background: var(--color-white);
+  overflow: hidden;
+  transition:
+    border-color var(--duration) var(--ease-out),
+    box-shadow var(--duration) var(--ease-out),
+    transform var(--duration) var(--ease-out);
+  animation: cardReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: inherit;
+}
+
+.card:hover {
+  border-color: var(--color-brand);
+  box-shadow: var(--shadow-lift);
+  transform: translatey(-6px);
+}
+
+.visualWrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--surface-panel);
+}
+
+.visualLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.04) rotate(1deg);
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0.85;
+    transform: translatey(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translatey(0);
+  }
+}
+
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translatey(-50%);
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--color-white);
+  color: var(--color-brand-dark);
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.navBtn:hover:not(:disabled) {
+  background: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-brand);
+}
+
+.navBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.navBtnLeft {
+  left: -1.25rem;
+}
+
+.navBtnRight {
+  right: -1.25rem;
+}
+
+.navBtnDisabled {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .card {
+    width: min(15rem, 100%);
+  }
+
+  .navBtnLeft {
+    left: -1rem;
+  }
+
+  .navBtnRight {
+    right: -1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .image,
+  .viewAll,
+  .navBtn {
+    animation: none;
+    transition: none;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-card);
+    transform: none;
+  }
+
+  .card:hover .image {
+    transform: none;
+  }
+
+  .navBtn {
+    transition: none;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0.9rem 0.9rem;
+  flex: 1;
+}
+
+.category {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+}
+
+.nameLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.name:hover {
+  color: var(--color-brand);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.compare {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.discountBadge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-luxury-red);
+  color: var(--color-white);
+}
+
+.actions {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.quickAddBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--color-white);
+  color: var(--color-brand-dark);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.quickAddBtn:hover {
+  background: var(--color-brand);
+  color: var(--color-white);
+  border-color: var(--color-brand);
+}

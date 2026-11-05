@@ -1,0 +1,356 @@
+.panel {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.category {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.title {
+  margin: -0.1rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.sku {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.summary {
+  margin: 0 0 0.75rem;
+  max-width: 34rem;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.price {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-brand);
+}
+
+.compare {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.stock {
+  margin: 0.25rem 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+  font-weight: 600;
+}
+
+.inStock {
+  color: var(--color-brand-dark);
+}
+
+.outStock {
+  color: var(--text-muted);
+}
+
+.optionGroup {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.optionLabel {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--text-muted);
+}
+
+.optionLabel strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  margin-left: 0.35rem;
+}
+
+.purchaseBlock {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.25rem;
+  padding: 1rem 0 0.15rem;
+  border-top: 1px solid var(--border);
+}
+
+.addBtn {
+  justify-self: stretch;
+  width: 100%;
+  max-width: 30rem;
+  min-width: 0;
+  min-height: 3.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.85rem 1.5rem;
+}
+
+.addBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.customiseBtn {
+  justify-self: stretch;
+  width: 100%;
+  max-width: 30rem;
+  min-width: 0;
+  min-height: 3.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  background: transparent;
+  color: var(--color-brand-dark);
+  border: 1px solid var(--color-brand-dark);
+}
+
+.customiseBtn:hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--color-brand-dark);
+  color: var(--color-white);
+}
+
+.customiseBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.wishlistRow {
+  justify-self: start;
+  width: fit-content;
+}
+
+.feedback {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--color-brand-dark);
+  font-weight: 500;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.businessNote {
+  display: grid;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.businessLabel {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.businessCopy {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 34rem;
+}
+
+.moq {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-secondary);
+}
+
+.entry {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  padding: 1rem 0 0.15rem;
+  border-top: 1px solid var(--border);
+}
+
+.configCue {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 34rem;
+}
+
+.ghostAction {
+  justify-self: start;
+  margin-top: 0.1rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-brand-dark);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1rem;
+  text-decoration: none;
+}
+
+.ghostAction:hover {
+  color: var(--color-brand);
+}
+
+.ghostAction:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.localNote {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.mobileBar {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .addBtn {
+    min-width: min(18rem, 100%);
+  }
+}
+
+@media (max-width: 959px) {
+  .hasMobileBar {
+    padding-bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  :global(body:has([data-compare-open="true"])) .hasMobileBar {
+    padding-bottom: calc(
+      5.25rem + var(--chrome-compare-clearance) + env(safe-area-inset-bottom, 0px)
+    );
+  }
+
+  .mobileBar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-mobile-bar);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--border);
+    background: color-mix(in srgb, var(--color-background) 94%, transparent);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -0.5rem 1.5rem color-mix(in srgb, var(--color-text) 8%, transparent);
+  }
+
+  .mobileBarMeta {
+    display: grid;
+    gap: 0.15rem;
+    min-width: 0;
+  }
+
+  .mobileBarPrice {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .mobileBarStock {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .mobileBarAction {
+    min-height: var(--touch-min);
+    min-width: 10rem;
+    justify-content: center;
+    white-space: nowrap;
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobileBar {
+    backdrop-filter: none;
+    background: var(--color-background);
+  }
+}

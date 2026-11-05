@@ -1,0 +1,50 @@
+[
+  {
+    "id": "blue",
+    "label": "Blue",
+    "swatch": "#2F5FA8",
+    "images": [
+      "/images/products/variants/bottle-blue.jpg"
+    ]
+  },
+  {
+    "id": "lilac",
+    "label": "Lilac",
+    "swatch": "#B8A4C9",
+    "images": [
+      "/images/products/variants/bottle-lilac.jpg"
+    ]
+  },
+  {
+    "id": "red",
+    "label": "Red",
+    "swatch": "#C0392B",
+    "images": [
+      "/images/products/variants/bottle-red.jpg"
+    ]
+  },
+  {
+    "id": "pink",
+    "label": "Pink",
+    "swatch": "#E8B4C8",
+    "images": [
+      "/images/products/variants/bottle-pink.jpg"
+    ]
+  },
+  {
+    "id": "green",
+    "label": "Green",
+    "swatch": "#2E6B4F",
+    "images": [
+      "/images/products/variants/bottle-green.jpg"
+    ]
+  },
+  {
+    "id": "black",
+    "label": "Black",
+    "swatch": "#1C211D",
+    "images": [
+      "/images/products/variants/bottle-black.jpg"
+    ]
+  }
+]

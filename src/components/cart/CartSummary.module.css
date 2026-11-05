@@ -1,0 +1,212 @@
+.summary {
+  display: grid;
+  gap: 1rem;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xl);
+  background: var(--surface-feature);
+  box-shadow: var(--shadow-card);
+  align-content: start;
+  position: relative;
+}
+
+.summary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-accent));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-dark);
+}
+
+.rows {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.row,
+.rowMuted {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 1rem;
+}
+
+.rowMuted {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.row strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.totalRow {
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.totalRow strong {
+  font-size: 1.35rem;
+  color: var(--color-brand-dark);
+}
+
+.note {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.blocked {
+  font-size: 0.88rem;
+  color: var(--color-luxury-red);
+  font-weight: 600;
+  line-height: 1.45;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-luxury-red) 8%, var(--surface-panel));
+  border: 1px solid color-mix(in srgb, var(--color-luxury-red) 20%, var(--hairline));
+}
+
+@media (min-width: 960px) {
+  .summary {
+    position: sticky;
+    top: calc(var(--nav-height) + 1.5rem);
+  }
+}
+
+.checkout {
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  box-shadow: var(--shadow-card);
+}
+
+.checkout:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.continue {
+  justify-self: start;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-dark);
+  border-bottom: 1px solid var(--color-brand);
+  padding-bottom: 0.15rem;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.continue:hover {
+  color: var(--color-brand);
+}
+
+.localNote {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.bulkBlock {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.bulkLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-muted);
+}
+
+.bulkCopy {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.bulkLink {
+  justify-self: start;
+  margin-top: 0.15rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand-dark);
+  border-bottom: 1px solid var(--color-brand);
+  padding-bottom: 0.1rem;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.bulkLink:hover {
+  color: var(--color-brand);
+}
+
+.clearBlock {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.clearTrigger {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.clearTrigger:hover {
+  color: var(--color-brand-dark);
+}
+
+.confirm {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.confirm p {
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.confirmActions {
+  display: flex;
+  gap: 0.85rem;
+}
+
+.confirmActions button {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.confirmClear {
+  color: var(--color-brand-dark) !important;
+  border-bottom: 1px solid var(--color-brand-dark);
+  padding-bottom: 0.1rem;
+}
+
+.confirmClear:hover {
+  color: var(--color-brand) !important;
+}

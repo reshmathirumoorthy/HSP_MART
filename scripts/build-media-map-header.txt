@@ -1,0 +1,15 @@
+/**
+ * Official HSP Mart product photography downloaded from hspmart.com (Shopify CDN).
+ * Each entry maps a catalogue product id to local public paths + source handle.
+ * Only verified official store images are included — no stock/AI substitutes.
+ */
+export type ProductMediaEntry = {
+  productId: string;
+  sourceHandle: string;
+  sourceTitle: string;
+  images: string[];
+  /** Suggested display name aligned with the official listing. */
+  officialName?: string;
+};
+
+export const productMedia: ProductMediaEntry[] = [

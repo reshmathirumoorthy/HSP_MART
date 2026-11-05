@@ -1,0 +1,43 @@
+.nav {
+  margin-bottom: 1.5rem;
+}
+
+.item a:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.55rem;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.item a {
+  color: var(--text-secondary);
+  transition: color var(--duration) var(--ease-out);
+}
+
+.item a:hover {
+  color: var(--text-primary);
+}
+
+.item:not(:last-child)::after {
+  content: "/";
+  color: var(--text-muted);
+}
+
+.item span[aria-current="page"] {
+  color: var(--text-primary);
+}

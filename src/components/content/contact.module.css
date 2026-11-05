@@ -1,0 +1,741 @@
+/* =============================================================================
+   Contact — premium corporate contact page
+   Ivory #F5F3EC · forest green #015C31 · deep green #063B25
+   DM Sans (body) + Instrument Serif (display)
+   ============================================================================= */
+
+.page {
+  background:
+    radial-gradient(72rem 34rem at 85% -16%, rgba(1, 92, 49, 0.09), transparent 62%),
+    var(--color-ivory);
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(3rem, 5vw, 4.5rem);
+  color: var(--text-primary);
+}
+
+.container {
+  display: grid;
+  gap: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+/* -----------------------------------------------------------------------------
+   Introduction
+   -------------------------------------------------------------------------- */
+
+.hero {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 48rem;
+  padding-bottom: clamp(1.1rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--border-cream);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  color: var(--color-brand-dark);
+}
+
+.lead {
+  margin: 0.1rem 0 0;
+  max-width: 52ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* -----------------------------------------------------------------------------
+   Two-column main section
+   -------------------------------------------------------------------------- */
+
+.mainGrid {
+  display: grid;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  align-items: stretch;
+}
+
+/* Left — deep green information panel */
+
+.infoPanel {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 1.15rem;
+  align-content: start;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  border-radius: 20px;
+  background:
+    radial-gradient(28rem 18rem at 112% -12%, rgba(245, 243, 236, 0.09), transparent 60%),
+    linear-gradient(165deg, #07401f 0%, #063b25 55%, #052f1e 100%);
+  color: #f5f3ec;
+  box-shadow: 0 20px 48px rgba(6, 59, 37, 0.32);
+}
+
+.infoPanel::after {
+  content: "";
+  position: absolute;
+  right: -6.5rem;
+  bottom: -6.5rem;
+  width: 17rem;
+  height: 17rem;
+  border-radius: 50%;
+  border: 2.1rem solid rgba(245, 243, 236, 0.045);
+  pointer-events: none;
+}
+
+.infoTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2vw, 1.8rem);
+  line-height: 1.18;
+  color: #fbfbf7;
+}
+
+.infoCopy {
+  margin: -0.45rem 0 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(245, 243, 236, 0.72);
+  max-width: 44ch;
+}
+
+.infoList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.infoItem {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+  padding: 0.85rem 0.35rem;
+  border-top: 1px solid rgba(245, 243, 236, 0.13);
+}
+
+.infoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  background: rgba(245, 243, 236, 0.07);
+  border: 1px solid rgba(245, 243, 236, 0.14);
+  color: #8fd0aa;
+}
+
+.infoLabel {
+  display: block;
+  margin-bottom: 0.18rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 243, 236, 0.55);
+}
+
+.infoValue {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: #fbfbf7;
+  overflow-wrap: anywhere;
+}
+
+.infoLink {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.infoLink:hover {
+  color: #b8e6cd;
+  border-bottom-color: currentColor;
+}
+
+.infoLink:focus-visible {
+  outline: 2px solid #8fd0aa;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.directionsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8fd0aa;
+  text-decoration: none;
+  width: fit-content;
+  border-radius: 4px;
+}
+
+.directionsLink:hover {
+  color: #c9f0da;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.directionsLink:focus-visible {
+  outline: 2px solid #8fd0aa;
+  outline-offset: 2px;
+}
+
+/* Right — enquiry form card */
+
+.formCard {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+  padding: clamp(1.25rem, 2.2vw, 1.75rem);
+  border-radius: 20px;
+  background: var(--color-white);
+  border: 1px solid var(--border-cream);
+  box-shadow: 0 1px 2px rgba(31, 37, 33, 0.05), 0 14px 36px rgba(31, 37, 33, 0.07);
+}
+
+.formTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.55rem;
+  line-height: 1.2;
+  color: var(--color-brand-dark);
+}
+
+.formCopy {
+  margin: -0.25rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.form {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.formGrid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: 1fr;
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.fieldLabelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fieldLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3c443d;
+}
+
+.requiredMark {
+  color: var(--color-brand);
+  margin-left: 0.1rem;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.62rem 0.8rem;
+  border: 1px solid #dcd9cc;
+  border-radius: 12px;
+  background: #fdfcf9;
+  font: inherit;
+  font-size: 16px;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.select {
+  appearance: none;
+  padding-right: 2.25rem;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2320251F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 0.7rem center / 1rem,
+    #fdfcf9;
+  cursor: pointer;
+}
+
+.textarea {
+  min-height: 7rem;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #a8a89d;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: #b9b5a4;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(1, 92, 49, 0.16);
+  background: #ffffff;
+}
+
+.input[aria-invalid="true"],
+.select[aria-invalid="true"],
+.textarea[aria-invalid="true"] {
+  border-color: #b42318;
+}
+
+.fieldError {
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #b42318;
+}
+
+.statusError,
+.statusSuccess {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.statusError {
+  background: rgba(180, 35, 24, 0.06);
+  border: 1px solid rgba(180, 35, 24, 0.22);
+  color: #b42318;
+}
+
+.statusSuccess {
+  background: rgba(1, 92, 49, 0.07);
+  border: 1px solid rgba(1, 92, 49, 0.22);
+  color: var(--color-brand-dark);
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-right-color: #ffffff;
+  animation: contactSpin 0.7s linear infinite;
+}
+
+@keyframes contactSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.honestNote {
+  margin: 0;
+  padding-left: 0.65rem;
+  border-left: 2px solid var(--color-ivory-deep, #e9e6da);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Success panel (replaces the form after a valid demo submission) */
+
+.successPanel {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 1.5rem 1rem 0.5rem;
+}
+
+.successIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50%;
+  background: var(--surface-green-tint);
+  border: 1px solid var(--border-brand);
+  color: var(--color-brand);
+  margin-bottom: 0.25rem;
+}
+
+.successTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--color-brand-dark);
+}
+
+.successCopy {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.successActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* -----------------------------------------------------------------------------
+   Visit Our Store — location section
+   -------------------------------------------------------------------------- */
+
+.locationSection {
+  display: grid;
+  gap: 0.9rem;
+  padding: clamp(1.25rem, 2vw, 1.6rem);
+  border-radius: 20px;
+  background: var(--color-white);
+  border: 1px solid var(--border-cream);
+  box-shadow: 0 1px 2px rgba(31, 37, 33, 0.05), 0 14px 36px rgba(31, 37, 33, 0.07);
+}
+
+.locationHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.locationTitle {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+  line-height: 1.15;
+  color: var(--color-brand-dark);
+}
+
+.locationCopy {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 52ch;
+}
+
+.locationGrid {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.addressStack {
+  display: grid;
+  gap: 0.85rem;
+  align-content: start;
+}
+
+.addressCard {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: start;
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: var(--color-ivory);
+  border: 1px solid var(--border-cream);
+}
+
+.addressIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  background: var(--color-white);
+  border: 1px solid var(--border-cream);
+  color: var(--color-brand);
+}
+
+.addressLabel {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.addressText {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.addressMeta {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.mapWrap {
+  position: relative;
+  min-height: 15rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-cream);
+  background: var(--surface-panel, #faf7ef);
+}
+
+.mapFrame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 15rem;
+  border: 0;
+}
+
+.mapLink {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-pill);
+  background: rgba(6, 59, 37, 0.92);
+  color: #fbfbf7;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease;
+}
+
+.mapLink:hover {
+  background: var(--color-brand-dark);
+}
+
+.mapLink:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   Business support strip
+   -------------------------------------------------------------------------- */
+
+.supportStrip {
+  display: grid;
+  gap: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--color-brand-dark);
+}
+
+.supportItem {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.05rem 1.15rem;
+  border-top: 1px solid rgba(245, 243, 236, 0.12);
+}
+
+.supportItem:first-child {
+  border-top: 0;
+}
+
+.supportIcon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  background: rgba(245, 243, 236, 0.07);
+  border: 1px solid rgba(245, 243, 236, 0.14);
+  color: #8fd0aa;
+}
+
+.supportTitle {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fbfbf7;
+}
+
+.supportCopy {
+  margin: 0.08rem 0 0;
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: rgba(245, 243, 236, 0.68);
+}
+
+/* -----------------------------------------------------------------------------
+   Bottom actions
+   -------------------------------------------------------------------------- */
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem 2rem;
+  flex-wrap: wrap;
+  padding: clamp(0.9rem, 1.6vw, 1.2rem) clamp(0.25rem, 1vw, 0.5rem) 0;
+  border-top: 1px solid var(--border-cream);
+}
+
+.actionsCopy {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.actionsCopy strong {
+  color: var(--text-primary);
+}
+
+.actionsLinks {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+/* -----------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 560px) {
+  .formGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .formGrid .full {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 900px) {
+  .supportStrip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .supportItem {
+    border-top: 0;
+    border-left: 1px solid rgba(245, 243, 236, 0.12);
+  }
+
+  .supportItem:first-child {
+    border-left: 0;
+  }
+
+  .locationGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .mainGrid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+@media (max-width: 1099px) {
+  .mainGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .infoPanel {
+    order: 2;
+  }
+
+  .formCard {
+    order: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    padding-top: 1.25rem;
+  }
+
+  .actionsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actionsLinks {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .actionsLinks .btn {
+    width: 100%;
+  }
+
+  .addressCard {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infoLink,
+  .directionsLink,
+  .input,
+  .select,
+  .textarea,
+  .mapLink,
+  .spinner {
+    transition: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,144 @@
+.page {
+  min-height: 70vh;
+  background: var(--color-ivory);
+  padding: clamp(1.75rem, 4vw, 2.75rem) 0 5rem;
+}
+
+.inner {
+  display: grid;
+  gap: 2rem;
+}
+
+.banner {
+  padding: clamp(1.75rem, 3.5vw, 2.35rem) clamp(1.35rem, 3vw, 2rem);
+  border: 0;
+  border-radius: var(--radius-card-lg);
+  background: var(--color-brand-dark);
+  color: #fffdf8;
+}
+
+.header {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 42rem;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cfe6d8;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: #fffdf8;
+}
+
+.copy {
+  font-size: 1rem;
+  color: rgba(255, 253, 248, 0.88);
+  line-height: 1.6;
+  max-width: 36rem;
+}
+
+.layout {
+  display: grid;
+  gap: 2.25rem;
+  align-items: start;
+}
+
+.main {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.side {
+  min-width: 0;
+}
+
+.section {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.sectionHead {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sectionNumber {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-brand-dark);
+}
+
+.sectionCopy {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 34rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  padding-top: 0.5rem;
+}
+
+.ghostBtn {
+  min-height: 3rem;
+  padding: 0.85rem 1.35rem;
+  border: 1px solid var(--border-strong);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.alert {
+  font-size: 0.88rem;
+  color: var(--accent-warm-dark);
+  line-height: 1.45;
+}
+
+@media (min-width: 960px) {
+  .page {
+    padding-top: 2.75rem;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.75fr);
+    gap: 3rem;
+  }
+
+  .side {
+    position: sticky;
+    top: calc(var(--nav-height) + 1.25rem);
+  }
+}

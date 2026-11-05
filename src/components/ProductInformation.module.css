@@ -1,0 +1,72 @@
+.section {
+  display: grid;
+  gap: 2rem;
+  padding: 2.25rem 0 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.block {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 40rem;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-overline);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.copy {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 36rem;
+}
+
+.specs {
+  display: grid;
+  gap: 0;
+}
+
+.specRow {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.specRow dt {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.specRow dd {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-top: 1.75rem;
+  }
+
+  .specRow {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}

@@ -1,0 +1,57 @@
+.section {
+  padding-block: 2rem;
+  background: var(--color-ivory);
+  border-top: 1px solid var(--border);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.item {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem 1.05rem;
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.mark {
+  width: 1.65rem;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-gold));
+  margin-bottom: 0.15rem;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.body {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 48rem;
+  }
+}

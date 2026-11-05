@@ -1,0 +1,91 @@
+.section {
+  padding: 0 0 2.5rem;
+  background: var(--color-background);
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  min-height: 12rem;
+  padding: 1.5rem 1.6rem;
+  border-radius: var(--radius-card-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.gold {
+  background: linear-gradient(145deg, #d4a044 0%, #c5a059 55%, #b8923f 100%);
+  color: var(--color-brand-dark);
+}
+
+.green {
+  background: linear-gradient(145deg, #0a4a2c 0%, #063b25 60%, #022818 100%);
+  color: var(--color-gold-soft);
+}
+
+.badge {
+  justify-self: start;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, white 22%, transparent);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gold .badge {
+  background: color-mix(in srgb, var(--color-brand-dark) 12%, transparent);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 14ch;
+}
+
+.note {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  opacity: 0.85;
+  max-width: 28ch;
+}
+
+.cta {
+  margin-top: auto;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.green .cta {
+  color: var(--color-gold);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.15rem;
+  }
+
+  .card {
+    min-height: 14rem;
+  }
+}

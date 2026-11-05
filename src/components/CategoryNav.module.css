@@ -1,0 +1,79 @@
+.nav {
+  min-width: 0;
+  max-width: 100%;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card-lg);
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+}
+
+/* Subcategory variant: borderless pills sitting directly on the page */
+.subNav {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.list {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding: 0.1rem;
+  min-width: 0;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.item {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.45rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--duration) var(--ease-out),
+    background var(--duration) var(--ease-out),
+    border-color var(--duration) var(--ease-out);
+}
+
+.item:hover {
+  color: var(--color-brand-dark);
+  background: color-mix(in srgb, var(--color-sage) 18%, transparent);
+}
+
+.item:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+  font-weight: 600;
+}
+
+.active:hover {
+  background: var(--color-brand-dark);
+  border-color: var(--color-brand-dark);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}

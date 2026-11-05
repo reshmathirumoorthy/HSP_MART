@@ -1,0 +1,61 @@
+.section {
+  background:
+    linear-gradient(180deg, var(--bg-sand) 0%, var(--surface) 55%, var(--bg-primary) 100%);
+  padding: var(--space-9) 0;
+  border-top: 1px solid var(--border);
+}
+
+.inner {
+  display: grid;
+  gap: 3rem;
+}
+
+.copy {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 32rem;
+}
+
+.lead {
+  max-width: 28rem;
+}
+
+.contexts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.contexts li {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 7.5rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  box-shadow: var(--shadow-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  line-height: 1;
+  color: var(--color-brand-dark);
+}
+
+.contexts li span {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+@media (min-width: 900px) {
+  .inner {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: end;
+    gap: 4rem;
+  }
+
+  .contexts {
+    justify-content: flex-end;
+  }
+}

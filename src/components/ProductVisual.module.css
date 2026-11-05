@@ -1,0 +1,473 @@
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  isolation: isolate;
+}
+
+.hasPhoto {
+  /* Nude-beige panel behind product photos */
+  --panel-nude: #e5d8c7;
+
+  background: var(--panel-nude);
+  box-shadow: none;
+  border-color: color-mix(in srgb, #c9b8a4 55%, transparent);
+  /* Do not clip product silhouettes — card radius clips via visualWrap only */
+  overflow: visible;
+}
+
+/* Uniform nude-beige for every photo panel */
+.toneSand.hasPhoto,
+.toneStone.hasPhoto,
+.toneClay.hasPhoto,
+.toneTaupe.hasPhoto,
+.toneOlive.hasPhoto,
+.toneCharcoal.hasPhoto {
+  background: var(--panel-nude);
+}
+
+.stageCard.hasPhoto,
+.stageGallery.hasPhoto {
+  border: 0;
+  box-shadow: none;
+}
+
+.stageCompact.hasPhoto {
+  border-color: color-mix(in srgb, #c9b8a4 50%, transparent);
+}
+
+.photoFrame {
+  position: absolute;
+  /* Inset (not padding) — Next/Image fill is absolutely positioned.
+     Generous inset keeps edge-tight photos clear of card radius clipping. */
+  inset: clamp(0.75rem, 5.5%, 1.5rem);
+  z-index: 1;
+  display: block;
+  overflow: visible;
+}
+
+.stageCard .photoFrame {
+  inset: clamp(1.05rem, 7.5%, 1.85rem);
+}
+
+.stageGallery .photoFrame {
+  inset: clamp(1.15rem, 7.5%, 2rem);
+}
+
+.stageCompact .photoFrame {
+  inset: 0.55rem;
+}
+
+.photo {
+  object-fit: contain;
+  object-position: center center;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stageCard:hover .photoPrimary {
+  transform: scale(1.04) rotate(1deg);
+}
+
+.photoPrimary {
+  z-index: 1;
+}
+
+.photoSecondary {
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.featured.hasPhoto {
+  box-shadow: none;
+}
+
+.featured:not(.hasPhoto) {
+  box-shadow: var(--shadow-lift);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo {
+    transition: none;
+  }
+
+  .stageCard.hasPhoto:hover .photoPrimary,
+  .stageGallery.hasPhoto:hover .photoPrimary,
+  .hasPhoto:hover .photoPrimary {
+    transform: none;
+  }
+}
+
+.glow {
+  position: absolute;
+  inset: 18% 12% auto;
+  height: 42%;
+  background: radial-gradient(ellipse at center, rgba(255, 250, 244, 0.55), transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.surface {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 12%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(28, 33, 29, 0.14), transparent 70%);
+  filter: blur(2px);
+  z-index: 1;
+}
+
+.object {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  transform: translateY(2%);
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.fallbackLabel {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.9rem;
+  z-index: 3;
+  max-width: calc(100% - 1.8rem);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(28, 33, 29, 0.34);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toneOlive .fallbackLabel,
+.toneCharcoal .fallbackLabel {
+  color: rgba(240, 232, 221, 0.38);
+}
+
+.toneSand {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(255, 252, 247, 0.7), transparent 60%),
+    linear-gradient(165deg, #f6f2e9 0%, #ede7da 48%, #e4ebe5 100%);
+}
+
+.toneStone {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(255, 250, 244, 0.45), transparent 60%),
+    linear-gradient(165deg, #e4ebe5 0%, #e4ebe5 50%, #d5d9d2 100%);
+}
+
+.toneClay {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(255, 246, 238, 0.35), transparent 60%),
+    linear-gradient(165deg, #f1dfd1 0%, #c86a35 52%, #a85628 100%);
+}
+
+.toneOlive {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(214, 214, 180, 0.22), transparent 60%),
+    linear-gradient(165deg, #52735f 0%, #0a4a2c 50%, #063b25 100%);
+}
+
+.toneCharcoal {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(120, 100, 85, 0.28), transparent 60%),
+    linear-gradient(165deg, #3a322c 0%, #063b25 48%, #1c211d 100%);
+}
+
+.toneTaupe {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(255, 248, 240, 0.35), transparent 60%),
+    linear-gradient(165deg, #e4ebe5 0%, #d5d9d2 50%, #687069 100%);
+}
+
+.shape {
+  position: relative;
+  width: min(58%, 11.5rem);
+  aspect-ratio: 1;
+}
+
+/* Organizer */
+.organizer {
+  width: min(64%, 13rem);
+  aspect-ratio: 1.15 / 1;
+}
+
+.orgBase {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 10%;
+  height: 42%;
+  background: linear-gradient(160deg, #f1dfd1, #c86a35);
+  box-shadow: 0 10px 24px rgba(28, 33, 29, 0.18);
+}
+
+.orgTray {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: 38%;
+  height: 18%;
+  background: linear-gradient(180deg, #efe2d3, #cbb69f);
+  box-shadow: 0 4px 12px rgba(28, 33, 29, 0.12);
+}
+
+.orgSlotA,
+.orgSlotB {
+  position: absolute;
+  bottom: 48%;
+  width: 18%;
+  height: 28%;
+  background: linear-gradient(180deg, #f3e8db, #c9b39a);
+  box-shadow: inset 0 -6px 10px rgba(28, 33, 29, 0.08);
+}
+
+.orgSlotA {
+  left: 18%;
+}
+
+.orgSlotB {
+  left: 40%;
+}
+
+.orgCup {
+  position: absolute;
+  right: 16%;
+  bottom: 46%;
+  width: 22%;
+  height: 34%;
+  border-radius: 0.2rem 0.2rem 0.05rem 0.05rem;
+  background: linear-gradient(180deg, #015c31, #4f5238);
+  box-shadow: 0 8px 16px rgba(28, 33, 29, 0.18);
+}
+
+/* Notebook */
+.notebook {
+  width: min(52%, 10rem);
+  aspect-ratio: 0.78;
+}
+
+.nbBack,
+.nbMid,
+.nbFront {
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 12px 28px rgba(28, 33, 29, 0.16);
+}
+
+.nbBack {
+  transform: translate(10%, 6%) rotate(4deg);
+  background: linear-gradient(145deg, #8a7260, #6d5748);
+}
+
+.nbMid {
+  transform: translate(4%, 2%) rotate(1.5deg);
+  background: linear-gradient(145deg, #e4ebe5, #d5d9d2);
+}
+
+.nbFront {
+  background: linear-gradient(155deg, #f6f2e9 0%, #e2d4c4 55%, #cbb7a3 100%);
+}
+
+.nbBand {
+  position: absolute;
+  left: 0;
+  top: 18%;
+  width: 100%;
+  height: 9%;
+  background: linear-gradient(90deg, #015c31, #4f5238);
+  opacity: 0.9;
+}
+
+/* Folder */
+.folder {
+  width: min(68%, 13.5rem);
+  aspect-ratio: 1.25 / 1;
+}
+
+.folderA,
+.folderB,
+.folderC {
+  position: absolute;
+  width: 72%;
+  height: 58%;
+  box-shadow: 0 10px 22px rgba(28, 33, 29, 0.16);
+}
+
+.folderA {
+  left: 4%;
+  bottom: 18%;
+  background: linear-gradient(150deg, #c86a35, #a85628);
+  transform: rotate(-8deg);
+}
+
+.folderB {
+  left: 18%;
+  bottom: 22%;
+  background: linear-gradient(150deg, #f1dfd1, #c86a35);
+  transform: rotate(-2deg);
+}
+
+.folderC {
+  left: 30%;
+  bottom: 28%;
+  background: linear-gradient(150deg, #f0e8dd, #d9cfc2);
+  transform: rotate(5deg);
+}
+
+.folderC::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 18%;
+  height: 1px;
+  background: rgba(28, 33, 29, 0.12);
+  box-shadow:
+    0 10px 0 rgba(28, 33, 29, 0.08),
+    0 20px 0 rgba(28, 33, 29, 0.06);
+}
+
+/* Tumbler */
+.tumbler {
+  width: min(34%, 6.5rem);
+  aspect-ratio: 0.45;
+}
+
+.tumLid {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 4%;
+  height: 12%;
+  border-radius: 0.35rem 0.35rem 0.1rem 0.1rem;
+  background: linear-gradient(180deg, #d9cfc2, #c86a35);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tumBody {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 14%;
+  bottom: 10%;
+  border-radius: 0.35rem 0.35rem 1.1rem 1.1rem;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 40%, rgba(0, 0, 0, 0.18)),
+    linear-gradient(180deg, #8a8d6a, #4f5238 55%, #3a3d28);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+}
+
+.tumBand {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 42%;
+  height: 10%;
+  background: linear-gradient(180deg, rgba(240, 232, 221, 0.35), rgba(240, 232, 221, 0.08));
+}
+
+.tumBase {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  bottom: 6%;
+  height: 6%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Kit */
+.kit {
+  width: min(62%, 12rem);
+  aspect-ratio: 1.2 / 1;
+}
+
+.kitBox {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 16%;
+  height: 48%;
+  background: linear-gradient(160deg, #e4ebe5, #9a8778);
+  box-shadow: 0 14px 28px rgba(28, 33, 29, 0.2);
+}
+
+.kitLid {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: 52%;
+  height: 14%;
+  background: linear-gradient(180deg, #f6f2e9, #d5d9d2);
+  box-shadow: 0 6px 14px rgba(28, 33, 29, 0.14);
+  transform: skewX(-8deg) translateX(4%);
+}
+
+.kitItemA,
+.kitItemB {
+  position: absolute;
+  bottom: 58%;
+  height: 22%;
+  box-shadow: 0 6px 12px rgba(28, 33, 29, 0.14);
+}
+
+.kitItemA {
+  left: 22%;
+  width: 18%;
+  background: linear-gradient(180deg, #015c31, #4f5238);
+}
+
+.kitItemB {
+  left: 46%;
+  width: 28%;
+  background: linear-gradient(180deg, #f0e8dd, #d9cfc2);
+}
+
+/* Pen */
+.pen {
+  width: min(70%, 13rem);
+  aspect-ratio: 1.6 / 1;
+}
+
+.penA,
+.penB,
+.penC {
+  position: absolute;
+  height: 10%;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+.penA {
+  left: 8%;
+  right: 8%;
+  top: 28%;
+  background: linear-gradient(90deg, #1c211d, #52735f 40%, #e4ebe5 78%, #8a7f75);
+  transform: rotate(-12deg);
+}
+
+.penB {
+  left: 12%;
+  right: 6%;
+  top: 48%;
+  background: linear-gradient(90deg, #0a4a2c, #c86a35 55%, #f6f2e9);
+  transform: rotate(-4deg);
+}
+
+.penC {
+  left: 6%;
+  right: 14%;
+  top: 66%;
+  background: linear-gradient(90deg, #063b25, #015c31 50%, #d9cfc2);
+  transform: rotate(8deg);
+}

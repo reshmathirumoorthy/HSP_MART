@@ -1,0 +1,125 @@
+.section {
+  background:
+    linear-gradient(180deg, #e4ebe5 0%, var(--bg-stone) 45%, #ede7da 100%);
+  padding: var(--space-9) 0;
+  color: var(--text-primary);
+  border-top: 1px solid rgba(28, 33, 29, 0.1);
+  box-shadow: var(--shadow-inset);
+}
+
+.inner {
+  display: grid;
+  gap: 3rem;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  max-width: 24rem;
+}
+
+.signal {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.list {
+  display: grid;
+  border-top: 1px solid var(--border-strong);
+}
+
+.item {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-strong);
+  transition: background var(--duration) var(--ease-out);
+}
+
+.trigger {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  text-align: left;
+  width: 100%;
+  padding: 0;
+}
+
+.num {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  line-height: 1;
+  transition: letter-spacing var(--duration) var(--ease-out);
+}
+
+.text {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  max-width: 28rem;
+  margin-left: calc(3.5rem + 1rem);
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  transition:
+    max-height var(--duration) var(--ease-out),
+    opacity var(--duration) var(--ease-out),
+    margin var(--duration) var(--ease-out);
+}
+
+.active .title {
+  letter-spacing: 0.02em;
+}
+
+.active .text {
+  max-height: 6rem;
+  opacity: 1;
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 900px) {
+  .list {
+    grid-template-columns: repeat(4, 1fr);
+    border-top: none;
+    gap: 0;
+  }
+
+  .item {
+    min-height: 22rem;
+    padding: 2rem 1.5rem;
+    border-bottom: none;
+    border-left: 1px solid var(--border-strong);
+    align-content: start;
+  }
+
+  .item:last-child {
+    border-right: 1px solid var(--border-strong);
+  }
+
+  .trigger {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .text {
+    margin-left: 0;
+    max-height: 0;
+  }
+
+  .active {
+    background: rgba(28, 33, 29, 0.04);
+  }
+
+  .active .text {
+    max-height: 8rem;
+  }
+}

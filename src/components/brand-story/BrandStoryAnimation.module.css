@@ -1,0 +1,205 @@
+/* Brand Story player — fills the editorial hero stage (transparent WebM) */
+
+.root {
+  --loop: 12s;
+  --ease: var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1));
+  --c-ivory: var(--color-background, #f5f3ec);
+
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: visible;
+  pointer-events: none;
+  min-height: 100%;
+  background: transparent;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: transparent;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center bottom;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  display: block;
+  /* No player chrome */
+  box-shadow: none;
+}
+
+.poster {
+  width: min(96%, 48rem);
+  height: auto;
+  max-height: 92%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  display: block;
+}
+
+.sprite {
+  width: min(96%, 48rem);
+  aspect-ratio: 16 / 9;
+  background-image: var(--sprite-url);
+  background-repeat: no-repeat;
+  background-size: var(--sprite-width) 100%;
+  background-position: 0 0;
+  animation: spritePlay var(--sprite-duration) steps(var(--sprite-frames)) infinite;
+}
+
+@keyframes spritePlay {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+.brandOverlay {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: min(88%, 18rem);
+  transform: translate(-50%, -40%);
+  text-align: center;
+  z-index: 4;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  opacity: 0;
+  animation: brandReveal var(--loop) var(--ease) infinite;
+  pointer-events: none;
+}
+
+@keyframes brandReveal {
+  0%,
+  74% {
+    opacity: 0;
+    transform: translate(-50%, -28%);
+  }
+  76%,
+  86% {
+    opacity: 1;
+    transform: translate(-50%, -46%);
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -54%);
+  }
+}
+
+.logo {
+  width: 3.75rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.brandTitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-brand-dark);
+  margin: 0;
+}
+
+.brandLine {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  line-height: 1.3;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.pending {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.45rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: color-mix(in srgb, var(--color-sage) 55%, transparent);
+  border-radius: var(--radius-md);
+}
+
+.pendingNote {
+  margin: 0.85rem 0 0;
+  max-width: 16rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.pendingPath {
+  display: block;
+  margin-top: 0.35rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  word-break: break-all;
+}
+
+.reducedMotion {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .brandOverlay,
+  .pending {
+    display: none !important;
+  }
+
+  .sprite {
+    animation: none;
+  }
+
+  .reducedMotion {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.45rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .video,
+  .sprite,
+  .poster {
+    object-position: center center;
+  }
+
+  .brandTitle {
+    letter-spacing: 0.14em;
+  }
+
+  .brandLine {
+    font-size: 0.95rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .video {
+    object-position: center 60%;
+  }
+}

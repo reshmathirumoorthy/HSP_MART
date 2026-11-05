@@ -1,0 +1,30 @@
+{
+  "name": "hsp-mart-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "validate:catalogue": "node scripts/validate-catalogue.mjs",
+    "verify:customization": "node scripts/verify-customization-foundation.mjs",
+    "verify:brand-story": "node scripts/verify-brand-story-webm.mjs",
+    "audit:customization": "node scripts/verify-universal-customization.mjs",
+    "verify:ai-shopping": "npx --yes tsx --tsconfig tsconfig.json scripts/verify-ai-shopping.ts"
+  },
+  "dependencies": {
+    "next": "16.3.7",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.7",
+    "typescript": "^5"
+  }
+}

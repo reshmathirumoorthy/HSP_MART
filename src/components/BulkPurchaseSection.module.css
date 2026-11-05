@@ -1,0 +1,128 @@
+.section {
+  background: var(--color-surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.header {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 30rem;
+}
+
+.label {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.copy {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.paths {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.paths li {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.paths li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.35rem;
+  height: 1px;
+  background: var(--color-brand);
+}
+
+.tiers {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  max-width: 36rem;
+}
+
+.tier {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.qty {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.note {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  align-self: center;
+}
+
+.moq {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.localNote {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .inner {
+    width: min(100% - 4rem, var(--max-width));
+  }
+}

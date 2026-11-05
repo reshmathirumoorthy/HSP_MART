@@ -1,0 +1,162 @@
+.section {
+  padding: var(--section-y) 0;
+  background: var(--color-background);
+  border-top: 1px solid var(--border-soft);
+}
+
+.inner {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.75rem);
+  align-items: center;
+}
+
+.copy {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 34rem;
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-overline);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-section);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.lead {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 32rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.35rem;
+  margin-top: 0.25rem;
+}
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  font-family: var(--font-sans);
+  font-size: var(--text-control);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.ghost:hover,
+.ghost:focus-visible {
+  color: var(--color-brand-dark);
+  border-bottom-color: var(--color-brand);
+  outline: none;
+}
+
+.aside {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 22rem);
+  min-height: 18rem;
+}
+
+.frameLarge {
+  position: relative;
+  width: 78%;
+  /* Organiser is ~501×362 landscape with transparent right margin */
+  aspect-ratio: 5 / 4;
+  margin-left: auto;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-sage);
+  border: 1px solid var(--border-soft);
+}
+
+.frameSmall {
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  width: 48%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.image {
+  object-fit: contain;
+  object-position: center center;
+  padding: 6%;
+}
+
+.frameLarge .image {
+  /* Bias left to compensate transparent right margin on wooden-organiser */
+  object-position: 18% center;
+  padding: 4% 8% 4% 2%;
+}
+
+.frameSmall .image {
+  /* document-bag has ~17–20% top/bottom white studio margin */
+  object-fit: cover;
+  object-position: center 42%;
+  padding: 0;
+  transform: scale(1.12);
+}
+
+.logoMark {
+  position: absolute;
+  right: -0.15rem;
+  top: -0.65rem;
+  width: 4.5rem;
+  height: auto;
+  background: var(--color-white);
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 900px) {
+  .inner {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .aside {
+    justify-self: end;
+    width: min(100%, 24rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ghost {
+    justify-content: center;
+  }
+}

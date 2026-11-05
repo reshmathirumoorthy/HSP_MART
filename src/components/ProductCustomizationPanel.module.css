@@ -1,0 +1,66 @@
+.section {
+  padding: 3.5rem 0;
+  background: var(--bg-sand);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.header {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 32rem;
+}
+
+.label {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.85rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.copy {
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.35rem;
+}
+
+.labels li {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.labels li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0.35rem;
+  height: 1px;
+  background: var(--accent-warm);
+}
+
+.localNote {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}

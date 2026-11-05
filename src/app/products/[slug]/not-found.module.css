@@ -1,0 +1,40 @@
+.page {
+  min-height: 70vh;
+  background: var(--bg-sand);
+  display: grid;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.inner {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 32rem;
+}
+
+.label {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.copy {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}

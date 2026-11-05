@@ -1,0 +1,368 @@
+/* =============================================================================
+   Cart drawer — premium panel pinned below the website header
+   The header height is measured at runtime (announcement + navbar) and set
+   as --site-header-h on the root; the drawer and backdrop never cover it.
+   ============================================================================= */
+
+.root {
+  position: fixed;
+  top: var(--site-header-h, 5rem);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-drawer);
+  pointer-events: none;
+}
+
+.open {
+  pointer-events: auto;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(17, 24, 20, 0.46);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.open .backdrop {
+  opacity: 1;
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(100%, 28rem);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--color-white);
+  color: var(--text-primary);
+  border-left: 1px solid var(--hairline);
+  box-shadow: -22px 0 56px rgba(17, 24, 20, 0.22);
+  transform: translateX(102%);
+  transition: transform var(--duration-slow) var(--ease-out);
+  overflow: hidden;
+}
+
+.open .drawer {
+  transform: translateX(0);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Header                                                                      */
+/* -------------------------------------------------------------------------- */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(180deg, #fbfbf8 0%, #ffffff 100%);
+}
+
+.headerIdentity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.headerIcon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 12px;
+  background: var(--surface-green-tint);
+  border: 1px solid var(--border-brand);
+  color: var(--color-brand);
+}
+
+.headerText {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.42rem;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--text-primary);
+}
+
+.count {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.close {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background: var(--color-white);
+  color: var(--text-secondary);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.close:hover {
+  background: var(--color-ivory, #f5f3ec);
+  color: var(--color-brand-dark, #063b25);
+  border-color: var(--border-brand);
+}
+
+.close:active {
+  transform: scale(0.94);
+}
+
+.close:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Content / scroll area                                                       */
+/* -------------------------------------------------------------------------- */
+
+.content {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  min-height: 0;
+  padding: 0.25rem 1.25rem 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ivory-deep, #e9e6da) transparent;
+}
+
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--color-ivory-deep, #e9e6da);
+  border-radius: 999px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer / summary — always visible, never needs scrolling to reach          */
+/* -------------------------------------------------------------------------- */
+
+.footer {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.85rem 1.25rem calc(1rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--hairline);
+  background: #fbfbf8;
+}
+
+/* Free delivery progress */
+
+.shippingUnlocked {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: var(--color-brand-dark);
+}
+
+.shippingUnlocked svg {
+  color: var(--color-brand);
+}
+
+.shippingProgress {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.shippingProgressCopy {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.shippingProgressCopy strong {
+  color: var(--color-brand-dark);
+}
+
+.shippingTrack {
+  height: 0.35rem;
+  border-radius: 999px;
+  background: var(--color-ivory-deep, #e9e6da);
+  overflow: hidden;
+}
+
+.shippingTrack span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0a6b45 0%, var(--color-brand, #015c31) 100%);
+  transition: width var(--duration-slow, 0.35s) var(--ease-out, ease);
+}
+
+/* Totals */
+
+.totals {
+  display: grid;
+  gap: 0.32rem;
+  margin: 0;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--hairline);
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.totalRow dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.freeValue {
+  color: var(--color-brand) !important;
+  font-weight: 650;
+}
+
+.mutedValue {
+  color: var(--text-muted) !important;
+  font-size: 0.8rem;
+}
+
+.totalRowGrand {
+  padding-top: 0.45rem;
+  margin-top: 0.1rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.totalRowGrand dt {
+  font-weight: 650;
+}
+
+.totalRowGrand dd {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: var(--color-brand-dark, #063b25);
+}
+
+/* CTAs */
+
+.checkoutBtn {
+  width: 100%;
+  min-height: 3.1rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+}
+
+.continue {
+  justify-self: center;
+  min-height: 2rem;
+  padding: 0.1rem 0.2rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.continue:hover {
+  color: var(--color-brand-dark);
+  border-bottom-color: currentColor;
+}
+
+.continue:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.checkoutBlocked {
+  justify-self: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-warm-dark, #8a5a00);
+  text-align: center;
+  line-height: 1.4;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(138, 90, 0, 0.25);
+  background: rgba(217, 119, 6, 0.08);
+  border-radius: 12px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Responsive                                                                  */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .drawer {
+    width: min(100%, 24.5rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .drawer {
+    width: 100%;
+    border-left: 0;
+  }
+
+  .content {
+    padding-inline: 1rem;
+  }
+
+  .footer {
+    padding-inline: 1rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .backdrop,
+  .close,
+  .shippingTrack span {
+    transition: none;
+  }
+}

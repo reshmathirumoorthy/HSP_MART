@@ -1,0 +1,71 @@
+.filters {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.sheet {
+  gap: 1.5rem;
+}
+
+.group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.group legend {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.1rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.3rem;
+}
+
+.option {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.option:hover {
+  border-color: var(--color-brand-muted);
+  color: var(--text-primary);
+}
+
+.option:has(input:checked) {
+  border-color: var(--color-brand);
+  background: var(--color-sage);
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+.option:has(input:focus-visible) {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}

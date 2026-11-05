@@ -1,0 +1,93 @@
+.section {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.head {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.number {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.65rem;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.edit {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1rem;
+}
+
+.body {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.body strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.note {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wide {
+    grid-column: 1 / -1;
+  }
+}

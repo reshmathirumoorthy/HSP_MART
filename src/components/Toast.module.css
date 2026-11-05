@@ -1,0 +1,106 @@
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translatex(-50%);
+  z-index: var(--z-notification);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--color-brand-dark);
+  color: var(--color-white);
+  border: 1px solid var(--border-forest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-deep);
+  min-width: 280px;
+  max-width: 480px;
+  animation: toastSlideIn 0.32s var(--ease-out);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translatex(-50%) translatey(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translatex(-50%) translatey(0);
+  }
+}
+
+.message {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.25rem;
+  padding: 0 1rem;
+  background: var(--color-brand);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease-out);
+}
+
+.actionBtn:hover {
+  background: var(--color-brand-dark);
+}
+
+.dismissBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-white) 30%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-out);
+}
+
+.dismissBtn:hover {
+  background: color-mix(in srgb, var(--color-white) 15%, transparent);
+  border-color: var(--color-white);
+}
+
+@media (max-width: 640px) {
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    width: auto;
+  }
+
+  .actionBtn {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
+}

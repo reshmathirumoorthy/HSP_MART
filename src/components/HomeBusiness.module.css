@@ -1,0 +1,94 @@
+.section {
+  padding: var(--section-y) 0;
+  background: var(--color-white);
+  border-top: 1px solid var(--border);
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.card {
+  display: grid;
+  gap: 1.25rem;
+  align-items: stretch;
+  padding: clamp(1.35rem, 3vw, 1.75rem);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--color-background);
+}
+
+.cardAlt {
+  background: var(--color-sage);
+}
+
+.copy {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-brand-dark);
+  text-wrap: balance;
+}
+
+.body {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.cta {
+  justify-self: start;
+  margin-top: 0.35rem;
+  text-decoration: none;
+}
+
+.media {
+  position: relative;
+  min-height: 11rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-white);
+  border: 1px solid var(--border);
+}
+
+.image {
+  object-fit: contain;
+  object-position: center;
+  padding: 1rem;
+}
+
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .card {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem;
+  }
+
+  .media {
+    min-height: 12.5rem;
+  }
+}

@@ -1,0 +1,204 @@
+.mascot {
+  display: block;
+  overflow: visible;
+}
+
+.float {
+  animation: mascotFloat 3.8s ease-in-out infinite;
+  transform-box: view-box;
+  transform-origin: 50% 55%;
+}
+
+@keyframes mascotFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.head {
+  animation: mascotHead 4.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 85%;
+}
+
+@keyframes mascotHead {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-2.6deg);
+  }
+  65% {
+    transform: rotate(2.2deg);
+  }
+}
+
+.eyes {
+  animation: mascotBlink 5.2s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+@keyframes mascotBlink {
+  0%,
+  91%,
+  100% {
+    transform: scaleY(1);
+  }
+  94% {
+    transform: scaleY(0.08);
+  }
+}
+
+.dots {
+  display: none;
+  animation: mascotDotsBob 1.1s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+@keyframes mascotDotsBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.6px);
+  }
+}
+
+.smile {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.armRight {
+  animation: mascotWave 4.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 22% 12%;
+}
+
+@keyframes mascotWave {
+  0%,
+  68%,
+  100% {
+    transform: rotate(0deg);
+  }
+  74% {
+    transform: rotate(-30deg);
+  }
+  80% {
+    transform: rotate(-6deg);
+  }
+  86% {
+    transform: rotate(-24deg);
+  }
+  92% {
+    transform: rotate(0deg);
+  }
+}
+
+.armLeft {
+  animation: mascotArmSway 5.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 78% 12%;
+}
+
+@keyframes mascotArmSway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+}
+
+.antenna {
+  animation: mascotAntenna 3.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+@keyframes mascotAntenna {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(-9deg);
+  }
+  75% {
+    transform: rotate(6deg);
+  }
+}
+
+.spark {
+  animation: mascotSpark 2.6s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.sparkLate {
+  animation-delay: 1.3s;
+}
+
+@keyframes mascotSpark {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Thinking state — swap happy arc eyes for focused dots, bob faster */
+.thinking .eyes {
+  display: none;
+}
+
+.thinking .dots {
+  display: block;
+}
+
+.thinking .float {
+  animation-duration: 1.7s;
+}
+
+.thinking .head {
+  animation: mascotHeadThinking 1.9s ease-in-out infinite;
+}
+
+@keyframes mascotHeadThinking {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-3.4deg) translateY(-1.2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .head,
+  .eyes,
+  .dots,
+  .armRight,
+  .armLeft,
+  .antenna,
+  .spark,
+  .sparkLate,
+  .thinking .float,
+  .thinking .head {
+    animation: none;
+  }
+}

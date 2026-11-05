@@ -1,0 +1,120 @@
+.customizer {
+  margin: 0;
+  padding: 0;
+}
+
+.customizerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: #F5F3EC;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+}
+
+.customizerIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.customizerEyebrow {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #063B25;
+}
+
+.customizerTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.customizerCopy {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.resetBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #063B25;
+  background: transparent;
+  border: 1px solid #063B25;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition:
+    background var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out),
+    border-color var(--duration) var(--ease-out);
+}
+
+.resetBtn:hover:not(:disabled) {
+  background: #063B25;
+  color: #FFFFFF;
+  border-color: #063B25;
+}
+
+.resetBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resetBtn:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.noCustomizer {
+  padding: 2rem;
+  background: #F5F3EC;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline);
+  text-align: center;
+}
+
+.noCustomizerCopy {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 959px) {
+  .customizerHeader {
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .resetBtn {
+    align-self: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .resetBtn {
+    transition: none;
+  }
+}
