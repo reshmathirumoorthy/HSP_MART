@@ -103,25 +103,6 @@ export function NewArrivals() {
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
-  const { addToCart, openCart } = useCart();
-  const inStock = isInStock(product);
-  const quickAdd = canQuickAdd(product);
-  const showDiscount =
-    typeof product.compareAtPrice === "number" &&
-    product.compareAtPrice > product.price;
-  const discountPct = showDiscount
-    ? Math.round(
-        ((product.compareAtPrice! - product.price) / product.compareAtPrice!) *
-          100
-      )
-    : 0;
-
-  const handleQuickAdd = () => {
-    if (!quickAdd) return;
-    const ok = addToCart(product.id, 1, getQuickAddCustomization(product));
-    if (ok) openCart();
-  };
 
   return (
     <article className={styles.cardWrap}>
