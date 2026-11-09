@@ -360,7 +360,6 @@ export function SearchOverlay({ open, onClose }: Props) {
               onChange={(event) => {
                 setQuery(event.target.value);
                 setActiveIndex(-1);
-                setActiveIndex(-1);
               }}
               onKeyDown={onInputKeyDown}
               placeholder="Search by name, SKU, or category…"
@@ -458,14 +457,14 @@ export function SearchOverlay({ open, onClose }: Props) {
               className={styles.suggestions}
             >
               {suggestions.results.length > 0 ? (
-                <section aria-labelledby="search-products-heading">
+                <section role="group" aria-labelledby="search-products-heading">
                   <h2
                     id="search-products-heading"
                     className={styles.sectionLabel}
                   >
                     Products
                   </h2>
-                  <ul className={styles.list}>
+                  <ul className={styles.list} role="presentation">
                     {suggestions.results.map((result) => {
                       const key = `product:${result.product.id}`;
                       const optionIndex = options.findIndex(
@@ -490,14 +489,14 @@ export function SearchOverlay({ open, onClose }: Props) {
               ) : null}
 
               {suggestions.categories.length > 0 ? (
-                <section aria-labelledby="search-categories-heading">
+                <section role="group" aria-labelledby="search-categories-heading">
                   <h2
                     id="search-categories-heading"
                     className={styles.sectionLabel}
                   >
                     Categories
                   </h2>
-                  <ul className={styles.categoryList}>
+                  <ul className={styles.categoryList} role="presentation">
                     {suggestions.categories.map((category) => {
                       const key = `category:${category.slug}`;
                       const optionIndex = options.findIndex(
@@ -540,7 +539,7 @@ export function SearchOverlay({ open, onClose }: Props) {
               ) : null}
 
               {trimmed && suggestions.hasMore ? (
-                <div className={styles.viewAllWrap}>
+                <div className={styles.viewAllWrap} role="presentation">
                   <button
                     id={`${optionIdPrefix}-view-all`}
                     type="button"
@@ -559,7 +558,7 @@ export function SearchOverlay({ open, onClose }: Props) {
               ) : null}
 
               {!trimmed && recent.length > 0 ? (
-                <section aria-labelledby="recent-searches-heading">
+                <section role="group" aria-labelledby="recent-searches-heading">
                   <div className={styles.recentHead}>
                     <h2
                       id="recent-searches-heading"
@@ -575,7 +574,7 @@ export function SearchOverlay({ open, onClose }: Props) {
                       Clear all
                     </button>
                   </div>
-                  <ul className={styles.recentList}>
+                  <ul className={styles.recentList} role="presentation">
                     {recent.map((term) => {
                       const key = `recent:${term.toLowerCase()}`;
                       const optionIndex = options.findIndex(
@@ -621,7 +620,7 @@ export function SearchOverlay({ open, onClose }: Props) {
               ) : null}
 
               {!trimmed && recent.length === 0 ? (
-                <section aria-labelledby="empty-search-heading">
+                <section role="group" aria-labelledby="empty-search-heading">
                   <h2
                     id="empty-search-heading"
                     className={styles.sectionLabel}
@@ -631,7 +630,7 @@ export function SearchOverlay({ open, onClose }: Props) {
                   <p className={styles.hint}>
                     Search by product name, SKU, or category — or explore below.
                   </p>
-                  <ul className={styles.categoryList}>
+                  <ul className={styles.categoryList} role="presentation">
                     {browseCategories.map((category) => {
                       const key = `browse:${category.slug}`;
                       const optionIndex = options.findIndex(

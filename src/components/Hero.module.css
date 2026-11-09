@@ -159,12 +159,14 @@
 
 @media (max-width: 959px) {
   .hero {
-    min-height: 52rem;
+    min-height: 0;
+    overflow: visible;
   }
 
   .content {
     padding: 3rem 1rem;
     align-items: flex-start;
+    flex-direction: column;
     height: auto;
     min-height: auto;
   }
@@ -225,7 +227,8 @@
 
 @media (max-width: 639px) {
   .hero {
-    min-height: 48rem;
+    min-height: 0;
+    overflow: visible;
   }
 
   .title {

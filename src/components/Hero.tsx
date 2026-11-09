@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 
@@ -52,13 +53,13 @@ export function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="hero-heading">
       <div className={styles.imageWrap}>
-        <img
+        <Image
           src="/images/hero-stationery-flatlay.jpg"
           alt="Executive stationery workspace with notebooks, pens, desk accessories, and a tumbler"
           className={styles.photo}
-          loading="eager"
-          decoding="async"
-          aria-hidden="true"
+          fill
+          sizes="100vw"
+          priority
         />
         <div className={styles.textSafeArea} />
       </div>

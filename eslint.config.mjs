@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local temporary audit/debug artifacts (also gitignored).
+    "tmp-*",
+    "qa-audit/**",
   ]),
 ]);
 

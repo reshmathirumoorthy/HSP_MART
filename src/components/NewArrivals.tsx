@@ -14,9 +14,6 @@ export function NewArrivals() {
   const list = products
     .filter((p) => p.active !== false)
     .slice(0, 8);
-  if (!list.length) return null;
-
-  const { addToCart } = useCart();
   const scrollRef = useRef<HTMLUListElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(list.length > 1);
@@ -39,6 +36,8 @@ export function NewArrivals() {
     window.addEventListener("resize", updateScrollState);
     return () => window.removeEventListener("resize", updateScrollState);
   }, [updateScrollState]);
+
+  if (list.length === 0) return null;
 
   return (
     <section
@@ -79,12 +78,6 @@ export function NewArrivals() {
               ref={scrollRef}
               className={styles.grid}
               onScroll={updateScrollState}
-              onWheel={(event) => {
-                if (event.deltaY !== 0) {
-                  event.preventDefault();
-                  scrollBy({ left: event.deltaY });
-                }
-              }}
             >
               {list.map((product, index) => (
                 <li
@@ -141,12 +134,13 @@ function ProductCard({ product }: { product: Product }) {
           className={styles.visualLink}
           aria-label={`View ${product.name}`}
         >
-          <img
+          <Image
             src={product.images[0]}
             alt={product.name}
             className={styles.image}
+            fill
+            sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 240px"
             loading="lazy"
-            decoding="async"
           />
         </Link>
         {showDiscount && (
