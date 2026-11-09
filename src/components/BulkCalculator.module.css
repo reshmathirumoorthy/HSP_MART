@@ -39,6 +39,7 @@
   font-size: clamp(1.5rem, 3vw, 1.9rem);
   font-weight: 700;
   color: var(--color-brand);
+  font-stretch: var(--display-stretch);
 }
 
 .lead {
@@ -218,6 +219,7 @@
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 700;
   color: white;
+  font-stretch: var(--display-stretch);
 }
 
 .note {

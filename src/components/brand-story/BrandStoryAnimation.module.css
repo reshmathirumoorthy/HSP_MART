@@ -119,6 +119,8 @@
   line-height: 1.3;
   color: var(--text-secondary);
   margin: 0;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .pending {

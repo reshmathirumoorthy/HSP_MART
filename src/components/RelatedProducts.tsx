@@ -11,7 +11,6 @@ type Props = {
 
 export function RelatedProducts({
   products,
-  label = "Continue browsing",
   title = "Related products",
   headingId = "related-heading",
 }: Props) {
@@ -21,7 +20,6 @@ export function RelatedProducts({
     <section className={styles.section} aria-labelledby={headingId}>
       <div className={`shell ${styles.inner}`}>
         <header className={styles.header}>
-          <p className={styles.label}>{label}</p>
           <h2 id={headingId} className={styles.title}>
             {title}
           </h2>

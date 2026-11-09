@@ -30,6 +30,7 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .copy {
@@ -92,6 +93,7 @@
   font-weight: 600;
   line-height: 1.05;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .emptyCopy {

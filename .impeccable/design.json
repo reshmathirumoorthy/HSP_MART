@@ -1,0 +1,580 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T03:56:06+00:00",
+  "title": "Design System: HSP Mart",
+  "extensions": {
+    "colorMeta": {
+      "emerald": {
+        "role": "primary",
+        "displayName": "House Emerald",
+        "canonical": "#0e3b2e",
+        "tonalRamp": [
+          "#001208",
+          "#002c20",
+          "#1e493b",
+          "#3d6859",
+          "#5f8b7b",
+          "#83b09f",
+          "#a8d6c5",
+          "#ccfbe9"
+        ]
+      },
+      "emerald-deep": {
+        "role": "primary",
+        "displayName": "Deep Emerald",
+        "canonical": "#082a20",
+        "tonalRamp": [
+          "#001108",
+          "#092b21",
+          "#27473c",
+          "#45665a",
+          "#67897c",
+          "#8aaea0",
+          "#b0d4c6",
+          "#d3f9ea"
+        ]
+      },
+      "emerald-hover": {
+        "role": "primary",
+        "displayName": "Emerald Hover",
+        "canonical": "#0a3025",
+        "tonalRamp": [
+          "#001108",
+          "#052b20",
+          "#24483c",
+          "#426659",
+          "#648a7c",
+          "#88afa0",
+          "#add5c6",
+          "#d0f9ea"
+        ]
+      },
+      "emerald-mist": {
+        "role": "neutral",
+        "displayName": "Emerald Mist",
+        "canonical": "#e7eee9",
+        "tonalRamp": [
+          "#080c09",
+          "#202522",
+          "#3c413d",
+          "#595f5b",
+          "#7c827e",
+          "#a0a6a2",
+          "#c6ccc8",
+          "#eaf1ec"
+        ]
+      },
+      "antique-gold": {
+        "role": "secondary",
+        "displayName": "Antique Gold",
+        "canonical": "#b98a3e",
+        "tonalRamp": [
+          "#220000",
+          "#401700",
+          "#5f3500",
+          "#7f5300",
+          "#a57728",
+          "#cb9b50",
+          "#f3c176",
+          "#ffe599"
+        ]
+      },
+      "gold-bright": {
+        "role": "secondary",
+        "displayName": "Bright Gold",
+        "canonical": "#cfa65c",
+        "tonalRamp": [
+          "#1f0100",
+          "#3d1a00",
+          "#5b3700",
+          "#7b5600",
+          "#a0792c",
+          "#c69e53",
+          "#eec479",
+          "#ffe89c"
+        ]
+      },
+      "gold-bright-hover": {
+        "role": "secondary",
+        "displayName": "Bright Gold Hover",
+        "canonical": "#dcb873",
+        "tonalRamp": [
+          "#1d0200",
+          "#3a1c00",
+          "#583900",
+          "#785705",
+          "#9c7a35",
+          "#c29f5a",
+          "#e9c580",
+          "#ffe9a3"
+        ]
+      },
+      "gold-ink": {
+        "role": "secondary",
+        "displayName": "Gold Ink",
+        "canonical": "#20180a",
+        "tonalRamp": [
+          "#110a01",
+          "#2b2314",
+          "#473e2f",
+          "#665c4c",
+          "#897f6e",
+          "#aea392",
+          "#d4c9b7",
+          "#f8edda"
+        ]
+      },
+      "gold-soft": {
+        "role": "secondary",
+        "displayName": "Gold Soft",
+        "canonical": "#f5ead6",
+        "tonalRamp": [
+          "#110a00",
+          "#2b2313",
+          "#473e2e",
+          "#665c4b",
+          "#897f6d",
+          "#aea391",
+          "#d4c9b6",
+          "#f8edd9"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "#fbf8f2",
+        "tonalRamp": [
+          "#0d0b07",
+          "#26241f",
+          "#423f3b",
+          "#605d58",
+          "#82807b",
+          "#a7a49f",
+          "#cdcac4",
+          "#f1eee8"
+        ]
+      },
+      "ivory": {
+        "role": "neutral",
+        "displayName": "Ivory",
+        "canonical": "#f3ede2",
+        "tonalRamp": [
+          "#0e0b04",
+          "#28231b",
+          "#443f36",
+          "#625d54",
+          "#858076",
+          "#a9a49a",
+          "#d0cabf",
+          "#f4eee3"
+        ]
+      },
+      "ivory-deep": {
+        "role": "neutral",
+        "displayName": "Ivory Deep",
+        "canonical": "#ebe3d4",
+        "tonalRamp": [
+          "#100a03",
+          "#292318",
+          "#453f33",
+          "#645d50",
+          "#877f72",
+          "#aba496",
+          "#d1cabb",
+          "#f6eede"
+        ]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#808080",
+          "#a4a4a4",
+          "#cacaca",
+          "#eeeeee"
+        ]
+      },
+      "field-ink": {
+        "role": "neutral",
+        "displayName": "Field Ink",
+        "canonical": "#f6f1e7",
+        "tonalRamp": [
+          "#0e0b05",
+          "#27241c",
+          "#433f37",
+          "#615d55",
+          "#848077",
+          "#a9a49b",
+          "#cfcac0",
+          "#f3eee4"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1b231f",
+        "tonalRamp": [
+          "#060d0a",
+          "#1e2622",
+          "#39423e",
+          "#57605b",
+          "#79837e",
+          "#9da7a2",
+          "#c3cdc8",
+          "#e7f2ec"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Ink Secondary",
+        "canonical": "#46504a",
+        "tonalRamp": [
+          "#060d09",
+          "#1d2721",
+          "#39423d",
+          "#56615a",
+          "#78837d",
+          "#9da8a1",
+          "#c2cec7",
+          "#e6f2eb"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "canonical": "#6a716b",
+        "tonalRamp": [
+          "#080d08",
+          "#202621",
+          "#3b423c",
+          "#59605a",
+          "#7b827c",
+          "#9fa7a0",
+          "#c5cdc6",
+          "#e9f1ea"
+        ]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Border",
+        "canonical": "#e4dccd",
+        "tonalRamp": [
+          "#100a02",
+          "#292318",
+          "#453f33",
+          "#645d50",
+          "#877f72",
+          "#aba495",
+          "#d1cabb",
+          "#f6eede"
+        ]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Border Strong",
+        "canonical": "#d3c7b2",
+        "tonalRamp": [
+          "#120900",
+          "#2c2312",
+          "#483e2d",
+          "#675c4a",
+          "#8a7f6b",
+          "#afa38f",
+          "#d5c9b4",
+          "#f9edd7"
+        ]
+      },
+      "destructive": {
+        "role": "error",
+        "displayName": "Destructive",
+        "canonical": "#9b2c2c",
+        "tonalRamp": [
+          "#330000",
+          "#570000",
+          "#721c1c",
+          "#963d3a",
+          "#bd615b",
+          "#e6857e",
+          "#ffaba3",
+          "#ffcfc6"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "One hero headline per page on an emerald field; white with one italic gold accent word."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads above a gold hairline; closing band headline."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Order-trail step titles, occasion names, quote sheet title, link rows."
+      },
+      "title-card": {
+        "displayName": "Card Title",
+        "purpose": "Product names on cards and the hero caption card, two-line clamp."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Every fixed price, in emerald, lining tabular numerals. Italic 400 at 1.05rem for \"On request\"."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Lead and section copy, light weight, 30 to 34rem measure."
+      },
+      "body-ui": {
+        "displayName": "Body UI",
+        "purpose": "Facts lines, captions, nav links, search text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase letterspaced text on buttons and action links only."
+      }
+    },
+    "shadows": [
+      {
+        "name": "soft",
+        "value": "0 1px 2px rgba(27, 35, 31, 0.05)",
+        "purpose": "Faintest separation for small panels inside paper surfaces."
+      },
+      {
+        "name": "card",
+        "value": "0 1px 2px rgba(27, 35, 31, 0.04), 0 12px 28px -18px rgba(27, 35, 31, 0.28)",
+        "purpose": "Product cards at rest."
+      },
+      {
+        "name": "lift",
+        "value": "0 2px 4px rgba(27, 35, 31, 0.04), 0 26px 50px -28px rgba(27, 35, 31, 0.4)",
+        "purpose": "Card hover with a 3px rise; floating caption cards."
+      },
+      {
+        "name": "deep",
+        "value": "0 40px 80px -40px rgba(4, 20, 15, 0.6)",
+        "purpose": "Hero arch on the emerald field."
+      },
+      {
+        "name": "on-quote-ring",
+        "value": "0 0 0 1px #b98a3e, var(--shadow-card)",
+        "purpose": "Card already on the quote request."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid #b98a3e; outline-offset: 3px",
+        "purpose": "Global focus-visible treatment."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default exponential ease-out for every state change; no overshoot."
+      },
+      {
+        "name": "duration-fast",
+        "value": "0.16s",
+        "purpose": "Header link and icon-button colour changes."
+      },
+      {
+        "name": "duration",
+        "value": "0.32s",
+        "purpose": "Button fills, borders, colours; quote stamp settle."
+      },
+      {
+        "name": "duration-slow",
+        "value": "0.5s",
+        "purpose": "Card lift and shadow swap."
+      },
+      {
+        "name": "photo-drift",
+        "value": "transform 1s to 1.2s, scale 1.03 to 1.035",
+        "purpose": "Slow photo zoom inside cards and the hero arch on hover; removed under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "360px"
+      },
+      {
+        "name": "card-compact",
+        "value": "420px"
+      },
+      {
+        "name": "header-compact",
+        "value": "480px"
+      },
+      {
+        "name": "hero-stack-caption",
+        "value": "560px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "960px"
+      },
+      {
+        "name": "xl",
+        "value": "1024px"
+      },
+      {
+        "name": "nav-full",
+        "value": "1200px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Pill (on emerald)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Gold pill for the main action on emerald fields.",
+      "html": "<div class=\"ds-field\"><a href=\"#\" class=\"ds-btn-gold\">Explore corporate gifts</a></div>",
+      "css": ".ds-field{background:var(--color-brand,#0e3b2e);padding:24px;border-radius:12px}.ds-btn-gold{display:inline-flex;align-items:center;min-height:3.25rem;padding:0 1.75rem;border-radius:999px;background:var(--gold-bright,#cfa65c);color:var(--gold-ink,#20180a);font:500 0.82rem/1 \"Jost\",Futura,system-ui,sans-serif;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:background .32s cubic-bezier(0.22,1,0.36,1)}.ds-btn-gold:hover{background:#dcb873}.ds-btn-gold:focus-visible{outline:2px solid #b98a3e;outline-offset:3px}"
+    },
+    {
+      "name": "Outline Pill (on emerald)",
+      "kind": "button",
+      "refersTo": "button-outline-field",
+      "description": "Secondary action beside the gold pill on emerald.",
+      "html": "<div class=\"ds-field\"><a href=\"#\" class=\"ds-btn-outline\">Request a quote</a></div>",
+      "css": ".ds-field{background:var(--color-brand,#0e3b2e);padding:24px;border-radius:12px}.ds-btn-outline{display:inline-flex;align-items:center;min-height:3.25rem;padding:0 1.75rem;border-radius:999px;border:1px solid rgba(246,241,231,0.45);color:#fff;font:500 0.82rem/1 \"Jost\",Futura,system-ui,sans-serif;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:border-color .32s cubic-bezier(0.22,1,0.36,1),color .32s cubic-bezier(0.22,1,0.36,1)}.ds-btn-outline:hover{border-color:#cfa65c;color:#cfa65c}.ds-btn-outline:focus-visible{outline:2px solid #b98a3e;outline-offset:3px}"
+    },
+    {
+      "name": "Emerald Pill (on paper)",
+      "kind": "button",
+      "refersTo": "button-emerald",
+      "description": "Primary action on cream and ivory bands, gold icon.",
+      "html": "<a href=\"#\" class=\"ds-btn-emerald\">Start a quote <svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-btn-emerald{display:inline-flex;align-items:center;gap:.6rem;min-height:3.25rem;padding:0 1.75rem;border-radius:999px;background:var(--color-brand,#0e3b2e);color:var(--field-ink,#f6f1e7);font:500 0.8rem/1 \"Jost\",Futura,system-ui,sans-serif;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:background .32s cubic-bezier(0.22,1,0.36,1)}.ds-btn-emerald svg{color:#cfa65c}.ds-btn-emerald:hover{background:var(--color-brand-dark,#082a20)}.ds-btn-emerald:focus-visible{outline:2px solid #b98a3e;outline-offset:3px}"
+    },
+    {
+      "name": "Boutique Product Card",
+      "kind": "card",
+      "refersTo": "card-product",
+      "description": "White card, ivory multiply photo well, Bodoni name and price, quote pill plus round buy button.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-well\"></div><div class=\"ds-card-body\"><h3 class=\"ds-card-name\">Ornate Navy Velvet Floral Basket for Gift</h3><p class=\"ds-card-note\">Made to order · Can be personalised</p><div class=\"ds-card-price\"><span class=\"ds-price\">&#8377;2,450</span><s class=\"ds-compare\">&#8377;2,900</s></div><div class=\"ds-card-actions\"><button class=\"ds-quote\">Add to quote</button><button class=\"ds-buy\" aria-label=\"Add to cart\"><svg viewBox=\"0 0 24 24\" width=\"15\" height=\"15\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"8\" cy=\"21\" r=\"1\"/><circle cx=\"19\" cy=\"21\" r=\"1\"/><path d=\"M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12\"/></svg></button></div></div></article>",
+      "css": ".ds-card{width:260px;display:flex;flex-direction:column;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(27,35,31,.04),0 12px 28px -18px rgba(27,35,31,.28);transition:box-shadow .5s cubic-bezier(0.22,1,0.36,1),transform .5s cubic-bezier(0.22,1,0.36,1)}.ds-card:hover{box-shadow:0 2px 4px rgba(27,35,31,.04),0 26px 50px -28px rgba(27,35,31,.4);transform:translateY(-3px)}.ds-card-well{aspect-ratio:4/5;border-radius:14px 14px 0 0;background:#f3ede2}.ds-card-body{display:flex;flex-direction:column;gap:.4rem;padding:1.1rem}.ds-card-name{margin:0;font:500 1.08rem/1.25 \"Bodoni Moda\",Didot,Georgia,serif;color:#1b231f}.ds-card-note{margin:0;font:400 .78rem/1.4 \"Jost\",Futura,system-ui,sans-serif;color:#6a716b}.ds-card-price{display:flex;align-items:baseline;gap:.55rem;padding-top:.5rem}.ds-price{font:500 1.35rem/1 \"Bodoni Moda\",Didot,Georgia,serif;color:#0e3b2e;font-variant-numeric:lining-nums tabular-nums}.ds-compare{font:400 .82rem \"Jost\",system-ui,sans-serif;color:#6a716b}.ds-card-actions{display:flex;gap:.5rem;padding-top:.6rem}.ds-quote{flex:1;min-height:2.6rem;border:1px solid #d3c7b2;border-radius:999px;background:transparent;color:#0e3b2e;font:500 .74rem/1 \"Jost\",system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .32s cubic-bezier(0.22,1,0.36,1),color .32s cubic-bezier(0.22,1,0.36,1),border-color .32s cubic-bezier(0.22,1,0.36,1)}.ds-quote:hover{background:#0e3b2e;border-color:#0e3b2e;color:#f6f1e7}.ds-buy{display:grid;place-items:center;width:2.6rem;height:2.6rem;border:0;border-radius:50%;background:#0e3b2e;color:#cfa65c;cursor:pointer;transition:background .32s cubic-bezier(0.22,1,0.36,1)}.ds-buy:hover{background:#082a20}.ds-quote:focus-visible,.ds-buy:focus-visible{outline:2px solid #b98a3e;outline-offset:3px}"
+    },
+    {
+      "name": "In Your Quote Stamp",
+      "kind": "chip",
+      "refersTo": "quote-stamp",
+      "description": "Emerald pill with gold check shown on a card already on the quote request.",
+      "html": "<span class=\"ds-stamp\"><svg viewBox=\"0 0 24 24\" width=\"13\" height=\"13\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg>In your quote</span>",
+      "css": ".ds-stamp{display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .7rem;border-radius:999px;background:#0e3b2e;color:#f6f1e7;font:500 .72rem/1 \"Jost\",system-ui,sans-serif;letter-spacing:.06em}.ds-stamp svg{color:#cfa65c}"
+    },
+    {
+      "name": "Header Search",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Pill search field in the header; emerald stroke on focus.",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m21 21-4.3-4.3\"/></svg><input placeholder=\"Search products...\" /></label>",
+      "css": ".ds-search{display:flex;align-items:center;width:22rem;min-height:2.5rem;border:1px solid #d3c7b2;border-radius:999px;background:#fff;color:#6a716b;padding-left:.9rem;transition:border-color .32s cubic-bezier(0.22,1,0.36,1),box-shadow .32s cubic-bezier(0.22,1,0.36,1)}.ds-search input{flex:1;border:0;background:transparent;outline:none;padding:.6rem .9rem;font:400 .88rem \"Jost\",system-ui,sans-serif;color:#1b231f}.ds-search:focus-within{border-color:#0e3b2e;box-shadow:0 0 0 3px rgba(14,59,46,.1)}"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "White sticky bar: Bodoni wordmark, Jost links with emerald underline, round icon buttons.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-wordmark\">HSP Mart</span><nav class=\"ds-links\"><a href=\"#\" class=\"ds-active\">Home</a><a href=\"#\">Products</a><a href=\"#\">Corporate Gifts</a></nav><button class=\"ds-icon\" aria-label=\"Open quote request\"><svg viewBox=\"0 0 24 24\" width=\"19\" height=\"19\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z\"/><path d=\"M14 2v4a2 2 0 0 0 2 2h4\"/><path d=\"M10 9H8M16 13H8M16 17H8\"/></svg><span class=\"ds-badge\">3</span></button></header>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:1.5rem;padding:.5rem 1.5rem;background:#fff;border-bottom:1px solid rgba(27,35,31,.08)}.ds-wordmark{font:500 1.35rem/1 \"Bodoni Moda\",Didot,Georgia,serif;letter-spacing:.01em;color:#082a20}.ds-links{display:flex;flex:1}.ds-links a{padding:.5rem .9rem;font:600 .85rem \"Jost\",system-ui,sans-serif;letter-spacing:.02em;color:#1b231f;text-decoration:none;border-bottom:2px solid transparent;transition:color .16s cubic-bezier(0.22,1,0.36,1)}.ds-links a:hover{color:#082a20}.ds-links a.ds-active{color:#082a20;border-bottom-color:#082a20}.ds-icon{position:relative;display:inline-grid;place-items:center;width:2.5rem;height:2.5rem;border-radius:50%;border:1px solid rgba(27,35,31,.08);background:#fff;color:#46504a;cursor:pointer;transition:background .16s,color .16s}.ds-icon:hover{background:#0e3b2e;color:#fff;border-color:#0e3b2e}.ds-icon:focus-visible{outline:2px solid #b98a3e;outline-offset:2px}.ds-badge{position:absolute;top:.2rem;right:.2rem;min-width:1.15rem;height:1.15rem;padding:0 .3rem;border-radius:999px;background:#0e3b2e;color:#fff;font:800 .65rem/1.1rem \"Jost\",system-ui,sans-serif;text-align:center}"
+    },
+    {
+      "name": "Order Trail Step",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Italic Bodoni numeral in a gold-ringed circle on ivory, Bodoni title, light Jost copy.",
+      "html": "<div class=\"ds-trail\"><span class=\"ds-step-no\">1</span><h3 class=\"ds-step-title\">Shortlist your gifts</h3><p class=\"ds-step-copy\">Add hampers to your quote request as you browse.</p></div>",
+      "css": ".ds-trail{display:grid;gap:.7rem;padding:24px;background:#f3ede2;max-width:18rem}.ds-step-no{display:grid;place-items:center;width:3.5rem;height:3.5rem;border:1px solid #b98a3e;border-radius:50%;background:#f3ede2;color:#0e3b2e;font:italic 400 1.5rem \"Bodoni Moda\",Didot,Georgia,serif}.ds-step-title{margin:0;font:500 1.45rem/1.15 \"Bodoni Moda\",Didot,Georgia,serif;color:#1b231f}.ds-step-copy{margin:0;font:300 1rem/1.7 \"Jost\",system-ui,sans-serif;color:#46504a}"
+    },
+    {
+      "name": "Assistant Mark",
+      "kind": "custom",
+      "refersTo": "assistant-mark",
+      "description": "Gold sparkle on an emerald disc with an inset gold hairline.",
+      "html": "<span class=\"ds-ai\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.13a.5.5 0 0 1 .96 0L14.06 8.5A2 2 0 0 0 15.5 9.94l6.13 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z\"/></svg></span>",
+      "css": ".ds-ai{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#0e3b2e;color:#cfa65c;box-shadow:inset 0 0 0 1px rgba(207,166,92,.55)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Gifting House",
+    "overview": "**Creative North Star: \"The Gifting House\"**\n\nHSP Mart presents every hamper as though it were being unboxed in a luxury gift boutique: rich deep emerald fields, warm champagne-ivory paper, and antique gold used as foil, never as paint. The register is the category standard for premium gifting (the user named Ferns N Petals and Neiman Marcus) executed straight and at craft level, rather than reinvented. Calm, assured and generous with space; the photography of real hampers carries the luxury, and the chrome stays quiet around it.\n\nThe system alternates two materials. Emerald fields (the hero, the quote sheet header, the closing band, the announcement bar) are where the house speaks in its own voice: white Bodoni with a gold italic accent word, gold pill actions, thin gold hairline frames. Paper surfaces (cream page, ivory bands, white cards) are where products are shown: Bodoni names and prices on white cards, ivory photo wells, emerald as the action colour and gold as rules and rings. Corners are soft, depth is warm and diffuse, motion is a slow exponential ease-out with no overshoot.\n\nThis world replaces a rejected \"trade catalogue\" direction (Archivo display, marigold accents, squared plates). Nothing from that world is part of this system; residual `--marigold` aliases in code now resolve to gold and exist only for back-compatibility.",
+    "keyCharacteristics": [
+      "Two materials only: emerald field and ivory paper; gold is a hairline, ring, icon or primary-action fill, never a surface.",
+      "Bodoni Moda for every display line, product name, price and numeral; Jost for everything else.",
+      "Italic Bodoni is the house's emphasis: one gold accent word in a headline, \"On request\" prices, order-trail numerals.",
+      "Uppercase letterspaced Jost appears only on controls (buttons, text links acting as actions), never as a heading label.",
+      "Pills for actions, soft 10 to 14px corners for cards, an arch for the hero photo window.",
+      "Real product photography on warm ivory; no discount badges, banners or marketplace noise."
+    ],
+    "rules": [
+      {
+        "name": "The Foil Rule",
+        "body": "Gold is a thread, not a surface. It appears as 1px rules, rings, frames, icons, the focus ring and the single primary-action fill. No gold panels, gold section bands or gold gradients.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Golds Rule",
+        "body": "Antique gold (antique-gold) works on paper; bright gold (gold-bright) works on emerald. Do not swap them: antique gold muddies on emerald, bright gold washes out on ivory.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gold Is Not Text On Paper Rule",
+        "body": "Antique gold against cream measures about 2.9:1, below AA for body and label sizes. On paper, gold may colour a rule, ring or icon; text stays ink or emerald.",
+        "section": "colors"
+      },
+      {
+        "name": "The Didone Numeral Rule",
+        "body": "Every price, count and step numeral is set in Bodoni Moda with lining tabular figures (`data-num`). Jost never carries a price.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Italic Word Rule",
+        "body": "A field headline gets at most one italic accent phrase, in bright gold. Italic elsewhere is reserved for \"On request\" and ordinal numerals.",
+        "section": "typography"
+      },
+      {
+        "name": "The Labels Are Controls Rule",
+        "body": "Uppercase letterspaced Jost marks something you can press. It is never placed above a heading as a category label.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lift Not Pop Rule",
+        "body": "Hover raises a card 3px and swaps Card for Lift over 0.5s with the exponential ease-out (cubic-bezier(0.22, 1, 0.36, 1)). No scale bounce on cards; photos inside may drift to 1.03 over a second. Reduced motion removes both.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put the house's own voice on emerald and the products on paper; alternate cream, ivory and emerald bands down a page.",
+      "**Do** set every name, price, count and numeral in Bodoni Moda with lining tabular figures.",
+      "**Do** use bright gold for the primary action and accents on emerald, and antique gold for hairlines, rings and focus on paper.",
+      "**Do** mark price-on-request items with Bodoni italic \"On request\" and route them to the quote pill.",
+      "**Do** use the exponential ease-out (cubic-bezier(0.22, 1, 0.36, 1)) at 0.32s for state changes and 0.5s for card lifts, with reduced-motion fallbacks.",
+      "**Do** read colour, radius and type from the `globals.css` world tokens and the shadcn theme variables."
+    ],
+    "donts": [
+      "**Don't** add discount, sale or percentage badges, promotional banners or marketplace-style noise to cards.",
+      "**Don't** fill surfaces with gold or use gold gradients; gold stays a thread (The Foil Rule).",
+      "**Don't** set text in antique gold on cream or ivory.",
+      "**Don't** put uppercase letterspaced labels above headings; uppercase Jost belongs to controls.",
+      "**Don't** float persistent tabs or launchers over content on phones; quote and assistant live in the header and menu.",
+      "**Don't** reintroduce the rejected trade-catalogue vocabulary: Archivo display, marigold fills, squared plates.",
+      "**Don't** invent social proof (client logos, testimonials, ratings, order counts) to dress a section."
+    ]
+  }
+}

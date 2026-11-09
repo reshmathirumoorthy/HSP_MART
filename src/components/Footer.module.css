@@ -102,6 +102,7 @@
   letter-spacing: 0.02em;
   color: var(--color-brand-dark);
   white-space: nowrap;
+  font-stretch: var(--display-stretch);
 }
 
 .blurb {

@@ -48,10 +48,11 @@
 .title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.22rem;
   line-height: 1.2;
   color: var(--color-brand-dark, #063b25);
+  font-stretch: var(--display-stretch);
 }
 
 .headerMeta {
@@ -234,10 +235,11 @@
 .emptyTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.3rem;
   line-height: 1.25;
   color: var(--color-brand-dark, #063b25);
+  font-stretch: var(--display-stretch);
 }
 
 .emptyCopy {

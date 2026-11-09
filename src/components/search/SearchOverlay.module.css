@@ -227,6 +227,8 @@
   font-family: var(--font-display);
   font-size: 1.15rem;
   line-height: 1.15;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .productMeta {
@@ -300,6 +302,8 @@
   font-family: var(--font-display);
   font-size: 1.3rem;
   line-height: 1.1;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .categoryAction {
@@ -375,6 +379,8 @@
   font-family: var(--font-display);
   font-size: 1.85rem;
   line-height: 1.1;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .emptyCopy {

@@ -47,9 +47,12 @@ function buildInitialQuote(initialProducts: string[]): BulkQuoteData {
     const seen = new Set<string>();
 
     for (const entry of initialProducts) {
-      const productId = resolveProductId(entry);
+      // Accepts "slug" or "slug:qty" (Quote Sheet handoff carries quantities).
+      const [ref, qtyRaw] = entry.split(":");
+      const productId = resolveProductId(ref);
       if (!productId || seen.has(productId)) continue;
-      const line = createQuoteLine(productId);
+      const qty = Number(qtyRaw);
+      const line = createQuoteLine(productId, Number.isFinite(qty) && qty > 0 ? qty : 1);
       if (!line) continue;
       seen.add(productId);
       lines.push(line);
@@ -180,7 +183,6 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
       <div className={`shell ${styles.inner}`}>
         <header className={styles.banner}>
           <div className={styles.header}>
-            <p className={styles.label}>Business &amp; bulk purchasing</p>
             <h1 className={styles.title}>Request a bulk quote</h1>
             <p className={styles.copy}>
               For teams, offices, and corporate gifting. Share products,

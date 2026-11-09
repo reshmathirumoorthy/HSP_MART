@@ -8,6 +8,8 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useNotifications } from "@/context/NotificationContext";
 import { useRfp } from "@/context/RfpContext";
+import { useQuoteSheet } from "@/context/QuoteSheetContext";
+import { FileText } from "lucide-react";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 import { NotificationPanel } from "@/components/notifications/NotificationPanel";
 import { ProductsNavLink } from "@/components/ProductsNavLink";
@@ -23,9 +25,21 @@ const categoryLinks = productCategories
     label: c.label,
   }));
 
+const giftingHref = (subcategory: string) =>
+  `/products?category=gifts&subcategory=${encodeURIComponent(subcategory)}`;
+
+/** Gifting occasions — mirrors the production storefront's primary menu. */
+const giftingLinks = [
+  { href: giftingHref("Corporate Gifting"), label: "Corporate Gifting" },
+  { href: giftingHref("Festive Gifting"), label: "Festive Gifting" },
+  { href: giftingHref("Wedding Gifting"), label: "Wedding Gifting" },
+  { href: giftingHref("Occasional Gifting"), label: "Occasional Gifting" },
+];
+
 const shopLinks = [
   { href: "/products", label: "Products" },
-  ...categoryLinks,
+  ...giftingLinks,
+  ...categoryLinks.filter((link) => link.slug !== "gifts"),
   { href: "/bulk-quote", label: "Bulk Orders" },
 ];
 
@@ -47,6 +61,7 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { cartCount, openCart, hydrated } = useCart();
+  const quoteSheet = useQuoteSheet();
   const { count: wishlistCount, hydrated: wishlistHydrated } = useWishlist();
   const { unreadCount, hydrated: notificationsHydrated } = useNotifications();
   const { items: rfpItems, openRfp, toggleRfp } = useRfp();
@@ -195,11 +210,18 @@ export function Navbar() {
             </Link>
             <ProductsNavLink onNavigate={() => setOpen(false)} />
             <Link
-              href="/products?category=stationery"
+              href={giftingHref("Corporate Gifting")}
               className={styles.navLink}
               onClick={() => setOpen(false)}
             >
-              Categories
+              Corporate Gifts
+            </Link>
+            <Link
+              href="/products?category=presentation"
+              className={styles.navLink}
+              onClick={() => setOpen(false)}
+            >
+              Boards
             </Link>
             <Link
               href="/products?category=gifts"
@@ -244,7 +266,7 @@ export function Navbar() {
           <div className={styles.actions}>
             <Link
               href="/account"
-              className={styles.iconBtn}
+              className={`${styles.iconBtn} ${styles.hideSm}`}
               aria-label="Account"
               onClick={() => setOpen(false)}
             >
@@ -272,7 +294,7 @@ export function Navbar() {
               </span>
             </Link>
 
-            <div className={styles.notifWrap} ref={notifWrapRef}>
+            <div className={`${styles.notifWrap} ${styles.secondary}`} ref={notifWrapRef}>
               <button
                 ref={bellRef}
                 type="button"
@@ -304,12 +326,33 @@ export function Navbar() {
 
             <Link
               href="/compare"
-              className={styles.iconBtn}
+              className={`${styles.iconBtn} ${styles.secondary}`}
               aria-label="Compare products"
               onClick={() => setOpen(false)}
             >
               <CompareIcon />
             </Link>
+
+            <button
+              type="button"
+              className={styles.iconBtn}
+              suppressHydrationWarning
+              aria-label={
+                quoteSheet.lines.length
+                  ? `Open quote request, ${quoteSheet.lines.length} gifts`
+                  : "Open quote request"
+              }
+              onClick={quoteSheet.open}
+            >
+              <FileText aria-hidden className={styles.lucide} />
+              <span
+                className={styles.badge}
+                aria-hidden={!quoteSheet.lines.length}
+                suppressHydrationWarning
+              >
+                {quoteSheet.lines.length || ""}
+              </span>
+            </button>
 
             <button
               type="button"
@@ -431,6 +474,19 @@ export function Navbar() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <button
+                  type="button"
+                  className={styles.mobileLink}
+                  tabIndex={open ? 0 : -1}
+                  onClick={() => {
+                    setOpen(false);
+                    window.dispatchEvent(new Event("hsp:open-ai"));
+                  }}
+                >
+                  Ask HSP AI
+                </button>
+              </li>
             </ul>
             <button
               type="button"

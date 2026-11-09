@@ -75,7 +75,6 @@ export function QuoteRequirements({
   return (
     <section className={styles.section} aria-labelledby="quote-requirements-heading">
       <div className={styles.head}>
-        <p className={styles.number}>02 · Requirements</p>
         <h2 id="quote-requirements-heading" className={styles.title}>
           Tell us what you need
         </h2>

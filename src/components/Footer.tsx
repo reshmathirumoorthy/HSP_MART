@@ -1,56 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
-import {
-  IconHeadset,
-  IconLightbulb,
-  IconShieldCheck,
-  IconTruck,
-} from "./ServiceBenefits";
 import styles from "./Footer.module.css";
 
-const benefits = [
-  {
-    title: "Expert advice",
-    body: "Expert advice over phone call",
-    icon: <IconLightbulb />,
-  },
-  {
-    title: "Secure payment",
-    body: "Safe and secure payments",
-    icon: <IconShieldCheck />,
-  },
-  {
-    title: "24/7 support",
-    body: "We're here to help",
-    icon: <IconHeadset />,
-  },
-  {
-    title: "Fast delivery",
-    body: "Reliable product delivery",
-    icon: <IconTruck />,
-  },
-];
 
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.benefitsBar}>
-        <ul className={`shell ${styles.benefits}`} aria-label="Service benefits">
-          {benefits.map((benefit) => (
-            <li key={benefit.title} className={styles.benefit}>
-              <span className={styles.benefitIcon} aria-hidden="true">
-                {benefit.icon}
-              </span>
-              <div className={styles.benefitText}>
-                <h3 className={styles.benefitTitle}>{benefit.title}</h3>
-                <p className={styles.benefitBody}>{benefit.body}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <div className={`shell ${styles.grid}`}>
         <div className={styles.brand}>
           <Link href="/" className={styles.brandLink}>
@@ -73,19 +29,19 @@ export function Footer() {
               <Link href="/products">All products</Link>
             </li>
             <li>
-              <Link href="/products?category=stationery">Stationery</Link>
+              <Link href={`/products?category=gifts&subcategory=${encodeURIComponent("Corporate Gifting")}`}>Corporate gifting</Link>
             </li>
             <li>
-              <Link href="/products?category=office">Office essentials</Link>
+              <Link href={`/products?category=gifts&subcategory=${encodeURIComponent("Festive Gifting")}`}>Festive gifting</Link>
             </li>
             <li>
-              <Link href="/products?category=gifts">Gifting</Link>
+              <Link href={`/products?category=gifts&subcategory=${encodeURIComponent("Wedding Gifting")}`}>Wedding gifting</Link>
             </li>
             <li>
-              <Link href="/products?category=desk">Desk &amp; accessories</Link>
+              <Link href="/products?category=presentation">Boards &amp; presentation</Link>
             </li>
             <li>
-              <Link href="/products?category=writing">Writing</Link>
+              <Link href="/products?category=stationery">Stationery &amp; office</Link>
             </li>
           </ul>
         </div>

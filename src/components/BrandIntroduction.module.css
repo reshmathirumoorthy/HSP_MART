@@ -61,6 +61,8 @@
   letter-spacing: -0.015em;
   color: var(--text-primary);
   margin: 0 0 1rem;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .lead {

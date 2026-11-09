@@ -37,6 +37,8 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .customizerCopy {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { formatPrice, type Product } from "@/data/products";
+import { productPriceLabel, type Product } from "@/data/products";
 import {
   isInStock,
   productAvailabilityLabel,
@@ -40,7 +40,7 @@ export function ProductPurchasePanel({ product }: Props) {
       <p className={styles.sku}>SKU · {product.sku}</p>
 
       <div className={styles.priceRow}>
-        <p className={styles.price}>{formatPrice(product.price, product.currency)}</p>
+        <p className={styles.price}>{productPriceLabel(product)}</p>
       </div>
 
       <p className={`${styles.stock} ${isInStock(product) ? styles.inStock : styles.outStock}`}>

@@ -40,10 +40,11 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.45rem, 2.4vw, 1.9rem);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   line-height: 1.2;
   color: var(--color-brand-dark);
   text-wrap: balance;
+  font-stretch: var(--display-stretch);
 }
 
 .body {

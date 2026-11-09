@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import type { Product, ProductVisualKind } from "@/data/products";
 import { productDisplayImageSrc, productOriginalImageSrc } from "@/lib/productImageSrc";
 import styles from "./ProductVisual.module.css";
@@ -84,6 +85,8 @@ export function ProductVisual({
   const [secondaryFailed, setSecondaryFailed] = useState(false);
   const showPhoto = Boolean(primarySrc) && !failed;
   const showSecondary = Boolean(secondarySrc) && !secondaryFailed;
+  // Imported catalogue photos are full lifestyle shots (not cutouts): show them edge to edge.
+  const isScene = Boolean(primarySrc && /^https?:\/\//.test(primarySrc));
 
   const variantClass =
     variant === "card"
@@ -96,12 +99,13 @@ export function ProductVisual({
 
   return (
     <div
-      className={`${styles.stage} ${toneClass[product.tone]} ${featured ? styles.featured : ""} ${showPhoto ? styles.hasPhoto : ""} ${showSecondary ? styles.hasSecondary : ""} ${variantClass}`}
+      className={`${styles.stage} ${toneClass[product.tone]} ${featured ? styles.featured : ""} ${showPhoto ? styles.hasPhoto : ""} ${showSecondary ? styles.hasSecondary : ""} ${isScene ? styles.scene : ""} ${variantClass}`}
     >
       {showPhoto && primarySrc ? (
         <div className={styles.photoFrame}>
           <Image
             src={primarySrc}
+            loader={shopifyImageLoader(primarySrc)}
             alt={imageAlt(product, imageIndex, altSuffix)}
             fill
             sizes={sizes}
@@ -112,6 +116,7 @@ export function ProductVisual({
           {showSecondary && secondarySrc ? (
             <Image
               src={secondarySrc}
+              loader={shopifyImageLoader(secondarySrc)}
               alt=""
               fill
               sizes={sizes}

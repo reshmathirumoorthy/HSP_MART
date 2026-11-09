@@ -26,7 +26,30 @@ import {
 import { AIChatMessage } from "./AIChatMessage";
 import { AIInput } from "./AIInput";
 import { AIQuickActions } from "./AIQuickActions";
-import { RobotMascot } from "./RobotMascot";
+import { Sparkles } from "lucide-react";
+
+/** Assistant mark in the gifting-house world: gold spark on an emerald disc. */
+function AssistantMark({ size = 40, title = "" }: { size?: number; title?: string; state?: string }) {
+  return (
+    <span
+      role={title ? "img" : undefined}
+      aria-label={title || undefined}
+      aria-hidden={title ? undefined : true}
+      style={{
+        display: "inline-grid",
+        placeItems: "center",
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: "var(--color-brand)",
+        color: "var(--gold-bright)",
+        boxShadow: "inset 0 0 0 1px rgba(207, 166, 92, 0.55)",
+      }}
+    >
+      <Sparkles style={{ width: size * 0.45, height: size * 0.45 }} />
+    </span>
+  );
+}
 import styles from "./AIShoppingAssistant.module.css";
 
 function createId(prefix: string): string {
@@ -94,6 +117,13 @@ export function AIShoppingAssistant() {
   } = useWishlist();
 
   const [open, setOpen] = useState(false);
+
+  // Opened from the site menu on phones, where the launcher is hidden.
+  useEffect(() => {
+    const openFromMenu = () => setOpen(true);
+    window.addEventListener("hsp:open-ai", openFromMenu);
+    return () => window.removeEventListener("hsp:open-ai", openFromMenu);
+  }, []);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const [thinkingLabel, setThinkingLabel] = useState("Thinking…");
@@ -422,11 +452,10 @@ export function AIShoppingAssistant() {
         onClick={() => setOpen((value) => !value)}
       >
         <span className={styles.launcherMascot} aria-hidden="true">
-          <RobotMascot size={40} title="" />
+          <AssistantMark size={40} title="" />
         </span>
         <span className={styles.launcherText}>
           <span className={styles.launcherTitle}>Ask HSP AI</span>
-          <span className={styles.launcherHint}>Find products</span>
         </span>
       </button>
 
@@ -448,7 +477,7 @@ export function AIShoppingAssistant() {
           >
             <header className={styles.header}>
               <span className={styles.headerMascot} aria-hidden="true">
-                <RobotMascot size={86} state={busy ? "thinking" : "idle"} title="" />
+                <AssistantMark size={86} state={busy ? "thinking" : "idle"} title="" />
               </span>
               <div className={styles.headerCopy}>
                 <div className={styles.brandRow}>
@@ -492,7 +521,7 @@ export function AIShoppingAssistant() {
             >
               {messages.length === 0 && !busy ? (
                 <div className={styles.empty}>
-                  <RobotMascot size={92} title="HSP AI robot, ready to help" />
+                  <AssistantMark size={92} title="HSP AI robot, ready to help" />
                   <p className={styles.emptyTitle}>Hi, I&rsquo;m HSP AI</p>
                   <p className={styles.emptyCopy}>
                     Search the live catalogue, compare options, manage your
@@ -513,7 +542,7 @@ export function AIShoppingAssistant() {
                   {busy ? (
                     <div className={`${styles.message} ${styles.messageAssistant}`}>
                       <span className={styles.avatarBot} aria-hidden="true">
-                        <RobotMascot size={30} state="thinking" title="" />
+                        <AssistantMark size={30} state="thinking" title="" />
                       </span>
                       <div className={styles.thinkingBubble} role="status">
                         <span className={styles.thinkingDots} aria-hidden="true">

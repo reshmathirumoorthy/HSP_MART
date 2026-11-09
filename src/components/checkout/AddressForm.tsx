@@ -24,7 +24,6 @@ export function AddressForm({
   return (
     <section id="checkout-delivery" className={styles.section} aria-labelledby="delivery-heading">
       <div className={styles.sectionHead}>
-        <p className={styles.sectionNumber}>02 · Delivery</p>
         <h2 id="delivery-heading" className={styles.sectionTitle}>
           Delivery address
         </h2>

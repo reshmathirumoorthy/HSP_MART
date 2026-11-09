@@ -95,6 +95,8 @@
   font-family: var(--font-display);
   line-height: 1;
   user-select: none;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .avatarXl {
@@ -170,11 +172,12 @@
 .profileName {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.85rem, 3.4vw, 2.55rem);
   line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--acct-text);
+  font-stretch: var(--display-stretch);
 }
 
 .profileContact {
@@ -300,10 +303,11 @@
 .pageTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.5rem, 2.6vw, 2rem);
   line-height: 1.15;
   color: var(--acct-text);
+  font-stretch: var(--display-stretch);
 }
 
 .pageDescription {
@@ -591,6 +595,8 @@
   font-size: 1.5rem;
   line-height: 1.05;
   color: var(--acct-green-dark);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 /* -----------------------------------------------------------------------------
@@ -627,11 +633,12 @@
 .sectionTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.42rem;
   line-height: 1.2;
   letter-spacing: -0.005em;
   color: var(--acct-text);
+  font-stretch: var(--display-stretch);
 }
 
 .sectionHint {
@@ -696,6 +703,8 @@
   font-family: var(--font-display);
   font-size: 1.3rem;
   line-height: 1.15;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .cardMeta {
@@ -738,10 +747,11 @@
 .orderRef {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.22rem;
   line-height: 1.15;
   color: var(--acct-text);
+  font-stretch: var(--display-stretch);
 }
 
 .orderMeta {
@@ -784,6 +794,8 @@
   font-size: 1.32rem;
   line-height: 1.1;
   color: var(--acct-text);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .cardAction {
@@ -927,6 +939,8 @@
   font-size: 1.15rem;
   line-height: 1.3;
   color: var(--acct-green-deep);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .helpCopy {
@@ -1003,9 +1017,10 @@
 .emptyTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.45rem;
   line-height: 1.15;
+  font-stretch: var(--display-stretch);
 }
 
 .emptyCopy {
@@ -1261,6 +1276,8 @@
   font-family: var(--font-display);
   font-size: 1.25rem;
   line-height: 1.2;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .avatarControls {
@@ -1312,10 +1329,11 @@
 .modalTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.6rem;
   line-height: 1.2;
   color: var(--acct-text);
+  font-stretch: var(--display-stretch);
 }
 
 .modalCopy {

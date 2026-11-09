@@ -1,35 +1,33 @@
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CampaignBanner } from "@/components/CampaignBanner";
-import { BestSellers } from "@/components/BestSellers";
-import { Hero } from "@/components/Hero";
-import { HomeCategories } from "@/components/HomeCategories";
+import { HomeHero } from "@/components/home/HomeHero";
+import {
+  CloseContact,
+  OneHouse,
+  OrderTrail,
+  ReadyToDispatch,
+  SignatureHampers,
+} from "@/components/home/HomeSections";
 import { NewArrivals } from "@/components/NewArrivals";
-import { TrustStrip } from "@/components/TrustStrip";
-import { BrandIntroduction } from "@/components/BrandIntroduction";
 import { RecentlyViewed } from "@/components/discovery/RecentlyViewed";
 import { organizationJsonLd } from "@/lib/seo";
 
 /**
- * HSP Mart homepage — premium editorial ecommerce layout.
- *
- * Rhythm follows a clean commercial structure:
- * Announcement bar → Navbar → Hero → Trust strip → Categories →
- * Recently Viewed → Brand Introduction → Featured Products → Campaign Banners →
- * New Arrivals.
+ * HSP Mart home: a premium corporate gifting house.
+ * Emerald hero + occasions, signature hampers, how an order is handled,
+ * signature corporate gifts, new arrivals, gifting + office, closing invitation.
  */
 export default function HomePage() {
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <Hero />
-      <TrustStrip />
-      <HomeCategories />
-      <RecentlyViewed title="Recently viewed" />
-      <BrandIntroduction />
-      <BestSellers />
-      <CampaignBanner variant="bulk" />
-      <CampaignBanner variant="gifting" />
+      <HomeHero />
+      <SignatureHampers />
+      <OrderTrail />
+      <ReadyToDispatch />
       <NewArrivals />
+      <OneHouse />
+      <RecentlyViewed title="Recently viewed" />
+      <CloseContact />
     </>
   );
 }

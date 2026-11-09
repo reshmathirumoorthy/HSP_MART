@@ -48,7 +48,7 @@ export function createCheckoutDemoNotification(
       title: "Demo order recorded",
       message: `Demo reference ${reference} was recorded in this browser. No payment was taken.`,
       timestamp,
-      read: false,
+      read: true,
       href,
     };
   }
@@ -60,7 +60,7 @@ export function createCheckoutDemoNotification(
       title: "Demo payment skipped",
       message: `No payment was processed for demo reference ${reference}.`,
       timestamp,
-      read: false,
+      read: true,
       href,
     };
   }
@@ -71,7 +71,7 @@ export function createCheckoutDemoNotification(
     title: "Demo checkout finished",
     message: `Demo reference ${reference} is complete. Nothing was sent to a fulfilment system.`,
     timestamp,
-    read: false,
+    read: true,
     href,
   };
 }
@@ -85,7 +85,7 @@ export function createSeedNotifications(now = Date.now()): Notification[] {
       title: "Your order has shipped",
       message: "Vacuum Insulated Bottle 500ml is on its way.",
       timestamp: new Date(now - 2 * 60 * 1000).toISOString(),
-      read: false,
+      read: true,
       href: "/account/orders",
     },
     {
@@ -94,7 +94,7 @@ export function createSeedNotifications(now = Date.now()): Notification[] {
       title: "Quote request updated",
       message: "Your bulk quote is being reviewed by our team.",
       timestamp: new Date(now - 60 * 60 * 1000).toISOString(),
-      read: false,
+      read: true,
       href: "/account/quotes",
     },
     {
@@ -103,7 +103,7 @@ export function createSeedNotifications(now = Date.now()): Notification[] {
       title: "Customization saved",
       message: "Your product customization is ready to add to cart.",
       timestamp: new Date(now - 24 * 60 * 60 * 1000).toISOString(),
-      read: false,
+      read: true,
       href: "/products",
     },
     {

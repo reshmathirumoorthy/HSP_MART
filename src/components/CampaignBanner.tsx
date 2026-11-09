@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import { useEffect, useRef, useState } from "react";
 import styles from "./CampaignBanner.module.css";
 
@@ -161,6 +162,7 @@ export function CampaignBanner({ variant }: { variant: Variant }) {
               <div className={styles.frame}>
                 <Image
                   src={c.image}
+                  loader={shopifyImageLoader(c.image)}
                   alt={c.imageAlt}
                   fill
                   sizes="(max-width: 959px) 100vw, 48vw"

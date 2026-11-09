@@ -73,7 +73,9 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={breadcrumbJsonLd(jsonLdTrail.map((b) => ({ name: b.label, url: b.href ? `https://hspmart.com${b.href}` : undefined })))} />
       {breadcrumbTrail.length > 0 ? (
-        <ProductBreadcrumb items={breadcrumbTrail} />
+        <div className="shell" style={{ paddingTop: "1rem" }}>
+          <ProductBreadcrumb items={breadcrumbTrail} />
+        </div>
       ) : null}
       <Suspense
         fallback={

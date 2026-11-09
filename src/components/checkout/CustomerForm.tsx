@@ -13,7 +13,6 @@ export function CustomerForm({ value, errors, onChange }: Props) {
   return (
     <section id="checkout-customer" className={styles.section} aria-labelledby="customer-heading">
       <div className={styles.sectionHead}>
-        <p className={styles.sectionNumber}>01 · Customer details</p>
         <h2 id="customer-heading" className={styles.sectionTitle}>
           Customer details
         </h2>

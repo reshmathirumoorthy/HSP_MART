@@ -10,6 +10,8 @@ import { NotificationProvider } from "@/context/NotificationContext";
 import { AccountProfileProvider } from "@/context/AccountProfileContext";
 import { AccountAddressProvider } from "@/context/AccountAddressContext";
 import { RfpProvider } from "@/context/RfpContext";
+import { QuoteSheetProvider } from "@/context/QuoteSheetContext";
+import { QuoteSheet } from "@/components/quote-sheet/QuoteSheet";
 import { CompareBar } from "@/components/discovery/CompareBar";
 
 const CartDrawer = dynamic(
@@ -36,10 +38,13 @@ export function Providers({ children }: { children: ReactNode }) {
               <AccountProfileProvider>
                 <AccountAddressProvider>
                   <RfpProvider>
+                   <QuoteSheetProvider>
                     {children}
+                    <QuoteSheet />
                     <CartDrawer />
                     <CompareBar />
                     <AIShoppingAssistant />
+                   </QuoteSheetProvider>
                   </RfpProvider>
                 </AccountAddressProvider>
               </AccountProfileProvider>

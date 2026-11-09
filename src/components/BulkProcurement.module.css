@@ -73,7 +73,9 @@
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 0.9;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .scaleItem:nth-child(1) .scaleValue {

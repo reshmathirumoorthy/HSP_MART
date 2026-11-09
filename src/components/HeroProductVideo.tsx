@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import styles from "./Hero.module.css";
 
 const VIDEO_SRC = "/videos/hsp-mart-hero-transparent.webm";
@@ -87,6 +88,7 @@ export function HeroProductVideo() {
       ) : null}
       <Image
         src={POSTER_SRC}
+        loader={shopifyImageLoader(POSTER_SRC)}
         alt={playVideo ? "" : "HSP Mart notebook and pen"}
         fill
         sizes="(max-width: 959px) 100vw, 62vw"

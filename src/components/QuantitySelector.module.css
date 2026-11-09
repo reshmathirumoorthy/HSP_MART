@@ -15,7 +15,7 @@
 
 .control {
   display: inline-grid;
-  grid-template-columns: 2.75rem 4.5rem 2.75rem;
+  grid-template-columns: var(--touch-min) 4.5rem var(--touch-min);
   align-items: center;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);

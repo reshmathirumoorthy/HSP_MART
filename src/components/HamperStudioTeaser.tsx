@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CatalogImage } from "@/components/CatalogImage";
 import Link from "next/link";
 import styles from "./HamperStudioTeaser.module.css";
 
@@ -55,7 +55,7 @@ export function HamperStudioTeaser() {
                 <li key={box.name}>
                   <Link href={box.href} className={styles.boxCard}>
                     <span className={styles.thumb}>
-                      <Image
+                      <CatalogImage
                         src={box.image}
                         alt=""
                         fill
@@ -82,7 +82,7 @@ export function HamperStudioTeaser() {
           <aside className={styles.studio} aria-hidden>
             <p className={styles.studioLabel}>Live hamper studio</p>
             <div className={styles.preview}>
-              <Image
+              <CatalogImage
                 src="/images/products/harry-potter-quill-main.jpg"
                 alt=""
                 fill

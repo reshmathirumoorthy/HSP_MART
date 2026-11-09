@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { formatPrice } from "@/data/products";
+import { productPriceLabel } from "@/data/products";
 import { productAvailabilityLabel } from "@/lib/productAvailability";
 import { isProductCustomizable } from "@/lib/productModel";
 import { ProductVisual } from "@/components/ProductVisual";
@@ -18,7 +18,6 @@ export function ComparePageClient() {
     <div className={styles.page} data-nav-surface="light">
       <div className="shell">
         <header className={styles.pageHeader}>
-          <p className={styles.pageLabel}>Compare</p>
           <h1 className={styles.pageTitle}>Compare products</h1>
           <p className={styles.pageCopy}>
             Side-by-side details using the fields available in the HSP Mart
@@ -28,7 +27,6 @@ export function ComparePageClient() {
 
         {!hydrated ? null : products.length < 2 ? (
           <EmptyState
-            label="Compare"
             title="Select at least two products"
             copy={
               products.length === 1
@@ -75,7 +73,7 @@ export function ComparePageClient() {
                         </Link>
                         <p className={styles.wishlistCategory}>{product.category}</p>
                         <p className={styles.wishlistPrice}>
-                          {formatPrice(product.price)}
+                          {productPriceLabel(product)}
                         </p>
                         <div className={styles.compareCellActions}>
                           <Link
@@ -131,7 +129,7 @@ export function ComparePageClient() {
                     <th scope="row">Price</th>
                     {products.map((product) => (
                       <td key={`${product.id}-price`}>
-                        {formatPrice(product.price, product.currency)}
+                        {productPriceLabel(product)}
                       </td>
                     ))}
                   </tr>

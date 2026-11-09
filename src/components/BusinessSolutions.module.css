@@ -34,10 +34,11 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3.2vw, 2.45rem);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   letter-spacing: -0.018em;
   line-height: 1.15;
   color: var(--business-forest);
+  font-stretch: var(--display-stretch);
 }
 
 .lead {

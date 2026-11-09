@@ -47,15 +47,6 @@ export function ProductDetail({ product, related, similar = [] }: Props) {
 
       {!hasVisualizer ? <ProductCustomizationPanel product={product} /> : null}
 
-      <section className={styles.descriptionSection}>
-        <div className={styles.descriptionBlock}>
-          <h2 className={styles.descriptionHeading}>
-            About {product.name}
-          </h2>
-          <p className={styles.descriptionCopy}>{product.description}</p>
-        </div>
-      </section>
-
       <RelatedProducts
         products={related}
         label="Related products"

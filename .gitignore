@@ -72,3 +72,10 @@ next-env.d.ts
 /scripts/_download_replacements.py
 /scripts/_fetch_hsp_product_images.py
 /scripts/_scrape_product_html.py
+
+# Local QA / design-review captures
+.playwright-mcp/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/hook.cache.json

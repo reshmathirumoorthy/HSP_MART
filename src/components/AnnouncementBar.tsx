@@ -10,11 +10,11 @@ export function AnnouncementBar() {
     <div className={styles.bar} role="region" aria-label="Store notices">
       <div className={`shell ${styles.inner}`}>
         <p className={styles.item}>Free delivery on orders above ₹499</p>
-        <span className={styles.sep} aria-hidden>
+        <span className={`${styles.sep} ${styles.wideOnly}`} aria-hidden>
           ·
         </span>
         {phone ? (
-          <a href={`tel:${tel}`} className={styles.item}>
+          <a href={`tel:${tel}`} className={`${styles.item} ${styles.wideOnly}`}>
             Call {phone}
           </a>
         ) : null}

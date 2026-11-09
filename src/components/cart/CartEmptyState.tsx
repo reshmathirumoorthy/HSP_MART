@@ -59,7 +59,6 @@ export function CartEmptyState({ onShop }: Props) {
             <path d="M9 10.5V6.5a3 3 0 0 1 6 0v4" />
           </svg>
         </span>
-        <p className={styles.eyebrow}>Your cart</p>
         <h2 className={styles.title}>Your cart is waiting.</h2>
         <p className={styles.copy}>
           Discover everyday essentials, stationery and thoughtful gifts.

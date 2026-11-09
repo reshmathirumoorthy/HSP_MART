@@ -36,7 +36,6 @@ export function AccountShell({
   children,
   title,
   description,
-  showWelcome = false,
 }: Props) {
   const {
     profile,
@@ -75,7 +74,6 @@ export function AccountShell({
 
             <div className={styles.profileIdentity}>
               <p className={styles.profileOverline}>
-                <span>{showWelcome ? "Welcome back" : "My account"}</span>
                 <span className={styles.demoChip}>Demo frontend</span>
               </p>
               <h1 className={styles.profileName}>{name}</h1>

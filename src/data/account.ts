@@ -74,8 +74,8 @@ function quoteItem(
 /** DEMO customer profile — placeholder contact details only. */
 const demoCustomer: CustomerProfile = {
   id: "demo-customer-01",
-  fullName: "Reshma Thirumoorthy",
-  firstName: "Reshma",
+  fullName: "Demo Customer",
+  firstName: "Demo",
   email: "customer@example.com",
   phone: "+91 98765 43210",
   customerType: "business" satisfies CustomerType,
@@ -108,7 +108,7 @@ const mockOrders: Order[] = [
     total: 1400,
     currency: "INR",
     paymentMethod: "upi" satisfies PaymentMethod,
-    deliveryName: "Reshma Thirumoorthy",
+    deliveryName: "Demo Customer",
     deliveryAddress: { ...demoCustomer.address },
   },
   {
@@ -128,7 +128,7 @@ const mockOrders: Order[] = [
     total: 1536,
     currency: "INR",
     paymentMethod: "card",
-    deliveryName: "Reshma Thirumoorthy",
+    deliveryName: "Demo Customer",
     deliveryAddress: { ...demoCustomer.address },
   },
   {
@@ -147,7 +147,7 @@ const mockOrders: Order[] = [
     total: 480,
     currency: "INR",
     paymentMethod: "cod",
-    deliveryName: "Reshma Thirumoorthy",
+    deliveryName: "Demo Customer",
     deliveryAddress: { ...demoCustomer.address },
   },
 ];
@@ -172,7 +172,7 @@ const mockQuotes: QuoteRequest[] = [
     expectedDelivery: "2026-10-30",
     additionalNotes: "Needed for team onboarding kits.",
     designFileName: "studio-logo.png",
-    customerName: "Reshma Thirumoorthy",
+    customerName: "Demo Customer",
     organizationName: "HSP Studio Co.",
     email: "customer@example.com",
     phone: "+91 98765 43210",
@@ -198,7 +198,7 @@ const mockQuotes: QuoteRequest[] = [
     expectedDelivery: "2026-09-20",
     additionalNotes: "For a client appreciation event.",
     designFileName: null,
-    customerName: "Reshma Thirumoorthy",
+    customerName: "Demo Customer",
     organizationName: "HSP Studio Co.",
     email: "customer@example.com",
     phone: "+91 98765 43210",

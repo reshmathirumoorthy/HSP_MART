@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   productCategories,
@@ -27,6 +28,29 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { EmptyProductState } from "@/components/EmptyProductState";
 import { trapTabKey } from "@/lib/focusTrap";
 import styles from "./ProductsCatalogue.module.css";
+
+const PAGE_SIZE = 24;
+
+/** Listing-header copy for the gifting occasions in the main menu. */
+const OCCASION_COPY: Record<string, string> = {
+  "Corporate Gifting":
+    "Client, employee and rewards gifting with logo branding, bulk pricing and pan-India dispatch.",
+  "Festive Gifting":
+    "Diwali hampers, diyas, dry-fruit boxes and Rakhi gifts — curated, packed and delivered on schedule.",
+  "Wedding Gifting":
+    "Shagun hampers, platters, trousseau packing and return gifts for every ceremony.",
+  "Occasional Gifting":
+    "Birthdays, anniversaries, baby showers and thank-yous — gifts that arrive ready to give.",
+};
+
+const CATEGORY_COPY: Record<string, string> = {
+  gifts:
+    "Corporate, festive, wedding and occasion gifting — order individually or request bulk pricing.",
+  presentation:
+    "Magnetic whiteboards, notice and chalk boards, easel stands and accessories for offices and schools.",
+  custom:
+    "Personalised platters and gifts with names, logos and custom packaging.",
+};
 
 type Sheet = "filters" | null;
 
@@ -163,6 +187,13 @@ export function ProductsCatalogue({ initialFilters }: Props) {
   };
 
   const results = useMemo(() => filterProducts(undefined, filters), [filters]);
+
+  // Incremental rendering: 24 at a time; resets whenever the filters change.
+  const filterKey = JSON.stringify(filters);
+  const [page, setPage] = useState({ key: filterKey, count: PAGE_SIZE });
+  const visibleCount = page.key === filterKey ? page.count : PAGE_SIZE;
+  const visibleResults = results.slice(0, visibleCount);
+  const remaining = results.length - visibleResults.length;
   const chips = getActiveFilterChips(filters);
   const subcategories = useMemo(
     () => getSubcategoriesForCategory(filters.category),
@@ -172,14 +203,18 @@ export function ProductsCatalogue({ initialFilters }: Props) {
   const activeCategory = productCategories.find(
     (item) => item.slug === filters.category,
   );
-  const headerTitle =
-    filters.category !== "all" && activeCategory
+  const occasion = filters.subcategory ? OCCASION_COPY[filters.subcategory] : undefined;
+  const headerTitle = filters.subcategory
+    ? filters.subcategory
+    : filters.category !== "all" && activeCategory
       ? activeCategory.label
       : "Browse Products";
   const headerLead =
-    filters.category !== "all" && activeCategory
-      ? `Shop ${activeCategory.label.toLowerCase()}. Use filters to narrow by price, stock, or options.`
-      : "Stationery, office essentials, and gifts. Search or filter to find what you need.";
+    occasion ??
+    (filters.category !== "all" && activeCategory
+      ? (CATEGORY_COPY[filters.category] ??
+        `Shop ${activeCategory.label.toLowerCase()}. Filter by price, stock or customisation.`)
+      : "Corporate and occasion gifting, boards and office essentials — for individual orders and bulk requirements.");
 
   const countLabel =
     filters.search.trim() || chips.length > 0
@@ -222,6 +257,7 @@ export function ProductsCatalogue({ initialFilters }: Props) {
       <header className={styles.banner}>
         <Image
           src={bannerImage}
+          loader={shopifyImageLoader(bannerImage)}
           alt=""
           fill
           sizes="100vw"
@@ -231,7 +267,6 @@ export function ProductsCatalogue({ initialFilters }: Props) {
         <div className={styles.bannerScrim} aria-hidden />
         <div className={`shell ${styles.header}`}>
           <div className={styles.headerCopy}>
-            <p className={styles.eyebrow}>Catalogue</p>
             <h1 className={styles.title}>{headerTitle}</h1>
             <p className={styles.lead}>{headerLead}</p>
           </div>
@@ -323,7 +358,32 @@ export function ProductsCatalogue({ initialFilters }: Props) {
           data-pending={isPending ? "true" : undefined}
         >
           {results.length > 0 ? (
-            <ProductGrid products={results} />
+            <>
+              <ProductGrid products={visibleResults} />
+              <div className={styles.loadMore}>
+                <p className={styles.loadMoreCount} aria-live="polite">
+                  Showing {visibleResults.length} of {results.length} products
+                </p>
+                <div className={styles.loadMoreTrack} aria-hidden>
+                  <span
+                    style={{
+                      width: `${(visibleResults.length / results.length) * 100}%`,
+                    }}
+                  />
+                </div>
+                {remaining > 0 ? (
+                  <button
+                    type="button"
+                    className="btn btn--outline"
+                    onClick={() =>
+                      setPage({ key: filterKey, count: visibleCount + PAGE_SIZE })
+                    }
+                  >
+                    Load {Math.min(PAGE_SIZE, remaining)} more
+                  </button>
+                ) : null}
+              </div>
+            </>
           ) : (
             <EmptyProductState
               onClear={clearFilters}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProductVisual } from "@/components/ProductVisual";
-import { formatPrice } from "@/data/products";
+import { productPriceLabel } from "@/data/products";
 import { productAvailabilityLabel } from "@/lib/productAvailability";
 import {
   formatSearchMatchHint,
@@ -42,7 +42,7 @@ export function SearchResultRow({ result, id, active, onNavigate }: Props) {
         <span className={styles.productName}>{product.name}</span>
         <span className={styles.productMeta}>{categoryLine}</span>
         <span className={styles.productMetaRow}>
-          <span>{formatPrice(product.price, product.currency)}</span>
+          <span>{productPriceLabel(product)}</span>
           {showStock ? (
             <span
               className={

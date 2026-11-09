@@ -1,5 +1,6 @@
 import type { Product } from "@/data/products";
 import { isProductCustomizable } from "@/lib/productModel";
+import { parseDescription } from "@/lib/productDescription";
 import styles from "./ProductInformation.module.css";
 
 type Props = {
@@ -45,7 +46,9 @@ export function ProductInformation({ product }: Props) {
   if (product.packagingOptions?.length) {
     details.push({
       label: "Packaging",
-      value: product.packagingOptions.join(", "),
+      value: product.packagingOptions
+        .map((option) => option.charAt(0).toUpperCase() + option.slice(1))
+        .join(", "),
     });
   }
 
@@ -75,10 +78,25 @@ export function ProductInformation({ product }: Props) {
         <h2 id="about-heading" className={styles.heading}>
           About the product
         </h2>
-        <p className={styles.copy}>{product.description}</p>
+        <div className={styles.copy}>
+          {parseDescription(product.description).map((block, index) =>
+            block.type === "p" ? (
+              <p key={index}>{block.text}</p>
+            ) : (
+              <div key={index} className={styles.listBlock}>
+                {block.title ? <p className={styles.listTitle}>{block.title}</p> : null}
+                <ul className={styles.list}>
+                  {block.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          )}
+        </div>
       </div>
 
-      <div className={styles.block}>
+      <div className={`${styles.block} ${styles.aside}`}>
         <h2 className={styles.heading}>Details</h2>
         <dl className={styles.specs}>
           {details.map((item) => (

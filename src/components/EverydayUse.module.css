@@ -38,6 +38,8 @@
   font-size: clamp(1.35rem, 2.5vw, 1.85rem);
   line-height: 1;
   color: var(--color-brand-dark);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .contexts li span {

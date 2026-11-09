@@ -24,9 +24,10 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-section);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   line-height: 1.15;
   color: var(--color-brand-dark);
+  font-stretch: var(--display-stretch);
 }
 
 .lead {

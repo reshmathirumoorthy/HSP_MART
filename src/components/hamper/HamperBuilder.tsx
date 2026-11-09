@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import type { Product } from "@/types/product";
 import type {
   AdvancedCustomizationState,
@@ -508,6 +509,7 @@ export function HamperBuilder({
                         {child.images[0] ? (
                           <Image
                             src={child.images[0]}
+                            loader={shopifyImageLoader(child.images[0])}
                             alt=""
                             fill
                             sizes="56px"

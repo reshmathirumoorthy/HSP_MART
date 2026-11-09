@@ -51,6 +51,8 @@
   letter-spacing: -0.01em;
   color: var(--text-primary);
   margin-bottom: 1rem;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .descriptionCopy {
@@ -97,5 +99,17 @@
 
   .configure :global(#customize) {
     grid-column: 1 / -1;
+  }
+}
+@media (min-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: clamp(3rem, 5vw, 5rem);
+  }
+
+  /* Keep price + primary action in view while browsing the gallery. */
+  .hero > :last-child {
+    position: sticky;
+    top: 6.5rem;
   }
 }

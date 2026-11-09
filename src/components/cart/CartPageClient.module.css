@@ -30,6 +30,7 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .count {

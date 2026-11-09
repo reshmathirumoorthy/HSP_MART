@@ -58,7 +58,7 @@ export function CustomizationControls({
               className={styles.input}
               value={state.text}
               maxLength={config.preview.maxLength}
-              placeholder="e.g. RESHMA"
+              placeholder="e.g. YOUR NAME"
               autoComplete="off"
               onChange={(event) => onChange({ text: event.target.value })}
             />

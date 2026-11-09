@@ -8,6 +8,7 @@
  */
 
 import { productCategories } from "@/data/categories";
+import { productionProducts } from "@/data/productionProducts";
 import type { PriceRangeKey, Product, SortOption } from "@/types/product";
 
 export type {
@@ -60,8 +61,16 @@ export function formatPrice(price: number, currency: Product["currency"] = "INR"
   return `₹${formatInrAmount(price)}`;
 }
 
-/** Full mock catalogue — replace with API later. */
-export const products: Product[] = [
+/** Customer-facing price for a product; handles price-on-request items. */
+export function productPriceLabel(
+  product: Pick<Product, "price" | "currency" | "priceOnRequest">,
+): string {
+  if (product.priceOnRequest || product.price <= 0) return "Price on request";
+  return formatPrice(product.price, product.currency);
+}
+
+/** Hand-authored products with local cutouts and customization studio configs. */
+const curatedProducts: Product[] = [
   {
     id: "executive-notebook-01",
     slug: "executive-notebook",
@@ -2061,6 +2070,12 @@ export const products: Product[] = [
     visual: "folder",
   }
 ];
+
+/**
+ * Full storefront catalogue: curated studio products + the HSP Mart production
+ * catalogue imported from hspmart.com (scripts/import-shopify-catalogue.mjs).
+ */
+export const products: Product[] = [...curatedProducts, ...productionProducts];
 
 /** Homepage product preview subset — derived from the catalogue. */
 export const previewProducts: Product[] = products.filter((product) => Boolean(product.layout));

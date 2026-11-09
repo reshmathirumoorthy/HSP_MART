@@ -46,7 +46,6 @@ export default function FaqPage() {
 
       <div className={`shell ${styles.inner}`}>
         <header className={styles.header}>
-          <p className="label">Help</p>
           <h1 className="h1">Frequently asked questions</h1>
           <p className={`body ${styles.lead}`}>
             Straightforward answers based on how this storefront works today.

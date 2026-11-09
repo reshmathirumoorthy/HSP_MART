@@ -243,7 +243,7 @@ export function ContactEnquiryForm() {
             type="text"
             autoComplete="name"
             className={styles.input}
-            placeholder="eg. Reshma Thirumoorthy"
+            placeholder="Your full name"
             value={name}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? `${ids.name}-error` : undefined}
@@ -269,7 +269,7 @@ export function ContactEnquiryForm() {
             type="email"
             autoComplete="email"
             className={styles.input}
-            placeholder="eg. reshma@example.com"
+            placeholder="you@company.com"
             value={email}
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? `${ids.email}-error` : undefined}

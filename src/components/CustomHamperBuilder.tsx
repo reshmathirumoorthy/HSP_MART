@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import { useRfp } from "@/context/RfpContext";
 import styles from "./CustomHamperBuilder.module.css";
 
@@ -214,6 +215,7 @@ export function CustomHamperBuilder() {
                       <span className={styles.thumb}>
                         <Image
                           src={item.image}
+                          loader={shopifyImageLoader(item.image)}
                           alt=""
                           fill
                           sizes="160px"

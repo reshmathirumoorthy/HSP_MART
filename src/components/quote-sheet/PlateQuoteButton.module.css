@@ -1,0 +1,40 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-pill);
+  background: var(--gold-bright);
+  color: var(--gold-ink);
+  font: 500 0.8rem/1 var(--font-sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out);
+}
+
+.button[data-tone="green"] {
+  border-color: var(--color-brand);
+  background: var(--color-brand);
+  color: var(--field-ink);
+}
+
+.button:hover {
+  background: #dcb873;
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.button[data-active] {
+  background: var(--color-gold-soft);
+  color: var(--color-brand-dark);
+}

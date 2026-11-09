@@ -26,6 +26,8 @@
   line-height: 1;
   letter-spacing: -0.02em;
   position: relative;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .list li:not(:last-child)::after {

@@ -1,6 +1,6 @@
 "use client";
 
-import { isInStock } from "@/lib/productAvailability";
+import { isPurchasable } from "@/lib/productAvailability";
 import {
   createContext,
   useCallback,
@@ -124,7 +124,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addToCart = useCallback(
     (productId: string, quantity = 1, customization?: CartCustomization) => {
       const product = getProductById(productId);
-      if (!product || !isInStock(product)) return false;
+      if (!product || !isPurchasable(product)) return false;
 
       const safeQty = Math.max(1, Math.min(999, Math.floor(quantity)));
       const normalized = normalizeCustomization(customization);
