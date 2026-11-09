@@ -753,3 +753,12 @@
   align-items: center;
   min-height: 44px;
 }
+
+/* Light address cards: directions link in brand ink, not the dark-card mint */
+.addressCard .directionsLink {
+  color: var(--color-brand);
+}
+
+.addressCard .directionsLink:hover {
+  color: var(--color-brand-dark);
+}

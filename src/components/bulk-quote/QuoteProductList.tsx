@@ -289,7 +289,7 @@ export function QuoteProductList({
                             <input
                               id={`custom-text-${line.productId}`}
                               type="text"
-                              placeholder='e.g. "RESHMA"'
+                              placeholder='e.g. "ACME CORP"'
                               maxLength={
                                 product.customization?.preview.maxLength ?? 20
                               }

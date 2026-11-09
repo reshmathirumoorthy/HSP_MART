@@ -339,7 +339,7 @@ export function AdvancedCustomizationControls({
                   className={styles.input}
                   value={state.layer.text ?? ""}
                   maxLength={config.preview.maxLength}
-                  placeholder="e.g. RESHMA"
+                  placeholder="e.g. YOUR NAME"
                   autoComplete="off"
                   onChange={(event) =>
                     onLayerChange({ text: event.target.value })

@@ -11,7 +11,7 @@
 
 .hasPhoto {
   /* Nude-beige panel behind product photos */
-  --panel-nude: #e5d8c7;
+  --panel-nude: var(--color-ivory);
 
   background: var(--panel-nude);
   box-shadow: none;

@@ -10,7 +10,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "HSP Mart | Office Supplies, Stationery & Bulk Orders",
+    default: "HSP Mart | Corporate Gifts, Hampers & Office Supplies",
     template: "%s | HSP Mart",
   },
   description:
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/images/hsp-mart-logo.png" }],
   },
   openGraph: {
-    title: "HSP Mart | Office Supplies, Stationery & Bulk Orders",
+    title: "HSP Mart | Corporate Gifts, Hampers & Office Supplies",
     description:
       "Stationery, office essentials, gifting, bulk orders and customization.",
     url: "https://hspmart.com",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "HSP Mart | Office Supplies, Stationery & Bulk Orders",
+    title: "HSP Mart | Corporate Gifts, Hampers & Office Supplies",
     description:
       "Stationery, office essentials, gifting, bulk orders and customization.",
     images: ["/images/hsp-mart-logo.png"],

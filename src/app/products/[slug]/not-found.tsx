@@ -5,7 +5,6 @@ export default function ProductNotFound() {
   return (
     <div className={styles.page} data-nav-surface="light">
       <div className={`shell ${styles.inner}`}>
-        <p className={styles.label}>Unavailable</p>
         <h1 className={styles.title}>Product not found</h1>
         <p className={styles.copy}>
           The product you&apos;re looking for may have moved or is no longer

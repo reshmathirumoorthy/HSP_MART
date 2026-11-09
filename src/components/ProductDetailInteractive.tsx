@@ -9,6 +9,7 @@ import {
 } from "@/lib/productAvailability";
 import { trackEvent } from "@/lib/analytics";
 import { productSummary } from "@/lib/productDescription";
+import { displayName } from "@/lib/displayName";
 import { PlateQuoteButton } from "@/components/quote-sheet/PlateQuoteButton";
 import { company } from "@/data/company";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -105,7 +106,7 @@ export function ProductDetailInteractive({ product }: Props) {
         <ProductGallery product={product} />
 
         <div className={purchaseStyles.panel}>
-          <h1 className={purchaseStyles.title}>{product.name}</h1>
+          <h1 className={purchaseStyles.title}>{displayName(product.name)}</h1>
           {summary ? <p className={purchaseStyles.summary}>{summary}</p> : null}
 
           <div className={purchaseStyles.priceRow}>

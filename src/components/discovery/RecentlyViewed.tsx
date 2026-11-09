@@ -33,7 +33,6 @@ export function RecentlyViewed({
         <div className="shell">
           <div className={styles.sectionHeader}>
             <div>
-              <p className={styles.sectionLabel}>Recently viewed</p>
               <h2 id="recently-viewed-heading" className={styles.sectionTitle}>
                 {title}
               </h2>
@@ -60,7 +59,6 @@ export function RecentlyViewed({
       <div className="shell">
         <div className={styles.sectionHeader}>
           <div>
-            <p className={styles.sectionLabel}>Recently viewed</p>
             <h2 id="recently-viewed-heading" className={styles.sectionTitle}>
               {title}
             </h2>

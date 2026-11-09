@@ -56,7 +56,6 @@ export default function ContactPage() {
       <div className={`shell ${styles.container}`}>
         {/* ---------------- Introduction ---------------- */}
         <header className={styles.hero}>
-          <p className={styles.eyebrow}>Contact</p>
           <h1 className={styles.title}>Let’s talk about what you need.</h1>
           <p className={styles.lead}>
             Have a question about our products, bulk orders or custom
@@ -214,7 +213,6 @@ export default function ContactPage() {
         <section className={styles.locationSection} aria-labelledby="visit-heading">
           <div className={styles.locationHeader}>
             <div>
-              <p className={styles.eyebrow}>Visit Us</p>
               <h2 id="visit-heading" className={styles.locationTitle}>
                 Visit Our Store
               </h2>

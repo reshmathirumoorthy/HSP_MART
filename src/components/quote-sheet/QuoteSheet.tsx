@@ -8,6 +8,7 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { useQuoteSheet } from "@/context/QuoteSheetContext";
 import { getProductBySlug } from "@/lib/products";
 import { productPriceLabel } from "@/data/products";
+import { displayName } from "@/lib/displayName";
 import {
   Sheet,
   SheetContent,
@@ -95,7 +96,7 @@ export function QuoteSheet() {
                         className={styles.lineName}
                         onClick={close}
                       >
-                        {product.name}
+                        {displayName(product.name)}
                       </Link>
                       <p className={styles.linePrice}>
                         {productPriceLabel(product)}

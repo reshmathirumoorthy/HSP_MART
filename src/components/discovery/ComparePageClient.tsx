@@ -18,7 +18,6 @@ export function ComparePageClient() {
     <div className={styles.page} data-nav-surface="light">
       <div className="shell">
         <header className={styles.pageHeader}>
-          <p className={styles.pageLabel}>Compare</p>
           <h1 className={styles.pageTitle}>Compare products</h1>
           <p className={styles.pageCopy}>
             Side-by-side details using the fields available in the HSP Mart
@@ -28,7 +27,6 @@ export function ComparePageClient() {
 
         {!hydrated ? null : products.length < 2 ? (
           <EmptyState
-            label="Compare"
             title="Select at least two products"
             copy={
               products.length === 1

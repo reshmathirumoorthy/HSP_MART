@@ -254,7 +254,7 @@ export function ContactEnquiryForm() {
             type="email"
             autoComplete="email"
             className={styles.input}
-            placeholder="eg. reshma@example.com"
+            placeholder="you@company.com"
             value={email}
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? `${ids.email}-error` : undefined}

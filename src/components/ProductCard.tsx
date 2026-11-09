@@ -12,6 +12,7 @@ import {
   requiresProductBuildFlow,
 } from "@/lib/productModel";
 import { ProductVisual } from "@/components/ProductVisual";
+import { displayName } from "@/lib/displayName";
 import { WishlistButton } from "@/components/discovery/WishlistButton";
 import { useCart } from "@/context/CartContext";
 import { useQuoteSheet } from "@/context/QuoteSheetContext";
@@ -65,7 +66,6 @@ export function ProductCard({ product, onWishlistRemoved, actions }: Props) {
             featured={product.featured}
             variant="card"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px"
-            useOriginalSrc
           />
         </Link>
         {onSheet ? (
@@ -81,7 +81,7 @@ export function ProductCard({ product, onWishlistRemoved, actions }: Props) {
 
       <div className={styles.body}>
         <h3 className={styles.name}>
-          <Link href={productHref}>{product.name}</Link>
+          <Link href={productHref}>{displayName(product.name)}</Link>
         </h3>
 
         {note ? <p className={styles.note}>{note}</p> : null}
