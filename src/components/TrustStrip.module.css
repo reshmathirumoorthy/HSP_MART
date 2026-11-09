@@ -27,16 +27,24 @@
     box-shadow var(--duration) var(--ease-out);
 }
 
+/*
+ * Entrance reveal runs as a pure CSS animation: content ends visible even if
+ * hydration/JS never runs (the previous JS-gated opacity:0 left the strip
+ * permanently invisible without JS).
+ */
 .item.reveal {
-  opacity: 0;
-  transform: translatey(12px);
-  transition:
-    opacity 0.5s var(--ease-out),
-    transform 0.5s var(--ease-out);
+  animation: trust-reveal 0.5s var(--ease-out) both;
 }
-.item.reveal.visible {
-  opacity: 1;
-  transform: none;
+
+@keyframes trust-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .item:hover {
@@ -68,5 +76,10 @@
 @media (prefers-reduced-motion: reduce) {
   .item {
     transition: none;
+  }
+  .item.reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }

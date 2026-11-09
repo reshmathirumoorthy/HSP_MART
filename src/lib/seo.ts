@@ -1,4 +1,5 @@
 import { company } from "@/data/company";
+import { isInStock } from "@/lib/productAvailability";
 import type { Product } from "@/types/product";
 
 export function organizationJsonLd() {
@@ -55,6 +56,9 @@ export function productJsonLd(product: Product) {
       priceCurrency: product.currency,
       price: product.price,
       url: `${company.contact.website}/products/${product.slug}`,
+      availability: isInStock(product)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
     },
   };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   INITIAL_BULK_QUOTE,
   buildQuoteSnapshot,
@@ -90,6 +90,16 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
   const [processing, setProcessing] = useState(false);
   const [completed, setCompleted] = useState<DemoQuoteSnapshot | null>(null);
   const submittingRef = useRef(false);
+  const submitTimerRef = useRef<number | null>(null);
+
+  // Clear the simulated-submit timer on unmount (avoids setState after unmount).
+  useEffect(() => {
+    return () => {
+      if (submitTimerRef.current !== null) {
+        window.clearTimeout(submitTimerRef.current);
+      }
+    };
+  }, []);
 
   const selectedIds = data.lines.map((line) => line.productId);
 
@@ -145,7 +155,10 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
 
     submittingRef.current = true;
     setProcessing(true);
-    window.setTimeout(() => {
+    if (submitTimerRef.current !== null) {
+      window.clearTimeout(submitTimerRef.current);
+    }
+    submitTimerRef.current = window.setTimeout(() => {
       setCompleted(snapshot);
       setProcessing(false);
       window.scrollTo({ top: 0, behavior: "smooth" });

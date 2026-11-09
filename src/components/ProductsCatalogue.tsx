@@ -47,13 +47,6 @@ export function ProductsCatalogue({ initialFilters }: Props) {
   const filterTriggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    document.body.style.overflow = sheet ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [sheet]);
-
-  useEffect(() => {
     if (!sheet) return;
     const dialog = sheetRef.current;
     const trigger = filterTriggerRef.current;
@@ -76,12 +69,32 @@ export function ProductsCatalogue({ initialFilters }: Props) {
     };
   }, [sheet]);
 
+  // Lock the document itself, not <body>. Locking body re-parents the sticky
+  // navbar into a non-scrollable clip container (flings the header off-screen)
+  // and would clobber locks held by other overlays (Navbar, CartDrawer).
   useEffect(() => {
-    const query = searchParams.toString();
+    if (!sheet) return;
+    const docEl = document.documentElement;
+    const previousOverflow = docEl.style.overflow;
+    docEl.style.overflow = "hidden";
+    return () => {
+      docEl.style.overflow = previousOverflow;
+    };
+  }, [sheet]);
+
+  // Sync filters when the URL query changes (back/forward, category links).
+  // Render-phase adjustment instead of setState-in-effect: re-runs immediately
+  // without an extra committed render pass.
+  const query = searchParams.toString();
+  const [prevQuery, setPrevQuery] = useState(query);
+  useEffect(() => {
     searchQueryRef.current = query;
+  }, [query]);
+  if (query !== prevQuery) {
+    setPrevQuery(query);
     const next = filtersFromSearchParams(new URLSearchParams(query));
-    setFilters((current) => (filtersEqual(current, next) ? current : next));
-  }, [searchParams]);
+    if (!filtersEqual(filters, next)) setFilters(next);
+  }
 
   useEffect(() => {
     if (skipUrlSync.current) {
@@ -213,7 +226,7 @@ export function ProductsCatalogue({ initialFilters }: Props) {
           fill
           sizes="100vw"
           className={styles.bannerPhoto}
-          priority={false}
+          priority
         />
         <div className={styles.bannerScrim} aria-hidden />
         <div className={`shell ${styles.header}`}>

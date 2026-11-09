@@ -28,6 +28,7 @@ export function WishlistPageClient() {
   const [confirmClear, setConfirmClear] = useState(false);
   const undoTimerRef = useRef<number | null>(null);
   const keepRef = useRef<HTMLButtonElement>(null);
+  const clearTriggerRef = useRef<HTMLButtonElement>(null);
 
   const browseCategories = useMemo(
     () => productCategories.filter((category) => category.slug !== "all"),
@@ -82,9 +83,24 @@ export function WishlistPageClient() {
 
   useEffect(() => () => clearUndoTimer(), [clearUndoTimer]);
 
-  // Move focus into the confirmation bar when it opens.
+  // Move focus into the confirmation bar when it opens, support Escape, and
+  // return focus to the trigger when it closes (focus would otherwise be lost
+  // to <body>).
   useEffect(() => {
-    if (showClearConfirm) keepRef.current?.focus();
+    if (!showClearConfirm) return;
+    keepRef.current?.focus();
+    const trigger = clearTriggerRef.current;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setConfirmClear(false);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      trigger?.focus({ preventScroll: true });
+    };
   }, [showClearConfirm]);
 
   const handleUndo = () => {
@@ -225,11 +241,14 @@ export function WishlistPageClient() {
                     </select>
                   </div>
                   <button
+                    ref={clearTriggerRef}
                     type="button"
                     className={styles.clearBtn}
                     onClick={() => setConfirmClear(true)}
                     aria-expanded={showClearConfirm}
-                    aria-controls="clear-wishlist-confirm"
+                    aria-controls={
+                      showClearConfirm ? "clear-wishlist-confirm" : undefined
+                    }
                   >
                     <svg
                       viewBox="0 0 24 24"

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -71,9 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Skip to main content
           </a>
           <AnnouncementBar />
-          <Suspense fallback={<div style={{ height: "3.25rem" }} aria-hidden />}>
-            <Navbar />
-          </Suspense>
+          <Navbar />
           <main id="main-content">{children}</main>
           <Footer />
           <RfpDrawer />

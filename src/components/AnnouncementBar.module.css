@@ -34,7 +34,9 @@
 a.item:hover,
 a.item:focus-visible {
   color: var(--color-gold);
-  outline: none;
+  /* Keep a visible keyboard focus indicator (WCAG 2.4.7) — color alone is not enough. */
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
 }
 
 .sep {
