@@ -36,7 +36,7 @@ export function NewArrivals() {
     return () => window.removeEventListener("resize", updateScrollState);
   }, [updateScrollState]);
 
-  if (!list.length) return null;
+  if (list.length === 0) return null;
 
   return (
     <section
@@ -76,12 +76,6 @@ export function NewArrivals() {
               ref={scrollRef}
               className={styles.grid}
               onScroll={updateScrollState}
-              onWheel={(event) => {
-                if (event.deltaY !== 0) {
-                  event.preventDefault();
-                  scrollBy({ left: event.deltaY });
-                }
-              }}
             >
               {list.map((product) => (
                 <li
@@ -109,3 +103,78 @@ export function NewArrivals() {
   );
 }
 
+function ProductCard({ product }: { product: Product }) {
+  const { addToCart, openCart } = useCart();
+  const inStock = isInStock(product);
+  const quickAdd = canQuickAdd(product);
+  const showDiscount =
+    typeof product.compareAtPrice === "number" &&
+    product.compareAtPrice > product.price;
+  const discountPct = showDiscount
+    ? Math.round(
+        ((product.compareAtPrice! - product.price) / product.compareAtPrice!) *
+          100
+      )
+    : 0;
+
+  const handleQuickAdd = () => {
+    if (!quickAdd) return;
+    const ok = addToCart(product.id, 1, getQuickAddCustomization(product));
+    if (ok) openCart();
+  };
+
+  return (
+    <article className={styles.cardWrap}>
+      <div className={styles.visualWrap}>
+        <Link
+          href={`/products/${product.slug}`}
+          className={styles.visualLink}
+          aria-label={`View ${product.name}`}
+        >
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            className={styles.image}
+            fill
+            sizes="(max-width: 640px) 70vw, (max-width: 1024px) 33vw, 240px"
+            loading="lazy"
+          />
+        </Link>
+        {showDiscount && (
+          <span className={styles.discountBadge}>{discountPct}% OFF</span>
+        )}
+        <div className={styles.actions}>
+          <WishlistButton product={product} variant="icon" />
+          {quickAdd && inStock ? (
+            <button
+              type="button"
+              className={styles.quickAddBtn}
+              onClick={handleQuickAdd}
+              title="Quick add to cart"
+              aria-label={`Quick add ${product.name} to cart`}
+            >
+              +
+            </button>
+          ) : null}
+        </div>
+      </div>
+
+      <div className={styles.body}>
+        <Link href={`/products/${product.slug}`} className={styles.nameLink}>
+          <p className={styles.category}>{product.category}</p>
+          <h3 className={styles.name}>{product.name}</h3>
+        </Link>
+        <div className={styles.priceRow}>
+          <p className={styles.price}>
+            {formatPrice(product.price, product.currency)}
+          </p>
+          {showDiscount ? (
+            <p className={styles.compare}>
+              {formatPrice(product.compareAtPrice!, product.currency)}
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}

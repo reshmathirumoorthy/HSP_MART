@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useNotifications } from "@/context/NotificationContext";
@@ -12,6 +12,7 @@ import { useQuoteSheet } from "@/context/QuoteSheetContext";
 import { FileText } from "lucide-react";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 import { NotificationPanel } from "@/components/notifications/NotificationPanel";
+import { ProductsNavLink } from "@/components/ProductsNavLink";
 import { productCategories } from "@/data/categories";
 import { trapTabKey } from "@/lib/focusTrap";
 import styles from "./Navbar.module.css";
@@ -59,7 +60,6 @@ const accountLinks = [
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { cartCount, openCart, hydrated } = useCart();
   const quoteSheet = useQuoteSheet();
   const { count: wishlistCount, hydrated: wishlistHydrated } = useWishlist();
@@ -82,8 +82,6 @@ export function Navbar() {
   const unreadLabel =
     notificationsHydrated && unreadCount > 0 ? String(unreadCount) : null;
   const rfpCount = rfpItems.length;
-  const onProducts = pathname.startsWith("/products");
-  const activeCategory = onProducts ? searchParams.get("category") : null;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -210,13 +208,7 @@ export function Navbar() {
             >
               Home
             </Link>
-            <Link
-              href="/products"
-              className={`${styles.navLink} ${onProducts && !activeCategory ? styles.navLinkActive : ""}`}
-              onClick={() => setOpen(false)}
-            >
-              Products
-            </Link>
+            <ProductsNavLink onNavigate={() => setOpen(false)} />
             <Link
               href={giftingHref("Corporate Gifting")}
               className={styles.navLink}
@@ -314,7 +306,7 @@ export function Navbar() {
                     : "Notifications"
                 }
                 aria-expanded={notifOpen}
-                aria-controls="header-notifications"
+                aria-controls={notifOpen ? "header-notifications" : undefined}
                 onClick={() => setNotifOpen((value) => !value)}
               >
                 <BellIcon />
