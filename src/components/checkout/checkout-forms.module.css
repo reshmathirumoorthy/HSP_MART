@@ -26,8 +26,9 @@
 .sectionTitle {
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   line-height: 1.1;
+  font-stretch: var(--display-stretch);
 }
 
 .sectionCopy {

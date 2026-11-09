@@ -16,7 +16,6 @@ export function PaymentMethod({ value, error, onChange }: Props) {
   return (
     <section id="checkout-payment" className={styles.section} aria-labelledby="payment-heading">
       <div className={styles.sectionHead}>
-        <p className={styles.sectionNumber}>03 · Payment</p>
         <h2 id="payment-heading" className={styles.sectionTitle}>
           Payment method
         </h2>

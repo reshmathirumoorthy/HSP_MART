@@ -1,6 +1,8 @@
 .section {
   display: grid;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 2rem clamp(2rem, 6vw, 5.5rem);
   padding: 2.25rem 0 1.25rem;
   border-top: 1px solid var(--border);
 }
@@ -24,6 +26,8 @@
 }
 
 .copy {
+  display: grid;
+  gap: 0.9rem;
   margin: 0;
   font-family: var(--font-sans);
   font-size: 1.02rem;
@@ -68,5 +72,64 @@
   .specRow {
     grid-template-columns: 1fr;
     gap: 0.3rem;
+  }
+}
+
+.copy p {
+  margin: 0;
+}
+
+.listBlock {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.listTitle {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.list li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  left: 0.15rem;
+  top: 0.62em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-gold);
+}
+
+.aside {
+  padding: 1.5rem 1.6rem 0.6rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  border: 1px solid var(--hairline);
+}
+
+.aside .specRow:last-child {
+  border-bottom: 0;
+}
+
+.aside .specRow {
+  grid-template-columns: 8.5rem 1fr;
+}
+
+@media (max-width: 900px) {
+  .section {
+    grid-template-columns: 1fr;
   }
 }

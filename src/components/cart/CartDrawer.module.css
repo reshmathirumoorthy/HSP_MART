@@ -45,12 +45,18 @@
   border-left: 1px solid var(--hairline);
   box-shadow: -22px 0 56px rgba(17, 24, 20, 0.22);
   transform: translateX(102%);
-  transition: transform var(--duration-slow) var(--ease-out);
+  /* Hidden when closed so the shadow never bleeds onto the page edge. */
+  visibility: hidden;
+  transition:
+    transform var(--duration-slow) var(--ease-out),
+    visibility 0s linear var(--duration-slow);
   overflow: hidden;
 }
 
 .open .drawer {
   transform: translateX(0);
+  visibility: visible;
+  transition: transform var(--duration-slow) var(--ease-out);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -96,11 +102,12 @@
 .title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.42rem;
   line-height: 1.15;
   letter-spacing: -0.005em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .count {
@@ -279,10 +286,11 @@
 
 .totalRowGrand dd {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.35rem;
   line-height: 1.1;
   color: var(--color-brand-dark, #063b25);
+  font-stretch: var(--display-stretch);
 }
 
 /* CTAs */

@@ -1,0 +1,361 @@
+.section {
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1rem 3rem;
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+.h2,
+.h2Light {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.h2 {
+  color: var(--color-text);
+}
+
+.h2Light {
+  color: #fff;
+}
+
+.headCopy {
+  max-width: 34rem;
+  margin: 0;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.headLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--gold);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  white-space: nowrap;
+}
+
+.headLink:hover {
+  color: var(--color-brand-dark);
+  border-bottom-color: var(--color-brand);
+}
+
+.headLink svg,
+.trailCta svg,
+.houseLinks svg {
+  width: 16px;
+  height: 16px;
+}
+
+.plates,
+.housePlates {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 1.6vw, 1.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Order trail */
+.trailSection {
+  background: var(--color-ivory);
+}
+
+.trail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trail::before {
+  content: "";
+  position: absolute;
+  top: 1.75rem;
+  left: 3.5rem;
+  right: 0;
+  height: 1px;
+  background: color-mix(in srgb, var(--gold) 55%, transparent);
+}
+
+.step {
+  position: relative;
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+}
+
+.stepNo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: var(--color-ivory);
+  color: var(--color-brand);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+}
+
+.stepTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.stepCopy {
+  margin: 0;
+  max-width: 28ch;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.trailEnd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: 3.25rem;
+}
+
+.trailCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand);
+  color: var(--field-ink);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background var(--duration) var(--ease-out);
+}
+
+.trailCta:hover {
+  background: var(--color-brand-dark);
+}
+
+.trailCta svg {
+  color: var(--gold-bright);
+}
+
+.trailNote {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+
+/* One house: emerald field */
+.house {
+  background: var(--color-ivory);
+  color: var(--color-text);
+}
+
+.houseGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.houseCopy p {
+  max-width: 30rem;
+  margin: 1.5rem 0 0;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.houseLinks {
+  display: grid;
+  margin-top: 2rem;
+  border-top: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+}
+
+.houseLinks a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-text);
+  transition: color var(--duration) var(--ease-out);
+}
+
+.houseLinks a svg {
+  color: var(--gold);
+}
+
+.houseLinks a:hover {
+  color: var(--color-brand);
+}
+
+.housePlates {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Closing invitation */
+.close {
+  background: var(--color-brand-dark);
+  color: var(--field-ink);
+}
+
+.closeGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 2rem 4rem;
+  align-items: center;
+  padding-block: clamp(4rem, 7vw, 6rem);
+}
+
+.closeTitle {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.closeActions {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.closePrimary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0 1.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--gold-bright);
+  color: var(--gold-ink);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.closePrimary:hover {
+  background: #dcb873;
+}
+
+.closeLine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-weight: 300;
+  color: var(--field-ink);
+}
+
+a.closeLine:hover {
+  color: var(--gold-bright);
+}
+
+.closeLine svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  color: var(--gold-bright);
+}
+
+@media (max-width: 1024px) {
+  .head {
+    grid-template-columns: 1fr;
+  }
+
+  .plates {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .houseGrid,
+  .closeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .trail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.75rem;
+  }
+
+  .trail::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .plates,
+  .housePlates {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .housePlates li:nth-child(3) {
+    display: none;
+  }
+
+  .trail {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .trail::before {
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 1.75rem;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+
+  .step {
+    grid-template-columns: 3.5rem 1fr;
+    column-gap: 1.1rem;
+    padding-bottom: 2rem;
+  }
+
+  .stepNo {
+    grid-row: span 2;
+    margin: 0;
+  }
+}

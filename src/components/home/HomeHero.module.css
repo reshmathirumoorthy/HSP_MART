@@ -1,0 +1,307 @@
+/* Emerald field with an inset gold foil frame */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(90% 80% at 85% 20%, rgba(207, 166, 92, 0.14), transparent 60%),
+    var(--color-brand);
+  color: var(--field-ink);
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: clamp(0.75rem, 1.6vw, 1.5rem);
+  border: 1px solid rgba(207, 166, 92, 0.45);
+  border-radius: var(--radius-xl);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding-block: clamp(2.75rem, 5vw, 4.25rem) clamp(2rem, 3.5vw, 3rem);
+}
+
+.copy {
+  max-width: 36rem;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3rem, 5.6vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-bright);
+}
+
+.rule {
+  display: block;
+  width: 4.5rem;
+  height: 1px;
+  margin: 2rem 0 1.5rem;
+  background: var(--gold-bright);
+}
+
+.lead {
+  max-width: 30rem;
+  margin: 0;
+  font-size: clamp(1.02rem, 1.2vw, 1.15rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--field-ink-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.25rem;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background var(--duration) var(--ease-out),
+    color var(--duration) var(--ease-out),
+    border-color var(--duration) var(--ease-out);
+}
+
+.primary {
+  background: var(--gold-bright);
+  color: var(--gold-ink);
+}
+
+.primary:hover {
+  background: #dcb873;
+}
+
+.secondary {
+  border: 1px solid rgba(246, 241, 231, 0.45);
+  color: #fff;
+}
+
+.secondary:hover {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+}
+
+/* Arched photo window */
+.window {
+  position: relative;
+  margin: 0;
+  justify-self: end;
+  width: min(100%, 26rem);
+}
+
+.arch {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  border: 1px solid rgba(207, 166, 92, 0.6);
+  outline: 1px solid rgba(207, 166, 92, 0.25);
+  outline-offset: 10px;
+  background: var(--color-brand-dark);
+  box-shadow: var(--shadow-deep);
+}
+
+.arch img {
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.arch:hover img {
+  transform: scale(1.03);
+}
+
+.caption {
+  position: absolute;
+  left: clamp(-3rem, -4vw, -1rem);
+  bottom: 2rem;
+  display: grid;
+  gap: 0.6rem;
+  width: min(19rem, 80%);
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-cream);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lift);
+}
+
+.captionName {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.captionMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.captionPrice {
+  white-space: nowrap;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.captionAction {
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 0.78rem;
+}
+
+/* Occasion row */
+.occasions {
+  border-top: 1px solid rgba(207, 166, 92, 0.3);
+}
+
+.occasions ul {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-inline: auto;
+  padding: 0 0 clamp(1rem, 2vw, 1.75rem);
+  list-style: none;
+}
+
+.occasions li + li {
+  border-left: 1px solid rgba(207, 166, 92, 0.22);
+}
+
+.occasions a {
+  position: relative;
+  display: grid;
+  gap: 0.2rem;
+  padding: 1.15rem 2.5rem 1rem 1.5rem;
+  color: #fff;
+}
+
+.occasions li:first-child a {
+  padding-left: 0;
+}
+
+.occName {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  line-height: 1.1;
+  transition: color var(--duration) var(--ease-out);
+}
+
+.occNote {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--field-ink-muted);
+}
+
+.occArrow {
+  position: absolute;
+  right: 1.25rem;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  color: var(--gold-bright);
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  transition:
+    opacity var(--duration) var(--ease-out),
+    transform var(--duration) var(--ease-out);
+}
+
+.occasions a:hover .occName {
+  color: var(--gold-bright);
+}
+
+.occasions a:hover .occArrow {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+@media (max-width: 960px) {
+  .frame {
+    grid-template-columns: 1fr;
+  }
+
+  .window {
+    justify-self: center;
+    width: min(100%, 26rem);
+  }
+
+  .caption {
+    left: -0.5rem;
+  }
+
+  .occasions ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .occasions li:nth-child(3) {
+    border-left: 0;
+  }
+
+  .occasions li:nth-child(n + 3) {
+    border-top: 1px solid rgba(207, 166, 92, 0.22);
+  }
+
+  .occasions li:nth-child(3) a {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .actions a {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .occasions a {
+    padding: 1.1rem 1rem 1rem;
+  }
+
+  .occName {
+    font-size: 1.3rem;
+  }
+
+  .caption {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: auto;
+    margin: -3rem 1rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch img,
+  .occArrow {
+    transition: none;
+  }
+}

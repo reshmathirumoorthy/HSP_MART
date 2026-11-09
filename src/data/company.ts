@@ -8,7 +8,7 @@ import type { CompanyInfo } from "@/types/company";
 export const company: CompanyInfo = {
   companyName: "HSP Mart",
   legalName: "HSP Office Basics Private Limited",
-  tagline: "Stationery, gifting, and office essentials for every occasion.",
+  tagline: "Corporate gifting, hampers, boards and office essentials for every occasion.",
   description:
     "HSP Mart is the online storefront of HSP Office Basics Private Limited. The catalogue focuses on stationery, office essentials, desk accessories, writing instruments, presentation materials and gifting. Individual customers can shop everyday products; businesses can request bulk orders, branding and packaging support. Some products are manufactured in-house and others are imported for the catalogue.",
   businessType: "Stationery, gifting and office products — retail and bulk",

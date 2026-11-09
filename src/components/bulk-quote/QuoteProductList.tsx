@@ -47,7 +47,6 @@ export function QuoteProductList({
   return (
     <section className={styles.sectionWrap} aria-labelledby="quote-products-heading">
       <div>
-        <p className={styles.eyebrow}>01 · Products</p>
         <h2 id="quote-products-heading" className={styles.heading}>
           Products for your request
         </h2>

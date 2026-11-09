@@ -57,6 +57,8 @@
   line-height: 1.12;
   letter-spacing: -0.02em;
   max-width: 14ch;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .note {

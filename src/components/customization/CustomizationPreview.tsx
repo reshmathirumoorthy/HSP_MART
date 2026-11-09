@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import type { Product } from "@/types/product";
 import type { CustomizationState } from "@/types/customization";
 import {
@@ -116,6 +117,7 @@ export function CustomizationPreview({ product, state }: Props) {
           {usePhoto ? (
             <Image
               src={photo}
+              loader={shopifyImageLoader(photo)}
               alt=""
               fill
               sizes="(max-width: 900px) 90vw, 420px"

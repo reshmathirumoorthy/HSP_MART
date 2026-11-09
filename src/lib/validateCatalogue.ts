@@ -58,7 +58,13 @@ const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export function isValidImagePath(imagePath: string): boolean {
   if (typeof imagePath !== "string" || !imagePath.trim()) return false;
-  if (!imagePath.startsWith("/images/")) return false;
+  // Local assets, or the production Shopify CDN for imported products.
+  if (
+    !imagePath.startsWith("/images/") &&
+    !imagePath.startsWith("https://cdn.shopify.com/")
+  ) {
+    return false;
+  }
   if (imagePath.includes("..")) return false;
   return true;
 }

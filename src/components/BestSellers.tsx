@@ -1,13 +1,23 @@
 "use client";
 
 import Image from "next/image";
+import { shopifyImageLoader } from "@/lib/imageLoader";
 import Link from "next/link";
-import { formatPrice, products } from "@/data/products";
+import { productPriceLabel, products } from "@/data/products";
 import styles from "./BestSellers.module.css";
 
 export function BestSellers() {
+  // In-stock, priced corporate gifts — buyable today without a quote.
   const list = products
-    .filter((p) => p.active !== false && p.featured)
+    .filter(
+      (p) =>
+        p.active !== false &&
+        p.subcategory === "Corporate Gifting" &&
+        p.stockStatus === "in_stock" &&
+        !p.priceOnRequest &&
+        p.price > 0 &&
+        p.images[0]?.startsWith("https://"),
+    )
     .slice(0, 4);
 
   if (!list.length) return null;
@@ -21,9 +31,12 @@ export function BestSellers() {
       <div className="shell">
         <header className={styles.header}>
           <h2 id="bestsellers-heading" className={styles.title}>
-            Best sellers
+            Ready-to-ship corporate gifts
           </h2>
-          <Link href="/products" className={styles.viewAll}>
+          <Link
+            href={`/products?category=gifts&subcategory=${encodeURIComponent("Corporate Gifting")}&stock=in-stock`}
+            className={styles.viewAll}
+          >
             View all →
           </Link>
         </header>
@@ -39,6 +52,7 @@ export function BestSellers() {
                 <span className={styles.photoFrame}>
                   <Image
                     src={product.images[0] ?? "/images/hsp-mart-logo.png"}
+                    loader={shopifyImageLoader(product.images[0] ?? "/images/hsp-mart-logo.png")}
                     alt={product.name}
                     fill
                     sizes="(max-width: 959px) 100vw, 220px"
@@ -51,7 +65,7 @@ export function BestSellers() {
                 <h3 className={styles.name}>
                   <Link href={`/products/${product.slug}`}>{product.name}</Link>
                 </h3>
-                <p className={styles.price}>{formatPrice(product.price)}</p>
+                <p className={styles.price}>{productPriceLabel(product)}</p>
                 <p className={styles.summary}>{product.shortDescription}</p>
                 <Link
                   href={`/products/${product.slug}`}

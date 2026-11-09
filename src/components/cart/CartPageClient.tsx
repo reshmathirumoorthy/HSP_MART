@@ -78,7 +78,6 @@ export function CartPageClient() {
     <div className={styles.page} data-nav-surface="light">
       <div className={`shell ${styles.inner}`}>
         <header className={styles.header}>
-          <p className={styles.label}>Shopping bag</p>
           <h1 className={styles.title}>Your cart</h1>
           <p className={styles.count}>
             {hydrated

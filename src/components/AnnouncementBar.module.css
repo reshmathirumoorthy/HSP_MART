@@ -50,3 +50,10 @@ a.item:focus-visible {
     display: inline;
   }
 }
+
+/* Phones: one line only */
+@media (max-width: 640px) {
+  .wideOnly {
+    display: none !important;
+  }
+}

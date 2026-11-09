@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
 import { RfpDrawer } from "@/components/rfp/RfpDrawer";
+import "./tailwind.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -52,17 +53,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <head>
-        {/* Loaded via CSS instead of next/font/google — Turbopack's Google
-            font resolver is currently broken for multi-face families. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* Self-hosted variable faces (see @font-face in globals.css). */}
         <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
+          rel="preload"
+          href="/fonts/bodoni-moda-normal-latin.woff2"
+          as="font"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Instrument+Serif&display=swap"
-          rel="stylesheet"
+          rel="preload"
+          href="/fonts/jost-normal-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
       </head>
       <body>

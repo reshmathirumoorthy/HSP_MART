@@ -228,7 +228,7 @@ export function ContactEnquiryForm() {
             type="text"
             autoComplete="name"
             className={styles.input}
-            placeholder="eg. Reshma Thirumoorthy"
+            placeholder="Your full name"
             value={name}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? `${ids.name}-error` : undefined}

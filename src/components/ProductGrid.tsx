@@ -17,7 +17,7 @@ export function ProductGrid({
   return (
     <ul className={styles.grid}>
       {products.map((product, index) => (
-        <li key={product.id} style={{ animationDelay: `${index * 0.08}s` }}>
+        <li key={product.id} style={{ animationDelay: `${Math.min(index % 24, 11) * 0.04}s` }}>
           <ProductCard
             product={product}
             onWishlistRemoved={onWishlistRemoved}

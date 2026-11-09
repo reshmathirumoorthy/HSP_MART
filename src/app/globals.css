@@ -130,7 +130,7 @@
   --bp-2xl: 1280px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-fast: 0.16s;
   --duration: 0.32s;
@@ -218,55 +218,62 @@ body {
   background: var(--surface-gold);
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+/*
+ * Element resets live in the `base` cascade layer so that Tailwind/shadcn
+ * utility classes (layer `utilities`) can override them. CSS-module class
+ * selectors are unlayered and still win, so existing pages are unchanged.
+ */
+@layer base {
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 
-/* Prevent iOS zoom-on-focus; keep desktop proportion */
-input,
-select,
-textarea {
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-
-@media (max-width: 959px) {
+  /* Prevent iOS zoom-on-focus; keep desktop proportion */
   input,
   select,
   textarea {
-    font-size: 16px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--text-primary);
   }
-}
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  @media (max-width: 959px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
 
-button {
-  font: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    color: inherit;
+  }
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
 }
 
 .sr-only {
@@ -319,40 +326,44 @@ p {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--text-display);
   line-height: 1.02;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .page-title,
 .h1 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--text-page);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .section-title,
 .h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--text-section);
   line-height: 1.1;
   letter-spacing: -0.015em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .title,
 .h3 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: var(--text-title);
   line-height: 1.2;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 /* Functional UI text stays on DM Sans */
@@ -885,6 +896,7 @@ p {
   font-size: 1.25rem;
   letter-spacing: 0.05em;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .premium-header .search-wrap {
@@ -1130,6 +1142,8 @@ p {
   line-height: 1.3;
   color: var(--text-primary);
   margin: 0;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .premium-card .price-row {
@@ -1144,6 +1158,7 @@ p {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .premium-card .compare {
@@ -1215,6 +1230,8 @@ p {
   line-height: 1.15;
   color: var(--text-primary);
   margin: 0 0 1rem;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .premium-section-header .lead {
@@ -1313,4 +1330,161 @@ p {
   .premium-card .visual {
     aspect-ratio: 1;
   }
+}
+
+/* ==========================================================================
+   World: HSP Gifting House
+   Deep emerald fields, champagne-ivory paper, antique-gold foil. Bodoni Moda
+   display over Jost text. Calm, generous, gift-box presentation.
+   These overrides re-skin every route through the shared tokens.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/fonts/bodoni-moda-normal-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/fonts/bodoni-moda-normal-latin-ext.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/fonts/bodoni-moda-italic-latin.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("/fonts/bodoni-moda-italic-latin-ext.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("/fonts/jost-normal-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("/fonts/jost-normal-latin-ext.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* Paper + ink */
+  --color-cream: #fbf8f2;
+  --color-ivory: #f3ede2;
+  --color-ivory-deep: #ebe3d4;
+  --color-white: #ffffff;
+  --color-text: #1b231f;
+  --color-text-secondary: #46504a;
+  --color-text-muted: #6a716b;
+  --color-border: #e4dccd;
+  --color-shadow: rgba(27, 35, 31, 0.08);
+
+  /* Emerald fields + antique gold */
+  --color-brand: #0e3b2e;
+  --color-brand-dark: #082a20;
+  --color-accent-hover: #0a3025;
+  --accent-hover: #0a3025;
+  --color-sage: #5a7466;
+  --color-gold: #b98a3e;
+  --color-gold-soft: #f5ead6;
+  --color-accent-soft: #e7eee9;
+  --gold: #b98a3e;
+  --gold-bright: #cfa65c;
+  --gold-ink: #20180a;
+  --field-ink: #f6f1e7;
+  --field-ink-muted: rgba(246, 241, 231, 0.74);
+  /* Back-compat for components written in the previous world */
+  --marigold: var(--gold-bright);
+  --marigold-ink: var(--gold-ink);
+
+  --surface-panel: #ffffff;
+  --surface-panel-hover: #f7f2e9;
+  --surface-feature: #ffffff;
+  --surface-cream-hover: #f1e9db;
+  --border-strong: #d3c7b2;
+
+  /* Soft, considered corners */
+  --radius-pill: 999px;
+  --radius-card: 10px;
+  --radius-card-lg: 14px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+
+  /* Quiet, warm depth */
+  --shadow-soft: 0 1px 2px rgba(27, 35, 31, 0.05);
+  --shadow-card: 0 1px 2px rgba(27, 35, 31, 0.04), 0 12px 28px -18px rgba(27, 35, 31, 0.28);
+  --shadow-lift: 0 2px 4px rgba(27, 35, 31, 0.04), 0 26px 50px -28px rgba(27, 35, 31, 0.4);
+  --shadow-deep: 0 40px 80px -40px rgba(4, 20, 15, 0.6);
+
+  --focus-ring: 2px solid var(--gold);
+  --focus-ring-offset: 3px;
+
+  /* Faces */
+  --font-display-family: "Bodoni Moda";
+  --font-sans-family: "Jost";
+  --font-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --font-sans: "Jost", "Futura", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display-stretch: 100%;
+  --display-weight: 500;
+
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Browser surfaces carry the world too */
+::selection {
+  background: var(--color-brand);
+  color: var(--field-ink);
+}
+
+html {
+  accent-color: var(--color-brand);
+  caret-color: var(--color-brand);
+  scrollbar-color: color-mix(in srgb, var(--gold) 55%, var(--color-ivory-deep)) var(--color-cream);
+}
+
+body {
+  font-feature-settings: "kern" 1;
+  letter-spacing: 0.005em;
+}
+
+:where(a) {
+  text-underline-offset: 0.24em;
+  text-decoration-thickness: 1px;
+}
+
+:where(:focus-visible) {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+:where([data-num], .tabular) {
+  font-variant-numeric: lining-nums tabular-nums;
 }

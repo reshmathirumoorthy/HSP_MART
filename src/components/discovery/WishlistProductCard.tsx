@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { formatPrice, type Product } from "@/data/products";
+import { formatPrice, productPriceLabel, type Product } from "@/data/products";
 import { isInStock } from "@/lib/productAvailability";
 import {
   canQuickAdd,
@@ -81,7 +81,7 @@ export function WishlistProductCard({
 
         <div className={styles.priceRow}>
           <p className={styles.price}>
-            {formatPrice(product.price, product.currency)}
+            {productPriceLabel(product)}
           </p>
           {showCompareAt ? (
             <p className={styles.compareAt}>

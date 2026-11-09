@@ -41,11 +41,12 @@
 .title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(2rem, 4.2vw, 3rem);
   line-height: 1.06;
   letter-spacing: -0.015em;
   color: var(--color-brand-dark);
+  font-stretch: var(--display-stretch);
 }
 
 .lead {
@@ -98,10 +99,11 @@
 .infoTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.5rem, 2vw, 1.8rem);
   line-height: 1.18;
   color: #fbfbf7;
+  font-stretch: var(--display-stretch);
 }
 
 .infoCopy {
@@ -218,10 +220,11 @@
 .formTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.55rem;
   line-height: 1.2;
   color: var(--color-brand-dark);
+  font-stretch: var(--display-stretch);
 }
 
 .formCopy {
@@ -406,9 +409,10 @@
 .successTitle {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: 1.5rem;
   color: var(--color-brand-dark);
+  font-stretch: var(--display-stretch);
 }
 
 .successCopy {
@@ -452,10 +456,11 @@
 .locationTitle {
   margin: 0.15rem 0 0;
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--display-weight);
   font-size: clamp(1.5rem, 2.4vw, 1.9rem);
   line-height: 1.15;
   color: var(--color-brand-dark);
+  font-stretch: var(--display-stretch);
 }
 
 .locationCopy {
@@ -738,4 +743,13 @@
     transition: none;
     animation: none;
   }
+}
+
+/* Comfortable touch targets for contact actions */
+.infoLink,
+.directionsLink,
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { CatalogImage } from "@/components/CatalogImage";
 import Link from "next/link";
 import styles from "./CustomizationSection.module.css";
 
@@ -35,7 +35,7 @@ export function CustomizationSection() {
         <div className={`shell ${styles.inner}`}>
           <div className={styles.visualCol}>
             <div className={styles.heroFrame}>
-              <Image
+              <CatalogImage
                 src="/images/products/trendy-tumbler-main.png"
                 alt=""
                 fill
@@ -45,7 +45,7 @@ export function CustomizationSection() {
             </div>
             <div className={styles.stack}>
               <div className={styles.stackItem}>
-                <Image
+                <CatalogImage
                   src="/images/products/a5-fancy-magnetic-notebook-main.jpg"
                   alt=""
                   fill
@@ -54,7 +54,7 @@ export function CustomizationSection() {
                 />
               </div>
               <div className={styles.stackItem}>
-                <Image
+                <CatalogImage
                   src="/images/products/vacuum-bottle-main.jpg"
                   alt=""
                   fill
@@ -83,7 +83,7 @@ export function CustomizationSection() {
                 <li key={item.label}>
                   <Link href={item.href} className={styles.showcaseLink}>
                     <span className={styles.thumb}>
-                      <Image
+                      <CatalogImage
                         src={item.image}
                         alt=""
                         width={64}

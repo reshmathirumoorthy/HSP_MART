@@ -31,7 +31,6 @@ export default function AboutPage() {
 
       <div className={`shell ${styles.inner}`}>
         <header className={styles.header}>
-          <p className="label">Company</p>
           <h1 className="h1">About HSP Mart</h1>
           <p className={`body ${styles.lead}`}>{company.description}</p>
         </header>

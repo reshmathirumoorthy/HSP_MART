@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { formatPrice, type Product } from "@/data/products";
+import { productPriceLabel, type Product } from "@/data/products";
 import {
   isInStock,
   productAvailabilityLabel,
@@ -66,7 +66,7 @@ export function AIProductResult({ product, wishlisted, onAction }: Props) {
         <Link href={`/products/${product.slug}`}>{product.name}</Link>
       </h3>
       <p className={styles.productPrice}>
-        {formatPrice(product.price, product.currency)}
+        {productPriceLabel(product)}
       </p>
       <p className={styles.productMeta}>
         {productAvailabilityLabel(product)}

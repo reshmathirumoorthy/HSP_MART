@@ -6,7 +6,7 @@
 import { products } from "@/data/products";
 import type { CartCustomization } from "@/types/customization";
 import type { Product } from "@/types/product";
-import { isInStock } from "@/lib/productAvailability";
+import { isPurchasable } from "@/lib/productAvailability";
 import { createDefaultHamperState, toHamperCartCustomization } from "@/lib/hamper";
 
 /** Alias clarifying that Product is the storefront catalogue record. */
@@ -78,7 +78,7 @@ export function requiresProductBuildFlow(product: Product): boolean {
 
 /** Safe catalogue quick-add for in-stock products, including curated gift sets. */
 export function canQuickAdd(product: Product): boolean {
-  return isInStock(product);
+  return isPurchasable(product);
 }
 
 /**

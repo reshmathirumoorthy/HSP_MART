@@ -21,7 +21,6 @@ export function QuoteReview({ data, onEdit }: Props) {
   return (
     <section className={styles.section} aria-labelledby="quote-review-heading">
       <div className={styles.head}>
-        <p className={styles.number}>04 · Review</p>
         <h2 id="quote-review-heading" className={styles.title}>
           Your bulk request
         </h2>

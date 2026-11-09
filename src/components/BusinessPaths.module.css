@@ -59,6 +59,8 @@
   font-size: clamp(1.75rem, 3vw, 2.75rem);
   line-height: 1;
   transition: letter-spacing var(--duration) var(--ease-out);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .text {

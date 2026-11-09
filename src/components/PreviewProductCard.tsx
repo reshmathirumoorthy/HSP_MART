@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { formatPrice, type Product } from "@/data/products";
+import { formatPrice, productPriceLabel, type Product } from "@/data/products";
 import {
   isInStock,
   productAvailabilityLabel,
@@ -74,7 +74,7 @@ export function PreviewProductCard({
         <p className={styles.sku}>SKU {product.sku}</p>
         <div className={styles.priceRow}>
           <p className={styles.price}>
-            {formatPrice(product.price, product.currency)}
+            {productPriceLabel(product)}
           </p>
           {showCompareAt ? (
             <p className={styles.compare}>

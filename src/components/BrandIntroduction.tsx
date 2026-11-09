@@ -17,7 +17,7 @@ export function BrandIntroduction() {
           <div className={styles.copy}>
             <p className={styles.eyebrow}>About HSP Mart</p>
             <h2 id="brand-heading" className={styles.title}>
-              Stationery for Every Moment
+              Gifting, boards &amp; office essentials — under one roof
             </h2>
             <p className={styles.lead}>
               {company.tagline}
@@ -27,7 +27,7 @@ export function BrandIntroduction() {
             </p>
             <div className={styles.actions}>
               <Link href="/products" className={`btn btn--forest ${styles.btnPrimary}`}>
-                Shop Stationery
+                Browse the catalogue
               </Link>
               <Link href="/about" className={`btn btn--outline ${styles.btnSecondary}`}>
                 About Us

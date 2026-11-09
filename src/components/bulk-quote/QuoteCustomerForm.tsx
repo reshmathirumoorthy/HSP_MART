@@ -32,7 +32,6 @@ export function QuoteCustomerForm({
   return (
     <section className={styles.section} aria-labelledby="quote-customer-heading">
       <div className={styles.head}>
-        <p className={styles.number}>03 · Customer</p>
         <h2 id="quote-customer-heading" className={styles.title}>
           Customer & delivery
         </h2>

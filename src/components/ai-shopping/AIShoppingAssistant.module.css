@@ -192,6 +192,8 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-brand-dark);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .betaBadge {
@@ -213,10 +215,11 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.72rem;
-  font-weight: 400;
+  font-weight: var(--display-weight);
   line-height: 1.05;
   letter-spacing: -0.01em;
   color: var(--color-brand-dark);
+  font-stretch: var(--display-stretch);
 }
 
 .subtitle {
@@ -299,6 +302,8 @@
   font-size: 1.28rem;
   line-height: 1.2;
   color: var(--color-brand-dark);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .emptyCopy {
@@ -889,4 +894,27 @@
     animation: none;
     transition: none;
   }
+}
+
+/* Catalogue world: compact square launcher that keeps clear of content */
+.launcher {
+  border-radius: 999px !important;
+  padding: 0.35rem !important;
+  gap: 0 !important;
+}
+
+.launcherText {
+  display: none !important;
+}
+
+/* Phones: launcher lives in the site menu so nothing floats over content */
+@media (max-width: 640px) {
+  .launcher {
+    display: none !important;
+  }
+}
+
+.launcher {
+  background: var(--color-white) !important;
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent) !important;
 }

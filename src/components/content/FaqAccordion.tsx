@@ -1,8 +1,12 @@
 "use client";
 
-import { useId, useState } from "react";
 import { companyFaqs } from "@/data/company";
-import styles from "./ContentPage.module.css";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type FaqItem = (typeof companyFaqs)[number];
 
@@ -10,51 +14,29 @@ type Props = {
   faqs: readonly FaqItem[];
 };
 
+/** shadcn/ui (Radix) accordion — keyboard + ARIA handled by the primitive. */
 export function FaqAccordion({ faqs }: Props) {
-  const baseId = useId();
-  const [openId, setOpenId] = useState<string | null>(faqs[0]?.id ?? null);
-
   return (
-    <div className={styles.faqList}>
-      {faqs.map((faq) => {
-        const panelId = `${baseId}-${faq.id}-panel`;
-        const buttonId = `${baseId}-${faq.id}-button`;
-        const labelId = `${baseId}-${faq.id}-label`;
-        const isOpen = openId === faq.id;
-
-        return (
-          <div key={faq.id} className={styles.faqItem}>
-            <h2 className={styles.faqQuestion}>
-              <button
-                type="button"
-                id={buttonId}
-                className={styles.faqTrigger}
-                aria-expanded={isOpen}
-                aria-controls={panelId}
-                onClick={() =>
-                  setOpenId((current) => (current === faq.id ? null : faq.id))
-                }
-              >
-                <span id={labelId} className={styles.faqTriggerText}>
-                  {faq.question}
-                </span>
-                <span className={styles.faqIndicator} aria-hidden>
-                  {isOpen ? "−" : "+"}
-                </span>
-              </button>
-            </h2>
-            <div
-              id={panelId}
-              role="region"
-              aria-labelledby={labelId}
-              hidden={!isOpen}
-              className={styles.faqAnswer}
-            >
-              {isOpen ? <p>{faq.answer}</p> : null}
-            </div>
-          </div>
-        );
-      })}
-    </div>
+    <Accordion
+      type="single"
+      collapsible
+      defaultValue={faqs[0]?.id}
+      className="my-8 overflow-hidden rounded-xl border border-border bg-card"
+    >
+      {faqs.map((faq) => (
+        <AccordionItem
+          key={faq.id}
+          value={faq.id}
+          className="border-b border-border px-5 last:border-b-0 sm:px-6"
+        >
+          <AccordionTrigger className="py-5 text-left text-base font-semibold text-brand-dark hover:no-underline [&>svg]:text-primary">
+            {faq.question}
+          </AccordionTrigger>
+          <AccordionContent className="pb-5 text-[0.95rem] leading-relaxed text-muted-foreground">
+            {faq.answer}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
   );
 }

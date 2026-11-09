@@ -124,6 +124,13 @@ export type Product = {
   active: boolean;
   badge?: string;
   specifications?: ProductSpecifications;
+  /**
+   * Sold by enquiry only (premium hampers). `price` is 0; the storefront shows
+   * "Price on request" and routes buyers to a quote instead of the cart.
+   */
+  priceOnRequest?: boolean;
+  /** Canonical page on the production storefront (imported products only). */
+  sourceUrl?: string;
   /** Frontend-only presentation fields. */
   tone: ProductTone;
   visual: ProductVisualKind;

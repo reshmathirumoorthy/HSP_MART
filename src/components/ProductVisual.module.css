@@ -471,3 +471,29 @@
   background: linear-gradient(90deg, #063b25, #015c31 50%, #d9cfc2);
   transform: rotate(8deg);
 }
+
+/* Full-bleed lifestyle photography (imported production catalogue). */
+.scene.hasPhoto {
+  background: var(--color-ivory-deep);
+  overflow: hidden;
+}
+
+.scene .photoFrame,
+.stageCard.scene .photoFrame,
+.stageGallery.scene .photoFrame,
+.stageCompact.scene .photoFrame {
+  inset: 0;
+  overflow: hidden;
+}
+
+.scene .photo {
+  object-fit: cover;
+}
+
+.stageGallery.scene .photo {
+  object-fit: contain;
+}
+
+.stageCard.scene:hover .photoPrimary {
+  transform: scale(1.035);
+}

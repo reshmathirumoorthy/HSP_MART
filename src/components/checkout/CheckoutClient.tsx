@@ -312,7 +312,6 @@ export function CheckoutClient() {
     <div className={styles.page} data-nav-surface="light">
       <div className={`shell ${styles.inner}`}>
         <header className={styles.header}>
-          <p className={styles.label}>Demo checkout</p>
           <h1 className={styles.title}>Checkout</h1>
           <p className={styles.demoBanner} role="status">
             Frontend demonstration only — no payment is processed, and shipping

@@ -61,7 +61,7 @@ export function ProductPicker({ open, selectedIds, onClose, onAdd }: Props) {
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
     return products.filter((product) => {
-      if (!product.active || !product.bulkAvailable) return false;
+      if (!product.active || !(product.bulkAvailable || product.priceOnRequest)) return false;
       if (category !== "all" && product.categorySlug !== category) return false;
       if (!query) return true;
       return (

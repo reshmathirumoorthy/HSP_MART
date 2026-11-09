@@ -7,7 +7,7 @@ import styles from "./TrustStrip.module.css";
 const TRUST_ITEMS = [
   { label: "Bulk ordering", detail: "Volume discounts for teams" },
   { label: "Custom branding", detail: "Logo, text & packaging" },
-  { label: "Product quality", detail: "Genuine stationery & deskware" },
+  { label: "Product quality", detail: "Curated gifts, boards & deskware" },
   { label: "Reliable delivery", detail: "Pan-India dispatch" },
 ];
 

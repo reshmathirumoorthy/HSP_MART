@@ -8,7 +8,7 @@ import styles from "./discovery.module.css";
 type Props = {
   product: Product;
   /** Kept for call-site compatibility; both variants render the minimal heart control. */
-  variant?: "icon" | "text";
+  variant?: "icon" | "text" | "pill";
   /** Fired after a successful remove, with the index before removal (for undo). */
   onRemoved?: (product: Product, previousIndex: number) => void;
 };
@@ -33,6 +33,21 @@ export function WishlistButton({
       onRemoved?.(product, previousIndex);
     }
   };
+
+  if (variant === "pill") {
+    return (
+      <button
+        type="button"
+        className={`${styles.pill} ${saved ? styles.pillActive : ""}`}
+        aria-pressed={saved}
+        aria-label={label}
+        onClick={handleToggle}
+      >
+        <HeartIcon filled={saved} />
+        <span aria-hidden="true">{saved ? "Saved" : "Save"}</span>
+      </button>
+    );
+  }
 
   return (
     <button

@@ -7,6 +7,14 @@ export function isInStock(product: Product): boolean {
   );
 }
 
+/**
+ * Can this product go into the cart? False for price-on-request items
+ * (sold by quote) even when they are in stock.
+ */
+export function isPurchasable(product: Product): boolean {
+  return isInStock(product) && !product.priceOnRequest && product.price > 0;
+}
+
 export function stockStatusLabel(status: StockStatus): string {
   switch (status) {
     case "in_stock":

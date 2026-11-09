@@ -37,7 +37,6 @@ export function OrderReview({
   return (
     <section id="checkout-review" className={styles.section} aria-labelledby="review-heading">
       <div className={styles.head}>
-        <p className={styles.number}>04 · Review</p>
         <h2 id="review-heading" className={styles.title}>
           Review your order
         </h2>

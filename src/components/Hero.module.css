@@ -71,9 +71,10 @@
   font-size: clamp(3rem, 8vw, 5.5rem);
   font-weight: 600;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: #E8E2D5;
   margin: 0;
+  font-stretch: var(--display-stretch);
 }
 
 .lead {

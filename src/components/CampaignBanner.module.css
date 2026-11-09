@@ -49,6 +49,8 @@
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
 }
 
 .lead {

@@ -19,6 +19,7 @@
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 600;
   color: var(--text-primary);
+  font-stretch: var(--display-stretch);
 }
 
 .viewAll {
