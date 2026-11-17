@@ -1,6 +1,7 @@
 "use client";
 
 import { formatPrice } from "@/data/products";
+import { estimateOnlineTotals } from "@/lib/checkout";
 import {
   paymentMethodLabel,
   type CheckoutData,
@@ -32,6 +33,7 @@ export function OrderReview({
 }: Props) {
   void _shipping;
   void _total;
+  const est = estimateOnlineTotals(subtotal);
   const { customer, address, paymentMethod } = data;
 
   return (
@@ -98,7 +100,7 @@ export function OrderReview({
             <strong>
               {paymentMethod ? paymentMethodLabel(paymentMethod) : "—"}
             </strong>
-            <span>No payment will be processed in this demo.</span>
+            <span>Paid securely through Razorpay on the next screen.</span>
           </div>
         </div>
 
@@ -135,16 +137,16 @@ export function OrderReview({
               <span>{formatPrice(subtotal)}</span>
             </div>
             <div className={styles.row}>
-              <span>Shipping</span>
-              <span>Not calculated (demo)</span>
+              <span>Delivery</span>
+              <span>{est.shipping ? formatPrice(est.shipping) : "Free"}</span>
             </div>
             <div className={styles.row}>
-              <span>Tax</span>
-              <span>Not calculated (demo)</span>
+              <span>GST (est.)</span>
+              <span>{formatPrice(est.gst)}</span>
             </div>
             <div className={`${styles.row} ${styles.total}`}>
               <span>Total</span>
-              <span>{formatPrice(subtotal)}</span>
+              <span>{formatPrice(est.total)}</span>
             </div>
           </div>
         </div>

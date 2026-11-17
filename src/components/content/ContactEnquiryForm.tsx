@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { validateCustomer } from "@/lib/checkout";
 import { company } from "@/data/company";
+import { clientApi } from "@/lib/clientApi";
 import styles from "./contact.module.css";
 
 type FieldErrors = Partial<
@@ -41,7 +42,6 @@ const ENQUIRY_TYPES = [
 export function ContactEnquiryForm() {
   const formId = useId();
   const statusRef = useRef<HTMLDivElement>(null);
-  const submitTimerRef = useRef<number | null>(null);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -53,6 +53,7 @@ export function ContactEnquiryForm() {
   const [status, setStatus] = useState<Status>({ type: "idle" });
   const [submitted, setSubmitted] = useState(false);
   const [submittedName, setSubmittedName] = useState("");
+  const [reference, setReference] = useState("");
 
   const ids = {
     name: `${formId}-name`,
@@ -62,15 +63,6 @@ export function ContactEnquiryForm() {
     subject: `${formId}-subject`,
     message: `${formId}-message`,
   };
-
-  // Clear the simulated-submit timer on unmount (avoids setState after unmount).
-  useEffect(() => {
-    return () => {
-      if (submitTimerRef.current !== null) {
-        window.clearTimeout(submitTimerRef.current);
-      }
-    };
-  }, []);
 
   // The form is replaced by the success panel on submit — move focus there so
   // keyboard/screen-reader users are not dropped back onto <body>.
@@ -138,16 +130,17 @@ export function ContactEnquiryForm() {
       return;
     }
 
-    // No contact API exists — simulate processing, then give honest feedback.
     setSubmittedName(name.trim().split(/\s+/)[0] || name.trim());
     setStatus({ type: "submitting" });
-    if (submitTimerRef.current !== null) {
-      window.clearTimeout(submitTimerRef.current);
-    }
-    submitTimerRef.current = window.setTimeout(() => {
-      setSubmitted(true);
-      setStatus({ type: "idle" });
-    }, 900);
+    clientApi<{ number: string }>("/enquiries/contact", {
+      body: { name, email, phone, subject: `${enquiryType}: ${subject.trim()}`, message },
+    })
+      .then((r) => {
+        setReference(r.number);
+        setSubmitted(true);
+        setStatus({ type: "idle" });
+      })
+      .catch((err: Error) => setStatus({ type: "error", text: err.message }));
   };
 
   const resetForm = () => {
@@ -161,6 +154,7 @@ export function ContactEnquiryForm() {
     setStatus({ type: "idle" });
     setSubmitted(false);
     setSubmittedName("");
+    setReference("");
     window.setTimeout(() => document.getElementById(ids.name)?.focus(), 0);
   };
 
@@ -188,15 +182,10 @@ export function ContactEnquiryForm() {
           Thank you{submittedName ? `, ${submittedName}` : ""}.
         </h3>
         <p className={styles.successCopy}>
-          Your enquiry passed validation in this browser, but this is a demo
-          form — nothing was actually delivered to HSP Mart. For a guaranteed
-          response, call{" "}
+          We received your enquiry{reference ? <> (reference <strong data-testid="enquiry-reference">{reference}</strong>)</> : null} and
+          emailed you a confirmation. HSP replies within one working day. For anything urgent, call{" "}
           <a className={styles.infoLink} href={phoneHref}>
             {company.contact.phone}
-          </a>{" "}
-          or email{" "}
-          <a className={styles.infoLink} href={`mailto:${company.contact.email}`}>
-            {company.contact.email}
           </a>
           .
         </p>

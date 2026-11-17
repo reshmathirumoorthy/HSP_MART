@@ -1,13 +1,21 @@
 "use client";
 
+/**
+ * Wishlist. Signed-in customers: stored on the account (/api/account/wishlist), with anything saved
+ * as a guest merged in at sign-in. Guests: kept on this device until they sign in.
+ */
 import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useSyncExternalStore,
   type ReactNode,
 } from "react";
+import { clientApi } from "@/lib/clientApi";
+import { useAccountSession } from "@/hooks/useAccountSession";
 import { getProductById } from "@/lib/cart";
 import {
   WISHLIST_STORAGE_KEY,
@@ -97,18 +105,38 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     () => (hydrated ? readIds() : EMPTY),
     getServerSnapshot,
   );
+  const { user, ready } = useAccountSession();
+  const signedIn = useRef(false);
+  useEffect(() => {
+    signedIn.current = !!user;
+  }, [user]);
+
+  // On sign-in: merge device items into the account, then mirror the account list on this device.
+  useEffect(() => {
+    if (!ready || !user || !hydrated) return;
+    const local = readIds();
+    clientApi<{ productIds: string[] }>(local.length ? "/account/wishlist/merge" : "/account/wishlist", local.length ? { body: { productIds: local } } : undefined)
+      .then((r) => commit(r.productIds.filter((id) => getProductById(id))))
+      .catch(() => {});
+  }, [ready, user, hydrated]);
+
+  const sync = useCallback((productId: string, on: boolean) => {
+    if (signedIn.current) clientApi("/account/wishlist", { body: { productId, on } }).catch(() => {});
+  }, []);
 
   const addToWishlist = useCallback((productId: string) => {
     if (!getProductById(productId)) return false;
     const current = readIds();
     if (current.includes(productId)) return true;
     commit([productId, ...current]);
+    sync(productId, true);
     return true;
-  }, []);
+  }, [sync]);
 
   const removeFromWishlist = useCallback((productId: string) => {
     commit(readIds().filter((id) => id !== productId));
-  }, []);
+    sync(productId, false);
+  }, [sync]);
 
   const restoreToWishlist = useCallback(
     (productId: string, index?: number) => {
@@ -120,32 +148,40 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
         const next = [...current];
         next.splice(Math.min(index, next.length), 0, productId);
         commit(next);
+        sync(productId, true);
         return true;
       }
 
       commit([productId, ...current]);
+      sync(productId, true);
       return true;
     },
-    [],
+    [sync],
   );
 
   const toggleWishlist = useCallback((productId: string) => {
     const current = readIds();
     if (current.includes(productId)) {
       commit(current.filter((id) => id !== productId));
+      sync(productId, false);
       return false;
     }
     if (!getProductById(productId)) return false;
     commit([productId, ...current]);
+    sync(productId, true);
     return true;
-  }, []);
+  }, [sync]);
 
   const isWishlisted = useCallback(
     (productId: string) => ids.includes(productId),
     [ids],
   );
 
-  const clearWishlist = useCallback(() => commit([]), []);
+  const clearWishlist = useCallback(() => {
+    const current = readIds();
+    commit([]);
+    for (const id of current) sync(id, false);
+  }, [sync]);
 
   const products = useMemo(() => resolveProductsByIds(ids), [ids]);
 

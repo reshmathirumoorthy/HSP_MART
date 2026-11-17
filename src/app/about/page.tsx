@@ -1,42 +1,42 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { company } from "@/data/company";
+import { about } from "@/lib/siteData";
+import { loadSiteData } from "@/lib/siteData.server";
+import { siteUrl } from "@/lib/siteData";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, organizationJsonLd } from "@/lib/seo";
 import styles from "@/components/content/ContentPage.module.css";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn about HSP Mart — stationery, gifting, office essentials, bulk orders and product customization.",
-  openGraph: {
-    title: "About | HSP Mart",
-    description: company.description,
-    url: "/about",
-    siteName: "HSP Mart",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  await loadSiteData();
+  return {
+    title: "About",
+    description: company.tagline,
+    openGraph: { title: `About | ${company.companyName}`, description: company.description, url: "/about", siteName: company.companyName, type: "website" },
+  };
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  await loadSiteData();
   return (
     <div className={styles.page} data-nav-surface="light">
       <JsonLd data={organizationJsonLd()} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", url: "https://hspmart.com/" },
-          { name: "About", url: "https://hspmart.com/about" },
+          { name: "Home", url: `${siteUrl()}/` },
+          { name: "About", url: `${siteUrl()}/about` },
         ])}
       />
 
       <div className={`shell ${styles.inner}`}>
         <header className={styles.header}>
-          <h1 className="h1">About HSP Mart</h1>
+          <h1 className="h1">{about.title}</h1>
           <p className={`body ${styles.lead}`}>{company.description}</p>
         </header>
 
         <section className={styles.section} aria-labelledby="about-focus">
-          <h2 id="about-focus">What we focus on</h2>
+          <h2 id="about-focus">{about.focusTitle}</h2>
           <p>
             {company.businessType}. Categories in the catalogue include{" "}
             {company.categories.join(", ")}.
@@ -44,7 +44,7 @@ export default function AboutPage() {
         </section>
 
         <section className={styles.section} aria-labelledby="about-services">
-          <h2 id="about-services">How you can shop</h2>
+          <h2 id="about-services">{about.servicesTitle}</h2>
           <div className={styles.services}>
             {company.services.map((service) => (
               <article key={service.id} className={styles.service}>
@@ -56,7 +56,7 @@ export default function AboutPage() {
         </section>
 
         <section className={styles.section} aria-labelledby="about-legal">
-          <h2 id="about-legal">Legal name</h2>
+          <h2 id="about-legal">{about.legalTitle}</h2>
           <p>
             {company.legalName
               ? `${company.companyName} is the online storefront of ${company.legalName}.`
@@ -65,15 +65,11 @@ export default function AboutPage() {
         </section>
 
         <div className={styles.actions}>
-          <Link href="/products" className="btn btn--dark">
-            Browse products
-          </Link>
-          <Link href="/bulk-quote" className="btn btn--ghost-dark">
-            Request a bulk quote
-          </Link>
-          <Link href="/contact" className="btn btn--ghost-dark">
-            Contact
-          </Link>
+          {about.actions.map((a, i) => (
+            <Link key={a.href} href={a.href} className={i === 0 ? "btn btn--dark" : "btn btn--ghost-dark"}>
+              {a.label}
+            </Link>
+          ))}
         </div>
       </div>
     </div>

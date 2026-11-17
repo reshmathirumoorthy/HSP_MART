@@ -3,6 +3,7 @@
  * Usage: npx tsx --tsconfig tsconfig.json scripts/verify-ai-shopping.ts
  */
 
+import "./db/seed-data/loadForScripts";
 import { runAssistantEngine } from "../src/lib/ai-shopping/engine";
 import { createEmptyConversationContext } from "../src/lib/ai-shopping/types";
 import { parseAssistantQuery } from "../src/lib/ai-shopping/parser";

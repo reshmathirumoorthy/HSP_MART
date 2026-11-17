@@ -10,13 +10,15 @@ import {
 import { NewArrivals } from "@/components/NewArrivals";
 import { RecentlyViewed } from "@/components/discovery/RecentlyViewed";
 import { organizationJsonLd } from "@/lib/seo";
+import { loadSiteData } from "@/lib/siteData.server";
 
 /**
  * HSP Mart home: a premium corporate gifting house.
  * Emerald hero + occasions, signature hampers, how an order is handled,
  * signature corporate gifts, new arrivals, gifting + office, closing invitation.
  */
-export default function HomePage() {
+export default async function HomePage() {
+  await loadSiteData();
   return (
     <>
       <JsonLd data={organizationJsonLd()} />

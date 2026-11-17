@@ -3,19 +3,25 @@ import { AnnouncementBar } from "@/components/AnnouncementBar";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
+import { SiteDataProvider } from "@/components/SiteDataProvider";
+import { company } from "@/lib/siteData";
+import { loadSiteData } from "@/lib/siteData.server";
 import { RfpDrawer } from "@/components/rfp/RfpDrawer";
 import "./tailwind.css";
 import "./globals.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  await loadSiteData();
+  const name = company.companyName;
+  const title = `${name} | Corporate Gifts, Hampers & Office Supplies`;
+  return {
   title: {
-    default: "HSP Mart | Corporate Gifts, Hampers & Office Supplies",
-    template: "%s | HSP Mart",
+    default: title,
+    template: `%s | ${name}`,
   },
-  description:
-    "Shop stationery, office essentials and gifts from HSP Mart. Everyday purchases, bulk orders and product customization.",
-  metadataBase: new URL("https://hspmart.com"),
-  applicationName: "HSP Mart",
+  description: company.tagline,
+  metadataBase: new URL(company.contact.website),
+  applicationName: name,
   icons: {
     icon: [
       { url: "/icon.png", type: "image/png" },
@@ -24,31 +30,31 @@ export const metadata: Metadata = {
     apple: [{ url: "/images/hsp-mart-logo.png" }],
   },
   openGraph: {
-    title: "HSP Mart | Corporate Gifts, Hampers & Office Supplies",
-    description:
-      "Stationery, office essentials, gifting, bulk orders and customization.",
-    url: "https://hspmart.com",
-    siteName: "HSP Mart",
+    title,
+    description: company.tagline,
+    url: company.contact.website,
+    siteName: name,
     type: "website",
     images: [
       {
         url: "/images/hsp-mart-logo.png",
         width: 163,
         height: 137,
-        alt: "HSP Mart",
+        alt: name,
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: "HSP Mart | Corporate Gifts, Hampers & Office Supplies",
-    description:
-      "Stationery, office essentials, gifting, bulk orders and customization.",
+    title,
+    description: company.tagline,
     images: ["/images/hsp-mart-logo.png"],
   },
 };
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const siteData = await loadSiteData();
   return (
     <html lang="en">
       <head>
@@ -69,6 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body>
+        <SiteDataProvider data={siteData}>
         <Providers>
           <a href="#main-content" className="skip-link">
             Skip to main content
@@ -79,6 +86,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Footer />
           <RfpDrawer />
         </Providers>
+        </SiteDataProvider>
       </body>
     </html>
   );

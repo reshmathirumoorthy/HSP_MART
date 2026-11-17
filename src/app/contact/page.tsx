@@ -5,31 +5,23 @@ import { ContactEnquiryForm } from "@/components/content/ContactEnquiryForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, organizationJsonLd } from "@/lib/seo";
 import styles from "@/components/content/contact.module.css";
+import { loadSiteData } from "@/lib/siteData.server";
+import { siteUrl } from "@/lib/siteData";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact HSP Mart by phone, email or visit the Paschim Vihar retail store.",
-  openGraph: {
-    title: "Contact | HSP Mart",
-    description: "Reach HSP Mart through verified public channels.",
-    url: "/contact",
-    siteName: "HSP Mart",
-    type: "website",
-  },
-};
-
-const retailStoreQuery = encodeURIComponent(
-  company.contact.retailStore ?? "Paschim Vihar, New Delhi",
-);
-const registeredOfficeQuery = encodeURIComponent(
-  company.contact.registeredOffice ?? "New Delhi",
-);
+export async function generateMetadata(): Promise<Metadata> {
+  await loadSiteData();
+  return {
+    title: "Contact",
+    description: `Contact ${company.companyName} by phone, email or at the retail store.`,
+    openGraph: { title: `Contact | ${company.companyName}`, description: company.tagline, url: "/contact", siteName: company.companyName, type: "website" },
+  };
+}
 
 const directionsUrl = (query: string) =>
   `https://www.google.com/maps/search/?api=1&query=${query}`;
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  await loadSiteData();
   const {
     website,
     email,
@@ -38,7 +30,9 @@ export default function ContactPage() {
     registeredOffice,
   } = company.contact;
   const telHref = phone ? `tel:${phone.replace(/\s/g, "")}` : undefined;
-  const websiteLabel = (website ?? "https://hspmart.com").replace(
+  const retailStoreQuery = encodeURIComponent(retailStore ?? "");
+  const registeredOfficeQuery = encodeURIComponent(registeredOffice ?? "");
+  const websiteLabel = (website ?? "").replace(
     /^https?:\/\//,
     "",
   );
@@ -48,8 +42,8 @@ export default function ContactPage() {
       <JsonLd data={organizationJsonLd()} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", url: "https://hspmart.com/" },
-          { name: "Contact", url: "https://hspmart.com/contact" },
+          { name: "Home", url: `${siteUrl()}/` },
+          { name: "Contact", url: `${siteUrl()}/contact` },
         ])}
       />
 
@@ -218,8 +212,7 @@ export default function ContactPage() {
               </h2>
               <p className={styles.locationCopy}>
                 Walk in for everyday stationery or collect a bulk order from
-                our Paschim Vihar store, or write to us at our registered
-                office.
+                our retail store, or write to us at our registered office.
               </p>
             </div>
           </div>
@@ -289,7 +282,7 @@ export default function ContactPage() {
             <div className={styles.mapWrap}>
               <iframe
                 className={styles.mapFrame}
-                title="Map showing HSP Mart retail store in Paschim Vihar, New Delhi"
+                title={`Map showing ${company.companyName} retail store: ${retailStore ?? ""}`}
                 src={`https://www.google.com/maps?q=${retailStoreQuery}&output=embed`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

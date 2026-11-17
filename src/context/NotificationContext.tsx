@@ -1,169 +1,78 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useSyncExternalStore,
-  type ReactNode,
-} from "react";
+/**
+ * Account inbox: the real messages HSP sent this customer (order, payment, dispatch, quote, credit
+ * note), from /api/account/notifications. Signed-out visitors have an empty inbox.
+ */
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Notification } from "@/types/notifications";
-import {
-  NOTIFICATIONS_STORAGE_KEY,
-  countUnread,
-  createSeedNotifications,
-  readNotifications,
-  sanitizeNotifications,
-  writeNotifications,
-} from "@/lib/notifications";
-import { useClientHydrated } from "@/hooks/useClientHydrated";
+import { clientApi } from "@/lib/clientApi";
+import { useAccountSession } from "@/hooks/useAccountSession";
 
 type NotificationContextValue = {
   notifications: Notification[];
   unreadCount: number;
   hydrated: boolean;
-  /** Idempotent by `notification.id` — safe under Strict Mode / repeated calls. */
+  /** Shows an in-session notice immediately (e.g. right after checkout) until the inbox refreshes. */
   addNotification: (notification: Notification) => void;
   markAsRead: (id: string) => void;
   markAllAsRead: () => void;
+  refresh: () => void;
 };
 
-const NotificationContext = createContext<NotificationContextValue | null>(
-  null,
-);
-
-const EMPTY: Notification[] = [];
-const CHANGE_EVENT = "hsp-mart-notifications-change";
-
-let cachedSerialized = "__unset__";
-let cachedNotifications: Notification[] = EMPTY;
-
-function emitChange() {
-  window.dispatchEvent(new Event(CHANGE_EVENT));
-}
-
-function subscribe(onStoreChange: () => void) {
-  const handle = () => onStoreChange();
-  window.addEventListener("storage", handle);
-  window.addEventListener(CHANGE_EVENT, handle);
-  return () => {
-    window.removeEventListener("storage", handle);
-    window.removeEventListener(CHANGE_EVENT, handle);
-  };
-}
-
-function getServerSnapshot() {
-  return EMPTY;
-}
-
-function readStored(): Notification[] {
-  try {
-    const raw = window.localStorage.getItem(NOTIFICATIONS_STORAGE_KEY);
-    if (raw == null) {
-      cachedSerialized = "__empty__";
-      cachedNotifications = EMPTY;
-      return EMPTY;
-    }
-
-    if (raw === cachedSerialized) return cachedNotifications;
-
-    const parsed = sanitizeNotifications(JSON.parse(raw) as unknown);
-    cachedSerialized = raw;
-    cachedNotifications = parsed ?? EMPTY;
-    return cachedNotifications;
-  } catch {
-    cachedSerialized = "__empty__";
-    cachedNotifications = EMPTY;
-    return EMPTY;
-  }
-}
-
-function commit(next: Notification[]) {
-  writeNotifications(next);
-  cachedSerialized = JSON.stringify(next);
-  cachedNotifications = next;
-  emitChange();
-}
-
-function ensureSeeded() {
-  try {
-    const raw = window.localStorage.getItem(NOTIFICATIONS_STORAGE_KEY);
-    if (raw == null) {
-      commit(createSeedNotifications());
-      return;
-    }
-
-    const parsed = sanitizeNotifications(JSON.parse(raw) as unknown);
-    if (!parsed) {
-      commit(createSeedNotifications());
-    }
-  } catch {
-    commit(createSeedNotifications());
-  }
-}
+const NotificationContext = createContext<NotificationContextValue | null>(null);
 
 export function NotificationProvider({ children }: { children: ReactNode }) {
-  const hydrated = useClientHydrated();
+  const { user, ready } = useAccountSession();
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  const refresh = useCallback(() => {
+    if (!user) return;
+    clientApi<Notification[]>("/account/notifications")
+      .then(setNotifications)
+      .catch(() => {})
+      .finally(() => setLoaded(true));
+  }, [user]);
 
   useEffect(() => {
-    if (!hydrated) return;
-    ensureSeeded();
-  }, [hydrated]);
+    if (ready && user) refresh();
+  }, [ready, user, refresh]);
 
-  const notifications = useSyncExternalStore(
-    subscribe,
-    () => (hydrated ? readStored() : EMPTY),
-    getServerSnapshot,
+  const addNotification = useCallback((n: Notification) => {
+    setNotifications((cur) => (cur.some((x) => x.id === n.id) ? cur : [n, ...cur]));
+  }, []);
+
+  const markAsRead = useCallback(
+    (id: string) => {
+      setNotifications((cur) => cur.map((n) => (n.id === id ? { ...n, read: true } : n)));
+      if (user) clientApi("/account/notifications/read", { body: { ids: [id] } }).catch(() => {});
+    },
+    [user],
   );
 
-  const addNotification = useCallback((notification: Notification) => {
-    const current = readNotifications();
-    if (current.some((item) => item.id === notification.id)) return;
-    commit([notification, ...current]);
-  }, []);
-
-  const markAsRead = useCallback((id: string) => {
-    const current = readNotifications();
-    let changed = false;
-    const next = current.map((item) => {
-      if (item.id !== id || item.read) return item;
-      changed = true;
-      return { ...item, read: true };
-    });
-    if (changed) commit(next);
-  }, []);
-
   const markAllAsRead = useCallback(() => {
-    const current = readNotifications();
-    if (!current.some((item) => !item.read)) return;
-    commit(current.map((item) => ({ ...item, read: true })));
-  }, []);
+    setNotifications((cur) => cur.map((n) => ({ ...n, read: true })));
+    if (user) clientApi("/account/notifications/read", { body: { ids: null } }).catch(() => {});
+  }, [user]);
 
   const value = useMemo<NotificationContextValue>(
     () => ({
       notifications,
-      unreadCount: countUnread(notifications),
-      hydrated,
+      unreadCount: notifications.filter((n) => !n.read).length,
+      hydrated: ready && (!user || loaded),
       addNotification,
       markAsRead,
       markAllAsRead,
+      refresh,
     }),
-    [notifications, hydrated, addNotification, markAsRead, markAllAsRead],
+    [notifications, ready, user, loaded, addNotification, markAsRead, markAllAsRead, refresh],
   );
-
-  return (
-    <NotificationContext.Provider value={value}>
-      {children}
-    </NotificationContext.Provider>
-  );
+  return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
 }
 
 export function useNotifications() {
   const ctx = useContext(NotificationContext);
-  if (!ctx) {
-    throw new Error("useNotifications must be used within NotificationProvider");
-  }
+  if (!ctx) throw new Error("useNotifications must be used within NotificationProvider");
   return ctx;
 }

@@ -74,7 +74,7 @@ export function AccountShell({
 
             <div className={styles.profileIdentity}>
               <p className={styles.profileOverline}>
-                <span className={styles.demoChip}>Demo frontend</span>
+                <span className={styles.demoChip}>HSP account</span>
               </p>
               <h1 className={styles.profileName}>{name}</h1>
               <ul className={styles.profileContact}>
@@ -165,8 +165,7 @@ export function AccountShell({
         </div>
 
         <p className={styles.footNote}>
-          Signed-in demo session stored on this device only. Not connected to
-          CRM or ERPNext.
+          Orders, quotes, addresses and your wishlist are saved to your HSP account.
         </p>
       </div>
 

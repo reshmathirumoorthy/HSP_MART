@@ -15,8 +15,8 @@ import styles from "./account.module.css";
 type Props = {
   recentOrders: Order[];
   recentQuotes: QuoteRequest[];
-  demoOrderCount: number;
-  demoQuoteCount: number;
+  orderCount: number;
+  quoteCount: number;
 };
 
 function StatIcon({ children }: { children: ReactNode }) {
@@ -41,8 +41,8 @@ function StatIcon({ children }: { children: ReactNode }) {
 export function AccountDashboard({
   recentOrders,
   recentQuotes,
-  demoOrderCount,
-  demoQuoteCount,
+  orderCount,
+  quoteCount,
 }: Props) {
   const { profile } = useAccountProfile();
   const { count: wishlistCount, hydrated: wishlistHydrated } = useWishlist();
@@ -52,7 +52,7 @@ export function AccountDashboard({
   const stats = [
     {
       label: "Total orders",
-      value: String(demoOrderCount),
+      value: String(orderCount),
       href: "/account/orders",
       icon: (
         <>
@@ -138,7 +138,7 @@ export function AccountDashboard({
               <div className={styles.empty}>
                 <h3 className={styles.emptyTitle}>No orders yet</h3>
                 <p className={styles.emptyCopy}>
-                  Browse the catalogue — your demo order history will appear here.
+                  Browse the catalogue — your orders will appear here.
                 </p>
                 <Link href="/products" className="btn btn--dark">
                   Browse products
@@ -154,7 +154,7 @@ export function AccountDashboard({
                   Recent bulk requests
                 </h2>
                 <p className={styles.sectionHint}>
-                  {demoQuoteCount} saved on this device
+                  {quoteCount} submitted
                 </p>
               </div>
               <Link href="/account/quotes" className={styles.viewAll}>

@@ -3,6 +3,7 @@
  * Usage: npx tsx --tsconfig tsconfig.json scripts/verify-customization-foundation.ts
  */
 
+import "./db/seed-data/loadForScripts";
 import { runCustomizationFoundationChecks } from "../src/lib/customization/foundationChecks";
 
 const result = runCustomizationFoundationChecks();

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { freeShippingThreshold } from "@/lib/siteData";
 import Link from "next/link";
 import { formatPrice, productPriceLabel, type Product } from "@/data/products";
 import {
@@ -215,7 +216,7 @@ export function ProductDetailInteractive({ product }: Props) {
             <li>
               <TruckIcon />
               <span>
-                <strong>Free delivery</strong> on orders above ₹499
+                <strong>Free delivery</strong> on orders of {formatPrice(freeShippingThreshold())} and above
               </span>
             </li>
             {product.bulkAvailable || onRequest ? (
