@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useNotifications } from "@/context/NotificationContext";
@@ -12,6 +12,7 @@ import { useQuoteSheet } from "@/context/QuoteSheetContext";
 import { FileText } from "lucide-react";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 import { NotificationPanel } from "@/components/notifications/NotificationPanel";
+import { ProductsNavLink } from "@/components/ProductsNavLink";
 import { productCategories } from "@/data/categories";
 import { company, navigation } from "@/lib/siteData";
 import { trapTabKey } from "@/lib/focusTrap";
@@ -44,7 +45,6 @@ export function Navbar() {
   const { shopLinks, exploreLinks } = menuLinks();
   const pathname = usePathname();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { cartCount, openCart, hydrated } = useCart();
   const quoteSheet = useQuoteSheet();
   const { count: wishlistCount, hydrated: wishlistHydrated } = useWishlist();
@@ -67,8 +67,6 @@ export function Navbar() {
   const unreadLabel =
     notificationsHydrated && unreadCount > 0 ? String(unreadCount) : null;
   const rfpCount = rfpItems.length;
-  const onProducts = pathname.startsWith("/products");
-  const activeCategory = onProducts ? searchParams.get("category") : null;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -187,25 +185,21 @@ export function Navbar() {
           </Link>
 
           <nav className={styles.primaryNav} aria-label="Main navigation">
-            {(navigation.primary ?? []).map((link) => {
-              const active =
-                link.href === "/"
-                  ? pathname === "/"
-                  : link.href === "/products"
-                    ? onProducts && !activeCategory
-                    : pathname === link.href;
-              return (
+            {(navigation.primary ?? []).map((link) =>
+              link.href === "/products" ? (
+                <ProductsNavLink key={`${link.href}-${link.label}`} onNavigate={() => setOpen(false)} />
+              ) : (
                 <Link
                   key={`${link.href}-${link.label}`}
                   href={link.href}
-                  className={`${styles.navLink} ${active ? styles.navLinkActive : ""}`}
-                  aria-current={active && link.href === "/" ? "page" : undefined}
+                  className={`${styles.navLink} ${pathname === link.href ? styles.navLinkActive : ""}`}
+                  aria-current={pathname === link.href && link.href === "/" ? "page" : undefined}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
                 </Link>
-              );
-            })}
+              ),
+            )}
           </nav>
 
           <form className={styles.search} onSubmit={submitSearch} role="search">
@@ -268,7 +262,7 @@ export function Navbar() {
                     : "Notifications"
                 }
                 aria-expanded={notifOpen}
-                aria-controls="header-notifications"
+                aria-controls={notifOpen ? "header-notifications" : undefined}
                 onClick={() => setNotifOpen((value) => !value)}
               >
                 <BellIcon />

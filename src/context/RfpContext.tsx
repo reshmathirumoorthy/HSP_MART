@@ -43,18 +43,25 @@ export function RfpProvider({ children }: { children: ReactNode }) {
 
   const clear = useCallback(() => setItems([]), []);
 
+  // Stable identities: RfpDrawer's focus effect depends on closeRfp, so these
+  // must not change when `items` changes (otherwise focus jumps on every
+  // item removal).
+  const openRfp = useCallback(() => setIsOpen(true), []);
+  const closeRfp = useCallback(() => setIsOpen(false), []);
+  const toggleRfp = useCallback(() => setIsOpen((v) => !v), []);
+
   const value = useMemo(
     () => ({
       items,
       isOpen,
-      openRfp: () => setIsOpen(true),
-      closeRfp: () => setIsOpen(false),
-      toggleRfp: () => setIsOpen((v) => !v),
+      openRfp,
+      closeRfp,
+      toggleRfp,
       addItem,
       removeItem,
       clear,
     }),
-    [items, isOpen, addItem, removeItem, clear],
+    [items, isOpen, openRfp, closeRfp, toggleRfp, addItem, removeItem, clear],
   );
 
   return <RfpContext.Provider value={value}>{children}</RfpContext.Provider>;

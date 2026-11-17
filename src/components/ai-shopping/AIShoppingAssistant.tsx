@@ -447,7 +447,7 @@ export function AIShoppingAssistant() {
         }
         aria-haspopup="dialog"
         aria-expanded={open}
-        aria-controls={open ? titleId : undefined}
+        aria-controls={open ? "hsp-ai-shopping-dialog" : undefined}
         aria-label={open ? "Close HSP AI shopping assistant" : "Open HSP AI shopping assistant"}
         onClick={() => setOpen((value) => !value)}
       >
@@ -470,6 +470,7 @@ export function AIShoppingAssistant() {
           <div
             ref={panelRef}
             className={styles.panel}
+            id="hsp-ai-shopping-dialog"
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}

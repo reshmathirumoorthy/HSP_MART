@@ -195,7 +195,7 @@ function tryFfmpegAlphaProbe(filePath) {
       "-select_streams",
       "v:0",
       "-show_entries",
-      "stream=codec_name,pix_fmt,duration,width,height,r_frame_rate:stream_tags=alpha_mode",
+      "stream=codec_name,pix_fmt,duration,width,height,r_frame_rate:stream_tags=alpha_mode:format=duration",
       "-of",
       "json",
       filePath,
@@ -212,6 +212,13 @@ function tryFfmpegAlphaProbe(filePath) {
     return { available: true, error: "ffprobe json parse failed", found };
   }
   const stream = info.streams?.[0] || {};
+  // VP9-in-WebM streams often omit stream-level duration; the container
+  // (format) duration is the authoritative fallback.
+  const streamDuration = stream.duration ? Number(stream.duration) : null;
+  const formatDuration =
+    info.format?.duration != null && info.format.duration !== ""
+      ? Number(info.format.duration)
+      : null;
   const pix = String(stream.pix_fmt || "");
   const alphaModeTag = String(stream.tags?.alpha_mode ?? "");
   // VP9+alpha WebM often reports yuv420p; AlphaMode/tag means use libvpx-vp9 decode.
@@ -292,7 +299,7 @@ print(json.dumps({
     found,
     codec_name: stream.codec_name,
     pix_fmt: pix,
-    duration: stream.duration ? Number(stream.duration) : null,
+    duration: streamDuration ?? formatDuration,
     width: stream.width,
     height: stream.height,
     hasAlphaPixFmt: hasAlphaPix,

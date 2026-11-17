@@ -14,6 +14,18 @@
   --color-gold: #C9A252;
   --color-white: #FFFFFF;
 
+  /*
+   * Referenced tokens — these were used across components but never defined,
+   * which made var() declarations invalid at computed-value time (invisible
+   * skip link, unstyled sale badges, missing scrims/focus rings).
+   */
+  --color-accent: #015C31;
+  --color-luxury-red: #B3261E;
+  --color-brand-deep: #022617;
+  --color-brand-muted: #52735F;
+  --accent-warm: #C9A252;
+  --accent-warm-dark: #8A5A00;
+
   /* Derived palette */
   --color-background: var(--color-cream);
   --color-ivory-deep: #E9E6DA;

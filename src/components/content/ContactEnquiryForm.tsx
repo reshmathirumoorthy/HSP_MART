@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { validateCustomer } from "@/lib/checkout";
 import { company } from "@/data/company";
 import { clientApi } from "@/lib/clientApi";
@@ -63,6 +63,12 @@ export function ContactEnquiryForm() {
     subject: `${formId}-subject`,
     message: `${formId}-message`,
   };
+
+  // The form is replaced by the success panel on submit — move focus there so
+  // keyboard/screen-reader users are not dropped back onto <body>.
+  useEffect(() => {
+    if (submitted) statusRef.current?.focus();
+  }, [submitted]);
 
   const clearError = (field: keyof FieldErrors) => {
     setErrors((prev) => {

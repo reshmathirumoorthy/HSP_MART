@@ -23,6 +23,13 @@ export function ProductPicker({ open, selectedIds, onClose, onAdd }: Props) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<ProductCategorySlug>("all");
   const panelRef = useRef<HTMLDivElement>(null);
+  // Keep the latest onClose without making it an effect dependency: the parent
+  // passes an inline arrow, and a changing dep would re-run the focus effect
+  // (stealing focus) on every parent render while the picker is open.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
   const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -41,7 +48,7 @@ export function ProductPicker({ open, selectedIds, onClose, onAdd }: Props) {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        onClose();
+        onCloseRef.current();
         return;
       }
       if (panel) trapTabKey(event, panel);
@@ -56,7 +63,7 @@ export function ProductPicker({ open, selectedIds, onClose, onAdd }: Props) {
       document.body.style.overflow = previous;
       returnFocusRef.current?.focus({ preventScroll: true });
     };
-  }, [open, onClose]);
+  }, [open]);
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();

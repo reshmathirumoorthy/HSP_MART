@@ -40,7 +40,7 @@ export function NewArrivals() {
     return () => window.removeEventListener("resize", updateScrollState);
   }, [updateScrollState]);
 
-  if (!list.length) return null;
+  if (list.length === 0) return null;
 
   return (
     <section
@@ -80,12 +80,6 @@ export function NewArrivals() {
               ref={scrollRef}
               className={styles.grid}
               onScroll={updateScrollState}
-              onWheel={(event) => {
-                if (event.deltaY !== 0) {
-                  event.preventDefault();
-                  scrollBy({ left: event.deltaY });
-                }
-              }}
             >
               {list.map((product) => (
                 <li
@@ -112,4 +106,3 @@ export function NewArrivals() {
     </section>
   );
 }
-

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { trapTabKey } from "@/lib/focusTrap";
 import styles from "./account.module.css";
 
 type Props = {
@@ -20,11 +21,17 @@ export function PhotoPreviewModal({
   busy = false,
 }: Props) {
   const saveRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     saveRef.current?.focus();
     const handleKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !busy) onCancel();
+      if (event.key === "Escape" && !busy) {
+        onCancel();
+        return;
+      }
+      // aria-modal="true" promises focus stays inside the dialog.
+      if (dialogRef.current) trapTabKey(event, dialogRef.current);
     };
     document.addEventListener("keydown", handleKey);
     const previousOverflow = document.body.style.overflow;
@@ -42,6 +49,7 @@ export function PhotoPreviewModal({
       onClick={busy ? undefined : onCancel}
     >
       <div
+        ref={dialogRef}
         className={styles.modal}
         role="dialog"
         aria-modal="true"
