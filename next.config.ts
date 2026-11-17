@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
+const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
+
 const nextConfig: NextConfig = {
+  // Every /api/* request (webhooks, file downloads, exports, cron, storefront calls) is served by
+  // the FastAPI backend.
+  async rewrites() {
+    return { beforeFiles: [], afterFiles: [], fallback: [{ source: "/api/:path*", destination: `${BACKEND_URL}/api/:path*` }] };
+  },
   images: {
     // Allow product-image cache tags (`?v=…`) after asset regeneration.
     // Omit `search` so any query is accepted for these local paths.
