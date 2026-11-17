@@ -11,7 +11,7 @@ import { useAvatarUpload } from "@/hooks/useAvatarUpload";
 import styles from "./account.module.css";
 
 export function ProfileEditor() {
-  const { profile, saveProfile } = useAccountProfile();
+  const { profile, saveProfile, error: saveError, saving } = useAccountProfile();
   const {
     hasAvatar,
     fileInputRef,
@@ -54,14 +54,15 @@ export function ProfileEditor() {
     setSavedOk(false);
   }
 
-  function saveChanges() {
+  async function saveChanges() {
+    // Email and mobile are the sign-in identity and are not edited here.
     const nextErrors = validateCustomer({
       fullName: draft.fullName,
-      email: draft.email,
-      phone: draft.phone,
+      email: draft.email || "placeholder@example.com",
+      phone: draft.phone || "9999999999",
     });
-    setErrors(nextErrors);
-    if (nextErrors.fullName || nextErrors.email || nextErrors.phone) {
+    setErrors({ fullName: nextErrors.fullName });
+    if (nextErrors.fullName) {
       setSavedOk(false);
       setNote("Please fix the highlighted fields before saving.");
       return;
@@ -70,11 +71,16 @@ export function ProfileEditor() {
       draft.fullName.trim().split(/\s+/)[0] || draft.firstName;
     // Avatar lives outside the form draft: take the latest saved
     // photo so an edit-save never reverts a Change Photo made elsewhere.
-    saveProfile({ ...draft, firstName, avatar: profile.avatar });
+    const ok = await saveProfile({ ...draft, firstName, avatar: profile.avatar });
+    if (!ok) {
+      setSavedOk(false);
+      setNote(saveError ?? "Your changes could not be saved. Please try again.");
+      return;
+    }
     setEditing(false);
     setErrors({});
     setSavedOk(true);
-    setNote("Your changes have been saved on this device.");
+    setNote("Your profile has been saved to your HSP account.");
   }
 
   return (
@@ -137,7 +143,7 @@ export function ProfileEditor() {
           <div className={styles.avatarEditorCopy}>
             <p className={styles.avatarEditorTitle}>Profile photo</p>
             <p className={styles.note}>
-              Shown in your account header. Saved on this device only — never
+              Shown in your account header. Kept on this device only — never
               uploaded.
             </p>
             <div className={styles.avatarControls}>
@@ -218,7 +224,8 @@ export function ProfileEditor() {
                 type="email"
                 autoComplete="email"
                 value={current.email}
-                disabled={!editing}
+                disabled
+                title="Your sign-in email cannot be changed here"
                 aria-invalid={Boolean(errors.email)}
                 aria-describedby={errors.email ? "profile-email-error" : undefined}
                 onChange={(event) =>
@@ -241,7 +248,8 @@ export function ProfileEditor() {
                 type="tel"
                 autoComplete="tel"
                 value={current.phone}
-                disabled={!editing}
+                disabled
+                title="Your sign-in mobile cannot be changed here"
                 aria-invalid={Boolean(errors.phone)}
                 aria-describedby={errors.phone ? "profile-phone-error" : undefined}
                 onChange={(event) =>
@@ -336,8 +344,8 @@ export function ProfileEditor() {
           </Link>
         </div>
         <p className={styles.note}>
-          Optional profile contact address. Delivery addresses for checkout
-          belong in the local address book.
+          Your default delivery address. Add or change addresses in{" "}
+          <Link href="/account/addresses">Addresses</Link>.
         </p>
         <div className={styles.formGrid}>
           <div className={styles.field}>
@@ -348,7 +356,7 @@ export function ProfileEditor() {
               id="profile-line1"
               className={styles.input}
               value={current.address.line1}
-              disabled={!editing}
+              disabled
               placeholder="Not added"
               autoComplete="address-line1"
               onChange={(event) =>
@@ -367,7 +375,7 @@ export function ProfileEditor() {
               id="profile-line2"
               className={styles.input}
               value={current.address.line2}
-              disabled={!editing}
+              disabled
               placeholder="Not added"
               autoComplete="address-line2"
               onChange={(event) =>
@@ -387,7 +395,7 @@ export function ProfileEditor() {
                 id="profile-city"
                 className={styles.input}
                 value={current.address.city}
-                disabled={!editing}
+                disabled
                 placeholder="Not added"
                 autoComplete="address-level2"
                 onChange={(event) =>
@@ -406,7 +414,7 @@ export function ProfileEditor() {
                 id="profile-state"
                 className={styles.select}
                 value={current.address.state}
-                disabled={!editing}
+                disabled
                 onChange={(event) =>
                   setDraft((prev) => ({
                     ...prev,
@@ -432,7 +440,7 @@ export function ProfileEditor() {
                 id="profile-pincode"
                 className={styles.input}
                 value={current.address.pincode}
-                disabled={!editing}
+                disabled
                 placeholder="Not added"
                 autoComplete="postal-code"
                 inputMode="numeric"

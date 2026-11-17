@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
+import { navigation } from "@/lib/siteData";
+import type { NavLink } from "@/types/site";
+
+const links = (list: NavLink[] | undefined) =>
+  (list ?? []).map((l) => (
+    <li key={`${l.href}-${l.label}`}>
+      <Link href={l.href}>{l.label}</Link>
+    </li>
+  ));
 import styles from "./Footer.module.css";
 
 
@@ -17,7 +26,7 @@ export function Footer() {
               height={34}
               className={styles.logo}
             />
-            <span className={styles.name}>HSP Mart</span>
+            <span className={styles.name}>{company.companyName}</span>
           </Link>
           <p className={styles.blurb}>{company.tagline}</p>
         </div>
@@ -25,54 +34,14 @@ export function Footer() {
         <div>
           <h3 className={styles.colTitle}>Shop</h3>
           <ul className={styles.list}>
-            <li>
-              <Link href="/products">All products</Link>
-            </li>
-            <li>
-              <Link href={`/products?category=gifts&subcategory=${encodeURIComponent("Corporate Gifting")}`}>Corporate gifting</Link>
-            </li>
-            <li>
-              <Link href={`/products?category=gifts&subcategory=${encodeURIComponent("Festive Gifting")}`}>Festive gifting</Link>
-            </li>
-            <li>
-              <Link href={`/products?category=gifts&subcategory=${encodeURIComponent("Wedding Gifting")}`}>Wedding gifting</Link>
-            </li>
-            <li>
-              <Link href="/products?category=presentation">Boards &amp; presentation</Link>
-            </li>
-            <li>
-              <Link href="/products?category=stationery">Stationery &amp; office</Link>
-            </li>
+            {links(navigation.footer?.shop)}
           </ul>
         </div>
 
         <div>
           <h3 className={styles.colTitle}>Help</h3>
           <ul className={styles.list}>
-            <li>
-              <Link href="/bulk-quote">Bulk orders</Link>
-            </li>
-            <li>
-              <Link href="/products?customizable=true">Customization</Link>
-            </li>
-            <li>
-              <Link href="/faq">FAQ</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/account">Account</Link>
-            </li>
-            <li>
-              <Link href="/wishlist">Wishlist</Link>
-            </li>
-            <li>
-              <Link href="/cart">Cart</Link>
-            </li>
+            {links(navigation.footer?.help)}
           </ul>
         </div>
 
@@ -100,8 +69,9 @@ export function Footer() {
       <div className={`shell ${styles.bottom}`}>
         <p>© {new Date().getFullYear()} {company.legalName}</p>
         <div className={styles.legal}>
-          <Link href="/faq">FAQ</Link>
-          <Link href="/contact">Contact</Link>
+          {(navigation.footer?.legal ?? []).map((l) => (
+            <Link key={`${l.href}-${l.label}`} href={l.href}>{l.label}</Link>
+          ))}
         </div>
       </div>
     </footer>

@@ -1,3 +1,4 @@
+import { deliveryCharge, freeShippingThreshold } from "@/lib/siteData";
 import { getCartLineKey } from "@/lib/cart";
 import type { CartCustomization } from "@/types/customization";
 
@@ -71,22 +72,17 @@ export const PAYMENT_OPTIONS: Array<{
   {
     id: "upi",
     label: "UPI",
-    description: "Recorded for this demo only. No UPI payment is taken.",
+    description: "Pay by any UPI app in the secure Razorpay window.",
   },
   {
     id: "card",
     label: "Card",
-    description: "Recorded for this demo only. No card payment is taken.",
+    description: "Credit or debit card, processed by Razorpay.",
   },
   {
     id: "netbanking",
     label: "Net Banking",
-    description: "Recorded for this demo only. No bank payment is taken.",
-  },
-  {
-    id: "cod",
-    label: "Cash on Delivery",
-    description: "Recorded for this demo only. No delivery payment is collected.",
+    description: "All major Indian banks, processed by Razorpay.",
   },
 ];
 
@@ -396,4 +392,14 @@ export function firstErrorFieldId(errors: CheckoutFieldErrors): string | null {
 
 export function countCheckoutErrors(errors: CheckoutFieldErrors): number {
   return Object.values(errors).filter(Boolean).length;
+}
+
+/**
+ * Display estimate mirroring the server (src/lib/commerce/online.ts): ₹99 delivery below ₹999,
+ * 18% GST on goods and delivery. The order page shows the authoritative amount before payment.
+ */
+export function estimateOnlineTotals(subtotal: number) {
+  const shipping = subtotal >= freeShippingThreshold() ? 0 : deliveryCharge();
+  const gst = Math.round((subtotal + shipping) * 0.18 * 100) / 100;
+  return { shipping, gst, total: Math.round((subtotal + shipping + gst) * 100) / 100 };
 }

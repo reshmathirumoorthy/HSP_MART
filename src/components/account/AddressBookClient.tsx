@@ -118,6 +118,7 @@ export function AddressBookClient() {
     updateAddress,
     removeAddress,
     setDefaultAddress,
+    error: addressError,
   } = useAccountAddresses();
   const [mode, setMode] = useState<"list" | "create" | "edit">("list");
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -161,7 +162,7 @@ export function AddressBookClient() {
     setErrors({});
   };
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const nextErrors = validateDraft(draft);
     setErrors(nextErrors);
     const firstInvalid = FIELD_ORDER.find((key) => nextErrors[key]);
@@ -172,13 +173,12 @@ export function AddressBookClient() {
       return;
     }
 
-    if (mode === "edit" && editingId) {
-      updateAddress(editingId, draft);
-      setStatus("Address updated on this device.");
-    } else {
-      addAddress(draft);
-      setStatus("Address saved on this device.");
+    const ok = mode === "edit" && editingId ? await updateAddress(editingId, draft) : Boolean(await addAddress(draft));
+    if (!ok) {
+      setStatus("");
+      return;
     }
+    setStatus(mode === "edit" ? "Address updated." : "Address saved to your account.");
     setMode("list");
     setEditingId(null);
     setErrors({});
@@ -187,10 +187,14 @@ export function AddressBookClient() {
   return (
     <div className={styles.content}>
       <p className={styles.note}>
-        Addresses are stored only in this browser. They are not sent to a server
-        and are not used for live delivery quoting.
+        Addresses are saved to your HSP account and offered at checkout on any device.
       </p>
 
+      {addressError ? (
+        <p className={styles.formErrorBanner} role="alert">
+          {addressError}
+        </p>
+      ) : null}
       {status ? (
         <p className={styles.note} role="status">
           {status}

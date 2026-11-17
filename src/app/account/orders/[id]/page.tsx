@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getOrderById } from "@/data/account";
+import { api, getOrNull } from "@/lib/api";
+import { requireUser } from "@/lib/auth/dal";
+import type { Order, QuoteRequest } from "@/data/account";
 import { AccountShell } from "@/components/account/AccountShell";
 import { OrderDetailView } from "@/components/account/OrderDetailView";
 import styles from "@/components/account/account.module.css";
+import { loadSiteData } from "@/lib/siteData.server";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await loadSiteData();
   const { id } = await params;
-  const order = getOrderById(id);
+  const order = await getOrNull<Order>(`/account/orders/${encodeURIComponent(id)}`, { dates: false });
   return {
     title: order
       ? `Order ${order.reference} — HSP Mart`
@@ -20,8 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function AccountOrderDetailPage({ params }: Props) {
+  await loadSiteData();
   const { id } = await params;
-  const order = getOrderById(id);
+  await requireUser(`/account/orders/${id}`);
+  const order = await getOrNull<Order>(`/account/orders/${encodeURIComponent(id)}`, { dates: false });
 
   if (!order) {
     return (
@@ -39,7 +45,7 @@ export default async function AccountOrderDetailPage({ params }: Props) {
   return (
     <AccountShell
       title={`Order ${order.reference}`}
-      description="Demo order detail — not connected to live fulfilment."
+      description="Live status from HSP fulfilment."
     >
       <OrderDetailView order={order} />
     </AccountShell>

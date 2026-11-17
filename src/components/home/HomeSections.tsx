@@ -3,23 +3,31 @@ import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { company } from "@/data/company";
 import { products, type Product } from "@/data/products";
 import { ProductCard } from "@/components/ProductCard";
+import { home } from "@/lib/siteData";
 import styles from "./HomeSections.module.css";
 
-const corporateHref = `/products?category=gifts&subcategory=${encodeURIComponent("Corporate Gifting")}`;
+/** Products picked in the admin app win; otherwise the section's automatic rule applies. */
+function pick(ids: string[] | undefined, auto: () => Product[], limit: number): Product[] {
+  if (ids?.length) {
+    const byId = new Map(products.map((p) => [p.id, p]));
+    return ids.map((id) => byId.get(id)).filter((p): p is Product => !!p && p.active).slice(0, limit);
+  }
+  return auto().slice(0, limit);
+}
 
 const withPhoto = (p: Product) => p.active && p.images[0]?.startsWith("https://");
 
 /** Hampers first: the house's signature, curated and packed in-house. */
 export function SignatureHampers() {
-  const list = products
-    .filter(
+  const c = home.hampers;
+  const list = pick(c.productIds, () =>
+    products.filter(
       (p) =>
         withPhoto(p) &&
         p.categorySlug === "gifts" &&
         /hamper|basket|platter/i.test(p.name) &&
         p.stockStatus !== "out_of_stock",
-    )
-    .slice(0, 8);
+    ), 8);
   if (!list.length) return null;
 
   return (
@@ -27,15 +35,11 @@ export function SignatureHampers() {
       <div className="shell">
         <header className={styles.head}>
           <h2 id="hampers-heading" className={styles.h2}>
-            Signature hampers
+            {c.title}
           </h2>
-          <p className={styles.headCopy}>
-            Composed, wrapped and packed by our own team. Order one, or add them
-            to your quote and we&apos;ll tailor contents and branding for your
-            occasion.
-          </p>
-          <Link href="/products?category=gifts" className={styles.headLink}>
-            All gifts <ArrowRight aria-hidden />
+          <p className={styles.headCopy}>{c.copy}</p>
+          <Link href={c.link.href} className={styles.headLink}>
+            {c.link.label} <ArrowRight aria-hidden />
           </Link>
         </header>
         <ul className={styles.plates}>
@@ -52,16 +56,16 @@ export function SignatureHampers() {
 
 /** In-stock, fixed-price corporate sets: buyable today, or quotable in bulk. */
 export function ReadyToDispatch() {
-  const list = products
-    .filter(
+  const c = home.dispatch;
+  const list = pick(c.productIds, () =>
+    products.filter(
       (p) =>
         withPhoto(p) &&
         p.subcategory === "Corporate Gifting" &&
         p.stockStatus === "in_stock" &&
         !p.priceOnRequest &&
         p.price > 0,
-    )
-    .slice(0, 8);
+    ), 8);
   if (!list.length) return null;
 
   return (
@@ -69,14 +73,11 @@ export function ReadyToDispatch() {
       <div className="shell">
         <header className={styles.head}>
           <h2 id="dispatch-heading" className={styles.h2}>
-            Signature corporate gifts
+            {c.title}
           </h2>
-          <p className={styles.headCopy}>
-            Refined writing sets and desk gifts, in stock and ready to dispatch.
-            Order one to sample, or add them to your quote for your whole team.
-          </p>
-          <Link href={`${corporateHref}&stock=in-stock`} className={styles.headLink}>
-            All corporate gifts <ArrowRight aria-hidden />
+          <p className={styles.headCopy}>{c.copy}</p>
+          <Link href={c.link.href} className={styles.headLink}>
+            {c.link.label} <ArrowRight aria-hidden />
           </Link>
         </header>
         <ul className={styles.plates}>
@@ -91,41 +92,19 @@ export function ReadyToDispatch() {
   );
 }
 
-/** Production's own four-step promise, set as a continuous order trail. */
-const TRAIL = [
-  {
-    title: "Understand the occasion",
-    copy: "Tell us who the gifts are for, how many, the budget per unit and the date they must land.",
-  },
-  {
-    title: "Curate the gifts",
-    copy: "We shortlist hampers and kits from the catalogue, or build a custom set around your brief.",
-  },
-  {
-    title: "Pack with a personal touch",
-    copy: "Assembled and packed by our own team, with your logo, names or custom packaging where you need it.",
-  },
-  {
-    title: "Delivered on time",
-    copy: "Dispatched against the date you need them by.",
-  },
-];
-
 export function OrderTrail() {
+  const c = home.trail;
   return (
     <section className={`${styles.section} ${styles.trailSection}`} aria-labelledby="trail-heading">
       <div className="shell">
         <header className={styles.head}>
           <h2 id="trail-heading" className={styles.h2}>
-            Every gift, considered
+            {c.title}
           </h2>
-          <p className={styles.headCopy}>
-            Every hamper is put together with care, in-house, from the first
-            call to the delivery date.
-          </p>
+          <p className={styles.headCopy}>{c.copy}</p>
         </header>
         <ol className={styles.trail}>
-          {TRAIL.map((step, i) => (
+          {c.steps.map((step, i) => (
             <li key={step.title} className={styles.step}>
               <span className={styles.stepNo} data-num>
                 {i + 1}
@@ -136,13 +115,10 @@ export function OrderTrail() {
           ))}
         </ol>
         <div className={styles.trailEnd}>
-          <Link href="/bulk-quote" className={styles.trailCta}>
-            Start with a quote request <ArrowRight aria-hidden />
+          <Link href={c.cta.href} className={styles.trailCta}>
+            {c.cta.label} <ArrowRight aria-hidden />
           </Link>
-          <span className={styles.trailNote}>
-            Pricing, branding and delivery are confirmed after we review your
-            request.
-          </span>
+          <span className={styles.trailNote}>{c.note}</span>
         </div>
       </div>
     </section>
@@ -151,33 +127,24 @@ export function OrderTrail() {
 
 /** Gifting and office supplies from the same house. */
 export function OneHouse() {
-  const boards = products
-    .filter((p) => withPhoto(p) && p.categorySlug === "presentation" && !p.priceOnRequest)
-    .slice(0, 3);
+  const c = home.house;
+  const boards = pick(c.productIds, () =>
+    products.filter((p) => withPhoto(p) && p.categorySlug === "presentation" && !p.priceOnRequest), 3);
 
   return (
     <section className={`${styles.section} ${styles.house}`} aria-labelledby="house-heading">
       <div className={`shell ${styles.houseGrid}`}>
         <div className={styles.houseCopy}>
           <h2 id="house-heading" className={styles.h2}>
-            Gifting and the office,
-            from one trusted house.
+            {c.title}
           </h2>
-          <p>
-            HSP Office Basics supplies magnetic whiteboards, notice and chalk
-            boards, easel stands and desk essentials alongside its gifting
-            range, so one vendor can cover both.
-          </p>
+          <p>{c.copy}</p>
           <div className={styles.houseLinks}>
-            <Link href="/products?category=presentation">
-              Boards &amp; presentation <ArrowRight aria-hidden />
-            </Link>
-            <Link href="/products?category=desk">
-              Desk accessories <ArrowRight aria-hidden />
-            </Link>
-            <Link href="/products?category=stationery">
-              Stationery <ArrowRight aria-hidden />
-            </Link>
+            {c.links.map((l) => (
+              <Link key={l.href} href={l.href}>
+                {l.label} <ArrowRight aria-hidden />
+              </Link>
+            ))}
           </div>
         </div>
         {boards.length ? (
@@ -196,15 +163,16 @@ export function OneHouse() {
 
 export function CloseContact() {
   const { phone, email } = company.contact;
+  const c = home.close;
   return (
     <section className={styles.close} aria-labelledby="close-heading">
       <div className={`shell ${styles.closeGrid}`}>
         <h2 id="close-heading" className={styles.closeTitle}>
-          Planning gifts for fifty people, or five thousand?
+          {c.title}
         </h2>
         <div className={styles.closeActions}>
-          <Link href="/bulk-quote" className={styles.closePrimary}>
-            Request a quote
+          <Link href={c.cta.href} className={styles.closePrimary}>
+            {c.cta.label}
           </Link>
           {phone ? (
             <a href={`tel:${phone.replace(/\s+/g, "")}`} className={styles.closeLine}>
@@ -217,8 +185,7 @@ export function CloseContact() {
             </a>
           ) : null}
           <p className={styles.closeLine}>
-            <MapPin aria-hidden /> Retail store, Paschim Vihar · Office,
-            Connaught Place, New Delhi
+            <MapPin aria-hidden /> {c.address}
           </p>
         </div>
       </div>

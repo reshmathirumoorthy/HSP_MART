@@ -1,17 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getQuoteById } from "@/data/account";
+import { api, getOrNull } from "@/lib/api";
+import { requireUser } from "@/lib/auth/dal";
+import type { Order, QuoteRequest } from "@/data/account";
 import { AccountShell } from "@/components/account/AccountShell";
 import { QuoteDetailView } from "@/components/account/QuoteDetailView";
 import styles from "@/components/account/account.module.css";
+import { loadSiteData } from "@/lib/siteData.server";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await loadSiteData();
   const { id } = await params;
-  const quote = getQuoteById(id);
+  const quote = await getOrNull<QuoteRequest>(`/account/quotes/${encodeURIComponent(id)}`, { dates: false });
   return {
     title: quote
       ? `Request ${quote.reference} — HSP Mart`
@@ -20,8 +24,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function AccountQuoteDetailPage({ params }: Props) {
+  await loadSiteData();
   const { id } = await params;
-  const quote = getQuoteById(id);
+  await requireUser(`/account/quotes/${id}`);
+  const quote = await getOrNull<QuoteRequest>(`/account/quotes/${encodeURIComponent(id)}`, { dates: false });
 
   if (!quote) {
     return (

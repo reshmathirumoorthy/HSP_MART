@@ -3,6 +3,7 @@
  */
 
 import { formatPrice } from "@/data/products";
+import { company, deliveryCharge, freeShippingThreshold } from "@/lib/siteData";
 import type { Product } from "@/types/product";
 import { isProductCustomizable } from "@/lib/productModel";
 import { productAvailabilityLabel } from "@/lib/productAvailability";
@@ -12,11 +13,13 @@ export function greetingResponse(): string {
 }
 
 export function helpResponse(): string {
-  return "I can search the HSP Mart catalogue, filter by price or category, compare options from our last results, add items to cart or wishlist, open customization, and help with bulk quotes. Try “show notebooks under ₹500” or “add the first one to my cart.”";
+  return "I can search the catalogue, filter by price or category, compare options from our last results, add items to cart or wishlist, open customization, and help with bulk quotes. Try “show notebooks under ₹500” or “add the first one to my cart.”";
 }
 
 export function deliveryResponse(): string {
-  return "HSP Mart offers free delivery on orders above ₹499. The storefront does not publish delivery timelines or charges for every pincode, so I don't want to guess. For the exact delivery details for your order or pincode, call +91 99996 98694 or email info@hspmart.com.";
+  const { phone, email } = company.contact ?? {};
+  const contact = [phone && `call ${phone}`, email && `email ${email}`].filter(Boolean).join(" or ");
+  return `${company.companyName} offers free delivery on orders of ${formatPrice(freeShippingThreshold())} and above; below that a ${formatPrice(deliveryCharge())} delivery charge applies. The storefront does not publish delivery timelines for every pincode, so I don't want to guess.${contact ? ` For delivery details for your order or pincode, ${contact}.` : ""}`;
 }
 
 export function unknownResponse(): string {

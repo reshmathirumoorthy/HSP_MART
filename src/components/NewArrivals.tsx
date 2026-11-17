@@ -4,13 +4,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
-import { productionProducts } from "@/data/productionProducts";
+import { products, type Product } from "@/data/products";
+import { home } from "@/lib/siteData";
 import styles from "./NewArrivals.module.css";
 
 export function NewArrivals() {
-  // The production feed is ordered newest-first, so its head = latest arrivals.
-  const list = productionProducts
-    .filter((p) => p.active !== false && p.stockStatus !== "out_of_stock")
+  // Chosen in the admin app (Site content → home → newArrivals).
+  const section = home.newArrivals;
+  const byId = new Map(products.map((p) => [p.id, p]));
+  const list = (section?.productIds ?? [])
+    .map((id) => byId.get(id))
+    .filter((p): p is Product => !!p && p.active !== false && p.stockStatus !== "out_of_stock")
     .slice(0, 8);
 
   const scrollRef = useRef<HTMLUListElement>(null);
@@ -48,14 +52,14 @@ export function NewArrivals() {
         <header className={styles.header}>
           <div className={styles.headingBlock}>
             <h2 id="new-arrivals-heading" className={styles.title}>
-              New in the catalogue
+              {section?.title}
             </h2>
             <p className={styles.lead}>
-              The latest hampers, gifts and boards added to the HSP Mart range.
+              {section?.copy}
             </p>
           </div>
-          <Link href="/products" className={styles.viewAll}>
-            View all new arrivals
+          <Link href={section?.link.href ?? "/products"} className={styles.viewAll}>
+            {section?.link.label}
             <span aria-hidden="true">→</span>
           </Link>
         </header>

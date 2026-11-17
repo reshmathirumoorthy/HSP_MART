@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { SearchResultsPage } from "@/components/search/SearchResultsPage";
+import { loadSiteData } from "@/lib/siteData.server";
 
 export const metadata: Metadata = {
   title: "Search",
@@ -26,7 +27,8 @@ function SearchFallback() {
   );
 }
 
-export default function SearchPage() {
+export default async function SearchPage() {
+  await loadSiteData();
   return (
     <Suspense fallback={<SearchFallback />}>
       <SearchResultsPage />

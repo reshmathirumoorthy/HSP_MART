@@ -7,6 +7,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, organizationJsonLd } from "@/lib/seo";
 import { getCategoryLabel } from "@/data/categories";
 import type { ProductCategorySlug } from "@/types/product";
+import { loadSiteData } from "@/lib/siteData.server";
+import { siteUrl } from "@/lib/siteData";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -32,6 +34,7 @@ function toParam(value: string | string[] | undefined): string | null {
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
+  await loadSiteData();
   const raw = await searchParams;
   const params = new URLSearchParams();
 
@@ -71,7 +74,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <JsonLd data={breadcrumbJsonLd(jsonLdTrail.map((b) => ({ name: b.label, url: b.href ? `https://hspmart.com${b.href}` : undefined })))} />
+      <JsonLd data={breadcrumbJsonLd(jsonLdTrail.map((b) => ({ name: b.label, url: b.href ? `${siteUrl()}${b.href}` : undefined })))} />
       {breadcrumbTrail.length > 0 ? (
         <div className="shell" style={{ paddingTop: "1rem" }}>
           <ProductBreadcrumb items={breadcrumbTrail} />

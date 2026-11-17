@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { freeDeliveryText } from "@/lib/siteData";
 import { formatPrice } from "@/data/products";
+import { estimateOnlineTotals } from "@/lib/checkout";
 import type { ResolvedCartItem } from "@/lib/cart";
 import {
   customizationDetails,
@@ -36,6 +38,7 @@ export function CheckoutSummary({
 }: Props) {
   void _shipping;
   void _total;
+  const est = estimateOnlineTotals(subtotal);
   return (
     <aside className={styles.summary} aria-label="Your order">
       <p className={styles.label}>Your order</p>
@@ -74,20 +77,20 @@ export function CheckoutSummary({
           <span>{formatPrice(subtotal)}</span>
         </div>
         <div className={styles.row}>
-          <span>Shipping</span>
-          <span>Not calculated (demo)</span>
+          <span>Delivery</span>
+          <span>{est.shipping ? formatPrice(est.shipping) : "Free"}</span>
         </div>
         <div className={styles.row}>
-          <span>Tax</span>
-          <span>Not calculated (demo)</span>
+          <span>GST (est.)</span>
+          <span>{formatPrice(est.gst)}</span>
         </div>
         <p className={styles.shippingNote}>
-          Demo checkout — shipping and tax are not calculated. Total shows
-          merchandise only.
+          {freeDeliveryText()}. The final amount is confirmed on the payment
+          screen.
         </p>
         <div className={`${styles.row} ${styles.total}`}>
           <span>Total</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span>{formatPrice(est.total)}</span>
         </div>
       </div>
 
@@ -104,12 +107,12 @@ export function CheckoutSummary({
         disabled={placeDisabled || processing}
         aria-describedby={formErrorSummaryId}
       >
-        {processing ? "Processing demo order…" : "Place demo order"}
+        {processing ? "Placing order…" : "Place order & pay"}
       </button>
 
       <p className={styles.note}>
-        Demo checkout only. No payment is taken and no order is created in a
-        backend system.
+        You&apos;ll pay securely through Razorpay (UPI, cards, net banking).
+        Sign-in is required so you can track your order.
       </p>
 
       <Link href="/cart" className={styles.back}>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BulkQuoteClient } from "@/components/bulk-quote/BulkQuoteClient";
+import { loadSiteData } from "@/lib/siteData.server";
 
 export const metadata: Metadata = {
   title: "Request a Bulk Quote",
@@ -25,6 +26,7 @@ function normalizeProducts(
 }
 
 export default async function BulkQuotePage({ searchParams }: Props) {
+  await loadSiteData();
   const params = await searchParams;
   const initialProducts = normalizeProducts(params.product);
 

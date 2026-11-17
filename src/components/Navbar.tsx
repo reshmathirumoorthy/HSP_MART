@@ -13,40 +13,24 @@ import { FileText } from "lucide-react";
 import { SearchOverlay } from "@/components/search/SearchOverlay";
 import { NotificationPanel } from "@/components/notifications/NotificationPanel";
 import { productCategories } from "@/data/categories";
+import { company, navigation } from "@/lib/siteData";
 import { trapTabKey } from "@/lib/focusTrap";
 import styles from "./Navbar.module.css";
 
-const categoryLinks = productCategories
-  .filter((c) => c.slug !== "all")
-  .map((c) => ({
-    slug: c.slug,
-    href: `/products?category=${c.slug}`,
-    label: c.label,
-  }));
-
-const giftingHref = (subcategory: string) =>
-  `/products?category=gifts&subcategory=${encodeURIComponent(subcategory)}`;
-
-/** Gifting occasions — mirrors the production storefront's primary menu. */
-const giftingLinks = [
-  { href: giftingHref("Corporate Gifting"), label: "Corporate Gifting" },
-  { href: giftingHref("Festive Gifting"), label: "Festive Gifting" },
-  { href: giftingHref("Wedding Gifting"), label: "Wedding Gifting" },
-  { href: giftingHref("Occasional Gifting"), label: "Occasional Gifting" },
-];
-
-const shopLinks = [
-  { href: "/products", label: "Products" },
-  ...giftingLinks,
-  ...categoryLinks.filter((link) => link.slug !== "gifts"),
-  { href: "/bulk-quote", label: "Bulk Orders" },
-];
-
-const exploreLinks = [
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-  { href: "/faq", label: "FAQ" },
-];
+/** Menu links come from Site content → navigation and the category list (admin app). */
+function menuLinks() {
+  const categoryLinks = productCategories
+    .filter((c) => c.slug !== "all")
+    .map((c) => ({ slug: c.slug, href: `/products?category=${c.slug}`, label: c.label }));
+  const giftingLinks = navigation.gifting ?? [];
+  const shopLinks = [
+    { href: "/products", label: "Products" },
+    ...giftingLinks,
+    ...categoryLinks.filter((link) => link.slug !== "gifts"),
+    ...(navigation.shopExtras ?? []),
+  ];
+  return { categoryLinks, giftingLinks, shopLinks, exploreLinks: navigation.explore ?? [] };
+}
 
 const accountLinks = [
   { href: "/account", label: "Account" },
@@ -57,6 +41,7 @@ const accountLinks = [
 ];
 
 export function Navbar() {
+  const { shopLinks, exploreLinks } = menuLinks();
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -198,60 +183,29 @@ export function Navbar() {
               className={styles.logo}
               priority
             />
-            <span className={styles.wordmark}>HSP Mart</span>
+            <span className={styles.wordmark}>{company.companyName}</span>
           </Link>
 
           <nav className={styles.primaryNav} aria-label="Main navigation">
-            <Link
-              href="/"
-              className={`${styles.navLink} ${pathname === "/" ? styles.navLinkActive : ""}`}
-              aria-current={pathname === "/" ? "page" : undefined}
-              onClick={() => setOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/products"
-              className={`${styles.navLink} ${onProducts && !activeCategory ? styles.navLinkActive : ""}`}
-              onClick={() => setOpen(false)}
-            >
-              Products
-            </Link>
-            <Link
-              href={giftingHref("Corporate Gifting")}
-              className={styles.navLink}
-              onClick={() => setOpen(false)}
-            >
-              Corporate Gifts
-            </Link>
-            <Link
-              href="/products?category=presentation"
-              className={styles.navLink}
-              onClick={() => setOpen(false)}
-            >
-              Boards
-            </Link>
-            <Link
-              href="/products?category=gifts"
-              className={styles.navLink}
-              onClick={() => setOpen(false)}
-            >
-              Gifting
-            </Link>
-            <Link
-              href="/about"
-              className={styles.navLink}
-              onClick={() => setOpen(false)}
-            >
-              About Us
-            </Link>
-            <Link
-              href="/contact"
-              className={styles.navLink}
-              onClick={() => setOpen(false)}
-            >
-              Contact
-            </Link>
+            {(navigation.primary ?? []).map((link) => {
+              const active =
+                link.href === "/"
+                  ? pathname === "/"
+                  : link.href === "/products"
+                    ? onProducts && !activeCategory
+                    : pathname === link.href;
+              return (
+                <Link
+                  key={`${link.href}-${link.label}`}
+                  href={link.href}
+                  className={`${styles.navLink} ${active ? styles.navLinkActive : ""}`}
+                  aria-current={active && link.href === "/" ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <form className={styles.search} onSubmit={submitSearch} role="search">
@@ -418,7 +372,7 @@ export function Navbar() {
               height={27}
               className={styles.logo}
             />
-            <span className={styles.wordmark}>HSP Mart</span>
+            <span className={styles.wordmark}>{company.companyName}</span>
           </Link>
           <button
             type="button"

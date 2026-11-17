@@ -3,31 +3,23 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { products, productPriceLabel, type Product } from "@/data/products";
 import { PlateQuoteButton } from "@/components/quote-sheet/PlateQuoteButton";
+import { home } from "@/lib/siteData";
 import styles from "./HomeHero.module.css";
 
 const gifting = (sub: string) =>
   `/products?category=gifts&subcategory=${encodeURIComponent(sub)}`;
 
-/** Four gifting occasions, mirroring the production storefront's menu. */
-const OCCASIONS: { label: string; note: string; href: string; sub: string }[] = [
-  { label: "Corporate", note: "Clients, teams & rewards", href: gifting("Corporate Gifting"), sub: "Corporate Gifting" },
-  { label: "Festive", note: "Diwali, Rakhi & seasonal", href: gifting("Festive Gifting"), sub: "Festive Gifting" },
-  { label: "Wedding", note: "Shagun, platters & trousseau", href: gifting("Wedding Gifting"), sub: "Wedding Gifting" },
-  { label: "Occasions", note: "Birthdays & celebrations", href: gifting("Occasional Gifting"), sub: "Occasional Gifting" },
-];
-
-const FEATURE_SLUG =
-  "luxury-decorative-gift-hamper-with-floral-birdcage-premium-festive-corporate-gift-basket";
-
-function featured(): Product | undefined {
+/** Hero copy, featured product and occasions come from Site content → home (admin app). */
+function featured(slug: string): Product | undefined {
   return (
-    products.find((p) => p.slug === FEATURE_SLUG && p.images.length) ??
+    (slug ? products.find((p) => p.slug === slug && p.images.length) : undefined) ??
     products.find((p) => p.categorySlug === "gifts" && p.images[0]?.startsWith("https://"))
   );
 }
 
 export function HomeHero() {
-  const gift = featured();
+  const { hero, occasions } = home;
+  const gift = featured(hero.featuredSlug);
   const active = products.filter((p) => p.active);
 
   return (
@@ -35,19 +27,18 @@ export function HomeHero() {
       <div className={`shell ${styles.frame}`}>
         <div className={styles.copy}>
           <h1 id="home-hero-heading" className={styles.title}>
-            The art of <em>corporate</em> gifting.
+            {hero.titleBefore} <em>{hero.titleEmphasis}</em> {hero.titleAfter}
           </h1>
           <span className={styles.rule} aria-hidden />
           <p className={styles.lead}>
-            Hampers and branded gifts, curated and hand-packed by our own team
-            in Delhi, for the clients, colleagues and celebrations that matter.
+            {hero.lead}
           </p>
           <div className={styles.actions}>
-            <Link href={gifting("Corporate Gifting")} className={styles.primary}>
-              Explore corporate gifts
+            <Link href={hero.primaryCta.href} className={styles.primary}>
+              {hero.primaryCta.label}
             </Link>
-            <Link href="/bulk-quote" className={styles.secondary}>
-              Request a quote
+            <Link href={hero.secondaryCta.href} className={styles.secondary}>
+              {hero.secondaryCta.label}
             </Link>
           </div>
         </div>
@@ -76,11 +67,11 @@ export function HomeHero() {
 
       <nav className={styles.occasions} aria-label="Shop by occasion">
         <ul className="shell">
-          {OCCASIONS.map((o) => {
-            const count = active.filter((p) => p.subcategory === o.sub).length;
+          {occasions.map((o) => {
+            const count = active.filter((p) => p.subcategory === o.subcategory).length;
             return (
               <li key={o.label}>
-                <Link href={o.href}>
+                <Link href={gifting(o.subcategory)}>
                   <span className={styles.occName}>{o.label}</span>
                   <span className={styles.occNote}>
                     {o.note} · {count}

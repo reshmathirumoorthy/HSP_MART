@@ -3,17 +3,15 @@ import { notFound } from "next/navigation";
 import { products } from "@/data/products";
 import { ProductCustomizationStudioPage } from "@/components/customization/ProductCustomizationStudioPage";
 import { getProductById, getProductBySlug } from "@/lib/products";
+import { loadSiteData } from "@/lib/siteData.server";
 
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export async function generateStaticParams() {
-  return products.map((product) => ({ slug: product.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await loadSiteData();
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
@@ -32,6 +30,7 @@ export default async function ProductCustomizePage({
   params,
   searchParams,
 }: Props) {
+  await loadSiteData();
   const { slug } = await params;
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
   const productId = resolvedSearchParams?.product;

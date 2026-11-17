@@ -1,119 +1,114 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useSyncExternalStore,
-  type ReactNode,
-} from "react";
-import { getCustomer as getSeedCustomer } from "@/data/account";
-import {
-  ACCOUNT_PROFILE_STORAGE_KEY,
-  clearAccountProfileOverlay,
-  readAccountProfile,
-  writeAccountProfile,
-} from "@/lib/accountProfile";
-import { useClientHydrated } from "@/hooks/useClientHydrated";
+/**
+ * Customer profile from the backend (/api/account/profile). The optional avatar photo is a
+ * device-local preference and is never uploaded.
+ */
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { clientApi } from "@/lib/clientApi";
+import { useAccountSession } from "@/hooks/useAccountSession";
 import type { CustomerProfile } from "@/types/customer";
 
 type AccountProfileContextValue = {
   profile: CustomerProfile;
   hydrated: boolean;
-  saveProfile: (profile: CustomerProfile) => void;
+  signedIn: boolean;
+  error: string | null;
+  saving: boolean;
+  /** Saves name, customer type, organisation and GSTIN to the account; the avatar stays on this device. */
+  saveProfile: (profile: CustomerProfile) => Promise<boolean>;
   resetProfileOverlay: () => void;
 };
 
-const AccountProfileContext =
-  createContext<AccountProfileContextValue | null>(null);
+const AVATAR_KEY = "hsp-mart-account-avatar";
+const EMPTY_PROFILE: CustomerProfile = {
+  id: "",
+  fullName: "",
+  firstName: "",
+  email: "",
+  phone: "",
+  customerType: "individual",
+  organizationName: "",
+  gstin: "",
+  address: { line1: "", line2: "", city: "", state: "", pincode: "", country: "India" },
+};
 
-const CHANGE_EVENT = "hsp-mart-account-profile-change";
-const SEED_PROFILE = getSeedCustomer();
-let cachedSerialized = "__unset__";
-let cachedProfile: CustomerProfile | null = null;
+const AccountProfileContext = createContext<AccountProfileContextValue | null>(null);
 
-function emitChange() {
-  window.dispatchEvent(new Event(CHANGE_EVENT));
-}
-
-function subscribe(onStoreChange: () => void) {
-  const handle = () => onStoreChange();
-  window.addEventListener("storage", handle);
-  window.addEventListener(CHANGE_EVENT, handle);
-  return () => {
-    window.removeEventListener("storage", handle);
-    window.removeEventListener(CHANGE_EVENT, handle);
-  };
-}
-
-function readProfileSnapshot(): CustomerProfile {
+function readAvatar(): string | undefined {
   try {
-    const raw = window.localStorage.getItem(ACCOUNT_PROFILE_STORAGE_KEY);
-    const serialized = raw ?? "__seed__";
-    if (serialized === cachedSerialized && cachedProfile) return cachedProfile;
-    const profile = readAccountProfile();
-    cachedSerialized = serialized;
-    cachedProfile = profile;
-    return profile;
+    return window.localStorage.getItem(AVATAR_KEY) ?? undefined;
   } catch {
-    const profile = readAccountProfile();
-    cachedSerialized = "__seed__";
-    cachedProfile = profile;
-    return profile;
+    return undefined;
   }
 }
 
-/** Must never touch localStorage — called on the client during hydration. */
-function getServerSnapshot(): CustomerProfile {
-  return SEED_PROFILE;
+function writeAvatar(v: string | undefined) {
+  try {
+    if (v) window.localStorage.setItem(AVATAR_KEY, v);
+    else window.localStorage.removeItem(AVATAR_KEY);
+  } catch {}
 }
 
 export function AccountProfileProvider({ children }: { children: ReactNode }) {
-  const hydrated = useClientHydrated();
-  const profile = useSyncExternalStore(
-    subscribe,
-    () => (hydrated ? readProfileSnapshot() : SEED_PROFILE),
-    getServerSnapshot,
+  const { user, ready } = useAccountSession();
+  const [profile, setProfile] = useState<CustomerProfile>(EMPTY_PROFILE);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (!ready || !user) return;
+    clientApi<CustomerProfile>("/account/profile")
+      .then((p) => setProfile({ ...p, avatar: readAvatar() }))
+      .catch((e: Error) => setError(e.message))
+      .finally(() => setLoaded(true));
+  }, [ready, user]);
+
+  const saveProfile = useCallback(
+    async (next: CustomerProfile) => {
+      writeAvatar(next.avatar);
+      setError(null);
+      if (!user) {
+        setProfile((p) => ({ ...p, avatar: next.avatar }));
+        return false;
+      }
+      setSaving(true);
+      try {
+        const saved = await clientApi<CustomerProfile>("/account/profile", {
+          body: {
+            fullName: next.fullName,
+            customerType: next.customerType,
+            organizationName: next.organizationName,
+            gstin: next.gstin,
+          },
+        });
+        setProfile({ ...saved, avatar: next.avatar });
+        return true;
+      } catch (e) {
+        setError((e as Error).message);
+        return false;
+      } finally {
+        setSaving(false);
+      }
+    },
+    [user],
   );
 
-  const saveProfile = useCallback((next: CustomerProfile) => {
-    writeAccountProfile(next);
-    cachedSerialized = "__unset__";
-    cachedProfile = null;
-    emitChange();
-  }, []);
-
   const resetProfileOverlay = useCallback(() => {
-    clearAccountProfileOverlay();
-    cachedSerialized = "__unset__";
-    cachedProfile = null;
-    emitChange();
+    writeAvatar(undefined);
+    setProfile((p) => ({ ...p, avatar: undefined }));
   }, []);
 
   const value = useMemo(
-    () => ({
-      profile,
-      hydrated,
-      saveProfile,
-      resetProfileOverlay,
-    }),
-    [profile, hydrated, saveProfile, resetProfileOverlay],
+    () => ({ profile, hydrated: ready && (!user || loaded), signedIn: !!user, error, saving, saveProfile, resetProfileOverlay }),
+    [profile, ready, loaded, user, error, saving, saveProfile, resetProfileOverlay],
   );
-
-  return (
-    <AccountProfileContext.Provider value={value}>
-      {children}
-    </AccountProfileContext.Provider>
-  );
+  return <AccountProfileContext.Provider value={value}>{children}</AccountProfileContext.Provider>;
 }
 
 export function useAccountProfile() {
   const ctx = useContext(AccountProfileContext);
-  if (!ctx) {
-    throw new Error(
-      "useAccountProfile must be used within AccountProfileProvider",
-    );
-  }
+  if (!ctx) throw new Error("useAccountProfile must be used within AccountProfileProvider");
   return ctx;
 }

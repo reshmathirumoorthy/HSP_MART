@@ -5,6 +5,8 @@ import { FaqAccordion } from "@/components/content/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo";
 import styles from "@/components/content/ContentPage.module.css";
+import { loadSiteData } from "@/lib/siteData.server";
+import { siteUrl } from "@/lib/siteData";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -20,13 +22,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  await loadSiteData();
   return (
     <div className={styles.page} data-nav-surface="light">
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", url: "https://hspmart.com/" },
-          { name: "FAQ", url: "https://hspmart.com/faq" },
+          { name: "Home", url: `${siteUrl()}/` },
+          { name: "FAQ", url: `${siteUrl()}/faq` },
         ])}
       />
       <JsonLd

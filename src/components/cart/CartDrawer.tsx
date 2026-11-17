@@ -11,8 +11,7 @@ import { validateResolvedCart } from "@/lib/cartValidation";
 import { getFocusableElements, trapTabKey } from "@/lib/focusTrap";
 import styles from "./CartDrawer.module.css";
 
-/** Matches the storefront announcement: free delivery above ₹499. */
-const FREE_DELIVERY_THRESHOLD = 499;
+import { freeShippingThreshold } from "@/lib/siteData";
 
 export function CartDrawer() {
   const pathname = usePathname();
@@ -33,10 +32,10 @@ export function CartDrawer() {
   const visibleSubtotal = hydrated ? cartSubtotal : 0;
   const canCheckout =
     hydrated && validateResolvedCart(visibleItems).canCheckout;
-  const freeDelivery = visibleSubtotal >= FREE_DELIVERY_THRESHOLD;
+  const freeDelivery = visibleSubtotal >= freeShippingThreshold();
   const deliveryProgress = Math.min(
     100,
-    Math.round((visibleSubtotal / FREE_DELIVERY_THRESHOLD) * 100),
+    Math.round((visibleSubtotal / freeShippingThreshold()) * 100),
   );
 
   // Close on route change so the backdrop cannot block logo/nav.
@@ -221,7 +220,7 @@ export function CartDrawer() {
             ) : (
               <div className={styles.shippingProgress}>
                 <p className={styles.shippingProgressCopy}>
-                  <strong>{formatPrice(FREE_DELIVERY_THRESHOLD - visibleSubtotal)}</strong>{" "}
+                  <strong>{formatPrice(freeShippingThreshold() - visibleSubtotal)}</strong>{" "}
                   away from free delivery
                 </p>
                 <div className={styles.shippingTrack} aria-hidden="true">

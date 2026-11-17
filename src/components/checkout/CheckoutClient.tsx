@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { placeOnlineOrderAction } from "@/app/checkout/actions";
 import { useCart } from "@/context/CartContext";
-import { useNotifications } from "@/context/NotificationContext";
 import {
   INITIAL_CHECKOUT_DATA,
   createDemoAttemptId,
@@ -18,14 +19,12 @@ import {
   readDemoCheckoutSnapshot,
   validateCheckout,
   writeDemoCheckoutAttempt,
-  writeDemoCheckoutSnapshot,
   type CheckoutData,
   type CheckoutFieldErrors,
   type CheckoutStep,
   type DemoOrderSnapshot,
   type PaymentMethod as PaymentMethodId,
 } from "@/lib/checkout";
-import { createCheckoutDemoNotification } from "@/lib/notifications";
 import { validateResolvedCart } from "@/lib/cartValidation";
 import { CheckoutProgress } from "@/components/checkout/CheckoutProgress";
 import { CustomerForm } from "@/components/checkout/CustomerForm";
@@ -40,6 +39,15 @@ import { isProductCustomizable } from "@/lib/productModel";
 import styles from "./CheckoutClient.module.css";
 
 const SHIPPING_AMOUNT = 0;
+
+/** Logos embedded as data URLs are too large to post; artwork is uploaded on the order page. */
+function stripInlineMedia(value: unknown): unknown {
+  if (typeof value === "string") return value.startsWith("data:") ? "[uploaded separately]" : value;
+  if (Array.isArray(value)) return value.map(stripInlineMedia);
+  if (value && typeof value === "object")
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, stripInlineMedia(v)]));
+  return value;
+}
 
 function scrollToStep(step: CheckoutStep) {
   const id =
@@ -93,7 +101,7 @@ export function CheckoutClient() {
     hydrated,
     clearCart,
   } = useCart();
-  const { addNotification } = useNotifications();
+  const router = useRouter();
 
   const [data, setData] = useState<CheckoutData>(INITIAL_CHECKOUT_DATA);
   const [errors, setErrors] = useState<CheckoutFieldErrors>(createEmptyErrors());
@@ -175,17 +183,6 @@ export function CheckoutClient() {
     if (!data.paymentMethod) return;
 
     const existingAttempt = readDemoCheckoutAttempt();
-    const existingSnapshot = readDemoCheckoutSnapshot();
-    if (
-      existingAttempt?.status === "complete" &&
-      existingAttempt.cartSignature === cartSignature &&
-      existingSnapshot?.reference === existingAttempt.reference
-    ) {
-      setCompletedOrder(existingSnapshot);
-      clearCart();
-      return;
-    }
-
     const reserved =
       existingAttempt?.status === "pending" &&
       existingAttempt.cartSignature === cartSignature
@@ -203,8 +200,9 @@ export function CheckoutClient() {
     setStockAlert("");
     setStep("review");
 
-    const snapshot: DemoOrderSnapshot = {
-      reference: reserved.reference,
+    // Real order: the server re-prices from the catalogue database and opens a Razorpay payment.
+    void placeOnlineOrderAction({
+      clientRef: reserved.attemptId,
       customer: {
         fullName: data.customer.fullName.trim(),
         email: data.customer.email.trim(),
@@ -216,57 +214,33 @@ export function CheckoutClient() {
         city: data.address.city.trim(),
         state: data.address.state.trim(),
         pincode: data.address.pincode.trim(),
-        country: data.address.country.trim(),
       },
-      paymentMethod: data.paymentMethod,
       items: resolvedItems.map((item) => ({
         productId: item.productId,
-        name: item.product.name,
         quantity: item.quantity,
-        lineTotal: item.lineTotal,
-        customization: item.customization,
+        personalisation: item.customization ? stripInlineMedia(item.customization) : undefined,
       })),
-      subtotal: cartSubtotal,
-      shipping,
-      total,
-    };
-
-    // Frontend-only demo events — idempotent per order reference.
-    addNotification(
-      createCheckoutDemoNotification(snapshot.reference, "order-placed"),
-    );
-
-    const paymentTimer = window.setTimeout(() => {
-      addNotification(
-        createCheckoutDemoNotification(snapshot.reference, "payment-success"),
-      );
-    }, 400);
-
-    const completeTimer = window.setTimeout(() => {
-      const current = readDemoCheckoutAttempt();
-      if (!current || current.attemptId !== reserved.attemptId) {
-        setProcessing(false);
+    })
+      .then((result) => {
+        if (!result.ok) {
+          placingRef.current = false;
+          setProcessing(false);
+          if (result.needLogin) {
+            router.push(`/login?next=${encodeURIComponent("/checkout")}`);
+            return;
+          }
+          setStockAlert(result.error);
+          return;
+        }
+        writeDemoCheckoutAttempt({ ...reserved, status: "complete" });
+        clearCart();
+        router.push(`/my/orders/${result.orderNumber}?pay=1`);
+      })
+      .catch(() => {
         placingRef.current = false;
-        return;
-      }
-      if (current.status === "complete") {
-        const saved = readDemoCheckoutSnapshot();
-        if (saved?.reference === current.reference) setCompletedOrder(saved);
         setProcessing(false);
-        return;
-      }
-      addNotification(
-        createCheckoutDemoNotification(snapshot.reference, "order-confirmed"),
-      );
-      writeDemoCheckoutSnapshot(snapshot);
-      writeDemoCheckoutAttempt({ ...reserved, status: "complete" });
-      clearCart();
-      setCompletedOrder(snapshot);
-      setProcessing(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 800);
-
-    demoTimersRef.current = [paymentTimer, completeTimer];
+        setStockAlert("We couldn't place your order. Please try again — you won't be charged twice.");
+      });
   };
 
   if (!hydrated) {
@@ -314,15 +288,13 @@ export function CheckoutClient() {
         <header className={styles.header}>
           <h1 className={styles.title}>Checkout</h1>
           <p className={styles.demoBanner} role="status">
-            Frontend demonstration only — no payment is processed, and shipping
-            or tax are not calculated.
+            Prices exclude GST. GST and delivery are calculated on the next
+            screen, where you pay securely through Razorpay.
           </p>
           {interruptedAttempt ? (
             <p className={styles.demoBanner} role="status">
-              This demonstration was interrupted before it finished. Submitting
-              again continues demo reference {interruptedAttempt.reference}. A
-              second confirmation is not created for that attempt. This browser
-              session is not exactly-once processing.
+              Your last attempt didn&apos;t finish. Placing the order again
+              continues the same order — you won&apos;t be charged twice.
             </p>
           ) : null}
           <p className={styles.copy}>
@@ -337,8 +309,8 @@ export function CheckoutClient() {
               aria-live="assertive"
             >
               {formErrorCount === 1
-                ? "1 field needs attention before this demo order can continue."
-                : `${formErrorCount} fields need attention before this demo order can continue.`}{" "}
+                ? "1 field needs attention before this order can continue."
+                : `${formErrorCount} fields need attention before this order can continue.`}{" "}
               Review the highlighted fields below.
             </div>
           ) : null}
@@ -469,7 +441,7 @@ export function CheckoutClient() {
                   cartValidation.issues.find(
                     (issue) => issue.severity === "error",
                   )?.message ||
-                  "One or more items need attention before placing this demo order."}
+                  "One or more items need attention before placing this order."}
               </p>
             ) : null}
           </div>
@@ -491,7 +463,7 @@ export function CheckoutClient() {
                 .join(" ") || undefined
             }
           >
-            {processing ? "Processing…" : "Place demo order"}
+            {processing ? "Processing…" : "Place order & pay"}
           </button>
         </div>
       </div>

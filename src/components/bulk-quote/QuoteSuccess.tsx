@@ -15,17 +15,16 @@ export function QuoteSuccess({ quote }: Props) {
       </div>
 
       <p className={styles.copy}>
-        We&apos;ve captured your bulk requirement for this frontend
-        demonstration.
+        HSP has your bulk requirement. Our team will price it against approved suppliers and send a formal quotation,
+        usually within one working day. A confirmation is on its way to {quote.customer.email}.
       </p>
 
       <div className={styles.panel}>
         <p className={styles.refLabel}>Reference</p>
-        <p className={styles.ref}>{quote.reference}</p>
+        <p className={styles.ref} data-testid="bulk-quote-reference">{quote.reference}</p>
         <p className={styles.disclaimer}>
-          This is a frontend demonstration. This reference is not a confirmed
-          price or an accepted offer. No email was sent and no order was
-          created.
+          This reference is not yet a price or an accepted offer. You can follow it under Account → Quotes when signed in with
+          this email.
         </p>
 
         <div className={styles.summary}>

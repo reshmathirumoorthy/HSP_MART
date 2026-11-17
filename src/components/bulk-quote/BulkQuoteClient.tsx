@@ -1,5 +1,6 @@
 "use client";
 
+import { clientApi } from "@/lib/clientApi";
 import { useRef, useState } from "react";
 import {
   INITIAL_BULK_QUOTE,
@@ -92,6 +93,7 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [completed, setCompleted] = useState<DemoQuoteSnapshot | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const submittingRef = useRef(false);
 
   const selectedIds = data.lines.map((line) => line.productId);
@@ -148,11 +150,40 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
 
     submittingRef.current = true;
     setProcessing(true);
-    window.setTimeout(() => {
-      setCompleted(snapshot);
-      setProcessing(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 800);
+    setSubmitError(null);
+    clientApi<{ number: string }>("/enquiries/bulk-quote", {
+      body: {
+        lines: snapshot.lines.map((l) => ({
+          productId: l.productId,
+          quantity: l.quantity,
+          notes: [l.notes, l.variantLabel, l.customizationText && `Text: ${l.customizationText}`, l.customizationZoneLabel]
+            .filter(Boolean)
+            .join(" · "),
+        })),
+        requirements: {
+          orderType: snapshot.orderType,
+          customization: snapshot.customization,
+          customizationNotes: snapshot.customizationNotes,
+          packaging: snapshot.packaging,
+          branding: snapshot.branding,
+          brandName: snapshot.brandName,
+          expectedDelivery: snapshot.expectedDelivery,
+          additionalNotes: snapshot.additionalNotes,
+          designFileName: snapshot.designFileName,
+        },
+        customer: snapshot.customer,
+        address: snapshot.address,
+      },
+    })
+      .then((r) => {
+        setCompleted({ ...snapshot, reference: r.number });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .catch((err: Error) => setSubmitError(err.message))
+      .finally(() => {
+        submittingRef.current = false;
+        setProcessing(false);
+      });
   };
 
   if (completed) {
@@ -173,8 +204,8 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
             <h1 className={styles.title}>Request a bulk quote</h1>
             <p className={styles.copy}>
               For teams, offices, and corporate gifting. Share products,
-              quantities, and any customization needs — this is a frontend
-              demonstration and does not generate live pricing.
+              quantities, and any customization needs. HSP prices every request
+              against approved suppliers and replies with a formal quotation.
             </p>
           </div>
         </header>
@@ -361,6 +392,11 @@ export function BulkQuoteClient({ initialProducts = [] }: Props) {
             ) : null}
 
             <div className={styles.actions}>
+              {submitError ? (
+                <p role="alert" className={styles.submitError ?? ""} style={{ color: "var(--color-danger, #b91c1c)", width: "100%" }}>
+                  {submitError}
+                </p>
+              ) : null}
               {step !== "products" ? (
                 <button
                   type="button"

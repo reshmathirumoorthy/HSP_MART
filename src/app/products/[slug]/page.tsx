@@ -10,16 +10,15 @@ import {
 } from "@/lib/products";
 import { MIN_SIMILAR_PRODUCTS } from "@/lib/discovery";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/seo";
+import { loadSiteData } from "@/lib/siteData.server";
+import { siteUrl } from "@/lib/siteData";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateStaticParams() {
-  return products.map((product) => ({ slug: product.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  await loadSiteData();
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
@@ -44,6 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
+  await loadSiteData();
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
@@ -62,17 +62,17 @@ export default async function ProductPage({ params }: Props) {
     similarCandidates.length >= MIN_SIMILAR_PRODUCTS ? similarCandidates : [];
 
   const breadcrumbTrail = [
-    { name: "Home", url: "https://hspmart.com/" },
-    { name: "Products", url: "https://hspmart.com/products" },
+    { name: "Home", url: `${siteUrl()}/` },
+    { name: "Products", url: `${siteUrl()}/products` },
     {
       name: product.category,
-      url: `https://hspmart.com/products?category=${product.categorySlug}`,
+      url: `${siteUrl()}/products?category=${product.categorySlug}`,
     },
     ...(product.subcategory
       ? [
           {
             name: product.subcategory,
-            url: `https://hspmart.com/products?category=${product.categorySlug}&subcategory=${encodeURIComponent(product.subcategory)}`,
+            url: `${siteUrl()}/products?category=${product.categorySlug}&subcategory=${encodeURIComponent(product.subcategory)}`,
           },
         ]
       : []),
