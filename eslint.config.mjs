@@ -11,6 +11,7 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    "admin/dist/**",
     "next-env.d.ts",
     // Local temporary audit/debug artifacts (also gitignored).
     "tmp-*",

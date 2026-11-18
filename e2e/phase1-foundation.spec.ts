@@ -3,6 +3,7 @@
  * server-authoritative pricing.
  */
 import { expect, test } from "@playwright/test";
+import { E2E_BASE_URL } from "../playwright.config";
 import { seedProducts as staticCatalogue } from "../scripts/db/seed-data/products";
 import { createUser, signIn, sql, uniqueEmail } from "./helpers";
 
@@ -123,7 +124,7 @@ test.describe("1.2 authentication & roles", () => {
     const email = uniqueEmail("next");
     await createUser(email, "associate");
     await signIn(page, email, "//evil.example.com");
-    await expect(page).toHaveURL(/localhost:3100\/partner$/);
+    await expect(page).toHaveURL(`${E2E_BASE_URL}/partner`);
   });
 
   test("revoking a role or disabling a user takes effect on the next request", async ({ page }) => {
@@ -150,7 +151,7 @@ test.describe("1.2 sessions", () => {
     const cookie = (await context.cookies()).find((c) => c.name === "hsp_session")!;
 
     await page.getByRole("button", { name: "Sign out" }).click();
-    await expect(page).toHaveURL("http://localhost:3100/");
+    await expect(page).toHaveURL(`${E2E_BASE_URL}/`);
 
     await context.addCookies([cookie]);
     await page.goto("/admin");

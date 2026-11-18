@@ -43,6 +43,30 @@ export async function asUser(browser: Browser, identifier: string) {
   return { ctx, page };
 }
 
+/** Signs in to the Vite admin app; retries Send code while React hydration is still pending. */
+export async function adminSignIn(page: Page, url: string, identifier: string, waitForSuccess = true) {
+  await page.goto(url);
+  const email = page.getByLabel("Email or mobile");
+  if (!(await email.isVisible().catch(() => false))) return false;
+
+  await email.fill(identifier);
+  const codeBox = page.getByTestId("dev-code");
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page.getByRole("button", { name: "Send code" }).click();
+    try {
+      await codeBox.waitFor({ state: "visible", timeout: 2_000 });
+      break;
+    } catch {
+      // The first click can land before Vite has attached React's submit handler.
+    }
+  }
+  const code = (await codeBox.textContent())!.replace(/\D/g, "");
+  await page.getByLabel(/Code sent/).fill(code);
+  await page.getByRole("button", { name: "Sign in" }).click();
+  if (waitForSuccess) await expect(email).toBeHidden({ timeout: 10_000 });
+  return true;
+}
+
 /** Creates an already-verified, active partner directly (for tests that aren't about onboarding). */
 export async function createPartner(email: string, type: "associate" | "franchise", city = "Pune") {
   const role = type === "associate" ? "associate" : "franchise";

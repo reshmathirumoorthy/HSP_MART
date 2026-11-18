@@ -7,7 +7,6 @@ Site content: one JSON document per key, edited in the admin app.
 import hashlib
 import json
 import re
-import threading
 import httpx
 from sqlalchemy import Connection
 from ..audit import audit
@@ -342,15 +341,16 @@ def _post_refresh():
         return
     try:
         httpx.post(s.next_revalidate_url, headers={"x-revalidate-secret": s.revalidate_secret}, timeout=5)
-    except httpx.HTTPError:
-        pass  # the storefront also refreshes on its own every 5 minutes
+    except Exception:
+        pass  # best effort: the storefront also refreshes on its own every 5 minutes
 
 
 def request_storefront_refresh(conn: Connection):
-    """After the transaction commits, tell Next.js to drop its cached catalogue/content."""
-    from sqlalchemy import event
+    """Commit the edit, then tell Next.js to drop its cached catalogue/content before returning.
 
-    def after_commit(_conn):
-        threading.Thread(target=_post_refresh, daemon=True).start()
-
-    event.listen(conn, "commit", after_commit, once=True)
+    FastAPI sends a response before the `get_conn` teardown commits, so committing here (and
+    calling the storefront synchronously) is what makes an admin edit visible on the very next
+    storefront request rather than racing the webhook.
+    """
+    conn.commit()
+    _post_refresh()

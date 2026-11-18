@@ -1,13 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 3100;
-export const E2E_BASE_URL = `http://localhost:${PORT}`;
+export const E2E_BASE_URL = `http://127.0.0.1:${PORT}`;
 const API_PORT = 8100;
 export const ADMIN_PORT = 5174;
 export const E2E_REVALIDATE_SECRET = "e2e-revalidate-secret-0123456789";
 const E2E_SESSION_SECRET = "e2e-only-secret-e2e-only-secret-0123456789";
 export const TEST_DATABASE_URL =
-  process.env.TEST_DATABASE_URL ?? "postgres://localhost:5432/hsp_giftos_test";
+  process.env.TEST_DATABASE_URL ?? "postgres://127.0.0.1:5432/hsp_giftos_test";
 
 export const E2E_WEBHOOK_SECRET = "e2e-razorpay-webhook-secret";
 export const E2E_CRON_SECRET = "e2e-cron-secret-value";
@@ -21,7 +21,7 @@ export default defineConfig({
   timeout: 60_000,
   reporter: [["list"]],
   use: {
-    baseURL: `http://localhost:${PORT}`,
+    baseURL: `http://127.0.0.1:${PORT}`,
     headless: true,
     trace: "retain-on-failure",
   },
@@ -30,7 +30,7 @@ export default defineConfig({
   webServer: [
     {
       command: `uv run --project backend uvicorn app.main:app --app-dir backend --port ${API_PORT} --timeout-keep-alive 75`,
-      url: `http://localhost:${API_PORT}/api/health`,
+      url: `http://127.0.0.1:${API_PORT}/api/health`,
       reuseExistingServer: false,
       timeout: 120_000,
       env: {
@@ -41,25 +41,25 @@ export default defineConfig({
         RETURN_WINDOW_DAYS: "0",
         CRON_SECRET: E2E_CRON_SECRET,
         UPLOAD_DIR: "../.uploads-e2e",
-        NEXT_REVALIDATE_URL: `http://localhost:${PORT}/revalidate`,
+        NEXT_REVALIDATE_URL: `http://127.0.0.1:${PORT}/revalidate`,
         REVALIDATE_SECRET: E2E_REVALIDATE_SECRET,
       },
     },
     {
       // React admin portal (Vite), proxying /api to the same FastAPI instance.
       command: `npm --prefix admin run dev -- --port ${ADMIN_PORT} --strictPort`,
-      url: `http://localhost:${ADMIN_PORT}`,
+      url: `http://127.0.0.1:${ADMIN_PORT}`,
       reuseExistingServer: false,
       timeout: 120_000,
-      env: { API_URL: `http://localhost:${API_PORT}` },
+      env: { API_URL: `http://127.0.0.1:${API_PORT}`, STOREFRONT_URL: `http://127.0.0.1:${PORT}` },
     },
     {
       command: `npx next dev --port ${PORT}`,
-      url: `http://localhost:${PORT}/images/hsp-mart-logo.png`,
+      url: `http://127.0.0.1:${PORT}/images/hsp-mart-logo.png`,
       reuseExistingServer: false,
       timeout: 180_000,
       env: {
-        BACKEND_URL: `http://localhost:${API_PORT}`,
+        BACKEND_URL: `http://127.0.0.1:${API_PORT}`,
         SESSION_SECRET: E2E_SESSION_SECRET,
         REVALIDATE_SECRET: E2E_REVALIDATE_SECRET,
       },

@@ -125,7 +125,7 @@ def sales_coach(conn: Connection, partner_id: str, now: datetime | None = None) 
     for l in leads:
         exp = l["protection_expires_at"]
         if now < exp <= in14 and l["customer_id"] not in quoted:
-            follow.append({"kind": "protection-expiring", "message": f"{l['name']}: protection ends {exp.strftime('%-d/%-m/%Y')} and no quote yet — send one now."})
+            follow.append({"kind": "protection-expiring", "message": f"{l['name']}: protection ends {exp.day}/{exp.month}/{exp.year} and no quote yet — send one now."})
         if l["status"] == "registered" and l["customer_id"] not in quoted and exp > in14:
             follow.append({"kind": "unquoted-lead", "message": f"{l['name']}: registered but not quoted. Ask for budget, quantity and occasion."})
     for q in quotes:

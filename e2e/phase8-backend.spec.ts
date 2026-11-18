@@ -4,7 +4,7 @@
  */
 import { expect, test } from "@playwright/test";
 import { ADMIN_PORT } from "../playwright.config";
-import { asUser, createUser, signIn, sql, uniqueEmail } from "./helpers";
+import { adminSignIn, asUser, createUser, signIn, sql, uniqueEmail } from "./helpers";
 
 const ADMIN_APP = `http://localhost:${ADMIN_PORT}`;
 
@@ -86,14 +86,8 @@ test.describe("8.2 the customer account is server-backed", () => {
     await ctx.close();
 
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`${ADMIN_APP}/enquiries`);
-    if (await admin.page.getByLabel("Email or mobile").isVisible().catch(() => false)) {
-      await admin.page.getByLabel("Email or mobile").fill("admin@hspmart.test");
-      await admin.page.getByRole("button", { name: "Send code" }).click();
-      const code = (await admin.page.getByTestId("dev-code").textContent())!.replace(/\D/g, "");
-      await admin.page.getByLabel(/Code sent/).fill(code);
-      await admin.page.getByRole("button", { name: "Sign in" }).click();
-    }
+    await sql`delete from otp_codes where identifier = ${"admin@hspmart.test"}`;
+    await adminSignIn(admin.page, `${ADMIN_APP}/enquiries`, "admin@hspmart.test");
     const card = admin.page.getByTestId(`enquiry-${number}`);
     await expect(card).toContainText("Iyer & Co");
     await card.getByRole("button", { name: "Create priced quote" }).click();
@@ -108,12 +102,8 @@ test.describe("8.3 the React admin portal runs on the API", () => {
   test("staff sign in, see orders and run a fulfilment step with business-rule errors shown", async ({ browser }) => {
     const ctx = await browser.newContext();
     const page = await ctx.newPage();
-    await page.goto(`${ADMIN_APP}/suppliers`);
-    await page.getByLabel("Email or mobile").fill("admin@hspmart.test");
-    await page.getByRole("button", { name: "Send code" }).click();
-    const code = (await page.getByTestId("dev-code").textContent())!.replace(/\D/g, "");
-    await page.getByLabel(/Code sent/).fill(code);
-    await page.getByRole("button", { name: "Sign in" }).click();
+    await sql`delete from otp_codes where identifier = ${"admin@hspmart.test"}`;
+    await adminSignIn(page, `${ADMIN_APP}/suppliers`, "admin@hspmart.test");
 
     const name = `SPA Supplier ${Date.now().toString(36)}`;
     await page.getByLabel("name", { exact: true }).fill(name);
@@ -138,12 +128,7 @@ test.describe("8.3 the React admin portal runs on the API", () => {
     await createUser(email, "customer");
     const ctx = await browser.newContext();
     const page = await ctx.newPage();
-    await page.goto(ADMIN_APP);
-    await page.getByLabel("Email or mobile").fill(email);
-    await page.getByRole("button", { name: "Send code" }).click();
-    const code = (await page.getByTestId("dev-code").textContent())!.replace(/\D/g, "");
-    await page.getByLabel(/Code sent/).fill(code);
-    await page.getByRole("button", { name: "Sign in" }).click();
+    await adminSignIn(page, ADMIN_APP, email, false);
     await expect(page.getByText("has no admin access")).toBeVisible();
     const api = await page.request.get(`${ADMIN_APP}/api/admin/dashboard`);
     expect(api.status()).toBe(403);

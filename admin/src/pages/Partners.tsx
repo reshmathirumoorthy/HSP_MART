@@ -75,7 +75,7 @@ function Contracts({ d, canEdit }: { d: D; canEdit: boolean }) {
   const set = (k: keyof typeof f) => (e: { target: { value: string } }) => setF({ ...f, [k]: e.target.value });
   return (
     <Card title="Contracted accounts (renewal commission)">
-      <p className="mb-3 text-xs text-muted">After a partner's lead converts, a contract keeps their renewal commission on that account for the term, as long as they keep servicing it. A protected lead always takes precedence.</p>
+      <p className="mb-3 text-xs text-muted">After a partner&apos;s lead converts, a contract keeps their renewal commission on that account for the term, as long as they keep servicing it. A protected lead always takes precedence.</p>
       <ul className="mb-4 divide-y divide-line text-sm">
         {d.contracts.map((c) => <ContractRow key={c.id} c={c} canEdit={canEdit} />)}
         {!d.contracts.length && <li className="py-2 text-muted">No contracts yet.</li>}

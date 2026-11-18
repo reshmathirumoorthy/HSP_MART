@@ -4,20 +4,16 @@
  */
 import { expect, test, type Page } from "@playwright/test";
 import { ADMIN_PORT } from "../playwright.config";
-import { asUser, sql } from "./helpers";
+import { adminSignIn, asUser, sql } from "./helpers";
 
 const ADMIN_APP = `http://localhost:${ADMIN_PORT}`;
 test.describe.configure({ mode: "serial" });
 
 async function adminApp(page: Page, path: string) {
-  await page.goto(`${ADMIN_APP}${path}`);
-  if (await page.getByLabel("Email or mobile").isVisible().catch(() => false)) {
-    await page.getByLabel("Email or mobile").fill("admin@hspmart.test");
-    await page.getByRole("button", { name: "Send code" }).click();
-    const code = (await page.getByTestId("dev-code").textContent())!.replace(/\D/g, "");
-    await page.getByLabel(/Code sent/).fill(code);
-    await page.getByRole("button", { name: "Sign in" }).click();
-  }
+  // The seeded admin is shared by these serial tests; clear its OTP window so a prior test's
+  // codes cannot trip the 15-minute rate limit here.
+  await sql`delete from otp_codes where identifier = ${"admin@hspmart.test"}`;
+  await adminSignIn(page, `${ADMIN_APP}${path}`, "admin@hspmart.test");
 }
 
 test("the storefront shows what the backend holds (announcement uses the live delivery threshold)", async ({ page }) => {
