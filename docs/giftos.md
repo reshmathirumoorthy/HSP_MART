@@ -104,7 +104,7 @@ End-to-end specs: `e2e/phase1-foundation` … `e2e/phase10-grievances-deposits`.
 
 - **Courier booking & tracking** (`backend/app/services/courier.py`): order page → *Book courier & dispatch* books
   with Shiprocket (`SHIPROCKET_EMAIL`/`PASSWORD`, pickup location name as set up in Shiprocket) and dispatches with the
-  AWB; cron `/api/cron/tracking` (every 2 h) polls status and marks the order delivered when every courier shipment is
+  AWB; cron `/api/cron/tracking` (daily on the Vercel Hobby plan; set every 2 h on Pro) polls status and marks the order delivered when every courier shipment is
   delivered, with the courier confirmation as proof. Without credentials a simulated courier runs the same flow.
   Manual dispatch still works. Parcel weight is estimated at 0.5 kg per unit until SKU weights are captured.
   The Shiprocket calls follow its public API but have not been exercised against a live account yet.
@@ -116,6 +116,12 @@ End-to-end specs: `e2e/phase1-foundation` … `e2e/phase10-grievances-deposits`.
   the partner and supplier portals. Native store apps are not built.
 - **Redis**: still not used — Postgres outbox + cron handle current volume; add a queue only when cron latency or
   load requires it.
+
+## Scheduled jobs
+
+The Vercel project is on the Hobby plan, which allows each cron at most once a day, so `vercel.json` runs all four
+daily. Notifications are sent immediately when created; the cron only retries failures. On Pro, use
+`*/15 * * * *` for `/api/cron/notifications` and `0 */2 * * *` for `/api/cron/tracking`.
 
 ## Decisions taken (2026-11-19, changeable)
 
