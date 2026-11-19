@@ -13,7 +13,7 @@ type Detail = {
   lines: { id: string; sku: string; name: string; quantity: number; creditedQuantity: number; unitPricePaise: number }[];
   payments: { id: string; providerOrderId: string; amountPaise: number; refundedPaise: number; status: string; createdAt: string }[];
   purchaseOrders: { id: string; number: string; status: string; totalCostPaise: number; supplier: string }[];
-  shipments: { id: string; courier: string; trackingNumber: string; city: string | null; dispatchedAt: string; deliveredAt: string | null; deliveryProofUrl: string | null }[];
+  shipments: { id: string; courier: string; trackingNumber: string; city: string | null; dispatchedAt: string; deliveredAt: string | null; deliveryProofUrl: string | null; provider: string | null; trackingStatus: string | null }[];
   files: { id: string; kind: string; filename: string; reviewStatus: string | null; reviewNote: string | null }[];
   creditNotes: { id: string; number: string; reason: string; totalPaise: number; gstPaise: number; refundPaise: number; status: string; refundStatus: string }[];
   recipients: { city: string; recipients: number; units: number }[];
@@ -78,7 +78,7 @@ export default function OrderDetail({ role }: { role: string }) {
               ...d.purchaseOrders.map((p) => <><span>{p.number} → {p.supplier} · cost {inr(p.totalCostPaise)}</span><Badge>{p.status}</Badge></>),
               ...d.shipments.map((s) => (
                 <>
-                  <span>{s.city ? `${s.city}: ` : ""}{s.courier} {s.trackingNumber}</span>
+                  <span>{s.city ? `${s.city}: ` : ""}{s.courier} {s.trackingNumber}{s.trackingStatus && !s.deliveredAt ? <> · <Badge>{s.trackingStatus}</Badge></> : null}</span>
                   <span className="text-xs text-muted">
                     {s.deliveredAt ? <>delivered {when(s.deliveredAt)}{s.deliveryProofUrl?.startsWith("file:") ? <> · <a className="underline" href={`/api/files/${s.deliveryProofUrl.slice(5)}`}>proof</a></> : s.deliveryProofUrl ? ` · ${s.deliveryProofUrl}` : ""}</> : `sent ${when(s.dispatchedAt)}`}
                   </span>
@@ -156,9 +156,11 @@ function StepsCard({ d }: { d: Detail }) {
         )}
         {s === "po_issued" && (
           <div className="space-y-2">
+            <button className={btn} disabled={step.pending} onClick={() => run({ step: "book_courier" }, "Courier booked — tracking will update automatically")}>Book courier & dispatch</button>
+            <p className="text-xs text-muted">Or record a manual dispatch:</p>
             <input aria-label="Courier" placeholder="Courier" className={input} value={courier} onChange={(e) => setCourier(e.target.value)} />
             <input aria-label="Tracking number" placeholder="Tracking number" className={input} value={tracking} onChange={(e) => setTracking(e.target.value)} />
-            <button className={btn} disabled={step.pending} onClick={() => run({ step: "dispatch", courier, tracking }, "Dispatched")}>Mark dispatched</button>
+            <button className={btnGhost} disabled={step.pending} onClick={() => run({ step: "dispatch", courier, tracking }, "Dispatched")}>Mark dispatched</button>
           </div>
         )}
         {s === "dispatched" && (

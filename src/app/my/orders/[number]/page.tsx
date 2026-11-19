@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getOrNull } from "@/lib/api";
-import { Badge, btnCls, btnGhostCls, Card, Flash, Row } from "@/components/portal/ui";
+import { Badge, btnCls, btnGhostCls, Card, Flash, inputCls, Row } from "@/components/portal/ui";
 import { requireUser } from "@/lib/auth/dal";
 import { formatINR } from "@/lib/commerce/pricing";
-import { payAction, uploadArtworkAction } from "../../actions";
+import { payAction, raiseGrievanceAction, uploadArtworkAction } from "../../actions";
 import { RazorpayCheckout } from "./RazorpayCheckout";
 import { loadSiteData } from "@/lib/siteData.server";
 
@@ -30,6 +30,8 @@ export default async function CustomerOrderPage({
     lines: { id: string; name: string; quantity: number; creditedQuantity: number; unitPricePaise: number }[];
     creditNotes: { id?: string; number: string; reason: string; totalPaise: number; refundPaise: number; refundStatus: string; createdAt: Date }[];
     files: { id: string; kind: string; filename: string; reviewStatus: string | null; reviewNote: string | null; createdAt: Date }[];
+    grievances: { number: string; category: string; description: string; status: string; resolution: string | null; dueAt: string }[];
+    grievanceCategories: string[];
   }>(`/my/orders/${encodeURIComponent(number)}`);
   if (!d) notFound();
   const o = d.order;
@@ -141,6 +143,30 @@ export default async function CustomerOrderPage({
               <button className={btnGhostCls}>Upload artwork</button>
             </form>
           )}
+        </Card>
+      )}
+      {o.status !== "cancelled" && (
+        <Card title="Report a problem">
+          {d.grievances.length > 0 && (
+            <ul className="mb-4 space-y-2 text-sm" data-testid="customer-grievances">
+              {d.grievances.map((g) => (
+                <li key={g.number}>
+                  {g.number} · {g.category.replaceAll("_", " ")} <Badge tone={["resolved", "closed"].includes(g.status) ? "good" : "warn"}>{g.status.replaceAll("_", " ")}</Badge>
+                  <span className="block text-xs text-[var(--color-text-muted)]">
+                    {g.resolution ? `Resolution: ${g.resolution}` : `We aim to resolve this by ${new Date(g.dueAt).toLocaleDateString("en-IN")}.`}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+          <form action={raiseGrievanceAction.bind(null, o.number)} className="space-y-3">
+            <select name="category" aria-label="Problem type" className={inputCls} defaultValue="">
+              <option value="" disabled>What went wrong?</option>
+              {d.grievanceCategories.map((c) => <option key={c} value={c}>{c.replaceAll("_", " ")}</option>)}
+            </select>
+            <textarea name="description" aria-label="Describe the problem" rows={3} placeholder="Tell us what happened (items, quantities, photos sent on WhatsApp…)" className={inputCls} />
+            <button className={btnGhostCls}>Submit complaint</button>
+          </form>
         </Card>
       )}
     </main>

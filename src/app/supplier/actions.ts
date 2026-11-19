@@ -14,3 +14,8 @@ export async function stockAction(rateId: string, form: FormData) {
   const stock = Number(form.get("stock"));
   await runAndRedirect("/supplier", () => api.post(`/supplier/rates/${rateId}/stock`, { stock: Number.isInteger(stock) ? stock : -1 }), "Stock updated");
 }
+
+export async function grievanceResponseAction(number: string, form: FormData) {
+  await requireRole(["supplier"]);
+  await runAndRedirect("/supplier", () => api.post(`/supplier/grievances/${number}/respond`, { note: String(form.get("note") ?? "") }), "Response sent to HSP");
+}

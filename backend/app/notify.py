@@ -56,6 +56,10 @@ def render(template: str, p: dict) -> tuple[str, str]:
         case "credit_note.issued":
             refund = f" A refund of {_inr(p.get('refundPaise'))} is on its way to your original payment method." if float(p.get("refundPaise") or 0) > 0 else ""
             return f"Credit note {p.get('creditNote')} for {p.get('order')}", f"Credit note {p.get('creditNote')} of {_inr(p.get('totalPaise'))} has been issued on order {p.get('order')}.{refund}"
+        case "grievance.received":
+            return f"Complaint {p.get('grievance')} received", f"We have logged complaint {p.get('grievance')} on order {p.get('order')} and will resolve it within 3 working days: {site}/my/orders/{p.get('order')}"
+        case "grievance.resolved":
+            return f"Complaint {p.get('grievance')} resolved", f"Complaint {p.get('grievance')} on order {p.get('order')} has been resolved. Details: {site}/my/orders/{p.get('order')}"
         case "payout.processed":
             return "Your HSP commission payout", f"Commission of {_inr(p.get('netPaise'))} (after TDS {_inr(p.get('tdsPaise'))}) has been paid. Reference {p.get('reference')}."
         case _:

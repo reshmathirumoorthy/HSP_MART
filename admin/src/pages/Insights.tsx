@@ -10,6 +10,12 @@ type D = {
   inactive: { code: string; type: string; city: string | null }[];
   margin: { pending: number; approved: number };
   deposits: number;
+  advances: { orders: number; advancesPaise: number };
+  grievances: { open: number; overdue: number; onTime: number; resolved: number };
+  forecast: { division: string; history: { month: string; units: number }[]; forecast: { month: string; units: number; season: string | null }[] }[];
+  franchises: { code: string; city: string | null; status: string; leads: number; quotes: number; orders: number; revenuePaise: number;
+    contributionPaise: number; avgOrderPaise: number; complaints: number; securityDepositPaise: number }[];
+  suppliers: { name: string; city: string | null; status: string; purchaseOrders: number; delivered: number; avgDaysToDeliver: number | null; complaints: number }[];
   alerts: { kind: string; severity: string; message: string }[];
   outbox: { id: string; channel: string; recipient: string; template: string; status: string; reason: string | null; createdAt: string }[];
 };
@@ -30,7 +36,12 @@ export default function Insights({ role }: { role: string }) {
         <Stat label="Quotes awaiting margin approval" value={String(d.margin.pending)} />
         <Stat label="Inactive partners (30d)" value={String(d.inactive.length)} />
         <Stat label="Deposits held (liability)" value={inr(d.deposits)} />
+        <Stat label={`Customer advances held (${d.advances.orders} undelivered orders)`} value={inr(d.advances.advancesPaise)} testId="advances" />
+        <Stat label="Open complaints" value={String(d.grievances.open)} />
+        <Stat label="Complaints past 3-day SLA" value={String(d.grievances.overdue)} />
+        <Stat label="Resolved on time" value={d.grievances.resolved ? `${Math.round((d.grievances.onTime / d.grievances.resolved) * 100)}%` : "—"} />
       </div>
+      <p className="text-xs text-muted">Customer advances are money received on orders not yet delivered. They are a liability (unearned revenue) until delivery, not sales.</p>
       <div className="grid gap-6 md:grid-cols-2">
         <Card title="Channel economics">
           <table className="w-full text-sm">
@@ -85,6 +96,55 @@ export default function Insights({ role }: { role: string }) {
             {!d.overdue.length && <li className="text-muted">Nothing overdue.</li>}
           </ul>
         </Card>
+        <Card title="Demand forecast (units, next 3 months)" testId="forecast">
+          <p className="mb-2 text-xs text-muted">Trailing 3-month average; festive months use last year's volume if higher. Indicative until a full year of orders exists.</p>
+          <table className="w-full text-sm">
+            <thead className="text-xs uppercase text-muted"><tr><th className="text-left">Division</th><th className="text-right">Last 12m</th>{d.forecast[0]?.forecast.map((f) => <th key={f.month} className="text-right">{f.month}{f.season ? ` · ${f.season}` : ""}</th>)}</tr></thead>
+            <tbody>
+              {d.forecast.map((r) => (
+                <tr key={r.division} className="border-t border-line">
+                  <td className="py-1.5">{r.division.replaceAll("_", " ")}</td>
+                  <td className="text-right tabular-nums">{r.history.reduce((t, h) => t + h.units, 0)}</td>
+                  {r.forecast.map((f) => <td key={f.month} className="text-right tabular-nums">{f.units}</td>)}
+                </tr>
+              ))}
+              {!d.forecast.length && <tr><td className="py-2 text-muted" colSpan={5}>No orders in the last 12 months.</td></tr>}
+            </tbody>
+          </table>
+        </Card>
+        <Card title="Supplier scorecard">
+          <table className="w-full text-sm">
+            <thead className="text-xs uppercase text-muted"><tr><th className="text-left">Supplier</th><th className="text-right">POs</th><th className="text-right">Delivered</th><th className="text-right">Avg days</th><th className="text-right">Complaints</th></tr></thead>
+            <tbody>
+              {d.suppliers.map((s) => (
+                <tr key={s.name} className="border-t border-line">
+                  <td className="py-1.5">{s.name} <Badge>{s.status}</Badge></td><td className="text-right">{s.purchaseOrders}</td>
+                  <td className="text-right">{s.delivered}</td><td className="text-right">{s.avgDaysToDeliver ?? "—"}</td><td className="text-right">{s.complaints}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+        <div className="md:col-span-2">
+          <Card title="Franchise analytics" testId="franchise-analytics">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="text-xs uppercase text-muted"><tr><th className="text-left">Franchise</th><th className="text-right">Leads</th><th className="text-right">Quotes</th><th className="text-right">Orders</th><th className="text-right">Revenue</th><th className="text-right">Contribution</th><th className="text-right">Avg order</th><th className="text-right">Complaints</th><th className="text-right">Deposit</th></tr></thead>
+                <tbody>
+                  {d.franchises.map((f) => (
+                    <tr key={f.code} className="border-t border-line">
+                      <td className="py-1.5">{f.code} · {f.city} <Badge>{f.status}</Badge></td><td className="text-right">{f.leads}</td><td className="text-right">{f.quotes}</td>
+                      <td className="text-right">{f.orders}</td><td className="text-right tabular-nums">{inr(f.revenuePaise)}</td>
+                      <td className="text-right tabular-nums">{inr(f.contributionPaise)}</td><td className="text-right tabular-nums">{inr(f.avgOrderPaise)}</td>
+                      <td className="text-right">{f.complaints}</td><td className="text-right tabular-nums">{inr(f.securityDepositPaise)}</td>
+                    </tr>
+                  ))}
+                  {!d.franchises.length && <tr><td className="py-2 text-muted" colSpan={9}>No franchises yet.</td></tr>}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        </div>
         <Card title="Inactive partners (30 days)">
           <ul className="space-y-1 text-sm">
             {d.inactive.map((p) => <li key={p.code}>{p.code} · {p.type} · {p.city}</li>)}
@@ -96,6 +156,6 @@ export default function Insights({ role }: { role: string }) {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
-  return <div className="rounded-lg border border-line bg-white p-3"><p className="text-xs text-muted">{label}</p><p className="text-xl font-semibold tabular-nums">{value}</p></div>;
+function Stat({ label, value, testId }: { label: string; value: string; testId?: string }) {
+  return <div data-testid={testId} className="rounded-lg border border-line bg-white p-3"><p className="text-xs text-muted">{label}</p><p className="text-xl font-semibold tabular-nums">{value}</p></div>;
 }

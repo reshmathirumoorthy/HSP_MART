@@ -18,6 +18,7 @@ import Assistant from "./pages/Assistant";
 import Insights from "./pages/Insights";
 import Programmes from "./pages/Programmes";
 import Enquiries from "./pages/Enquiries";
+import Grievances from "./pages/Grievances";
 import Products from "./pages/Products";
 import ProductEdit from "./pages/ProductEdit";
 import Content from "./pages/Content";
@@ -31,6 +32,7 @@ const NAV = [
   ["/", "Overview"],
   ["/orders", "Orders"],
   ["/enquiries", "Enquiries"],
+  ["/complaints", "Complaints"],
   ["/products", "Products"],
   ["/content", "Site content"],
   ["/quotes", "Quotes"],
@@ -74,6 +76,7 @@ function Shell() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:number" element={<OrderDetail role={me.data.role} />} />
           <Route path="/enquiries" element={<Enquiries role={me.data.role} />} />
+          <Route path="/complaints" element={<Grievances role={me.data.role} />} />
           <Route path="/products" element={<Products canEdit={["hsp_admin", "hsp_procurement"].includes(me.data.role)} />} />
           <Route path="/products/:id" element={<ProductEdit canEdit={["hsp_admin", "hsp_procurement"].includes(me.data.role)} />} />
           <Route path="/content" element={<Content canEdit={me.data.role === "hsp_admin"} />} />
@@ -81,7 +84,7 @@ function Shell() {
           <Route path="/quotes/:number" element={<QuoteDetail role={me.data.role} userId={me.data.id} />} />
           <Route path="/assistant" element={<Assistant />} />
           <Route path="/suppliers" element={<Suppliers />} />
-          <Route path="/partners" element={<Partners role={me.data.role} />} />
+          <Route path="/partners" element={<Partners role={me.data.role} userId={me.data.id} />} />
           <Route path="/payouts" element={<Payouts role={me.data.role} userId={me.data.id} />} />
           <Route path="/insights" element={<Insights role={me.data.role} />} />
           <Route path="/programmes" element={<Programmes role={me.data.role} />} />

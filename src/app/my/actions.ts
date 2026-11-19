@@ -35,3 +35,12 @@ export async function uploadArtworkAction(number: string, form: FormData) {
   if (file instanceof File) body.set("file", file, file.name);
   await runAndRedirect(`/my/orders/${number}`, () => api.post(`/my/orders/${number}/artwork`, body), "Artwork uploaded — HSP will review it");
 }
+
+export async function raiseGrievanceAction(number: string, form: FormData) {
+  await requireUser(`/my/orders/${number}`);
+  await runAndRedirect(
+    `/my/orders/${number}`,
+    () => api.post(`/my/orders/${number}/grievances`, { category: String(form.get("category") ?? ""), description: String(form.get("description") ?? "") }),
+    "Complaint logged — we will resolve it within 3 days",
+  );
+}

@@ -6,6 +6,7 @@ from sqlalchemy import Connection
 from ..db import all_, one
 from .llm import polish_text
 from .pricing import price_quote
+from .search import relevance
 
 OCCASION_DIVISIONS = [
     (re.compile(r"diwali|deepavali|holi|christmas|eid|rakhi|raksha|festiv|new year|pongal|onam", re.I), ["festive", "premium"]),
@@ -40,6 +41,7 @@ def discover_products(conn: Connection, *, query: str | None = None, occasion: s
         select r.product_id, min(r.lead_time_days)::int as days from supplier_rates r join suppliers s on s.id = r.supplier_id
         where s.status = 'approved' and r.product_id = any(:ids) group by r.product_id""", ids=[c["id"] for c in cands])}
     words = [w for w in re.split(r"\W+", (query or "").lower()) if len(w) > 2]
+    rel = relevance(conn, query or "", [c["id"] for c in cands])
     out = []
     for p in cands:
         lt = lead.get(p["id"])
@@ -48,7 +50,7 @@ def discover_products(conn: Connection, *, query: str | None = None, occasion: s
         name = p["name"].lower()
         hits = [w for w in words if w in name]
         budget_fit = p["price_paise"] / (budget_rupees * 100) if budget_rupees else 0.5
-        score = len(hits) * 3 + budget_fit * 2 + (1 if divisions and divisions[0] == p["division"] else 0) + (0.5 if lt is not None else 0)
+        score = len(hits) * 3 + rel.get(p["id"], 0) * 4 + budget_fit * 2 + (1 if divisions and divisions[0] == p["division"] else 0) + (0.5 if lt is not None else 0)
         budget_label = f"{budget_rupees:g}" if budget_rupees else ""
         reasons = [r for r in [f"{p['division']} gifting" if divisions else None,
                                f"within ₹{budget_label} per unit" if budget_rupees else None,

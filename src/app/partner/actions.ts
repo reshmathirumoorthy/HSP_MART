@@ -56,3 +56,13 @@ export async function partnerSendQuoteAction(number: string) {
   await requireRole(PARTNER_ROLES);
   await runAndRedirect("/partner/quotes", () => api.post(`/partner/quotes/${number}/send`), `Quote ${number} sent`);
 }
+
+export async function partnerGrievanceAction(form: FormData) {
+  await requireRole(PARTNER_ROLES, "/partner/complaints");
+  const order = str(form, "order");
+  await runAndRedirect(
+    "/partner/complaints",
+    () => api.post(`/my/orders/${encodeURIComponent(order)}/grievances`, { category: str(form, "category"), description: str(form, "description") }),
+    "Complaint logged — HSP will resolve it within 3 days",
+  );
+}

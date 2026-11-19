@@ -67,6 +67,24 @@ def cron_programmes(request: Request):
     return {"raised": programmes.run_due_programmes()}
 
 
+@router.get("/cron/tracking")
+def cron_tracking(request: Request):
+    if not _cron_ok(request):
+        return JSONResponse({"error": "unauthorized"}, status_code=401)
+    from ..services.courier import poll_tracking
+    return poll_tracking()
+
+
+@router.get("/cron/embeddings")
+def cron_embeddings(request: Request):
+    if not _cron_ok(request):
+        return JSONResponse({"error": "unauthorized"}, status_code=401)
+    from ..db import engine
+    from ..services.search import refresh_embeddings
+    with engine().begin() as conn:
+        return {"embedded": refresh_embeddings(conn)}
+
+
 class LocaleIn(BaseModel):
     locale: str
 
