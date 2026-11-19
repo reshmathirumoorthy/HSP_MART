@@ -54,7 +54,7 @@ def site_data(conn: Connection) -> dict:
     """Everything the storefront renders, with a version that changes on any edit."""
     content = get_content(conn)
     names = {c["slug"]: c["name"] for c in (content.get("categories") or [])}
-    rows = all_(conn, "select * from products order by sort_order, name")
+    rows = [_public(r) for r in all_(conn, "select * from products order by sort_order, name")]
     marker = one(conn, """select greatest((select max(updated_at) from products), (select max(updated_at) from site_content))::text as v,
                                  (select count(*) from products)::text as n""")
     version = hashlib.sha1(f"{marker['v']}|{marker['n']}".encode()).hexdigest()[:16]
@@ -84,8 +84,14 @@ def list_products(conn: Connection, q: str = "", category: str = "", status: str
     return {"items": rows, "total": total}
 
 
+def _public(row):
+    """Product row without the search embedding (internal, large)."""
+    return {k: v for k, v in dict(row).items() if k != "embedding"} if row else row
+
+
 def get_product(conn: Connection, product_id: str):
-    return one(conn, "select * from products where id = :id", id=product_id) or fail("Product not found.")
+    row = one(conn, "select * from products where id = :id", id=product_id) or fail("Product not found.")
+    return _public(row)
 
 
 SLUG_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
@@ -220,12 +226,12 @@ def save_product(conn: Connection, actor, data: dict, product_id: str | None = N
             fields["budget_band"] = _budget_band(fields["price_paise"])
         sets = ", ".join(f"{k} = cast(:{k} as json)" if k == "content" else f"{k} = :{k}" for k in fields)
         params = {k: (json.dumps(v) if k == "content" else v) for k, v in fields.items()}
-        row = one(conn, f"update products set {sets}, updated_at = now() where id = :pid returning *", pid=product_id, **params)
+        row = one(conn, f"update products set {sets}, embedding = null, updated_at = now() where id = :pid returning *", pid=product_id, **params)
         changed = {k: v for k, v in fields.items() if k != "content" and before.get(k) != v}
         audit(conn, actor, "product.update", "product", product_id, {k: before.get(k) for k in changed},
               {**changed, **({"content": "updated"} if "content" in fields and before["content"] != fields["content"] else {})})
     request_storefront_refresh(conn)
-    return row
+    return _public(row)
 
 
 # ── Admin: site content ──

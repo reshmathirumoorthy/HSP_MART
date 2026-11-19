@@ -11,10 +11,14 @@ type D = {
   contracts: { id: string; status: string; endsAt: string; renewalCommissionBps: number; endedReason: string | null; customer: string; email: string; partner: string }[];
   customers: { id: string; name: string; email: string; isNationalKeyAccount: boolean }[];
   depositLiability: number;
+  settlements: S[];
 };
+type S = { id: string; number: string; status: string; depositPaise: number; deductions: { reason: string; amountPaise: number }[];
+  deductionPaise: number; refundPaise: number; reason: string; payoutReference: string | null; createdAt: string; requestedBy: string;
+  partnerCode: string; city: string | null };
 const KEY = [["partners"]];
 
-export default function Partners({ role }: { role: string }) {
+export default function Partners({ role, userId }: { role: string; userId: string }) {
   const q = useQuery({ queryKey: ["partners"], queryFn: () => api<D>("/admin/partners") });
   if (q.error) return <ErrorText error={q.error} />;
   if (!q.data) return <Loading />;
@@ -25,9 +29,10 @@ export default function Partners({ role }: { role: string }) {
       <PageTitle>Partner network</PageTitle>
       <p className="text-sm">Refundable franchise deposits held (liability): <strong data-testid="deposit-liability">{inr(d.depositLiability)}</strong></p>
       <div className="space-y-3">
-        {d.partners.map((p) => <PartnerRow key={p.id} p={p} role={role} />)}
+        {d.partners.map((p) => <PartnerRow key={p.id} p={p} role={role} pending={d.settlements.some((s) => s.partnerCode === p.code && s.status === "pending")} />)}
         {!d.partners.length && <p className="text-sm text-muted">No partner applications yet.</p>}
       </div>
+      <Settlements d={d} finance={finance} userId={userId} />
       <Contracts d={d} canEdit={finance} />
       <Card title="National key accounts">
         <ul className="divide-y divide-line text-sm">{d.customers.map((c) => <KeyAccountRow key={c.id} c={c} canEdit={role === "hsp_admin"} />)}</ul>
@@ -36,7 +41,8 @@ export default function Partners({ role }: { role: string }) {
   );
 }
 
-function PartnerRow({ p, role }: { p: P; role: string }) {
+function PartnerRow({ p, role, pending }: { p: P; role: string; pending: boolean }) {
+  const [settling, setSettling] = useState(false);
   const verify = useAction(`/admin/partners/${p.id}/verify`, KEY);
   const status = useAction(`/admin/partners/${p.id}/status`, KEY);
   const approve = useAction(`/admin/partners/${p.id}/approve-commissions`, KEY);
@@ -56,7 +62,10 @@ function PartnerRow({ p, role }: { p: P; role: string }) {
           {p.status === "active" && finance && <button className={btnGhost} onClick={() => approve.run({}, "Eligible commissions approved")}>Approve earned commission</button>}
           {p.status === "active" && role === "hsp_admin" && <button className={btnGhost} onClick={() => status.run({ status: "suspended" }, "Partner suspended")}>Suspend</button>}
           {p.status === "suspended" && role === "hsp_admin" && <button className={btnGhost} onClick={() => status.run({ status: "active" }, "Partner reinstated")}>Reinstate</button>}
-          {p.type === "franchise" && finance && (
+          {p.type === "franchise" && finance && p.status === "suspended" && p.securityDepositPaise > 0 && !pending && (
+            <button className={btnGhost} onClick={() => setSettling(!settling)}>Settle deposit</button>
+          )}
+          {p.type === "franchise" && finance && p.status !== "terminated" && (
             <form className="flex gap-2" onSubmit={(e: FormEvent) => { e.preventDefault(); deposit.run({ depositPaise: rupeesToPaise(amount) }, "Deposit recorded as liability"); }}>
               <input aria-label="Deposit received" placeholder={`Deposit ₹ (now ${inr(p.securityDepositPaise)})`} className={`${input} w-48`} value={amount} onChange={(e) => setAmount(e.target.value)} />
               <button className={btnGhost}>Record deposit</button>
@@ -65,6 +74,7 @@ function PartnerRow({ p, role }: { p: P; role: string }) {
         </div>
       </div>
       {verify.feedback}{status.feedback}{approve.feedback}{deposit.feedback}
+      {settling && <SettlementForm p={p} />}
     </section>
   );
 }
@@ -127,6 +137,65 @@ function KeyAccountRow({ c, canEdit }: { c: D["customers"][number]; canEdit: boo
         {canEdit && <button className={btnGhost} onClick={() => flag.run({ on: !c.isNationalKeyAccount }, c.isNationalKeyAccount ? "Key account flag removed" : "Marked as national key account")}>{c.isNationalKeyAccount ? "Unflag" : "Flag key account"}</button>}
       </div>
       {flag.feedback}
+    </li>
+  );
+}
+
+function SettlementForm({ p }: { p: P }) {
+  const req = useAction(`/admin/partners/${p.id}/deposit-settlement`, KEY);
+  const [reason, setReason] = useState("");
+  const [rows, setRows] = useState<{ reason: string; amount: string }[]>([]);
+  const deducted = rows.reduce((t, r) => t + (rupeesToPaise(r.amount) || 0), 0);
+  return (
+    <form data-testid="settlement-form" className="mt-3 space-y-2 rounded-md bg-stone-50 p-3 text-sm" onSubmit={(e: FormEvent) => {
+      e.preventDefault();
+      req.run({ reason, deductions: rows.map((r) => ({ reason: r.reason, amountPaise: rupeesToPaise(r.amount) })) }, "Settlement raised — a second finance user must approve it");
+    }}>
+      <p>Deposit held {inr(p.securityDepositPaise)} · deductions {inr(deducted)} · refund <strong>{inr(p.securityDepositPaise - deducted)}</strong></p>
+      <Field label="Reason for settlement"><input className={input} value={reason} onChange={(e) => setReason(e.target.value)} /></Field>
+      {rows.map((r, i) => (
+        <div key={i} className="flex gap-2">
+          <input aria-label="Deduction reason" placeholder="Documented deduction (e.g. unreturned demo kits)" className={input} value={r.reason}
+            onChange={(e) => setRows(rows.map((x, j) => j === i ? { ...x, reason: e.target.value } : x))} />
+          <input aria-label="Deduction amount" placeholder="₹" className={`${input} w-32`} value={r.amount}
+            onChange={(e) => setRows(rows.map((x, j) => j === i ? { ...x, amount: e.target.value } : x))} />
+          <button type="button" className={btnGhost} onClick={() => setRows(rows.filter((_, j) => j !== i))}>Remove</button>
+        </div>
+      ))}
+      <div className="flex gap-2">
+        <button type="button" className={btnGhost} onClick={() => setRows([...rows, { reason: "", amount: "" }])}>Add deduction</button>
+        <button className={btn}>Raise settlement</button>
+      </div>
+      {req.feedback}
+    </form>
+  );
+}
+
+function Settlements({ d, finance, userId }: { d: D; finance: boolean; userId: string }) {
+  if (!d.settlements.length) return null;
+  return (
+    <Card title="Deposit settlements" testId="settlements">
+      <p className="mb-3 text-xs text-muted">Deposits are refunded only after documented deductions, approved by a different finance user. Approval releases the liability and terminates the franchise.</p>
+      <ul className="divide-y divide-line text-sm">{d.settlements.map((s) => <SettlementRow key={s.id} s={s} canDecide={finance && s.requestedBy !== userId} />)}</ul>
+    </Card>
+  );
+}
+
+function SettlementRow({ s, canDecide }: { s: S; canDecide: boolean }) {
+  const decide = useAction(`/admin/deposit-settlements/${s.id}/decide`, KEY);
+  const [ref, setRef] = useState("");
+  return (
+    <li className="py-2">
+      <p>{s.number} · {s.partnerCode} · deposit {inr(s.depositPaise)} − {inr(s.deductionPaise)} = refund <strong>{inr(s.refundPaise)}</strong> <Badge>{s.status}</Badge></p>
+      <p className="text-xs text-muted">{s.reason}{s.deductions.map((x) => ` · ${x.reason} ${inr(x.amountPaise)}`).join("")}{s.payoutReference ? ` · ref ${s.payoutReference}` : ""}</p>
+      {s.status === "pending" && canDecide && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          <input aria-label="Transfer reference" placeholder="Bank transfer reference (UTR)" className={`${input} w-56`} value={ref} onChange={(e) => setRef(e.target.value)} />
+          <button className={btn} onClick={() => decide.run({ approve: true, payoutReference: ref }, "Settlement approved — deposit released")}>Approve & release</button>
+          <button className={btnGhost} onClick={() => decide.run({ approve: false }, "Settlement rejected")}>Reject</button>
+        </div>
+      )}
+      {decide.feedback}
     </li>
   );
 }

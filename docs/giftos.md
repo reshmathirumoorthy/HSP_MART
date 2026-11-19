@@ -36,7 +36,7 @@ npm run test:api                                # pytest against hsp_giftos_test
 npm run test:e2e                                # Playwright: starts API, admin app and Next.js; resets hsp_giftos_test
 ```
 
-End-to-end specs: `e2e/phase1-foundation` … `e2e/phase9-content`. API tests: `backend/tests/`.
+End-to-end specs: `e2e/phase1-foundation` … `e2e/phase10-grievances-deposits`. API tests: `backend/tests/`.
 
 ## Deploying
 
@@ -51,7 +51,7 @@ End-to-end specs: `e2e/phase1-foundation` … `e2e/phase9-content`. API tests: `
 ## Business rules enforced in code
 
 - **Money** is integer paise. GST on goods and freight; commission base excludes GST and freight.
-- **Pricing engine** (`src/lib/commerce/pricing.ts`) is deterministic. Contribution below 12% → quote needs an
+- **Pricing engine** (`backend/app/services/pricing.py`) is deterministic. Contribution below 12% → quote needs an
   exception approved by a *different* admin/finance user with a written reason.
 - **Attribution**: one partner per order. Leads are protected for 90 days by email/domain; national key accounts
   cannot be registered. A direct HSP quote to a protected customer is still attributed to the partner.
@@ -62,26 +62,79 @@ End-to-end specs: `e2e/phase1-foundation` … `e2e/phase9-content`. API tests: `
 - **Payouts**: maker-checker, TDS at `COMMISSION_TDS_BPS` (confirm under Income-tax Act 2025 s.393), idempotency key,
   each paid row linked to its payout.
 - **Deposits** are recorded as a liability, never revenue. No earnings for recruiting.
-- **AI engines** (`src/lib/ai/engines.ts`) are read-only: suggest and draft, never change prices, commissions,
+- **AI engines** (`backend/app/services/ai.py`) are read-only: suggest and draft, never change prices, commissions,
   suppliers, refunds or payouts; only active products and approved suppliers.
 - **Notifications** go through an outbox; marketing is blocked without consent; OTP codes are redacted.
 - **Audit**: every state change writes `audit_events`.
 
 ## Added in phase 7
 
-- **Storefront checkout** (`src/lib/commerce/online.ts`): cart → real order, re-priced from the DB (prices excl. GST,
+- **Storefront checkout** (`backend/app/services/online.py`): cart → real order, re-priced from the DB (prices excl. GST,
   ₹99 delivery below ₹999, GST on top), sign-in required, paid in full via Razorpay, idempotent per checkout attempt.
-- **Credit notes & partial refunds** (`src/lib/commerce/creditNotes.ts`): returned quantities or value adjustments,
+- **Credit notes & partial refunds** (`backend/app/services/credit_notes.py`): returned quantities or value adjustments,
   maker-checker, refund through Razorpay linked by `notes.credit_note`; amount due = total − credited; commission base
   shrinks by credited taxable value (clawback flagged in audit if already paid).
 - **Renewal commission** (`account_contracts`): after a converted lead, admin/finance records a contract (term,
   renewal % ≤ 10%); attribution order is protected lead → active contract → direct. Ending a contract needs a reason.
-- **Files** (`src/lib/storage.ts`, `/api/files/[id]`): artwork and delivery proofs in private Vercel Blob (local
+- **Files** (`backend/app/services/storage.py` and `files.py`, `/api/files/{id}`): artwork and delivery proofs in private Vercel Blob (local
   `.uploads/` in dev), content-sniffed, authorised download. Branded orders need approved artwork before production.
 - **Accounting**: Tally Prime XML vouchers (`/api/admin/exports/tally`) + credit-notes CSV.
 - **Notifications**: Resend (email), WhatsApp Cloud API, MSG91 (SMS) adapters; retry cron `/api/cron/notifications`.
-- **AI wording** (`src/lib/ai/llm.ts`): optional Claude rewording of coach messages; numbers must survive or the
+- **AI wording** (`backend/app/services/llm.py`): optional Claude rewording of coach messages; numbers must survive or the
   deterministic draft is kept.
+
+## Added in phase 10
+
+- **Customer complaints** (`backend/app/services/grievances.py`): customers raise them on `/my/orders/[n]`, the
+  selling partner on `/partner/complaints` (own attributed orders only). Staff route supply defects to a supplier that
+  has a PO on the order (admin app → Complaints); the supplier answers on `/supplier` without seeing customer details;
+  staff record the resolution, optionally linked to a credit note, then close. Target: 3 days (`due_at`), overdue
+  count shown in Insights. Customer is emailed/WhatsApped on receipt and resolution.
+- **Franchise deposit settlement** (`backend/app/services/deposits.py`): only for a suspended franchise; finance
+  raises a settlement with documented deductions (≤ deposit); a *different* finance user approves with the bank
+  transfer reference. Approval zeroes the deposit liability and terminates the franchise. No new deposit can be
+  recorded while a settlement is pending.
+- **Customer advances**: Insights shows money received on undelivered orders as a liability (unearned revenue).
+- **P2 analytics** (Insights): demand forecast by division for the next 3 months (trailing 3-month average, last
+  year's volume as a floor in festive months; replace with a fitted model once a year of orders exists), franchise
+  analytics (leads, quotes, orders, revenue, contribution, complaints, deposit) and a supplier scorecard
+  (POs, delivered, average days to deliver, complaints).
+
+## Added in phase 11 (previously deferred)
+
+- **Courier booking & tracking** (`backend/app/services/courier.py`): order page → *Book courier & dispatch* books
+  with Shiprocket (`SHIPROCKET_EMAIL`/`PASSWORD`, pickup location name as set up in Shiprocket) and dispatches with the
+  AWB; cron `/api/cron/tracking` (daily on the Vercel Hobby plan; set every 2 h on Pro) polls status and marks the order delivered when every courier shipment is
+  delivered, with the courier confirmation as proof. Without credentials a simulated courier runs the same flow.
+  Manual dispatch still works. Parcel weight is estimated at 0.5 kg per unit until SKU weights are captured.
+  The Shiprocket calls follow its public API but have not been exercised against a live account yet.
+- **Product search for the AI engines** (`backend/app/services/search.py`): Postgres full-text + trigram (typo
+  tolerant) always; with `VOYAGE_API_KEY`, pgvector embeddings are blended in (cron `/api/cron/embeddings` nightly,
+  or admin `POST /api/admin/search/reindex`). Editing a product clears its embedding so it is re-embedded.
+- **Refunds in Tally**: each processed refund exports a Payment voucher (customer → `Razorpay Clearing`).
+- **Installable app**: `src/app/manifest.ts` + icons; phones can add HSP Mart to the home screen, with shortcuts to
+  the partner and supplier portals. Native store apps are not built.
+- **Redis**: still not used — Postgres outbox + cron handle current volume; add a queue only when cron latency or
+  load requires it.
+
+## Scheduled jobs
+
+The Vercel project is on the Hobby plan, which allows each cron at most once a day, so `vercel.json` runs all four
+daily. Notifications are sent immediately when created; the cron only retries failures. On Pro, use
+`*/15 * * * *` for `/api/cron/notifications` and `0 */2 * * *` for `/api/cron/tracking`.
+
+## Decisions taken (2026-11-19, changeable)
+
+| Decision | Setting | Where |
+| --- | --- | --- |
+| Advances are a liability until dispatch | Tally: Sales voucher dated at first dispatch; receipts before it credit `Customer Advances`, then a Journal moves them to the customer | `services/tally.py`, `TALLY_ADVANCE_LEDGER`, `TALLY_BANK_LEDGER` |
+| TDS on commission | 2% (old s.194H rate) pending CA confirmation under Income-tax Act 2025 s.393 | `COMMISSION_TDS_BPS=200` |
+| Delivery charge | ₹99 + GST below ₹999 | `services/online.py` |
+| Renewal commission | Default 5%, maximum 10% | admin contracts form / API default |
+| Online orders need sign-in | Yes (protects attribution and order history) | storefront checkout |
+| Return window before commission approval | 7 days | `RETURN_WINDOW_DAYS` |
+| GST classification | HSN assigned only where unambiguous (45 products); no rate changed. Every product listed with proposed HSN/rate and confidence in `docs/compliance/gst-review.csv` for the CA. Re-run: `cd backend && uv run python -I ../scripts/db/gst-review.py $DATABASE_URL` | admin app → Products to apply CA decisions |
+| Legal documents | Drafts in `docs/legal/` (associate, franchise, deposit policy, supplier, customer terms, privacy/consent) with questions for the advocate | `docs/legal/README.md` |
 
 ## Before go-live (not done in code)
 
@@ -92,5 +145,9 @@ End-to-end specs: `e2e/phase1-foundation` … `e2e/phase9-content`. API tests: `
 - Real landed costs per SKU / supplier rates (engine estimates 70% cost until then); confirm GST rates per HSN.
 - Business decisions to confirm: delivery fee/threshold, default renewal %, whether online orders need sign-in.
 - Legal review: partner agreement, franchise/direct-selling rules, FSSAI for food hampers, DPDP consent.
-- Not built (deliberately deferred): Redis/background workers (Postgres outbox + cron cover current volume), vector
-  search, courier booking APIs, mobile apps.
+- Accountant to confirm the advances treatment, create the `Customer Advances` and `Razorpay Clearing` ledgers in Tally,
+  and decide how outgoing refunds are posted (refunds currently appear only via Credit Note vouchers).
+- CA to complete `docs/compliance/gst-review.csv`; advocate to review `docs/legal/`.
+- Shiprocket account + pickup address; `VOYAGE_API_KEY` for semantic search; a higher-resolution logo for app icons.
+- Not built (deliberately): Redis/background workers (Postgres outbox + cron cover current volume) and native
+  app-store apps (the installable web app covers phones).

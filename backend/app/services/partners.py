@@ -89,6 +89,10 @@ def record_deposit(conn: Connection, actor, partner_id: str, amount_paise: int):
     p = _partner(conn, partner_id) or fail("Partner not found.")
     if p["type"] != "franchise":
         fail("Deposits apply to city franchises only.")
+    if p["status"] == "terminated":
+        fail("This franchise has been terminated and its deposit settled.")
+    if one(conn, "select 1 as x from deposit_settlements where partner_id = :id and status = 'pending'", id=p["id"]):
+        fail("A deposit settlement is awaiting approval.")
     run(conn, "update partners set security_deposit_paise = :a where id = :id", a=amount_paise, id=p["id"])
     audit(conn, actor, "partner.deposit_recorded", "partner", partner_id, {"depositPaise": p["security_deposit_paise"]},
           {"depositPaise": amount_paise, "accounting": "liability"})

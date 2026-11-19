@@ -4,7 +4,7 @@ import { PortalShell } from "@/components/portal/PortalShell";
 import { Badge, btnGhostCls, Card, Flash, inputCls } from "@/components/portal/ui";
 import { requireRole } from "@/lib/auth/dal";
 import { formatINR } from "@/lib/commerce/pricing";
-import { acknowledgeAction, stockAction } from "./actions";
+import { acknowledgeAction, grievanceResponseAction, stockAction } from "./actions";
 import { loadSiteData } from "@/lib/siteData.server";
 
 export const metadata: Metadata = { title: "Supplier portal", robots: { index: false } };
@@ -17,6 +17,7 @@ export default async function SupplierHome({ searchParams }: { searchParams: Pro
     supplier: { id: string; name: string; status: string; city: string | null } | null;
     purchaseOrders: { id: string; number: string; status: string; totalCostPaise: number; createdAt: Date; orderNumber: string }[];
     rates: { id: string; sku: string; name: string; costPaise: number; leadTimeDays: number; stockQuantity: number | null }[];
+    grievances: { number: string; category: string; description: string; status: string; supplierNote: string | null; dueAt: string; poNumber: string }[];
   }>("/supplier/dashboard");
   const supplier = data.supplier;
   if (!supplier) {
@@ -75,6 +76,28 @@ export default async function SupplierHome({ searchParams }: { searchParams: Pro
             ))}
           </ul>
         </Card>
+        <div className="md:col-span-2">
+          <Card title="Quality complaints">
+            <ul data-testid="supplier-grievances" className="divide-y divide-[var(--color-border)] text-sm">
+              {data.grievances.map((g) => (
+                <li key={g.number} className="py-2">
+                  <p>
+                    {g.number} · {g.poNumber} · {g.category.replaceAll("_", " ")} <Badge tone={g.status === "with_supplier" ? "warn" : "neutral"}>{g.status.replaceAll("_", " ")}</Badge>
+                  </p>
+                  <p className="text-[var(--color-text-muted)]">{g.description}</p>
+                  {g.supplierNote && <p className="text-xs">Your response: {g.supplierNote}</p>}
+                  {g.status === "with_supplier" && (
+                    <form action={grievanceResponseAction.bind(null, g.number)} className="mt-2 flex gap-2">
+                      <input name="note" aria-label={`Response to ${g.number}`} placeholder="Corrective action taken" className={inputCls} />
+                      <button className={btnGhostCls}>Send response</button>
+                    </form>
+                  )}
+                </li>
+              ))}
+              {data.grievances.length === 0 && <li className="py-3 text-[var(--color-text-muted)]">No complaints. Keep it up.</li>}
+            </ul>
+          </Card>
+        </div>
       </div>
     </PortalShell>
   );

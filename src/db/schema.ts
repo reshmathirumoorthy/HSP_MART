@@ -15,6 +15,7 @@ import {
   timestamp,
   uniqueIndex,
   uuid,
+  vector,
 } from "drizzle-orm/pg-core";
 
 const id = () => uuid("id").primaryKey().defaultRandom();
@@ -265,6 +266,8 @@ export const products = pgTable("products", {
   costPaise: paise("cost_paise"),
   gstRateBps: integer("gst_rate_bps").notNull().default(1800),
   hsnCode: text("hsn_code"),
+  /** Semantic-search embedding (Voyage, 1024 dims). Null until the embedding job runs with VOYAGE_API_KEY. */
+  embedding: vector("embedding", { dimensions: 1024 }),
   customizable: boolean("customizable").notNull().default(false),
   bulkAvailable: boolean("bulk_available").notNull().default(false),
   minOrderQuantity: integer("min_order_quantity").notNull().default(1),
@@ -511,6 +514,11 @@ export const shipments = pgTable("shipments", {
   dispatchedAt: timestamp("dispatched_at", { withTimezone: true }),
   deliveredAt: timestamp("delivered_at", { withTimezone: true }),
   deliveryProofUrl: text("delivery_proof_url"),
+  /** Courier aggregator booking (e.g. Shiprocket) — null for manual dispatch. */
+  provider: text("provider"),
+  providerShipmentId: text("provider_shipment_id"),
+  trackingStatus: text("tracking_status"),
+  trackingCheckedAt: timestamp("tracking_checked_at", { withTimezone: true }),
   createdAt: createdAt(),
 });
 
@@ -741,4 +749,63 @@ export const enquiries = pgTable(
     createdAt: createdAt(),
   },
   (t) => [uniqueIndex("enquiries_number_uq").on(t.number), index("enquiries_email_idx").on(t.email)],
+);
+
+/* ── Franchise deposit settlement (Blueprint §2 "Rules for franchise protection") ── */
+
+/** Refund of a security deposit: documented deductions, maker-checker approval, liability released. */
+export const depositSettlements = pgTable(
+  "deposit_settlements",
+  {
+    id: id(),
+    number: text("number").notNull().unique(),
+    partnerId: uuid("partner_id")
+      .notNull()
+      .references(() => partners.id),
+    depositPaise: paise("deposit_paise").notNull(),
+    /** [{ reason, amountPaise }] — damages, unpaid dues, documented under the agreement. */
+    deductions: jsonb("deductions").notNull(),
+    deductionPaise: paise("deduction_paise").notNull(),
+    refundPaise: paise("refund_paise").notNull(),
+    reason: text("reason").notNull(),
+    status: text("status", { enum: ["pending", "approved", "rejected"] }).notNull().default("pending"),
+    payoutReference: text("payout_reference"),
+    requestedBy: uuid("requested_by")
+      .notNull()
+      .references(() => users.id),
+    decidedBy: uuid("decided_by").references(() => users.id),
+    decidedAt: timestamp("decided_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [index("deposit_settlements_partner_idx").on(t.partnerId)],
+);
+
+/* ── Customer grievances (Blueprint §1: HSP accountable, partner assists, supplier resolves defects) ── */
+
+export const grievances = pgTable(
+  "grievances",
+  {
+    id: id(),
+    number: text("number").notNull().unique(),
+    orderId: uuid("order_id")
+      .notNull()
+      .references(() => orders.id),
+    raisedBy: uuid("raised_by")
+      .notNull()
+      .references(() => users.id),
+    raisedByRole: text("raised_by_role").notNull(),
+    category: text("category", {
+      enum: ["damaged", "missing", "wrong_item", "quality", "delay", "billing", "other"],
+    }).notNull(),
+    description: text("description").notNull(),
+    status: text("status", { enum: ["open", "with_supplier", "resolved", "closed"] }).notNull().default("open"),
+    supplierId: uuid("supplier_id").references(() => suppliers.id),
+    supplierNote: text("supplier_note"),
+    resolution: text("resolution"),
+    creditNoteId: uuid("credit_note_id").references(() => creditNotes.id),
+    dueAt: timestamp("due_at", { withTimezone: true }).notNull(),
+    resolvedAt: timestamp("resolved_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [index("grievances_order_idx").on(t.orderId), index("grievances_status_idx").on(t.status)],
 );

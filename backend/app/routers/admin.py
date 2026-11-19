@@ -10,7 +10,7 @@ from ..db import all_, get_conn, one
 from ..errors import fail
 from ..serialize import camel
 from ..services import ai, campaigns, credit_notes, enquiries, exports, files, insights, orders as svc, partners, payouts
-from ..services import programmes, quotes, recipients, suppliers as sup, tally
+from ..services import courier as courier_svc, deposits, grievances, search, programmes, quotes, recipients, suppliers as sup, tally
 from ..services.common import amount_due, net_paid
 from ..services.ledger import latest_ledger
 from ..services.pricing import advance_due
@@ -67,7 +67,8 @@ def order_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Con
                                          status::text as status, created_at from payments where order_id = :id order by created_at desc""", id=oid),
         "purchaseOrders": all_(conn, """select po.id::text, po.number, po.status, po.total_cost_paise, s.name as supplier
                                         from purchase_orders po join suppliers s on s.id = po.supplier_id where po.order_id = :id""", id=oid),
-        "shipments": all_(conn, """select id::text, courier, tracking_number, city, dispatched_at, delivered_at, delivery_proof_url
+        "shipments": all_(conn, """select id::text, courier, tracking_number, city, dispatched_at, delivered_at, delivery_proof_url,
+                                          provider, tracking_status
                                    from shipments where order_id = :id order by tracking_number""", id=oid),
         "files": all_(conn, """select id::text, kind, filename, review_status, review_note, created_at from files
                                where entity = 'order' and entity_id = :id order by created_at desc""", id=str(oid)),
@@ -84,7 +85,7 @@ def order_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Con
 
 
 @router.post("/orders/{number}/steps")
-def order_step(number: str, step: Literal["production", "po", "dispatch", "deliver", "close", "cancel"] = Form(...),
+def order_step(number: str, step: Literal["production", "po", "dispatch", "book_courier", "deliver", "close", "cancel"] = Form(...),
                supplierId: str = Form(""), courier: str = Form(""), tracking: str = Form(""), proof: str = Form(""),
                proofFile: UploadFile | None = File(None), user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
     """Accepts form data (portal forms, with an optional POD scan) or the same fields as JSON-free form posts."""
@@ -96,6 +97,7 @@ def order_step(number: str, step: Literal["production", "po", "dispatch", "deliv
         "production": lambda: svc.approve_production(conn, user, number),
         "po": lambda: svc.issue_purchase_order(conn, user, number, supplierId),
         "dispatch": lambda: svc.dispatch_order(conn, user, number, courier, tracking),
+        "book_courier": lambda: courier_svc.book_and_dispatch(conn, user, number),
         "deliver": lambda: svc.mark_delivered(conn, user, number, proof),
         "close": lambda: svc.close_order(conn, user, number),
         "cancel": lambda: svc.cancel_order(conn, user, number),
@@ -281,7 +283,8 @@ def list_partners(_: CurrentUser = Depends(require_staff), conn: Connection = De
     customers = all_(conn, """select id::text, name, email, is_national_key_account from customers where kind = 'organisation'
                               order by created_at desc limit 50""")
     return camel({"partners": rows, "contracts": contracts, "customers": customers,
-                  "depositLiability": insights.deposit_liability(conn)})
+                  "depositLiability": insights.deposit_liability(conn),
+                  "settlements": deposits.list_settlements(conn)})
 
 
 @router.post("/partners/{partner_id}/verify")
@@ -310,6 +313,34 @@ def deposit(partner_id: str, body: Deposit, user: CurrentUser = Depends(FINANCE)
     return OK
 
 
+class DeductionIn(BaseModel):
+    reason: str
+    amountPaise: int
+
+
+class SettlementIn(BaseModel):
+    reason: str
+    deductions: list[DeductionIn] = []
+
+
+@router.post("/partners/{partner_id}/deposit-settlement")
+def request_settlement(partner_id: str, body: SettlementIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+    s = deposits.request_settlement(conn, user, partner_id, reason=body.reason, deductions=[d.model_dump() for d in body.deductions])
+    return {"number": s["number"]}
+
+
+class SettlementDecision(BaseModel):
+    approve: bool
+    payoutReference: str = ""
+
+
+@router.post("/deposit-settlements/{settlement_id}/decide")
+def decide_settlement(settlement_id: str, body: SettlementDecision, user: CurrentUser = Depends(FINANCE),
+                      conn: Connection = Depends(get_conn)):
+    deposits.decide_settlement(conn, user, settlement_id, approve=body.approve, payout_reference=body.payoutReference)
+    return OK
+
+
 @router.post("/partners/{partner_id}/approve-commissions")
 def approve_commissions(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
     return {"approved": partners.approve_commissions(conn, user, partner_id)}
@@ -329,7 +360,7 @@ class ContractIn(BaseModel):
     customerEmail: str
     partnerCode: str
     months: int = 12
-    renewalCommissionBps: int
+    renewalCommissionBps: int = 500  # default renewal rate: 5% (max 10%)
     reference: str = ""
 
 
@@ -380,6 +411,9 @@ def get_insights(_: CurrentUser = Depends(require_staff), conn: Connection = Dep
         "channels": insights.channel_economics(conn), "overdue": insights.overdue_orders(conn),
         "income": insights.associate_income_distribution(conn), "inactive": insights.inactive_partners(conn),
         "margin": insights.margin_exceptions(conn), "deposits": insights.deposit_liability(conn),
+        "advances": insights.customer_advances(conn), "grievances": grievances.summary(conn),
+        "forecast": insights.demand_forecast(conn), "franchises": insights.franchise_analytics(conn),
+        "suppliers": insights.supplier_scorecard(conn),
         "alerts": ai.management_alerts(conn),
         "outbox": all_(conn, """select id::text, channel, recipient, template, category, status, reason, created_at
                                 from notifications order by created_at desc limit 12"""),
@@ -515,3 +549,61 @@ def save_content(key: str, body: dict, user: CurrentUser = Depends(ADMIN), conn:
         fail("Send the new value.")
     catalogue.save_content(conn, user, key, body["value"])
     return OK
+
+
+# ── Customer grievances ──
+
+@router.get("/grievances")
+def list_grievances(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    rows = grievances.for_admin(conn, status or None)
+    for g in rows:
+        g["suppliers"] = all_(conn, """select distinct s.id::text, s.name from purchase_orders po join suppliers s on s.id = po.supplier_id
+                                       join orders o on o.id = po.order_id where o.number = :n""", n=g["order_number"])
+    return camel(rows)
+
+
+class GrievanceIn(BaseModel):
+    category: str
+    description: str
+
+
+@router.post("/orders/{number}/grievances")
+def staff_raise_grievance(number: str, body: GrievanceIn, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    return {"number": grievances.raise_grievance(conn, user, number, category=body.category, description=body.description)["number"]}
+
+
+class AssignIn(BaseModel):
+    supplierId: str
+
+
+@router.post("/grievances/{number}/assign")
+def assign_grievance(number: str, body: AssignIn, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
+    grievances.assign_supplier(conn, user, number, body.supplierId)
+    return OK
+
+
+class ResolveIn(BaseModel):
+    resolution: str
+    creditNote: str = ""
+
+
+@router.post("/grievances/{number}/resolve")
+def resolve_grievance(number: str, body: ResolveIn, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    grievances.resolve(conn, user, number, body.resolution, body.creditNote)
+    return OK
+
+
+@router.post("/grievances/{number}/close")
+def close_grievance(number: str, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    grievances.close(conn, user, number)
+    return OK
+
+
+@router.get("/search/status")
+def search_status(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    return search.status(conn)
+
+
+@router.post("/search/reindex")
+def search_reindex(_: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+    return {"embedded": search.refresh_embeddings(conn)}

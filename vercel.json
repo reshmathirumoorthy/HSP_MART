@@ -1,6 +1,8 @@
 {
   "crons": [
     { "path": "/api/cron/programmes", "schedule": "30 2 * * *" },
-    { "path": "/api/cron/notifications", "schedule": "*/15 * * * *" }
+    { "path": "/api/cron/notifications", "schedule": "0 4 * * *" },
+    { "path": "/api/cron/tracking", "schedule": "0 5 * * *" },
+    { "path": "/api/cron/embeddings", "schedule": "15 3 * * *" }
   ]
 }

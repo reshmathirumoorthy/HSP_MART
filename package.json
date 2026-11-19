@@ -16,7 +16,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx --tsconfig tsconfig.json --env-file=.env.local scripts/db/migrate.mts",
     "db:seed": "tsx --tsconfig tsconfig.json --env-file=.env.local scripts/db/seed.mts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:gst-review": "cd backend && uv run --env-file ../.env.local python -I ../scripts/db/gst-review.py"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",

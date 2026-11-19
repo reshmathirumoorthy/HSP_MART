@@ -7,7 +7,7 @@ from ..auth import PARTNER_ROLES, CurrentUser, require_roles, require_user
 from ..db import all_, get_conn, one
 from ..errors import fail
 from ..serialize import camel
-from ..services import ai, files, partners, payments, quotes, suppliers as sup
+from ..services import ai, files, grievances, partners, payments, quotes, suppliers as sup
 from ..services.common import amount_due, customer_owns, is_uuid, net_paid, partner_for_user, supplier_for_user
 from ..services.pricing import advance_due
 from ..services.razorpay import live as razorpay_live
@@ -62,7 +62,20 @@ def my_order(number: str, user: CurrentUser = Depends(require_user), conn: Conne
                                where entity = 'order' and entity_id = :id order by created_at desc""", id=str(o["id"])),
         "shipments": all_(conn, """select courier, tracking_number, city, dispatched_at, delivered_at from shipments
                                    where order_id = :id order by tracking_number""", id=o["id"]),
+        "grievances": [{k: g[k] for k in ("number", "category", "description", "status", "resolution", "due_at", "created_at")}
+                       for g in grievances.for_order(conn, o["id"])],
+        "grievanceCategories": list(grievances.CATEGORIES),
     })
+
+
+class GrievanceIn(BaseModel):
+    category: str
+    description: str
+
+
+@router.post("/my/orders/{number}/grievances")
+def raise_grievance(number: str, body: GrievanceIn, user: CurrentUser = Depends(require_user), conn: Connection = Depends(get_conn)):
+    return {"number": grievances.raise_grievance(conn, user, number, category=body.category, description=body.description)["number"]}
 
 
 class PayIn(BaseModel):
@@ -213,7 +226,25 @@ def supplier_dashboard(user: CurrentUser = Depends(SUPPLIER), conn: Connection =
                                         where po.supplier_id = :s order by po.created_at desc""", s=s["id"]),
         "rates": all_(conn, """select r.id::text, p.sku, p.name, r.cost_paise, r.lead_time_days, r.stock_quantity
                                from supplier_rates r join products p on p.id = r.product_id where r.supplier_id = :s order by p.sku""", s=s["id"]),
+        "grievances": grievances.for_supplier(conn, s["id"]),
     })
+
+
+class SupplierResponseIn(BaseModel):
+    note: str
+
+
+@router.post("/supplier/grievances/{number}/respond")
+def supplier_respond(number: str, body: SupplierResponseIn, user: CurrentUser = Depends(SUPPLIER), conn: Connection = Depends(get_conn)):
+    grievances.supplier_respond(conn, user, number, body.note)
+    return OK
+
+
+@router.get("/partner/grievances")
+def partner_grievances(user: CurrentUser = Depends(PARTNER), conn: Connection = Depends(get_conn)):
+    p = _my_partner(conn, user)
+    return camel([{k: g[k] for k in ("number", "order_number", "category", "description", "status", "resolution", "due_at", "overdue")}
+                  for g in grievances.for_partner(conn, p["id"])])
 
 
 @router.post("/supplier/purchase-orders/{po_id}/acknowledge")
