@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { connection } from "next/server";
 import { BACKEND_URL } from "@/lib/api";
 import { applySiteData, type SiteData } from "@/lib/siteData";
 
@@ -11,6 +12,9 @@ export const SITE_DATA_TAG = "site-data";
  * expires the tag; otherwise it refreshes every 5 minutes.
  */
 export const loadSiteData = cache(async (): Promise<SiteData> => {
+  // Render at request time, never at build: the API is not reachable from the build (e.g. on Vercel), and
+  // content must come from it. The fetch below is still cached for 5 minutes / until revalidated.
+  await connection();
   const res = await fetch(`${BACKEND_URL}/api/site-data`, { next: { tags: [SITE_DATA_TAG], revalidate: 300 } });
   if (!res.ok) throw new Error(`Backend /api/site-data failed: ${res.status} ${(await res.text()).slice(0, 200)}`);
   const data = (await res.json()) as SiteData;
