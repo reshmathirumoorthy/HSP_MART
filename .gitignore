@@ -90,3 +90,6 @@ playwright-report/
 __pycache__/
 /admin/dist/
 /admin/node_modules/
+
+# Docker deployment secrets
+deploy/.env.docker

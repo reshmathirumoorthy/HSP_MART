@@ -19,6 +19,8 @@ import Insights from "./pages/Insights";
 import Programmes from "./pages/Programmes";
 import Enquiries from "./pages/Enquiries";
 import Grievances from "./pages/Grievances";
+import Plan from "./pages/Plan";
+import Imports from "./pages/Imports";
 import Products from "./pages/Products";
 import ProductEdit from "./pages/ProductEdit";
 import Content from "./pages/Content";
@@ -41,6 +43,8 @@ const NAV = [
   ["/partners", "Partners"],
   ["/payouts", "Payouts"],
   ["/insights", "Insights"],
+  ["/plan", "Plan & readiness"],
+  ["/imports", "Data imports"],
   ["/programmes", "Programmes"],
 ] as const;
 
@@ -76,6 +80,8 @@ function Shell() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:number" element={<OrderDetail role={me.data.role} />} />
           <Route path="/enquiries" element={<Enquiries role={me.data.role} />} />
+          <Route path="/plan" element={<Plan role={me.data.role} />} />
+          <Route path="/imports" element={<Imports role={me.data.role} />} />
           <Route path="/complaints" element={<Grievances role={me.data.role} />} />
           <Route path="/products" element={<Products canEdit={["hsp_admin", "hsp_procurement"].includes(me.data.role)} />} />
           <Route path="/products/:id" element={<ProductEdit canEdit={["hsp_admin", "hsp_procurement"].includes(me.data.role)} />} />

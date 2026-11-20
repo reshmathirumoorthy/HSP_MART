@@ -13,6 +13,7 @@ import {
   pgTable,
   text,
   timestamp,
+  unique,
   uniqueIndex,
   uuid,
   vector,
@@ -808,4 +809,30 @@ export const grievances = pgTable(
     createdAt: createdAt(),
   },
   (t) => [index("grievances_order_idx").on(t.orderId), index("grievances_status_idx").on(t.status)],
+);
+
+/* ── Management settings (e.g. financial-plan assumptions); staff-only, never served to the storefront ── */
+
+export const appSettings = pgTable("app_settings", {
+  key: text("key").primaryKey(),
+  value: jsonb("value").notNull(),
+  updatedBy: uuid("updated_by").references(() => users.id),
+  updatedAt: updatedAt(),
+});
+
+/* ── HSP's sales history before the platform (Blueprint §11 dataset 2), imported from CSV ── */
+
+export const salesHistory = pgTable(
+  "sales_history",
+  {
+    id: id(),
+    month: text("month").notNull(),
+    channel: text("channel", { enum: ["associate", "franchise", "direct", "online", "other"] }).notNull(),
+    division: text("division"),
+    orders: integer("orders").notNull(),
+    revenuePaise: paise("revenue_paise").notNull(),
+    costPaise: paise("cost_paise"),
+    createdAt: createdAt(),
+  },
+  (t) => [unique("sales_history_uq").on(t.month, t.channel, t.division).nullsNotDistinct()],
 );

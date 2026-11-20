@@ -1,0 +1,13 @@
+node_modules
+.next
+admin
+backend
+e2e
+test-results
+playwright-report
+.env*
+!.env.example
+.uploads
+design-references
+*.tsbuildinfo
+.git

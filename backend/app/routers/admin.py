@@ -10,7 +10,7 @@ from ..db import all_, get_conn, one
 from ..errors import fail
 from ..serialize import camel
 from ..services import ai, campaigns, credit_notes, enquiries, exports, files, insights, orders as svc, partners, payouts
-from ..services import courier as courier_svc, deposits, grievances, search, programmes, quotes, recipients, suppliers as sup, tally
+from ..services import courier as courier_svc, deposits, grievances, imports, plan, readiness, search, programmes, quotes, recipients, suppliers as sup, tally
 from ..services.common import amount_due, net_paid
 from ..services.ledger import latest_ledger
 from ..services.pricing import advance_due
@@ -607,3 +607,49 @@ def search_status(_: CurrentUser = Depends(require_staff), conn: Connection = De
 @router.post("/search/reindex")
 def search_reindex(_: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
     return {"embedded": search.refresh_embeddings(conn)}
+
+
+# ── Financial plan, scale readiness and data imports ──
+
+@router.get("/plan")
+def get_plan(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    return camel(plan.get(conn))
+
+
+class PlanIn(BaseModel):
+    assumptions: dict
+
+
+@router.post("/plan")
+def save_plan(body: PlanIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+    return camel(plan.save(conn, user, body.assumptions))
+
+
+@router.post("/plan/reset")
+def reset_plan(user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+    return camel(plan.reset(conn, user))
+
+
+@router.get("/readiness")
+def get_readiness(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+    return readiness.summary(conn)
+
+
+@router.get("/imports")
+def list_imports(_: CurrentUser = Depends(require_staff)):
+    return [{"kind": k, "columns": v["columns"], "help": v["help"], "roles": list(v["roles"])} for k, v in imports.KINDS.items()]
+
+
+@router.get("/imports/{kind}/template")
+def import_template(kind: str, _: CurrentUser = Depends(require_staff)):
+    return Response(imports.template(kind), media_type="text/csv",
+                    headers={"Content-Disposition": f'attachment; filename="{kind}-template.csv"'})
+
+
+@router.post("/imports/{kind}")
+def run_import(kind: str, file: UploadFile = File(...), apply: bool = Form(False), user: CurrentUser = Depends(require_staff),
+               conn: Connection = Depends(get_conn)):
+    data = file.file.read(5 * 1024 * 1024 + 1)
+    if len(data) > 5 * 1024 * 1024:
+        fail("Files must be 5 MB or smaller.")
+    return imports.run_import(conn, user, kind, data, dry_run=not apply)
