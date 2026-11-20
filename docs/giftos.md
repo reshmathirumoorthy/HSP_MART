@@ -38,7 +38,26 @@ npm run test:e2e                                # Playwright: starts API, admin 
 
 End-to-end specs: `e2e/phase1-foundation` … `e2e/phase10-grievances-deposits`. API tests: `backend/tests/`.
 
-## Deploying
+## Deploying anywhere with Docker
+
+`docker-compose.yml` runs the whole platform on one host: Postgres 17 with pgvector, the API, the storefront, the
+admin console, an nginx gateway and the scheduled jobs.
+
+```bash
+cp deploy/.env.docker.example deploy/.env.docker   # fill SESSION_SECRET, CRON_SECRET, REVALIDATE_SECRET, provider keys
+docker compose up -d --build
+docker compose run --rm migrate                    # apply the schema (safe to re-run on every release)
+docker compose run --rm seed                       # first install only: catalogue, content, staff users
+```
+
+Store: `http://<host>` · Admin: `http://admin.<host>` (the gateway routes by hostname; `/api` goes to the API on both).
+For production, point DNS for both names at the host, put TLS in front (or add certificates to `deploy/nginx.conf`),
+keep `ENVIRONMENT=production` (secure cookies) and leave `AUTH_DEV_OTP` empty. Uploads persist in the `uploads`
+volume and the database in `dbdata`; back both up. The `cron` service calls the four jobs every
+`CRON_INTERVAL_SECONDS` (default hourly). Verified locally: images build, migrate + seed succeed, store, admin, sign-in,
+plan and all four cron jobs work through the gateway.
+
+## Deploying on Vercel (previous setup)
 
 - **API:** deploy `backend/` as its own service (for example a Vercel project with the FastAPI preset, or any container
   host). Give it the same `DATABASE_URL` and `SESSION_SECRET` as before, plus the provider keys in `.env.example`.
@@ -116,6 +135,21 @@ End-to-end specs: `e2e/phase1-foundation` … `e2e/phase10-grievances-deposits`.
   the partner and supplier portals. Native store apps are not built.
 - **Redis**: still not used — Postgres outbox + cron handle current volume; add a queue only when cron latency or
   load requires it.
+
+## Added in phase 12 (launch readiness)
+
+- **Financial plan** (admin → *Plan & readiness*, `backend/app/services/plan.py`): the blueprint's §4 model with every
+  driver editable by finance (audited). Defaults reproduce the PDF exactly (revenue 297.30 / 1,692 / 6,480 lakh, cash
+  −70.31 / 22.87 / 456.39, Year 1 break-even ₹4.82 Cr, associate commission ₹1,875 / 3,000 / 4,200 a month). Working
+  capital is an input per year because the PDF gives figures but not its method. Shown beside platform actuals for the
+  last 12 months and HSP's imported history.
+- **Scale readiness** (`readiness.py`): the seven §10 conditions measured live — reconciliation, commission integrity,
+  12% contribution share, supplier on-time, defect rate, associates with repeat customers, complaint SLA. Targets are
+  management defaults in `TARGETS`.
+- **Data imports** (admin → *Data imports*, `imports.py`): CSV templates and importers for dataset 1 (landed costs and
+  prices), 2 (12 months of sales → `sales_history`), 3 (suppliers, rates, lead times, stock; new suppliers start
+  *pending*), and the CA's signed `gst-review.csv` (only rows with a decision and initials are applied, each audited).
+  Every file is validated in full first; nothing is written unless all rows are valid.
 
 ## Scheduled jobs
 

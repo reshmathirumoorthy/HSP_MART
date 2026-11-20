@@ -26,8 +26,8 @@ const tones: Record<string, string> = {
   bad: "bg-red-50 text-bad",
   neutral: "bg-stone-100 text-muted",
 };
-const GOOD = ["approved", "active", "closed", "delivered", "captured", "processed", "sent", "accepted", "paid", "quoted", "simulated"];
-const BAD = ["cancelled", "suspended", "failed", "rejected", "reversed", "expired", "void", "blocked", "high"];
+const GOOD = ["pass", "approved", "active", "closed", "delivered", "captured", "processed", "sent", "accepted", "paid", "quoted", "simulated"];
+const BAD = ["fail", "cancelled", "suspended", "failed", "rejected", "reversed", "expired", "void", "blocked", "high"];
 const NEUTRAL = ["new", "draft", "none", "ended", "in_review"];
 
 export function Badge({ children }: { children: string }) {

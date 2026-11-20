@@ -1,0 +1,78 @@
+# Full HSP GiftOS stack on any Docker host: Postgres (pgvector), API, storefront, admin, gateway, cron.
+#   cp deploy/.env.docker.example deploy/.env.docker   # fill SESSION_SECRET etc.
+#   docker compose up -d --build
+#   docker compose run --rm migrate                    # schema (safe to re-run)
+#   docker compose run --rm seed                       # first install only: catalogue + staff users
+# Store: http://localhost   Admin: http://admin.localhost
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: hsp_giftos
+      POSTGRES_USER: hsp
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hsp-local-only}
+    volumes: [dbdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hsp -d hsp_giftos"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+
+  api:
+    build: ./backend
+    env_file: deploy/.env.docker
+    environment:
+      DATABASE_URL: postgres://hsp:${POSTGRES_PASSWORD:-hsp-local-only}@db:5432/hsp_giftos
+      NEXT_REVALIDATE_URL: http://web:3000/revalidate
+    volumes: [uploads:/data/uploads]
+    depends_on: { db: { condition: service_healthy } }
+    restart: unless-stopped
+
+  web:
+    build: .
+    env_file: deploy/.env.docker
+    environment:
+      BACKEND_URL: http://api:8000
+    depends_on: [api]
+    restart: unless-stopped
+
+  admin:
+    build: ./admin
+    restart: unless-stopped
+
+  gateway:
+    image: nginx:1.27-alpine
+    ports: ["${HTTP_PORT:-80}:80"]
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./deploy/proxy_common.conf:/etc/nginx/proxy_common.conf:ro
+    depends_on: [web, api, admin]
+    restart: unless-stopped
+
+  cron:
+    image: curlimages/curl:8.11.1
+    env_file: deploy/.env.docker
+    volumes: [./deploy/cron.sh:/cron.sh:ro]
+    entrypoint: ["/bin/sh", "/cron.sh"]
+    depends_on: [api]
+    restart: unless-stopped
+
+  migrate:
+    build: { context: ., target: build }
+    profiles: [tools]
+    environment:
+      DATABASE_URL: postgres://hsp:${POSTGRES_PASSWORD:-hsp-local-only}@db:5432/hsp_giftos
+    command: ["npx", "tsx", "scripts/db/migrate.mts"]
+    depends_on: { db: { condition: service_healthy } }
+
+  seed:
+    build: { context: ., target: build }
+    profiles: [tools]
+    environment:
+      DATABASE_URL: postgres://hsp:${POSTGRES_PASSWORD:-hsp-local-only}@db:5432/hsp_giftos
+    command: ["npx", "tsx", "--tsconfig", "tsconfig.json", "scripts/db/seed.mts"]
+    depends_on: { db: { condition: service_healthy } }
+
+volumes:
+  dbdata:
+  uploads:
