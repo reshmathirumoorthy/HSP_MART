@@ -49,6 +49,9 @@ jobs:
         run: npx playwright test
       - name: API tests
         working-directory: backend
+        # Locally this comes from .env.local; in CI use a throwaway test-only value.
+        env:
+          SESSION_SECRET: ci-only-session-secret-not-used-anywhere-else-0123
         run: uv run pytest
       - name: Admin type check
         working-directory: admin
