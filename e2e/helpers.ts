@@ -1,4 +1,6 @@
 import { createHmac } from "node:crypto";
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
 import { expect, type Page } from "@playwright/test";
 import postgres from "postgres";
 import { TEST_DATABASE_URL } from "../playwright.config";
@@ -18,6 +20,8 @@ export async function signIn(page: Page, identifier: string, next?: string) {
   await page.getByLabel("Sign-in code").fill(code);
   await page.getByRole("button", { name: "Sign in" }).click();
   await expect(page).not.toHaveURL(/\/login/);
+  // Let the post-login page finish loading; otherwise an immediate page.goto() can be aborted (seen in Firefox).
+  await page.waitForLoadState("load");
 }
 
 export async function createUser(email: string, role: string, name = role) {
@@ -30,15 +34,42 @@ export async function createUser(email: string, role: string, name = role) {
 type Browser = import("@playwright/test").Browser;
 type StorageState = Awaited<ReturnType<import("@playwright/test").BrowserContext["storageState"]>>;
 const sessions = new Map<string, StorageState>();
+/** Cleared by global setup each run (the DB reset invalidates every session). */
+export const SESSION_DIR = join("test-results", ".auth");
+
+// Sessions are also kept on disk: Playwright restarts its worker after any failure, and an in-memory cache alone
+// would then re-request OTP codes for shared staff accounts, hit the (correct) 5-per-15-min limit and fail
+// unrelated tests in a cascade.
+function sessionFile(identifier: string) {
+  return join(SESSION_DIR, `${identifier.replace(/[^a-z0-9]+/gi, "_")}.json`);
+}
+function cachedSession(identifier: string): StorageState | undefined {
+  if (sessions.has(identifier)) return sessions.get(identifier);
+  const f = sessionFile(identifier);
+  if (!existsSync(f)) return undefined;
+  const state = JSON.parse(readFileSync(f, "utf8")) as StorageState;
+  sessions.set(identifier, state);
+  return state;
+}
+function saveSession(identifier: string, state: StorageState) {
+  sessions.set(identifier, state);
+  mkdirSync(SESSION_DIR, { recursive: true });
+  writeFileSync(sessionFile(identifier), JSON.stringify(state));
+}
+/** Forget a cached session (e.g. after a test signs that user out). */
+export function dropSession(identifier: string) {
+  sessions.delete(identifier);
+  try { unlinkSync(sessionFile(identifier)); } catch { /* not cached */ }
+}
 
 /** New isolated context signed in as `identifier`; the session is reused (OTP sends are rate limited). */
 export async function asUser(browser: Browser, identifier: string) {
-  const cached = sessions.get(identifier);
+  const cached = cachedSession(identifier);
   const ctx = await browser.newContext(cached ? { storageState: cached } : {});
   const page = await ctx.newPage();
   if (!cached) {
     await signIn(page, identifier);
-    sessions.set(identifier, await ctx.storageState());
+    saveSession(identifier, await ctx.storageState());
   }
   return { ctx, page };
 }

@@ -10,7 +10,7 @@ from ..db import all_, get_conn, one
 from ..errors import fail
 from ..serialize import camel
 from ..services import ai, campaigns, credit_notes, enquiries, exports, files, insights, orders as svc, partners, payouts
-from ..services import courier as courier_svc, deposits, grievances, imports, plan, readiness, search, programmes, quotes, recipients, suppliers as sup, tally
+from ..services import courier as courier_svc, deposits, grievances, imports, plan, readiness, search, users, programmes, quotes, recipients, suppliers as sup, tally
 from ..services.common import amount_due, net_paid
 from ..services.ledger import latest_ledger
 from ..services.pricing import advance_due
@@ -653,3 +653,32 @@ def run_import(kind: str, file: UploadFile = File(...), apply: bool = Form(False
     if len(data) > 5 * 1024 * 1024:
         fail("Files must be 5 MB or smaller.")
     return imports.run_import(conn, user, kind, data, dry_run=not apply)
+
+
+# ── Staff users and roles ──
+
+@router.get("/users")
+def list_users(q: str = "", role: str = "", page: int = 1, _: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+    return camel(users.list_users(conn, q=q, role=role, page=page))
+
+
+class StaffIn(BaseModel):
+    email: str
+    name: str
+    role: Literal["hsp_admin", "hsp_finance", "hsp_procurement"]
+
+
+@router.post("/users")
+def create_staff(body: StaffIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+    return users.create_staff(conn, user, email=body.email, name=body.name, role=body.role)
+
+
+class StaffUpdate(BaseModel):
+    role: Literal["hsp_admin", "hsp_finance", "hsp_procurement"] | None = None
+    active: bool | None = None
+
+
+@router.post("/users/{user_id}")
+def update_staff(user_id: str, body: StaffUpdate, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+    users.update_staff(conn, user, user_id, role=body.role, active=body.active)
+    return OK

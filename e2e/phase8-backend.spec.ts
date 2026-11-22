@@ -108,8 +108,10 @@ test.describe("8.3 the React admin portal runs on the API", () => {
   test("staff sign in, see orders and run a fulfilment step with business-rule errors shown", async ({ browser }) => {
     const ctx = await browser.newContext();
     const page = await ctx.newPage();
+    const staff = uniqueEmail("spa-admin"); // fresh account: shared ones are OTP rate limited across runs
+    await createUser(staff, "hsp_admin");
     await page.goto(`${ADMIN_APP}/suppliers`);
-    await page.getByLabel("Email or mobile").fill("admin@hspmart.test");
+    await page.getByLabel("Email or mobile").fill(staff);
     await page.getByRole("button", { name: "Send code" }).click();
     const code = (await page.getByTestId("dev-code").textContent())!.replace(/\D/g, "");
     await page.getByLabel(/Code sent/).fill(code);

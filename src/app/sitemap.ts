@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/data/products";
+import { loadSiteData } from "@/lib/siteData.server";
 
 const BASE_URL = "https://hspmart.com";
 
@@ -12,7 +13,9 @@ const STATIC_ROUTES: Array<{ path: string; changeFrequency: "weekly" | "monthly"
   { path: "/faq", changeFrequency: "monthly" },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // The catalogue lives in the backend; load it, or the sitemap would list no products.
+  await loadSiteData();
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map(
     ({ path, changeFrequency }) => ({
       url: `${BASE_URL}${path}`,

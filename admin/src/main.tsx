@@ -21,6 +21,7 @@ import Enquiries from "./pages/Enquiries";
 import Grievances from "./pages/Grievances";
 import Plan from "./pages/Plan";
 import Imports from "./pages/Imports";
+import Users from "./pages/Users";
 import Products from "./pages/Products";
 import ProductEdit from "./pages/ProductEdit";
 import Content from "./pages/Content";
@@ -46,6 +47,7 @@ const NAV = [
   ["/plan", "Plan & readiness"],
   ["/imports", "Data imports"],
   ["/programmes", "Programmes"],
+  ["/users", "Staff & roles"],
 ] as const;
 
 function Shell() {
@@ -64,7 +66,7 @@ function Shell() {
       <aside className="border-b border-line bg-white p-4 md:border-b-0 md:border-r">
         <p className="mb-4 font-semibold text-brand">HSP Admin</p>
         <nav className="flex flex-wrap gap-1 md:flex-col">
-          {NAV.map(([to, label]) => (
+          {NAV.filter(([to]) => to !== "/users" || me.data.role === "hsp_admin").map(([to, label]) => (
             <NavLink key={to} to={to} end={to === "/"}
               className={({ isActive }) => `rounded px-2 py-1 text-sm ${isActive ? "bg-stone-100 font-medium" : "text-muted hover:text-ink"}`}>
               {label}
@@ -80,6 +82,7 @@ function Shell() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/orders/:number" element={<OrderDetail role={me.data.role} />} />
           <Route path="/enquiries" element={<Enquiries role={me.data.role} />} />
+          <Route path="/users" element={me.data.role === "hsp_admin" ? <Users userId={me.data.id} /> : <p className="text-sm">Only admins can manage staff.</p>} />
           <Route path="/plan" element={<Plan role={me.data.role} />} />
           <Route path="/imports" element={<Imports role={me.data.role} />} />
           <Route path="/complaints" element={<Grievances role={me.data.role} />} />
