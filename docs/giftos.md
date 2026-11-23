@@ -173,9 +173,15 @@ plan and all four cron jobs work through the gateway.
   Partner and supplier access is still granted from their own pages. Every change is audited and ends that person's
   sessions; you cannot change your own account, and at least one active admin always remains.
 - **Security headers**: the store (`next.config.ts`), the API (`backend/app/main.py`) and the admin app
-  (`admin/nginx.conf`) send `X-Frame-Options: DENY`, `nosniff`, a referrer policy and a CSP limited to
-  `frame-ancestors`/`base-uri`/`object-src` (a full script policy with nonces is a follow-up); private API responses are
+  (`admin/nginx.conf`) send `X-Frame-Options: DENY`, `nosniff` and a referrer policy; private API responses are
   `Cache-Control: no-store`.
+- **Content Security Policy**: the store sets a strict CSP per request in `src/proxy.ts` — a fresh nonce, scripts only
+  with that nonce (`'strict-dynamic'`, so scripts it loads such as Razorpay Checkout are trusted), no inline scripts,
+  images only from this site, `cdn.shopify.com` and `images.unsplash.com`, frames only for Razorpay and the Google Maps
+  embed. The admin app's nginx allows scripts from its own origin only. Adding a new third-party script, image host or
+  embed means adding it to `contentSecurityPolicy()` in `src/proxy.ts` (and to `admin/nginx.conf` for the admin app);
+  the E2E suite fails on any CSP violation. Before go-live, run one checkout with Razorpay test keys to confirm
+  Checkout opens under the policy (tests run without live keys, so the Razorpay script is not loaded there).
 - **API logging**: one line per request (method, path, status, duration, request id; no query strings) and a full
   traceback for unexpected errors, which return a generic message with a `requestId` customers can quote.
   `X-Request-Id` is accepted from a proxy or generated.

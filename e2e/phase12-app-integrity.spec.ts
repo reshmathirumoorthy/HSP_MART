@@ -81,6 +81,61 @@ test("store pages and API responses carry security headers", async ({ request })
   expect(api.headers()["x-request-id"]).toBeTruthy();
 });
 
+test("the Content Security Policy uses a fresh nonce per request and blocks unsigned inline scripts", async ({ request, page }) => {
+  const csp = (await request.get("/")).headers()["content-security-policy"];
+  expect(csp).toMatch(/script-src 'self' 'nonce-[A-Za-z0-9+/=]+' 'strict-dynamic'/);
+  expect(csp).not.toContain("'unsafe-inline' 'strict-dynamic'");
+  const nonce = (h: string) => h.match(/'nonce-([^']+)'/)![1];
+  expect(nonce((await request.get("/")).headers()["content-security-policy"])).not.toBe(nonce(csp));
+
+  // Simulate stored XSS: splice an unsigned inline script into the real HTML, keeping the real CSP header.
+  // It must not run, while the page's own (nonce-signed) scripts still do.
+  await page.route("**/", async (route) => {
+    const res = await route.fetch();
+    const html = (await res.text()).replace("</body>", "<script>window.__xss = true</script></body>");
+    await route.fulfill({ response: res, body: html });
+  });
+  await page.goto("/");
+  expect(await page.evaluate(() => (window as unknown as { __xss?: boolean }).__xss)).toBeUndefined();
+  await page.unroute("**/");
+
+  // Control: the same payload served without the CSP header does run, so the check above is meaningful.
+  await page.route("**/", async (route) => {
+    const res = await route.fetch();
+    const html = (await res.text()).replace("</body>", "<script>window.__xss = true</script></body>");
+    const headers = { ...res.headers() };
+    delete headers["content-security-policy"];
+    await route.fulfill({ response: res, body: html, headers });
+  });
+  await page.goto("/");
+  expect(await page.evaluate(() => (window as unknown as { __xss?: boolean }).__xss)).toBe(true);
+  await page.unroute("**/");
+  await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeVisible();
+});
+
+test("no page in the store, portals or checkout breaks the Content Security Policy", async ({ browser }) => {
+  test.setTimeout(180_000);
+  const email = uniqueEmail("csp-buyer");
+  const { ctx, page } = await asUser(browser, email);
+  await page.addInitScript(() => {
+    const w = window as unknown as { __csp: string[] };
+    w.__csp = [];
+    document.addEventListener("securitypolicyviolation", (e) => w.__csp.push(`${e.violatedDirective} ${e.blockedURI}`));
+  });
+  const violations: string[] = [];
+  for (const path of [...PUBLIC_PAGES, "/account", "/account/orders", "/checkout"]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle").catch(() => {});
+    for (const v of await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp)) violations.push(`${path}: ${v}`);
+  }
+  await page.goto("/products");
+  await page.locator('a[href^="/products/"]').first().click();
+  await page.waitForLoadState("networkidle").catch(() => {});
+  for (const v of await page.evaluate(() => (window as unknown as { __csp: string[] }).__csp)) violations.push(`product: ${v}`);
+  expect(violations).toEqual([]);
+  await ctx.close();
+});
+
 test("the store fits a phone screen without horizontal scrolling", async ({ browser }) => {
   const ctx = await browser.newContext({ viewport: { width: 375, height: 812 }, isMobile: true, hasTouch: true });
   const page = await ctx.newPage();

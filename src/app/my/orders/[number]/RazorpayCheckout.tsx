@@ -12,6 +12,8 @@ export function RazorpayCheckout(props: {
   amountPaise: number;
   orderNumber: string;
   email: string | null;
+  /** CSP nonce for this request (src/proxy.ts), so the checkout script is allowed to load. */
+  nonce?: string;
 }) {
   const router = useRouter();
   const [ready, setReady] = useState(false);
@@ -34,7 +36,7 @@ export function RazorpayCheckout(props: {
 
   return (
     <>
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" onReady={() => setReady(true)} />
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" nonce={props.nonce} onReady={() => setReady(true)} />
       <button
         onClick={open}
         disabled={!ready}
