@@ -5,7 +5,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { seedProducts as catalogue } from "../scripts/db/seed-data/products";
 import { E2E_CRON_SECRET, E2E_WEBHOOK_SECRET } from "../playwright.config";
-import { asUser, createPartner, makeOrder, sql, uniqueEmail, webhookSigner } from "./helpers";
+import { adminUrl, asUser, createPartner, expectProblem, makeOrder, sql, uniqueEmail, webhookSigner } from "./helpers";
 
 const signed = webhookSigner(E2E_WEBHOOK_SECRET);
 const P = catalogue.find((p) => p.active !== false && (p.minOrderQuantity ?? 1) === 1 && p.price >= 300 && p.price <= 900)!;
@@ -74,11 +74,11 @@ test.describe.serial("7.1 storefront checkout creates a real order paid via Razo
       await signed(request, { event: "payment.captured", payload: { payment: { entity: { id: `pay_on_${orderNo}`, order_id: pay.provider_order_id, amount: Number(pay.amount_paise), status: "captured" } } } }),
     ).toBe("processed");
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await expect(admin.page.getByTestId("order-source")).toContainText("Online");
     await expect(admin.page.getByTestId("ship-to")).toContainText("411001");
     await admin.page.getByRole("button", { name: "Approve production" }).click();
-    await expect(admin.page.getByTestId("order-status")).toHaveText("production_approved");
+    await expect(admin.page.getByTestId("order-status")).toHaveText("production approved");
     await admin.ctx.close();
   });
 
@@ -116,18 +116,18 @@ test.describe.serial("7.2 credit notes: maker-checker, partial refund, commissio
 
   test("finance raises a 2-unit return with a refund; the maker cannot approve it", async ({ browser }) => {
     const fin = await asUser(browser, "finance@hspmart.test");
-    await fin.page.goto(`/admin/orders/${orderNo}`);
+    await fin.page.goto(adminUrl(`/orders/${orderNo}`));
     await fin.page.getByLabel(`Credit quantity ${P.sku}`).fill("11");
     await fin.page.getByLabel("Credit reason").fill("Two hampers arrived damaged");
     await fin.page.getByRole("button", { name: "Raise credit note" }).click();
-    await expect(fin.page.getByTestId("flash-error")).toContainText("can still be credited");
+    await expectProblem(fin.page, "can still be credited");
 
     const value = pricePaise * 2 + Math.round(pricePaise * 2 * 0.18);
     await fin.page.getByLabel(`Credit quantity ${P.sku}`).fill("2");
     await fin.page.getByLabel("Credit reason").fill("Two hampers arrived damaged");
     await fin.page.getByLabel("Refund amount").fill(String(value / 100 + 1));
     await fin.page.getByRole("button", { name: "Raise credit note" }).click();
-    await expect(fin.page.getByTestId("flash-error")).toContainText("exceed");
+    await expectProblem(fin.page, "exceed");
 
     await fin.page.getByLabel(`Credit quantity ${P.sku}`).fill("2");
     await fin.page.getByLabel("Credit reason").fill("Two hampers arrived damaged");
@@ -136,13 +136,13 @@ test.describe.serial("7.2 credit notes: maker-checker, partial refund, commissio
     await expect(fin.page.getByTestId("credit-note-row")).toContainText("draft");
 
     await fin.page.getByRole("button", { name: "Approve credit note" }).click();
-    await expect(fin.page.getByTestId("flash-error")).toContainText("cannot approve");
+    await expectProblem(fin.page, "cannot approve");
     await fin.ctx.close();
   });
 
   test("a second approver applies it; refund is requested; closing waits for the refund", async ({ browser, request }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await admin.page.getByRole("button", { name: "Approve credit note" }).click();
     await expect(admin.page.getByTestId("refund-status")).toHaveText("requested");
     const [o] = await sql`select credited_paise, credited_taxable_paise from orders where id = ${orderId}`;
@@ -150,7 +150,7 @@ test.describe.serial("7.2 credit notes: maker-checker, partial refund, commissio
 
     // Paid more than now due → cannot reconcile until the refund lands.
     await admin.page.getByRole("button", { name: "Reconcile & close" }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("reconcile");
+    await expectProblem(admin.page, "reconcile");
 
     const [cn] = await sql`select number, refund_paise from credit_notes where order_id = ${orderId}`;
     expect(
@@ -218,13 +218,13 @@ test.describe.serial("7.3 contracted accounts carry renewal commission after lea
 
   test("admin records a contract; renewal quotes are attributed at the renewal rate", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/partners");
+    await admin.page.goto(adminUrl("/partners"));
     await admin.page.getByLabel("Contract customer email").fill(customerEmail);
     await admin.page.getByLabel("Contract partner code").fill(partnerCode);
     await admin.page.getByLabel("Contract months").fill("12");
     await admin.page.getByLabel("Renewal commission percent").fill("12");
     await admin.page.getByRole("button", { name: "Record contract" }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("0% and 10%");
+    await expectProblem(admin.page, "0% and 10%");
     await admin.page.getByLabel("Contract customer email").fill(customerEmail);
     await admin.page.getByLabel("Contract partner code").fill(partnerCode);
     await admin.page.getByLabel("Renewal commission percent").fill("5");
@@ -237,7 +237,7 @@ test.describe.serial("7.3 contracted accounts carry renewal commission after lea
     expect(Number(q.commission_paise)).toBe(Math.round(Number(q.subtotal_paise) * 0.05));
 
     // Ending the contract (service stopped) returns the account to HSP direct.
-    await admin.page.goto("/admin/partners");
+    await admin.page.goto(adminUrl("/partners"));
     const row = admin.page.getByTestId(`contract-${customerEmail}`);
     await row.getByLabel("End reason").fill("Partner stopped servicing the account");
     await row.getByRole("button", { name: "End" }).click();
@@ -250,12 +250,12 @@ test.describe.serial("7.3 contracted accounts carry renewal commission after lea
 });
 
 async function quote(page: Page, email: string) {
-  await page.goto("/admin/quotes/new");
-  await page.locator('input[name="customerName"]').fill("Renewal Co");
-  await page.locator('input[name="customerEmail"]').fill(email);
-  await page.locator('textarea[name="lines"]').fill(`${P.sku}, 20`);
+  await page.goto(adminUrl("/quotes"));
+  await page.getByLabel("Customer name").fill("Renewal Co");
+  await page.getByLabel("Customer email").fill(email);
+  await page.getByLabel(/^Lines/).fill(`${P.sku}, 20`);
   await page.getByRole("button", { name: "Create quote" }).click();
-  await expect(page).toHaveURL(/\/admin\/quotes\/Q-/);
+  await expect(page).toHaveURL(/\/quotes\/Q-/);
   return page.url().split("/").pop()!.split("?")[0];
 }
 
@@ -270,7 +270,7 @@ test.describe("7.4 secure files and the notification cron", () => {
     await buyer.page.goto(`/my/orders/${o.number}`);
     await buyer.page.getByLabel("Artwork file").setInputFiles({ name: "evil.png", mimeType: "image/png", buffer: Buffer.from("<script>alert(1)</script>") });
     await buyer.page.getByRole("button", { name: "Upload artwork" }).click();
-    await expect(buyer.page.getByTestId("flash-error")).toContainText("PDF, PNG");
+    await expectProblem(buyer.page, "PDF, PNG");
     await buyer.page.getByLabel("Artwork file").setInputFiles({ name: "logo.pdf", mimeType: "application/pdf", buffer: Buffer.from("%PDF-1.4\n%%EOF") });
     await buyer.page.getByRole("button", { name: "Upload artwork" }).click();
     await expect(buyer.page.getByTestId("artwork-row")).toContainText("logo.pdf");

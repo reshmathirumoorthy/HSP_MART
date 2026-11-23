@@ -15,8 +15,8 @@ export default function Dashboard() {
     <div className="space-y-6">
       <PageTitle>Overview</PageTitle>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-6">
-        <Stat label="Products" value={d.divisions.reduce((a, x) => a + x.n, 0)} />
-        {d.divisions.map((x) => <Stat key={x.division} label={String(x.division)} value={x.n} />)}
+        <Stat label="Products" testId="stat-products" value={d.divisions.reduce((a, x) => a + x.n, 0)} />
+        {d.divisions.map((x) => <Stat key={x.division} testId={`stat-division-${x.division}`} label={String(x.division)} value={x.n} />)}
       </div>
       {d.enquiries > 0 && (
         <p className="rounded-md bg-amber-50 px-3 py-2 text-sm text-warn">
@@ -29,7 +29,7 @@ export default function Dashboard() {
           <Card title="Users by role"><Counts rows={d.roles} k="role" /></Card>
         </div>
         <Card title="Recent audit events">
-          <Table head={["When", "Action", "Actor", "Entity"]} empty={!d.events.length}>
+          <Table testId="audit-table" head={["When", "Action", "Actor", "Entity"]} empty={!d.events.length}>
             {d.events.map((e) => (
               <tr key={e.id}><td className="whitespace-nowrap px-3 py-1.5">{when(e.createdAt)}</td><td className="px-3">{e.action}</td><td className="px-3">{e.actorRole ?? "system"}</td><td className="px-3">{e.entity}</td></tr>
             ))}
@@ -40,8 +40,8 @@ export default function Dashboard() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
-  return <div className="rounded-lg border border-line bg-white p-3"><p className="text-xs text-muted">{label}</p><p className="text-xl font-semibold tabular-nums">{value}</p></div>;
+function Stat({ label, value, testId }: { label: string; value: number; testId?: string }) {
+  return <div className="rounded-lg border border-line bg-white p-3"><p className="text-xs text-muted">{label}</p><p data-testid={testId} className="text-xl font-semibold tabular-nums">{value}</p></div>;
 }
 
 function Counts({ rows, k }: { rows: Row[]; k: string }) {

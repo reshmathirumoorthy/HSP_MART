@@ -7,7 +7,7 @@ The storefront (HSP Mart) plus the central-seller platform from *Reimagine HSP* 
 | Part | Folder | What it does |
 | --- | --- | --- |
 | **API** (FastAPI, Python) | `backend/` | Owns every business rule and all data: pricing, quotes, orders, payments and webhooks, credit notes, partners and commission, payouts, files, notifications, AI engines, exports, enquiries, customer account. Every request is authorised here. |
-| **Storefront and portals** (Next.js) | `src/` | Renders the store, `/account`, `/my`, `/partner`, `/supplier`, `/join`, `/login` and the legacy `/admin`. Pages and server actions call the API through `src/lib/api.ts`; the browser calls `/api/*`, which Next.js forwards to the API. Next.js has no database access. |
+| **Storefront and portals** (Next.js) | `src/` | Renders the store, `/account`, `/my`, `/partner`, `/supplier`, `/join` and `/login`; `/admin/*` only forwards staff to the admin app (`ADMIN_APP_URL`). Pages and server actions call the API through `src/lib/api.ts`; the browser calls `/api/*`, which Next.js forwards to the API. Next.js has no database access. |
 | **Admin portal** (React + Vite) | `admin/` | The HSP staff console: enquiries, quotes and the AI assistant, orders end to end (artwork, POs, dispatch, POD, credit notes, recipients), suppliers, partners and contracts, payouts and exports, insights and campaigns, programmes. |
 | **Catalogue & content** | `products`, `site_content` tables | Every storefront page renders products, categories, company details, FAQs, menus, footer, announcement bar, homepage and About copy from `/api/site-data`. Staff edit them in the admin app (Products, Site content); saves refresh the store immediately via `POST /revalidate` (secret `REVALIDATE_SECRET`), and otherwise within 5 minutes. Delivery promises are generated from the backend's checkout rule. `scripts/db/seed-data/` is only the one-time import of the original catalogue. |
 | **Database** | PostgreSQL | One database. The schema and migrations are still defined with Drizzle (`src/db/schema.ts`, `drizzle/`). |
@@ -20,7 +20,7 @@ admin app (same site).
 | Customer | `/account` (orders, bulk requests, profile, addresses, wishlist, inbox), `/my/quotes/[n]`, `/my/orders/[n]`, `/join` | `customer` |
 | Partner | `/partner` (earnings, leads, quotes, AI sales coach) | `associate`, `franchise`, `enterprise_partner` |
 | Supplier | `/supplier` | `supplier` |
-| HSP staff | admin app (`admin/`), also `/admin` in Next.js | `hsp_admin`, `hsp_finance`, `hsp_procurement` |
+| HSP staff | admin app (`admin/`); signing in on the store forwards staff there | `hsp_admin`, `hsp_finance`, `hsp_procurement` |
 
 ## Run locally
 
@@ -182,6 +182,13 @@ plan and all four cron jobs work through the gateway.
 - **Dependencies**: Next.js 16.4.6 (fixes a critical advisory); unused `@vercel/blob`, `@anthropic-ai/sdk` and
   `class-variance-authority` removed. `npm audit --omit=dev` reports 0 vulnerabilities.
 - **Fixes**: `sitemap.xml` now lists the live catalogue (it listed no products); JSON-LD output escapes `<`.
+
+## One staff console
+
+The React admin app is the only staff interface; the Next.js `/admin` pages were removed. `/admin/*` on the store now
+forwards staff to the same page in the admin app (`ADMIN_APP_URL`), so bookmarks keep working, and customers, partners
+and suppliers are still sent back to their own area. In production set `SESSION_COOKIE_DOMAIN=.hspmart.com` so the
+sign-in made on `hspmart.com` also covers `admin.hspmart.com`.
 
 ## Scheduled jobs
 

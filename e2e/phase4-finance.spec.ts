@@ -4,7 +4,7 @@
  */
 import { expect, test } from "@playwright/test";
 import { seedProducts as catalogue } from "../scripts/db/seed-data/products";
-import { asUser, createPartner, makeOrder, signIn, sql, uniqueEmail } from "./helpers";
+import { adminUrl, asUser, createPartner, expectNotice, expectProblem, makeOrder, signIn, sql, uniqueEmail } from "./helpers";
 
 const P = catalogue.find((p) => p.price >= 500 && p.active !== false)!;
 
@@ -35,31 +35,36 @@ test.describe.serial("4 finance & administration", () => {
     commission = (await seedApprovableCommission(partner.partnerId)).amount;
 
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto("/admin/partners");
+    await finance.page.goto(adminUrl("/partners"));
     await finance.page.locator(`[data-testid="partner-${partnerEmail}"]`).getByRole("button", { name: "Approve earned commission" }).click();
-    await expect(finance.page.getByTestId("flash-ok")).toBeVisible();
+    await expect(finance.page.getByRole("status").first()).toBeVisible();
 
-    await finance.page.goto("/admin/payouts");
+    await finance.page.goto(adminUrl("/payouts"));
     await finance.page.getByTestId(`due-${partner.code}`).getByRole("button", { name: "Raise payout" }).click();
-    await expect(finance.page.getByTestId("flash-ok")).toContainText("awaiting second approval");
+    await expectNotice(finance.page, "awaiting second approval");
     const [po] = await sql`select gross_paise, tds_paise, net_paise, status from payouts where partner_id = ${partner.partnerId}`;
     expect(Number(po.gross_paise)).toBe(commission);
     expect(Number(po.tds_paise)).toBe(Math.round(commission * 0.02));
     expect(Number(po.net_paise)).toBe(commission - Math.round(commission * 0.02));
     expect(po.status).toBe("requested");
 
+    // The admin app does not offer approval to the person who raised the payout, and the API refuses it anyway.
     const row = finance.page.getByTestId("payout-list").locator("li", { hasText: partner.code });
-    await row.getByRole("button", { name: "Approve & transfer" }).click();
-    await expect(finance.page.getByTestId("flash-error")).toContainText("cannot approve");
+    await expect(row).toBeVisible();
+    await expect(row.getByRole("button", { name: "Approve & transfer" })).toHaveCount(0);
+    const [raised] = await sql`select id from payouts where partner_id = ${partner.partnerId}`;
+    const res = await finance.page.request.post(adminUrl(`/api/admin/payouts/${raised.id}/approve`), { data: {} });
+    expect(res.status()).toBe(400);
+    expect((await res.json()).detail).toContain("cannot approve");
     await finance.ctx.close();
   });
 
   test("4.2 a second approver transfers once; ledger becomes Paid; a re-raise finds nothing due", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/payouts");
+    await admin.page.goto(adminUrl("/payouts"));
     const row = admin.page.getByTestId("payout-list").locator("li", { hasText: partner.code });
     await row.getByRole("button", { name: "Approve & transfer" }).click();
-    await expect(admin.page.getByTestId("flash-ok")).toContainText("transferred");
+    await expectNotice(admin.page, "transferred");
     await expect(row).toContainText("processed");
     await expect(row).toContainText("pout_sim_");
 
@@ -86,10 +91,12 @@ test.describe.serial("4 finance & administration", () => {
               select partner_id, order_id, rate_bps, eligible_base_paise, amount_paise, 'approved' from commission_ledger
               where partner_id = ${p2.partnerId} and status = 'earned'`;
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto("/admin/payouts");
-    await sql`update partners set status = 'suspended' where id = ${p2.partnerId}`; // suspended after the page loaded, before the click
+    await finance.page.goto(adminUrl("/payouts"));
+    // The admin app loads its data after the page; wait until the row is shown, then suspend before the click.
+    await expect(finance.page.getByTestId(`due-${p2.code}`)).toBeVisible();
+    await sql`update partners set status = 'suspended' where id = ${p2.partnerId}`;
     await finance.page.getByTestId(`due-${p2.code}`).getByRole("button", { name: "Raise payout" }).click();
-    await expect(finance.page.getByTestId("flash-error")).toContainText("active with verified KYC");
+    await expectProblem(finance.page, "active with verified KYC");
     await finance.ctx.close();
   });
 
@@ -118,10 +125,10 @@ test.describe.serial("4 finance & administration", () => {
 
   test("4.4 dashboard shows channel economics and the associate income distribution", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/insights");
+    await admin.page.goto(adminUrl("/insights"));
     await expect(admin.page.getByTestId("channel-table")).toContainText("direct");
     await expect(admin.page.getByTestId("income-buckets")).toContainText("₹15k+");
-    const counts = await admin.page.getByTestId("income-buckets").locator("li span.text-right").allTextContents();
+    const counts = await admin.page.getByTestId("bucket-count").allTextContents();
     const [{ n }] = await sql`select count(*)::int n from partners where status = 'active' and type = 'associate'`;
     expect(counts.map(Number).reduce((a, b) => a + b, 0)).toBe(n);
     await expect(admin.page.getByTestId("kpi-overdue")).toBeVisible();
@@ -140,10 +147,10 @@ test.describe.serial("4 finance & administration", () => {
     await sql`insert into customers (kind, name, email, dedupe_key, marketing_consent) values
               ('individual', 'Yes', ${yes}, ${"email:" + yes}, true), ('individual', 'No', ${no}, ${"email:" + no}, false)`;
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/insights");
+    await admin.page.goto(adminUrl("/insights"));
     await admin.page.getByLabel("Campaign template").fill("festive.diwali.e2e");
     await admin.page.getByRole("button", { name: "Send marketing campaign" }).click();
-    await expect(admin.page.getByTestId("flash-ok")).toContainText("Campaign processed");
+    await expectNotice(admin.page, "Campaign processed");
     const rows = await sql`select recipient, status from notifications where template = 'festive.diwali.e2e' and recipient in (${yes}, ${no})`;
     const by = Object.fromEntries(rows.map((r) => [r.recipient, r.status]));
     expect(by[yes]).toBe("simulated");

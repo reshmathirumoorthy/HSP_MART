@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router";
 import { api, when } from "../api";
@@ -9,13 +9,23 @@ type P = { id: string; name: string; occasion: string; nextDate: string; leadDay
 export default function Programmes({ role }: { role: string }) {
   const q = useQuery({ queryKey: ["programmes"], queryFn: () => api<P[]>("/admin/programmes") });
   const create = useAction("/admin/programmes", [["programmes"]]);
-  const runDue = useAction("/admin/programmes/run", [["programmes"], ["quotes"]]);
+  const qc = useQueryClient();
+  // Report what the run actually did: which quotes were raised, or that nothing was due.
+  const runDue = useMutation({
+    mutationFn: () => api<{ raised: string[] }>("/admin/programmes/run", {}),
+    onSuccess: () => ["programmes", "quotes"].forEach((k) => qc.invalidateQueries({ queryKey: [k] })),
+  });
   const [f, setF] = useState({ customerName: "", customerEmail: "", name: "", occasion: "", nextDate: "", leadDays: "30", lines: "" });
   const set = (k: keyof typeof f) => (e: { target: { value: string } }) => setF({ ...f, [k]: e.target.value });
   return (
     <div className="space-y-6">
-      <PageTitle action={role === "hsp_admin" && <button className={btnGhost} onClick={() => runDue.run({}, "Due programmes processed")}>Run due programmes now</button>}>Gifting programmes</PageTitle>
-      {runDue.feedback}
+      <PageTitle action={role === "hsp_admin" && <button className={btnGhost} disabled={runDue.isPending} onClick={() => runDue.mutate()}>Run due programmes now</button>}>Gifting programmes</PageTitle>
+      <ErrorText error={runDue.error} />
+      {runDue.data && (
+        <p role="status" className="rounded-md bg-green-50 px-3 py-2 text-sm text-good">
+          {runDue.data.raised.length ? `Raised draft quotes: ${runDue.data.raised.join(", ")}` : "Nothing due — no programme is inside its lead time."}
+        </p>
+      )}
       {role === "hsp_admin" && (
         <Card title="Schedule a recurring programme">
           <form className="grid gap-3 md:grid-cols-3" onSubmit={(e: FormEvent) => { e.preventDefault(); create.run({ ...f, leadDays: Number(f.leadDays) || 30 }, "Programme scheduled"); }}>
@@ -34,7 +44,7 @@ export default function Programmes({ role }: { role: string }) {
       <ErrorText error={q.error} />
       {!q.data ? <Loading /> : (
         <Card title="Scheduled">
-          <ul className="divide-y divide-line text-sm">
+          <ul data-testid="programme-list" className="divide-y divide-line text-sm">
             {q.data.map((p) => (
               <li key={p.id} className="py-2">
                 {p.name} · {p.customer} · next {when(p.nextDate)} · {p.leadDays}d lead <Badge>{p.active ? "active" : "ended"}</Badge>

@@ -73,7 +73,8 @@ function Shell() {
             </NavLink>
           ))}
         </nav>
-        <p className="mt-6 truncate text-xs text-muted">{me.data.email ?? me.data.role}</p>
+        <p className="mt-6 truncate text-xs text-muted">{me.data.email ?? me.data.name}</p>
+        <p className="text-xs text-muted" data-testid="portal-role">{me.data.role}</p>
         <button onClick={logout} className="text-xs underline">Sign out</button>
       </aside>
       <main className="min-w-0 p-4 md:p-8">

@@ -3,9 +3,21 @@ import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "
 import { join } from "node:path";
 import { expect, type Page } from "@playwright/test";
 import postgres from "postgres";
-import { TEST_DATABASE_URL } from "../playwright.config";
+import { ADMIN_PORT, TEST_DATABASE_URL } from "../playwright.config";
 
 export const sql = postgres(TEST_DATABASE_URL, { max: 2, onnotice: () => {} });
+
+/** The React admin app (the staff console). Same host as the store, so the session cookie is shared. */
+export const ADMIN_APP = `http://localhost:${ADMIN_PORT}`;
+export const adminUrl = (path: string) => `${ADMIN_APP}${path.startsWith("/") ? path : `/${path}`}`;
+
+/** The admin app confirms an action with a role="status" message and reports a refusal with role="alert". */
+export async function expectNotice(page: Page, text: string | RegExp) {
+  await expect(page.getByRole("status").filter({ hasText: text }).first()).toBeVisible();
+}
+export async function expectProblem(page: Page, text: string | RegExp) {
+  await expect(page.getByRole("alert").filter({ hasText: text }).first()).toBeVisible();
+}
 
 let counter = 0;
 export const uniqueEmail = (tag: string) =>
@@ -20,6 +32,9 @@ export async function signIn(page: Page, identifier: string, next?: string) {
   await page.getByLabel("Sign-in code").fill(code);
   await page.getByRole("button", { name: "Sign in" }).click();
   await expect(page).not.toHaveURL(/\/login/);
+  // Staff go store /admin → admin app: wait for the final page, not the intermediate hop, or the next navigation
+  // in the test can be interrupted by the redirect.
+  await page.waitForURL((u) => !(u.pathname.startsWith("/admin") && u.port !== String(ADMIN_PORT)));
   // Let the post-login page finish loading; otherwise an immediate page.goto() can be aborted (seen in Firefox).
   await page.waitForLoadState("load");
 }
@@ -67,6 +82,7 @@ export async function asUser(browser: Browser, identifier: string) {
   const cached = cachedSession(identifier);
   const ctx = await browser.newContext(cached ? { storageState: cached } : {});
   const page = await ctx.newPage();
+  page.on("dialog", (d) => d.accept()); // staff pages confirm destructive actions; tests always proceed
   if (!cached) {
     await signIn(page, identifier);
     saveSession(identifier, await ctx.storageState());

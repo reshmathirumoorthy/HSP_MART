@@ -7,7 +7,7 @@ import { expect, test, type APIRequestContext, type Page } from "@playwright/tes
 import { seedProducts as catalogue } from "../scripts/db/seed-data/products";
 import { priceQuote } from "../src/lib/commerce/pricing";
 import { E2E_WEBHOOK_SECRET } from "../playwright.config";
-import { asUser, sql, uniqueEmail } from "./helpers";
+import { adminUrl, asUser, expectNotice, expectProblem, sql, uniqueEmail } from "./helpers";
 
 /* ── 2.1 pricing engine (pure) ─────────────────────────── */
 
@@ -68,12 +68,12 @@ const captured = (orderId: string, amount: number, payId = `pay_${orderId.slice(
 });
 
 async function createQuote(page: Page, customerEmail: string, lines: string, name = "Acme Industries Pvt Ltd") {
-  await page.goto("/admin/quotes/new");
-  await page.locator('input[name="customerName"]').fill(name);
-  await page.locator('input[name="customerEmail"]').fill(customerEmail);
-  await page.locator('textarea[name="lines"]').fill(lines);
+  await page.goto(adminUrl("/quotes"));
+  await page.getByLabel("Customer name").fill(name);
+  await page.getByLabel("Customer email").fill(customerEmail);
+  await page.getByLabel(/^Lines/).fill(lines);
   await page.getByRole("button", { name: "Create quote" }).click();
-  await expect(page).toHaveURL(/\/admin\/quotes\/Q-/);
+  await expect(page).toHaveURL(/\/quotes\/Q-/);
   return page.url().split("/").pop()!.split("?")[0];
 }
 
@@ -86,30 +86,30 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
 
   test("procurement onboards an approved supplier with rates (finance cannot approve)", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/suppliers");
+    await admin.page.goto(adminUrl("/suppliers"));
     await admin.page.getByLabel("Supplier name").fill("Sharma Gift Works");
     await admin.page.getByLabel("City").fill("Mumbai");
     await admin.page.getByRole("button", { name: "Add (pending approval)" }).click();
-    await expect(admin.page.getByTestId("flash-ok")).toHaveText("Supplier added");
+    await expectNotice(admin.page, "Supplier added");
 
-    const card = admin.page.getByTestId("supplier-Sharma Gift Works").locator("..");
+    const card = admin.page.getByTestId("supplier-Sharma Gift Works");
     for (const p of [A, B]) {
       await card.getByLabel("Rate SKU").fill(p.sku);
       await card.getByLabel("Rate cost").fill(String(Math.round(p.price * 0.6)));
       await card.getByLabel("Lead time").fill("5");
       await card.getByRole("button", { name: "Save rate" }).click();
-      await expect(admin.page.getByTestId("flash-ok")).toHaveText("Rate saved");
+      await expectNotice(admin.page, "Rate saved");
     }
 
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto("/admin/suppliers");
+    await finance.page.goto(adminUrl("/suppliers"));
     await finance.page.getByTestId("supplier-Sharma Gift Works").getByRole("button", { name: "Approve" }).click();
-    await expect(finance.page.getByTestId("flash-error")).toContainText("Only procurement");
+    await expectProblem(finance.page, "Only procurement");
 
     const proc = await asUser(browser, "procurement@hspmart.test");
-    await proc.page.goto("/admin/suppliers");
+    await proc.page.goto(adminUrl("/suppliers"));
     await proc.page.getByTestId("supplier-Sharma Gift Works").getByRole("button", { name: "Approve" }).click();
-    await expect(proc.page.getByTestId("flash-ok")).toHaveText("Supplier approved");
+    await expectNotice(proc.page, "Supplier approved");
     await Promise.all([admin.ctx.close(), finance.ctx.close(), proc.ctx.close()]);
   });
 
@@ -127,12 +127,12 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
 
   test("unknown SKUs and bad lines are rejected with a clear error", async ({ browser }) => {
     const { ctx, page } = await asUser(browser, "admin@hspmart.test");
-    await page.goto("/admin/quotes/new");
-    await page.locator('input[name="customerName"]').fill("X");
-    await page.locator('input[name="customerEmail"]').fill("x@x.test");
-    await page.locator('textarea[name="lines"]').fill("NOT-A-SKU, 3");
+    await page.goto(adminUrl("/quotes"));
+    await page.getByLabel("Customer name").fill("X");
+    await page.getByLabel("Customer email").fill("x@x.test");
+    await page.getByLabel(/^Lines/).fill("NOT-A-SKU, 3");
     await page.getByRole("button", { name: "Create quote" }).click();
-    await expect(page.getByTestId("flash-error")).toContainText("Unknown or inactive SKU");
+    await expectProblem(page, "Unknown or inactive SKU");
     await ctx.close();
   });
 
@@ -147,20 +147,20 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
     const admin = await asUser(browser, "admin@hspmart.test");
     const discounted = Math.round(A.price * 0.7);
     const lowNo = await createQuote(admin.page, uniqueEmail("discount"), `${A.sku}, 5, ${discounted}`);
-    await expect(admin.page.getByTestId("quote-status")).toHaveText("pending_approval");
+    await expect(admin.page.getByTestId("quote-status")).toHaveText("pending approval");
     await expect(admin.page.getByTestId("below-minimum")).toBeVisible();
     await expect(admin.page.getByRole("button", { name: "Send to customer" })).toHaveCount(0);
 
-    await admin.page.locator('textarea[name="reason"]').fill("Strategic first order for new logo account");
+    await admin.page.getByLabel("Exception reason").fill("Strategic first order for new logo account");
     await admin.page.getByRole("button", { name: "Approve exception" }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("cannot approve its own");
+    await expectProblem(admin.page, "cannot approve its own");
 
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto(`/admin/quotes/${lowNo}`);
-    await finance.page.locator('textarea[name="reason"]').fill("short");
+    await finance.page.goto(adminUrl(`/quotes/${lowNo}`));
+    await finance.page.getByLabel("Exception reason").fill("short");
     await finance.page.getByRole("button", { name: "Approve exception" }).click();
-    await expect(finance.page.getByTestId("flash-error")).toContainText("at least 10");
-    await finance.page.locator('textarea[name="reason"]').fill("Strategic first order for new logo account");
+    await expectProblem(finance.page, "at least 10");
+    await finance.page.getByLabel("Exception reason").fill("Strategic first order for new logo account");
     await finance.page.getByRole("button", { name: "Approve exception" }).click();
     await expect(finance.page.getByTestId("quote-status")).toHaveText("approved");
     const [q] = await sql`select exception_reason, approved_by is not null as ok from quotations where number = ${lowNo}`;
@@ -170,7 +170,7 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
 
   test("admin sends; another customer gets 404; the buyer accepts and an order is created", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/quotes/${quoteNo}`);
+    await admin.page.goto(adminUrl(`/quotes/${quoteNo}`));
     await admin.page.getByRole("button", { name: "Send to customer" }).click();
     await expect(admin.page.getByTestId("quote-status")).toHaveText("sent");
 
@@ -194,9 +194,9 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
 
   test("production is blocked until the 50% advance is captured via a verified webhook", async ({ browser, request }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await admin.page.getByRole("button", { name: /start production/ }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("advance");
+    await expectProblem(admin.page, "advance");
 
     const buyer = await asUser(browser, customerEmail);
     await buyer.page.goto(`/my/orders/${orderNo}`);
@@ -225,27 +225,27 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
     expect(Number(after.paid_paise)).toBe(amount);
 
     // Branded order: production also needs uploaded artwork with HSP's written approval.
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await admin.page.getByRole("button", { name: /start production/ }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("artwork");
+    await expectProblem(admin.page, "artwork");
     await buyer.page.goto(`/my/orders/${orderNo}`);
     await buyer.page.getByLabel("Artwork file").setInputFiles({ name: "logo.png", mimeType: "image/png", buffer: PNG });
     await buyer.page.getByRole("button", { name: "Upload artwork" }).click();
     await expect(buyer.page.getByTestId("artwork-row")).toContainText("submitted");
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await admin.page.getByRole("button", { name: "Approve artwork & spec" }).click();
     await expect(admin.page.getByTestId("admin-artwork-row")).toContainText("approved");
     await admin.page.getByRole("button", { name: /start production/ }).click();
-    await expect(admin.page.getByTestId("order-status")).toHaveText("production_approved");
+    await expect(admin.page.getByTestId("order-status")).toHaveText("production approved");
     await Promise.all([admin.ctx.close(), buyer.ctx.close()]);
   });
 
   test("PO goes to the approved supplier at supplier cost; dispatch needs full payment", async ({ browser, request }) => {
     const proc = await asUser(browser, "procurement@hspmart.test");
-    await proc.page.goto(`/admin/orders/${orderNo}`);
-    await proc.page.getByLabel("Supplier").selectOption({ label: "Sharma Gift Works" });
+    await proc.page.goto(adminUrl(`/orders/${orderNo}`));
+    await proc.page.getByLabel("Supplier").selectOption({ label: "Sharma Gift Works (Mumbai)" });
     await proc.page.getByRole("button", { name: "Issue purchase order" }).click();
-    await expect(proc.page.getByTestId("order-status")).toHaveText("po_issued");
+    await expect(proc.page.getByTestId("order-status")).toHaveText("po issued");
     const expectedCost = (paise(Math.round(A.price * 0.6)) + paise(Math.round(B.price * 0.6))) * 5;
     await expect(proc.page.getByTestId("po-row")).toContainText("Sharma Gift Works");
     const [po] = await sql`select total_cost_paise from purchase_orders p join orders o on o.id = p.order_id where o.number = ${orderNo}`;
@@ -254,7 +254,7 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
     await proc.page.getByLabel("Courier").fill("Blue Dart");
     await proc.page.getByLabel("Tracking number").fill("BD123456789");
     await proc.page.getByRole("button", { name: "Mark dispatched" }).click();
-    await expect(proc.page.getByTestId("flash-error")).toContainText("Full payment");
+    await expectProblem(proc.page, "Full payment");
 
     const buyer = await asUser(browser, customerEmail);
     await buyer.page.goto(`/my/orders/${orderNo}`);
@@ -265,7 +265,7 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
     await buyer.page.reload();
     await expect(buyer.page.getByTestId("customer-balance")).toContainText("0");
 
-    await proc.page.goto(`/admin/orders/${orderNo}`);
+    await proc.page.goto(adminUrl(`/orders/${orderNo}`));
     await proc.page.getByLabel("Courier").fill("Blue Dart");
     await proc.page.getByLabel("Tracking number").fill("BD123456789");
     await proc.page.getByRole("button", { name: "Mark dispatched" }).click();
@@ -275,9 +275,9 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
 
   test("delivery needs proof; closing reconciles payments to the paisa and audits every step", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await admin.page.getByRole("button", { name: "Mark delivered" }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("proof");
+    await expectProblem(admin.page, "proof");
     await admin.page.getByLabel("Delivery proof").fill("POD-BD123456789.pdf");
     await admin.page.getByRole("button", { name: "Mark delivered" }).click();
     await expect(admin.page.getByTestId("order-status")).toHaveText("delivered");
@@ -301,11 +301,11 @@ test.describe.serial("2.2–2.5 quote → order → payment → PO → delivery 
     await buyer.page.getByRole("button", { name: "Accept quotation" }).click();
     await expect(buyer.page).toHaveURL(/\/my\/orders\//);
     const ord = buyer.page.url().split("/").pop()!.split("?")[0];
-    await admin.page.goto(`/admin/orders/${ord}`);
+    await admin.page.goto(adminUrl(`/orders/${ord}`));
     await admin.page.getByRole("button", { name: "Cancel order" }).click();
     await expect(admin.page.getByTestId("order-status")).toHaveText("cancelled");
 
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await expect(admin.page.getByRole("button", { name: "Cancel order" })).toHaveCount(0);
     await Promise.all([admin.ctx.close(), buyer.ctx.close()]);
   });

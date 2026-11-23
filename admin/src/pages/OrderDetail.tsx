@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router";
 import { api, inr, rupeesToPaise, when } from "../api";
 import { Badge, btn, btnGhost, Card, ErrorText, input, Loading, useAction } from "../ui";
@@ -43,7 +43,7 @@ export default function OrderDetail({ role }: { role: string }) {
         <h1 className="text-xl font-semibold">{o.number}</h1>
         <span data-testid="order-status"><Badge>{o.status}</Badge></span>
         {o.requiresArtwork && <Badge>branded</Badge>}
-        <span className="text-sm text-muted">{o.source === "online" ? "Online store" : "Quotation"} · {o.customer}{o.partner ? ` · via ${o.partner}` : ""}</span>
+        <span data-testid="order-source" className="text-sm text-muted">{o.source === "online" ? "Online store" : "Quotation"} · {o.customer}{o.partner ? ` · via ${o.partner}` : ""}</span>
       </div>
       <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
         <div className="space-y-6">
@@ -75,10 +75,10 @@ export default function OrderDetail({ role }: { role: string }) {
 
           <Card title="Fulfilment">
             <List empty="No purchase order yet." items={[
-              ...d.purchaseOrders.map((p) => <><span>{p.number} → {p.supplier} · cost {inr(p.totalCostPaise)}</span><Badge>{p.status}</Badge></>),
+              ...d.purchaseOrders.map((p) => <><span data-testid="po-row">{p.number} → {p.supplier} · cost {inr(p.totalCostPaise)}</span><Badge>{p.status}</Badge></>),
               ...d.shipments.map((s) => (
                 <>
-                  <span>{s.city ? `${s.city}: ` : ""}{s.courier} {s.trackingNumber}{s.trackingStatus && !s.deliveredAt ? <> · <Badge>{s.trackingStatus}</Badge></> : null}</span>
+                  <span data-testid="shipment-row">{s.city ? `${s.city}: ` : ""}{s.courier} {s.trackingNumber}{s.trackingStatus && !s.deliveredAt ? <> · <Badge>{s.trackingStatus}</Badge></> : null}</span>
                   <span className="text-xs text-muted">
                     {s.deliveredAt ? <>delivered {when(s.deliveredAt)}{s.deliveryProofUrl?.startsWith("file:") ? <> · <a className="underline" href={`/api/files/${s.deliveryProofUrl.slice(5)}`}>proof</a></> : s.deliveryProofUrl ? ` · ${s.deliveryProofUrl}` : ""}</> : `sent ${when(s.dispatchedAt)}`}
                   </span>
@@ -120,6 +120,9 @@ function StepsCard({ d }: { d: Detail }) {
   const o = d.order;
   const step = useAction(`/admin/orders/${o.number}/steps`, [["order", o.number], ["orders"]]);
   const [supplierId, setSupplierId] = useState(d.ranking[0]?.supplierId ?? "");
+  // The ranking arrives once production is approved (often after this card mounted); pre-select the best supplier.
+  const top = d.ranking[0]?.supplierId;
+  useEffect(() => { if (top) setSupplierId((cur) => cur || top); }, [top]);
   const [courier, setCourier] = useState("");
   const [tracking, setTracking] = useState("");
   const [proof, setProof] = useState("");
@@ -151,7 +154,7 @@ function StepsCard({ d }: { d: Detail }) {
               <option value="">Choose supplier…</option>
               {d.suppliers.map((x) => <option key={x.id} value={x.id}>{x.name}{x.city ? ` (${x.city})` : ""}</option>)}
             </select>
-            <button className={btn} disabled={step.pending} onClick={() => run({ step: "po", supplierId }, "Purchase order issued")}>Issue PO</button>
+            <button className={btn} disabled={step.pending} onClick={() => run({ step: "po", supplierId }, "Purchase order issued")}>Issue purchase order</button>
           </div>
         )}
         {s === "po_issued" && (
@@ -251,7 +254,7 @@ function CreditNoteRow({ order, c, canAct }: { order: string; c: Detail["creditN
   return (
     <li data-testid="credit-note-row">
       {c.number} · {inr(c.totalPaise)} (GST {inr(c.gstPaise)}) · <Badge>{c.status}</Badge>
-      {c.refundPaise > 0 && <> · refund {inr(c.refundPaise)} <Badge>{c.refundStatus}</Badge></>}
+      {c.refundPaise > 0 && <> · refund {inr(c.refundPaise)} <span data-testid="refund-status"><Badge>{c.refundStatus}</Badge></span></>}
       <div className="text-xs text-muted">{c.reason}</div>
       {approve.feedback}{voidIt.feedback}{retry.feedback}
       {canAct && c.status === "draft" && (

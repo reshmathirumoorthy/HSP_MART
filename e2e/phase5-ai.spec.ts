@@ -3,7 +3,7 @@
  * procurement ranking (approved suppliers only), management intelligence; and AI controls.
  */
 import { expect, test } from "@playwright/test";
-import { asUser, createPartner, makeOrder, sql, uniqueEmail } from "./helpers";
+import { adminUrl, asUser, createPartner, makeOrder, sql, uniqueEmail } from "./helpers";
 
 test.describe.serial("5 AI engines", () => {
   test("5.1 discovery returns active, in-budget, occasion-appropriate products and never cost", async ({ request }) => {
@@ -29,7 +29,7 @@ test.describe.serial("5 AI engines", () => {
   test("5.2 quotation assistant understands a request, drafts lines and saves nothing", async ({ browser }) => {
     const [{ before }] = await sql`select count(*)::int before from quotations`;
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/assistant");
+    await admin.page.goto(adminUrl("/assistant"));
     await admin.page.getByLabel("Customer request").fill("Hi, we need 25 Diwali hampers under 3000 each with our logo, delivered in 20 days.");
     await admin.page.getByRole("button", { name: "Draft quote" }).click();
     await expect(admin.page.getByTestId("u-qty")).toHaveText("25");
@@ -42,8 +42,8 @@ test.describe.serial("5 AI engines", () => {
     const [{ after }] = await sql`select count(*)::int after from quotations`;
     expect(after).toBe(before);
 
-    await admin.page.getByRole("link", { name: "Review & create quote" }).click();
-    await expect(admin.page.locator('textarea[name="lines"]')).toHaveValue(draftLines);
+    await admin.page.getByRole("link", { name: "Open as a new quote" }).click();
+    await expect(admin.page.getByLabel(/^Lines/)).toHaveValue(draftLines);
     await admin.ctx.close();
   });
 
@@ -80,7 +80,7 @@ test.describe.serial("5 AI engines", () => {
       paidFraction: 1,
     });
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${order.number}`);
+    await admin.page.goto(adminUrl(`/orders/${order.number}`));
     const ranking = admin.page.getByTestId("supplier-ranking");
     await expect(ranking.locator("li").first()).toContainText("AI Best Value Co");
     await expect(ranking).toContainText("AI Pricey Slow Co");
@@ -104,7 +104,7 @@ test.describe.serial("5 AI engines", () => {
               values (${"PO-LATE-" + Date.now()}, ${poOrder.id}, ${s.id}, 1000, now() - interval '20 days')`;
 
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/insights");
+    await admin.page.goto(adminUrl("/insights"));
     const alerts = admin.page.getByTestId("ai-alerts");
     await expect(alerts).toContainText(`Order ${overdue.number}`);
     await expect(alerts).toContainText("overdue-payment");
@@ -121,9 +121,9 @@ test.describe.serial("5 AI engines", () => {
       expect((await request.get(`/api/ai/discover?q=${encodeURIComponent(q)}&budget=5000&qty=50`)).status()).toBe(200);
     }
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/assistant?q=${encodeURIComponent("200 premium hampers under 5000 with logo")}`);
+    await admin.page.goto(adminUrl(`/assistant?q=${encodeURIComponent("200 premium hampers under 5000 with logo")}`));
     await expect(admin.page.getByTestId("understood")).toBeVisible();
-    await admin.page.goto("/admin/insights");
+    await admin.page.goto(adminUrl("/insights"));
     await expect(admin.page.getByTestId("ai-alerts")).toBeVisible();
     const [after] = await snapshot();
     expect(after).toEqual(before);

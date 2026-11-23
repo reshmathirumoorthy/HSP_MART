@@ -6,7 +6,7 @@
 import { expect, test } from "@playwright/test";
 import { seedProducts as catalogue } from "../scripts/db/seed-data/products";
 import { E2E_WEBHOOK_SECRET } from "../playwright.config";
-import { asUser, createPartner, payInFull, signIn, sql, uniqueEmail } from "./helpers";
+import { adminUrl, asUser, createPartner, expectNotice, expectProblem, payInFull, signIn, sql, uniqueEmail } from "./helpers";
 
 // Products with no supplier rate yet → engine estimates 70% cost: associate 13%, franchise 11%.
 const sellable = catalogue.filter((p) => p.price >= 200 && (p.minOrderQuantity ?? 1) <= 4 && p.active !== false);
@@ -28,7 +28,7 @@ test.describe.serial("3 partner network", () => {
     await page.getByLabel("Bank IFSC").fill("HDFC0001234");
     await page.getByLabel("Bank account (last 4 digits)").fill("4321");
     await page.getByRole("button", { name: "Submit application" }).click();
-    await expect(page.getByTestId("flash-error")).toContainText("accept the partner agreement");
+    await expectProblem(page, "accept the partner agreement");
 
     await page.getByLabel("City", { exact: true }).fill("Pune");
     await page.getByLabel("PAN").fill("BADPAN");
@@ -36,7 +36,7 @@ test.describe.serial("3 partner network", () => {
     await page.getByLabel("Bank account (last 4 digits)").fill("4321");
     await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Submit application" }).click();
-    await expect(page.getByTestId("flash-error")).toContainText("valid PAN");
+    await expectProblem(page, "valid PAN");
 
     await page.getByLabel("City", { exact: true }).fill("Pune");
     await page.getByLabel("PAN").fill("abcde1234f");
@@ -51,9 +51,9 @@ test.describe.serial("3 partner network", () => {
     await expect(page).toHaveURL(/\/account/);
 
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto("/admin/partners");
+    await finance.page.goto(adminUrl("/partners"));
     await finance.page.getByTestId(`partner-${applicant}`).getByRole("button", { name: "Verify KYC" }).click();
-    await expect(finance.page.getByTestId("flash-ok")).toContainText("KYC verified");
+    await expectNotice(finance.page, "KYC verified");
 
     // Same session, role now read from DB → portal opens without signing in again.
     await page.goto("/partner");
@@ -68,12 +68,12 @@ test.describe.serial("3 partner network", () => {
     const fr = await createPartner(uniqueEmail("franchise"), "franchise", "Nagpur");
     const assoc = await createPartner(uniqueEmail("assocdep"), "associate");
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto("/admin/partners");
+    await finance.page.goto(adminUrl("/partners"));
     const before = await finance.page.getByTestId("deposit-liability").textContent();
     const card = finance.page.locator(`[data-testid^="partner-"]`, { hasText: fr.code });
     await card.getByLabel("Deposit received").fill("50000");
     await card.getByRole("button", { name: "Record deposit" }).click();
-    await expect(finance.page.getByTestId("flash-ok")).toHaveText("Deposit recorded as liability");
+    await expectNotice(finance.page, "Deposit recorded as liability");
     await expect(finance.page.getByTestId("deposit-liability")).not.toHaveText(before!);
     const [row] = await sql`select security_deposit_paise from partners where id = ${fr.partnerId}`;
     expect(Number(row.security_deposit_paise)).toBe(5_000_000);
@@ -89,13 +89,13 @@ test.describe.serial("3 partner network", () => {
     await me.page.getByLabel("Customer name").fill("Corp X Pvt Ltd");
     await me.page.getByLabel("Customer email").fill(buyer);
     await me.page.getByRole("button", { name: "Register lead" }).click();
-    await expect(me.page.getByTestId("flash-ok")).toContainText("protected for 90 days");
+    await expectNotice(me.page, "protected for 90 days");
     await expect(me.page.getByTestId("lead-list")).toContainText(/registered · (89|90)d left/);
 
     await me.page.getByLabel("Customer name").fill("Corp X Pvt Ltd");
     await me.page.getByLabel("Customer email").fill(buyer);
     await me.page.getByRole("button", { name: "Register lead" }).click();
-    await expect(me.page.getByTestId("flash-error")).toContainText("already registered");
+    await expectProblem(me.page, "already registered");
 
     const rivalEmail = uniqueEmail("rival");
     await createPartner(rivalEmail, "associate", "Mumbai");
@@ -104,7 +104,7 @@ test.describe.serial("3 partner network", () => {
     await rival.page.getByLabel("Customer name").fill("Corp X HR team");
     await rival.page.getByLabel("Customer email").fill(`hr@${domain}`);
     await rival.page.getByRole("button", { name: "Register lead" }).click();
-    await expect(rival.page.getByTestId("flash-error")).toContainText("protected by another partner");
+    await expectProblem(rival.page, "protected by another partner");
     // Isolation: the rival never sees the other partner's lead.
     await expect(rival.page.getByTestId("lead-list")).not.toContainText(domain);
 
@@ -115,7 +115,7 @@ test.describe.serial("3 partner network", () => {
     await rival.page.getByLabel("Customer name").fill("BigCo");
     await rival.page.getByLabel("Customer email").fill(keyEmail);
     await rival.page.getByRole("button", { name: "Register lead" }).click();
-    await expect(rival.page.getByTestId("flash-error")).toContainText("national key account");
+    await expectProblem(rival.page, "national key account");
     await Promise.all([me.ctx.close(), rival.ctx.close(), admin.ctx.close()]);
   });
 
@@ -124,11 +124,11 @@ test.describe.serial("3 partner network", () => {
     await me.page.goto("/partner/quotes");
     await me.page.getByLabel("Quote lines").fill(`${C.sku}, 4, 1`);
     await me.page.getByRole("button", { name: "Price quote" }).click();
-    await expect(me.page.getByTestId("flash-error")).toContainText("approved catalogue prices only");
+    await expectProblem(me.page, "approved catalogue prices only");
 
     await me.page.getByLabel("Quote lines").fill(`${C.sku}, 4`);
     await me.page.getByRole("button", { name: "Price quote" }).click();
-    await expect(me.page.getByTestId("flash-ok")).toContainText("created");
+    await expectNotice(me.page, "created");
     const [q] = await sql`select number, status, channel, contribution_bps, commission_paise, subtotal_paise from quotations
                           where partner_id = (select p.id from partners p join users u on u.id = p.user_id where u.email = ${applicant})
                           order by created_at desc limit 1`;
@@ -136,7 +136,7 @@ test.describe.serial("3 partner network", () => {
     expect(Number(q.commission_paise)).toBe(Math.round(Number(q.subtotal_paise) * 0.1));
 
     await me.page.getByTestId("partner-quotes").locator("li", { hasText: q.number }).getByRole("button", { name: "Send" }).click();
-    await expect(me.page.getByTestId("flash-ok")).toContainText("sent");
+    await expectNotice(me.page, "sent");
 
     const customer = await asUser(browser, buyer);
     await customer.page.goto(`/my/quotes/${q.number}`);
@@ -158,7 +158,7 @@ test.describe.serial("3 partner network", () => {
     await fr.page.getByLabel("Customer name").fill("Indore Retail");
     await fr.page.getByLabel("Customer email").fill(uniqueEmail("indore"));
     await fr.page.getByRole("button", { name: "Register lead" }).click();
-    await expect(fr.page.getByTestId("flash-ok")).toBeVisible();
+    await expect(fr.page.getByRole("status").first()).toBeVisible();
     await fr.page.goto("/partner/quotes");
     await fr.page.getByLabel("Quote lines").fill(`${D.sku}, 4`);
     await fr.page.getByRole("button", { name: "Price quote" }).click();
@@ -170,12 +170,12 @@ test.describe.serial("3 partner network", () => {
 
   test("3.2 a direct HSP quote to a protected customer is still attributed to the partner", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/quotes/new");
-    await admin.page.locator('input[name="customerName"]').fill("Corp X Pvt Ltd");
-    await admin.page.locator('input[name="customerEmail"]').fill(buyer);
-    await admin.page.locator('textarea[name="lines"]').fill(`${D.sku}, 4`);
+    await admin.page.goto(adminUrl("/quotes"));
+    await admin.page.getByLabel("Customer name").fill("Corp X Pvt Ltd");
+    await admin.page.getByLabel("Customer email").fill(buyer);
+    await admin.page.getByLabel(/^Lines/).fill(`${D.sku}, 4`);
     await admin.page.getByRole("button", { name: "Create quote" }).click();
-    await expect(admin.page).toHaveURL(/\/admin\/quotes\/Q-/);
+    await expect(admin.page).toHaveURL(/\/quotes\/Q-/);
     const no = admin.page.url().split("/").pop()!.split("?")[0];
     const [q] = await sql`select q.channel, p.user_id = u.id as mine from quotations q join partners p on p.id = q.partner_id
                           join users u on u.email = ${applicant} where q.number = ${no}`;
@@ -192,46 +192,46 @@ test.describe.serial("3 partner network", () => {
   test("3.5 supplier portal: linked login sees only its POs, acknowledges and updates stock", async ({ browser, request }) => {
     const supplierEmail = uniqueEmail("supplier");
     const proc = await asUser(browser, "procurement@hspmart.test");
-    await proc.page.goto("/admin/suppliers");
+    await proc.page.goto(adminUrl("/suppliers"));
     await proc.page.getByLabel("Supplier name").fill("Pune Packers");
     await proc.page.getByLabel("City", { exact: true }).fill("Pune");
     await proc.page.getByLabel("Supplier login email").fill(supplierEmail);
     await proc.page.getByRole("button", { name: "Add (pending approval)" }).click();
-    const card = proc.page.getByTestId("supplier-Pune Packers").locator("..");
+    const card = proc.page.getByTestId("supplier-Pune Packers");
     await card.getByLabel("Rate SKU").fill(C.sku);
     await card.getByLabel("Rate cost").fill(String(Math.round(C.price * 0.65)));
     await card.getByLabel("Lead time").fill("4");
     await card.getByRole("button", { name: "Save rate" }).click();
     await proc.page.getByTestId("supplier-Pune Packers").getByRole("button", { name: "Approve" }).click();
-    await expect(proc.page.getByTestId("flash-ok")).toHaveText("Supplier approved");
+    await expectNotice(proc.page, "Supplier approved");
 
     const customer = await asUser(browser, buyer);
     await payInFull(customer.page, request, orderNo, E2E_WEBHOOK_SECRET);
 
-    await proc.page.goto(`/admin/orders/${orderNo}`);
+    await proc.page.goto(adminUrl(`/orders/${orderNo}`));
     await proc.page.getByRole("button", { name: "Approve production" }).click();
-    await proc.page.getByLabel("Supplier").selectOption({ label: "Pune Packers" });
+    await proc.page.getByLabel("Supplier").selectOption({ label: "Pune Packers (Pune)" });
     await proc.page.getByRole("button", { name: "Issue purchase order" }).click();
-    await expect(proc.page.getByTestId("order-status")).toHaveText("po_issued");
+    await expect(proc.page.getByTestId("order-status")).toHaveText("po issued");
 
     const sup = await asUser(browser, supplierEmail);
     await sup.page.goto("/supplier");
     await expect(sup.page.getByTestId("supplier-pos").locator("li")).toHaveCount(1);
     await expect(sup.page.getByTestId("supplier-pos")).not.toContainText("Sharma");
     await sup.page.getByRole("button", { name: "Acknowledge" }).click();
-    await expect(sup.page.getByTestId("flash-ok")).toHaveText("Purchase order acknowledged");
+    await expectNotice(sup.page, "Purchase order acknowledged");
     await sup.page.getByLabel(`Stock for ${C.sku}`).fill("250");
     await sup.page.getByRole("button", { name: "Update stock" }).click();
-    await expect(sup.page.getByTestId("flash-ok")).toHaveText("Stock updated");
+    await expectNotice(sup.page, "Stock updated");
     // Suppliers never reach the admin or partner areas.
-    await sup.page.goto("/admin/orders");
+    await sup.page.goto("/admin/orders"); // the store's /admin only forwards staff
     await expect(sup.page).toHaveURL(/\/supplier$/);
     await Promise.all([proc.ctx.close(), customer.ctx.close(), sup.ctx.close()]);
   });
 
   test("3.3 ledger: pending → earned on close → approved by finance; cancellation reverses", async ({ browser }) => {
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${orderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${orderNo}`));
     await admin.page.getByLabel("Courier").fill("Delhivery");
     await admin.page.getByLabel("Tracking number").fill("DL998877");
     await admin.page.getByRole("button", { name: "Mark dispatched" }).click();
@@ -245,14 +245,14 @@ test.describe.serial("3 partner network", () => {
     await expect(me.page.getByTestId("ledger-earned")).not.toHaveText("₹0.00");
 
     const finance = await asUser(browser, "finance@hspmart.test");
-    await finance.page.goto("/admin/partners");
+    await finance.page.goto(adminUrl("/partners"));
     await finance.page.getByTestId(`partner-${applicant}`).getByRole("button", { name: "Approve earned commission" }).click();
-    await expect(finance.page.getByTestId("flash-ok")).toHaveText("Eligible commissions approved");
+    await expectNotice(finance.page, "Eligible commissions approved");
     await me.page.reload();
     await expect(me.page.getByTestId("ledger-approved")).not.toHaveText("₹0.00");
     await expect(me.page.getByTestId("ledger-earned")).toHaveText("₹0.00");
 
-    await admin.page.goto(`/admin/orders/${cancelOrderNo}`);
+    await admin.page.goto(adminUrl(`/orders/${cancelOrderNo}`));
     await admin.page.getByRole("button", { name: "Cancel order" }).click();
     await expect(admin.page.getByTestId("order-status")).toHaveText("cancelled");
 

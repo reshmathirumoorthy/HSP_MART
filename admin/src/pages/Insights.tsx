@@ -32,7 +32,7 @@ export default function Insights({ role }: { role: string }) {
     <div className="space-y-6">
       <PageTitle>Management insights</PageTitle>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Stat label="Overdue balances" value={String(d.overdue.length)} />
+        <Stat label="Overdue balances" value={String(d.overdue.length)} testId="kpi-overdue" />
         <Stat label="Quotes awaiting margin approval" value={String(d.margin.pending)} />
         <Stat label="Inactive partners (30d)" value={String(d.inactive.length)} />
         <Stat label="Deposits held (liability)" value={inr(d.deposits)} />
@@ -44,7 +44,7 @@ export default function Insights({ role }: { role: string }) {
       <p className="text-xs text-muted">Customer advances are money received on orders not yet delivered. They are a liability (unearned revenue) until delivery, not sales.</p>
       <div className="grid gap-6 md:grid-cols-2">
         <Card title="Channel economics">
-          <table className="w-full text-sm">
+          <table data-testid="channel-table" className="w-full text-sm">
             <thead className="text-xs uppercase text-muted"><tr><th className="text-left">Channel</th><th className="text-right">Orders</th><th className="text-right">Revenue</th><th className="text-right">Contribution</th></tr></thead>
             <tbody>
               {d.channels.map((c) => (
@@ -59,19 +59,19 @@ export default function Insights({ role }: { role: string }) {
         </Card>
         <Card title="Associate income (last 30 days)">
           <p className="mb-2 text-sm">{d.income.associates} active associates · median <strong>{inr(d.income.median)}</strong></p>
-          <ul className="space-y-1 text-sm">
+          <ul data-testid="income-buckets" className="space-y-1 text-sm">
             {d.income.buckets.map((b) => (
               <li key={b.label} className="flex items-center gap-2">
                 <span className="w-20 text-xs">{b.label}</span>
                 <span className="h-3 rounded bg-brand" style={{ width: `${(b.count / max) * 70}%`, minWidth: b.count ? 4 : 0 }} />
-                <span className="text-xs tabular-nums">{b.count}</span>
+                <span data-testid="bucket-count" className="text-xs tabular-nums">{b.count}</span>
               </li>
             ))}
           </ul>
         </Card>
         <Card title="AI exception alerts">
-          <ul className="space-y-2 text-sm">
-            {d.alerts.map((a, i) => <li key={i}><Badge>{a.severity}</Badge> {a.message}</li>)}
+          <ul data-testid="ai-alerts" className="space-y-2 text-sm">
+            {d.alerts.map((a, i) => <li key={i}><Badge>{a.severity}</Badge> {a.message} <span className="text-xs text-muted">({a.kind})</span></li>)}
             {!d.alerts.length && <li className="text-muted">No exceptions detected.</li>}
           </ul>
         </Card>

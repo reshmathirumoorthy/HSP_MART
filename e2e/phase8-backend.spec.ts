@@ -118,13 +118,13 @@ test.describe("8.3 the React admin portal runs on the API", () => {
     await page.getByRole("button", { name: "Sign in" }).click();
 
     const name = `SPA Supplier ${Date.now().toString(36)}`;
-    await page.getByLabel("name", { exact: true }).fill(name);
-    await page.getByRole("button", { name: "Add", exact: true }).click();
+    await page.getByLabel("Supplier name").fill(name);
+    await page.getByRole("button", { name: "Add (pending approval)" }).click();
     const card = page.getByTestId(`supplier-${name}`);
     await card.getByRole("button", { name: "Approve" }).click();
     await expect(card.getByText("approved", { exact: true })).toBeVisible();
-    await card.getByLabel("SKU").fill("NOT-A-SKU");
-    await card.getByLabel("Cost (₹)").fill("100");
+    await card.getByLabel("Rate SKU").fill("NOT-A-SKU");
+    await card.getByLabel("Rate cost").fill("100");
     await card.getByRole("button", { name: "Save rate" }).click();
     await expect(card.getByRole("alert")).toContainText("Unknown SKU");
 

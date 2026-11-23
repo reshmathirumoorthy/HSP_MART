@@ -27,7 +27,7 @@ export default function QuoteDetail({ role, userId }: { role: string; userId: st
         <Link to="/quotes" className="text-sm text-muted underline">Quotes</Link>
         <h1 className="text-xl font-semibold">{x.number}</h1>
         <span data-testid="quote-status"><Badge>{x.status}</Badge></span>
-        {x.belowMinimum && <Badge>below 12% minimum</Badge>}
+        {x.belowMinimum && <span data-testid="below-minimum"><Badge>below 12% minimum</Badge></span>}
         {x.orderNumber && <Link className="text-sm underline" to={`/orders/${x.orderNumber}`}>Order {x.orderNumber}</Link>}
       </div>
       <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
@@ -70,7 +70,7 @@ export default function QuoteDetail({ role, userId }: { role: string; userId: st
           {x.status === "approved" && role === "hsp_admin" && (
             <Card title="Send to customer">
               {send.feedback}
-              <button className={btn} disabled={send.pending} onClick={() => send.run({}, "Quote sent to customer")}>Send quote</button>
+              <button className={btn} disabled={send.pending} onClick={() => send.run({}, "Quote sent to customer")}>Send to customer</button>
             </Card>
           )}
         </div>

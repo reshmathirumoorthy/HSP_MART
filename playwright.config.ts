@@ -77,6 +77,7 @@ export default defineConfig({
       timeout: process.env.E2E_PROD === "1" ? 600_000 : 180_000,
       env: {
         BACKEND_URL: `http://localhost:${API_PORT}`,
+        ADMIN_APP_URL: `http://localhost:${ADMIN_PORT}`,
         SESSION_SECRET: E2E_SESSION_SECRET,
         REVALIDATE_SECRET: E2E_REVALIDATE_SECRET,
       },

@@ -1,17 +1,5 @@
 import type { ReactNode } from "react";
 
-export const ADMIN_NAV = [
-  { href: "/admin", label: "Overview" },
-  { href: "/admin/quotes", label: "Quotes" },
-  { href: "/admin/assistant", label: "AI assistant" },
-  { href: "/admin/orders", label: "Orders" },
-  { href: "/admin/suppliers", label: "Suppliers" },
-  { href: "/admin/partners", label: "Partners" },
-  { href: "/admin/payouts", label: "Payouts" },
-  { href: "/admin/insights", label: "Insights" },
-  { href: "/admin/programmes", label: "Programmes" },
-];
-
 export const inputCls =
   "w-full rounded-md border border-[var(--color-border)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-brand)]";
 export const btnCls =
