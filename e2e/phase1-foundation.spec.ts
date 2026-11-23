@@ -4,7 +4,7 @@
  */
 import { expect, test } from "@playwright/test";
 import { seedProducts as staticCatalogue } from "../scripts/db/seed-data/products";
-import { createUser, signIn, sql, uniqueEmail } from "./helpers";
+import { ADMIN_APP, createUser, signIn, sql, uniqueEmail } from "./helpers";
 
 test.describe("1.1 database & catalogue", () => {
   test("every storefront product is in the DB with a division and budget band", async () => {
@@ -91,11 +91,11 @@ test.describe("1.2 authentication & roles", () => {
     await expect(page.getByTestId("form-error")).toContainText("Too many codes");
   });
 
-  test("staff land on /admin and see the DB catalogue by division", async ({ page }) => {
+  test("staff land in the admin app and see the DB catalogue by division", async ({ page }) => {
     const staff = uniqueEmail("staff-admin"); // fresh account: shared ones are OTP rate limited across runs
     await createUser(staff, "hsp_admin");
-    await signIn(page, staff);
-    await expect(page).toHaveURL(/\/admin$/);
+    await signIn(page, staff); // the store's /admin forwards staff to the admin app
+    await expect(page).toHaveURL(`${ADMIN_APP}/`);
     await expect(page.getByTestId("portal-role")).toHaveText("hsp_admin");
     await expect(page.getByTestId("stat-products")).toHaveText(String(staticCatalogue.length));
     await expect(page.getByTestId("stat-division-corporate")).toBeVisible();
@@ -150,11 +150,11 @@ test.describe("1.2 sessions", () => {
     const finance = uniqueEmail("staff-finance");
     await createUser(finance, "hsp_finance");
     await signIn(page, finance);
-    await expect(page).toHaveURL(/\/admin$/);
+    await expect(page).toHaveURL(`${ADMIN_APP}/`);
     const cookie = (await context.cookies()).find((c) => c.name === "hsp_session")!;
 
-    await page.getByRole("button", { name: "Sign out" }).click();
-    await expect(page).toHaveURL("http://localhost:3100/");
+    await Promise.all([page.waitForEvent("load"), page.getByRole("button", { name: "Sign out" }).click()]);
+    await expect(page.getByLabel("Email or mobile")).toBeVisible();
 
     await context.addCookies([cookie]);
     await page.goto("/admin");

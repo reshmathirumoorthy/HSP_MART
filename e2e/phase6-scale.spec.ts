@@ -4,7 +4,7 @@
  */
 import { expect, test } from "@playwright/test";
 import { E2E_CRON_SECRET } from "../playwright.config";
-import { asUser, createPartner, makeOrder, signIn, sql, uniqueEmail } from "./helpers";
+import { adminUrl, asUser, createPartner, expectNotice, expectProblem, makeOrder, signIn, sql, uniqueEmail } from "./helpers";
 
 test.describe.serial("6 scale features", () => {
   test("6.1 an annual programme raises one draft quote when due, then rolls forward a year", async ({ browser, request }) => {
@@ -13,16 +13,16 @@ test.describe.serial("6 scale features", () => {
     const occasion = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10);
 
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto("/admin/programmes");
+    await admin.page.goto(adminUrl("/programmes"));
     await admin.page.getByLabel("Customer name").fill("Annual Gifting Co");
     await admin.page.getByLabel("Customer email").fill(custEmail);
     await admin.page.getByLabel("Programme name").fill("Diwali staff gifts");
     await admin.page.getByLabel("Occasion", { exact: true }).fill("Diwali");
-    await admin.page.getByLabel("Occasion date").fill(occasion);
-    await admin.page.getByLabel("Lead days").fill("30");
-    await admin.page.getByLabel("Programme lines").fill(`${prod.sku}, 20`);
+    await admin.page.getByLabel("Next occasion date").fill(occasion);
+    await admin.page.getByLabel("Raise quote this many days before").fill("30");
+    await admin.page.getByLabel(/^Lines/).fill(`${prod.sku}, 20`);
     await admin.page.getByRole("button", { name: "Schedule" }).click();
-    await expect(admin.page.getByTestId("flash-ok")).toHaveText("Programme scheduled");
+    await expectNotice(admin.page, "Programme scheduled");
 
     expect((await request.get("/api/cron/programmes")).status()).toBe(401);
     expect((await request.get("/api/cron/programmes", { headers: { authorization: "Bearer wrong-secret-value!!" } })).status()).toBe(401);
@@ -36,7 +36,7 @@ test.describe.serial("6 scale features", () => {
     expect(["approved", "pending_approval"]).toContain(q.status);
 
     await admin.page.getByRole("button", { name: "Run due programmes now" }).click();
-    await expect(admin.page.getByTestId("flash-ok")).toHaveText("Nothing due");
+    await expectNotice(admin.page, "Nothing due");
     const [p] = await sql`select next_date from programmes p join customers c on c.id = p.customer_id where c.email = ${custEmail}`;
     expect(new Date(p.next_date).getFullYear()).toBe(new Date(occasion).getFullYear() + 1);
     await expect(admin.page.getByTestId("programme-list")).toContainText(raised[0]);
@@ -52,15 +52,15 @@ test.describe.serial("6 scale features", () => {
       paidFraction: 1,
     });
     const admin = await asUser(browser, "admin@hspmart.test");
-    await admin.page.goto(`/admin/orders/${order.number}`);
+    await admin.page.goto(adminUrl(`/orders/${order.number}`));
 
     await admin.page.getByLabel("Recipients CSV", { exact: true }).fill("name, phone, address, city, pincode, quantity\nAsha, 98765 43210, 12 MG Road, Pune, 0110, 1");
     await admin.page.getByRole("button", { name: "Upload recipients" }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("invalid PIN code");
+    await expectProblem(admin.page, "invalid PIN code");
 
     await admin.page.getByLabel("Recipients CSV", { exact: true }).fill("Asha, 9876543210, 12 MG Road, Pune, 411001, 1");
     await admin.page.getByRole("button", { name: "Upload recipients" }).click();
-    await expect(admin.page.getByTestId("flash-error")).toContainText("account for 1 units but the order has 3");
+    await expectProblem(admin.page, "account for 1 units but the order has 3");
 
     await admin.page
       .getByLabel("Recipients CSV", { exact: true })

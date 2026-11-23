@@ -3,9 +3,21 @@ import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "
 import { join } from "node:path";
 import { expect, type Page } from "@playwright/test";
 import postgres from "postgres";
-import { TEST_DATABASE_URL } from "../playwright.config";
+import { ADMIN_PORT, TEST_DATABASE_URL } from "../playwright.config";
 
 export const sql = postgres(TEST_DATABASE_URL, { max: 2, onnotice: () => {} });
+
+/** The React admin app (the staff console). Same host as the store, so the session cookie is shared. */
+export const ADMIN_APP = `http://localhost:${ADMIN_PORT}`;
+export const adminUrl = (path: string) => `${ADMIN_APP}${path.startsWith("/") ? path : `/${path}`}`;
+
+/** The admin app confirms an action with a role="status" message and reports a refusal with role="alert". */
+export async function expectNotice(page: Page, text: string | RegExp) {
+  await expect(page.getByRole("status").filter({ hasText: text }).first()).toBeVisible();
+}
+export async function expectProblem(page: Page, text: string | RegExp) {
+  await expect(page.getByRole("alert").filter({ hasText: text }).first()).toBeVisible();
+}
 
 let counter = 0;
 export const uniqueEmail = (tag: string) =>
@@ -67,6 +79,7 @@ export async function asUser(browser: Browser, identifier: string) {
   const cached = cachedSession(identifier);
   const ctx = await browser.newContext(cached ? { storageState: cached } : {});
   const page = await ctx.newPage();
+  page.on("dialog", (d) => d.accept()); // staff pages confirm destructive actions; tests always proceed
   if (!cached) {
     await signIn(page, identifier);
     saveSession(identifier, await ctx.storageState());

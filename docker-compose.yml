@@ -33,6 +33,7 @@ services:
     env_file: deploy/.env.docker
     environment:
       BACKEND_URL: http://api:8000
+      # ADMIN_APP_URL (where /admin forwards staff) comes from deploy/.env.docker.
     depends_on: [api]
     restart: unless-stopped
 

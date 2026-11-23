@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { api, inr, pct } from "../api";
 import { btn, Card, ErrorText, input, Loading, PageTitle } from "../ui";
 
@@ -12,15 +12,16 @@ type Draft = {
 };
 
 export default function Assistant() {
-  const [text, setText] = useState("");
-  const [asked, setAsked] = useState("");
+  const [params] = useSearchParams();
+  const [text, setText] = useState(params.get("q") ?? "");
+  const [asked, setAsked] = useState(params.get("q") ?? "");
   const q = useQuery({ queryKey: ["assistant", asked], queryFn: () => api<Draft>(`/admin/assistant?q=${encodeURIComponent(asked)}`), enabled: !!asked });
   return (
     <div className="space-y-6">
       <PageTitle>Quotation assistant</PageTitle>
       <form onSubmit={(e: FormEvent) => { e.preventDefault(); setAsked(text.trim()); }} className="flex flex-wrap gap-2">
         <input aria-label="Customer request" className={`${input} flex-1`} placeholder="e.g. 200 Diwali hampers under ₹1500 with logo in 20 days" value={text} onChange={(e) => setText(e.target.value)} />
-        <button className={btn}>Draft</button>
+        <button className={btn}>Draft quote</button>
       </form>
       <ErrorText error={q.error} />
       {q.isFetching && <Loading />}
@@ -28,13 +29,13 @@ export default function Assistant() {
         <div className="grid gap-6 md:grid-cols-2">
           <Card title="Understood" testId="understood">
             <ul className="space-y-1 text-sm">
-              <li>Quantity: {q.data.understood.quantity ?? "—"}</li>
-              <li>Budget per unit: {q.data.understood.budgetRupees ? `₹${q.data.understood.budgetRupees}` : "—"}</li>
+              <li>Quantity: <span data-testid="u-qty">{q.data.understood.quantity ?? "—"}</span></li>
+              <li>Budget per unit: <span data-testid="u-budget">{q.data.understood.budgetRupees ? `₹${q.data.understood.budgetRupees}` : "—"}</span></li>
               <li>Deadline: {q.data.understood.deadlineDays ? `${q.data.understood.deadlineDays} days` : "—"}</li>
-              <li>Branding: {q.data.understood.branding ? "Yes — artwork approval required" : "No"}</li>
+              <li>Branding: <span data-testid="u-branding">{q.data.understood.branding ? "Yes — artwork approval required" : "No"}</span></li>
             </ul>
             <h3 className="mt-4 text-sm font-medium">Suggestions (approved catalogue only)</h3>
-            <ul className="mt-1 space-y-2 text-sm">
+            <ul data-testid="suggestions" className="mt-1 space-y-2 text-sm">
               {q.data.suggestions.map((s) => <li key={s.id}><strong>{s.sku}</strong> {s.name} · {inr(s.pricePaise)}<span className="block text-xs text-muted">{s.reason}</span></li>)}
               {!q.data.suggestions.length && <li>No approved product fits — widen the budget or deadline.</li>}
             </ul>
@@ -47,7 +48,7 @@ export default function Assistant() {
                 <dt className="font-medium">Total</dt><dd className="text-right font-medium">{inr(q.data.preview.totalPaise)}</dd>
                 <dt className="text-muted">Contribution</dt><dd className="text-right">{pct(q.data.preview.contributionBps)}</dd>
               </dl>
-              <pre className="mt-3 rounded bg-stone-100 p-2 text-xs">{q.data.linesText}</pre>
+              <pre data-testid="draft-lines" className="mt-3 rounded bg-stone-100 p-2 text-xs">{q.data.linesText}</pre>
               <Link className={`${btn} mt-3`} to={`/quotes?lines=${encodeURIComponent(q.data.linesText)}`}>Open as a new quote</Link>
               <p className="mt-2 text-xs text-muted">The assistant only drafts. The pricing engine recomputes prices, GST and margin when a person creates the quote.</p>
             </Card>

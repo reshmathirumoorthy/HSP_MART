@@ -1,4 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { api, inr, when } from "../api";
 import { Badge, btnGhost, Card, ErrorText, ExportLink, Loading, PageTitle, useAction } from "../ui";
 
@@ -10,6 +11,7 @@ type D = {
 const KEY = [["payouts"], ["partners"]];
 
 export default function Payouts({ role, userId }: { role: string; userId: string }) {
+  const [notice, setNotice] = useState<string | null>(null);
   const q = useQuery({ queryKey: ["payouts"], queryFn: () => api<D>("/admin/payouts") });
   if (q.error) return <ErrorText error={q.error} />;
   if (!q.data) return <Loading />;
@@ -18,6 +20,7 @@ export default function Payouts({ role, userId }: { role: string; userId: string
   return (
     <div className="space-y-6">
       <PageTitle>Partner payouts</PageTitle>
+      {notice && <p role="status" className="rounded-md bg-green-50 px-3 py-2 text-sm text-good">{notice}</p>}
       <p className="text-sm text-muted">TDS withheld at {(d.tdsBps / 100).toFixed(2)}% (confirm against the Income-tax Act, 2025 s.393). Payouts need a second finance/admin approver.</p>
       <div className="flex flex-wrap gap-2">
         <ExportLink kind="payouts">Payouts CSV</ExportLink>
@@ -29,7 +32,7 @@ export default function Payouts({ role, userId }: { role: string; userId: string
       <div className="grid gap-6 md:grid-cols-2">
         <Card title="Approved commission due">
           <ul className="divide-y divide-line text-sm">
-            {d.due.map((x) => <DueRow key={x.partnerId} x={x} canRaise={finance} />)}
+            {d.due.map((x) => <DueRow key={x.partnerId} x={x} canRaise={finance} onRaised={setNotice} />)}
             {!d.due.length && <li className="py-2 text-muted">Nothing due.</li>}
           </ul>
         </Card>
@@ -44,15 +47,20 @@ export default function Payouts({ role, userId }: { role: string; userId: string
   );
 }
 
-function DueRow({ x, canRaise }: { x: D["due"][number]; canRaise: boolean }) {
-  const raise = useAction(`/admin/partners/${x.partnerId}/payouts`, KEY);
+function DueRow({ x, canRaise, onRaised }: { x: D["due"][number]; canRaise: boolean; onRaised: (m: string) => void }) {
+  const qc = useQueryClient();
+  // Raising moves the partner out of "due", so the confirmation is shown at page level.
+  const raise = useMutation({
+    mutationFn: () => api(`/admin/partners/${x.partnerId}/payouts`, {}),
+    onSuccess: () => { onRaised(`Payout raised for ${x.code} — awaiting second approval`); KEY.forEach((queryKey) => qc.invalidateQueries({ queryKey })); },
+  });
   return (
     <li data-testid={`due-${x.code}`} className="py-2">
       <div className="flex items-center justify-between gap-2">
         <span>{x.code} · {inr(x.amountPaise)}</span>
-        {canRaise && <button className={btnGhost} onClick={() => raise.run({}, "Payout raised — awaiting second approval")}>Raise payout</button>}
+        {canRaise && <button className={btnGhost} disabled={raise.isPending} onClick={() => raise.mutate()}>Raise payout</button>}
       </div>
-      {raise.feedback}
+      <ErrorText error={raise.error} />
     </li>
   );
 }

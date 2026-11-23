@@ -96,10 +96,10 @@ function Contracts({ d, canEdit }: { d: D; canEdit: boolean }) {
           const p = Number(f.renewalPct);
           create.run({ customerEmail: f.customerEmail, partnerCode: f.partnerCode, months: Number(f.months) || 12, renewalCommissionBps: Number.isFinite(p) ? Math.round(p * 100) : -1, reference: f.reference }, "Contract recorded — renewal commission applies");
         }}>
-          <Field label="Customer email"><input className={input} value={f.customerEmail} onChange={set("customerEmail")} /></Field>
-          <Field label="Partner code"><input className={input} placeholder="HSP-A-…" value={f.partnerCode} onChange={set("partnerCode")} /></Field>
-          <Field label="Term (months)"><input className={input} value={f.months} onChange={set("months")} /></Field>
-          <Field label="Renewal commission %"><input className={input} value={f.renewalPct} onChange={set("renewalPct")} /></Field>
+          <Field label="Customer email"><input aria-label="Contract customer email" className={input} value={f.customerEmail} onChange={set("customerEmail")} /></Field>
+          <Field label="Partner code"><input aria-label="Contract partner code" className={input} placeholder="HSP-A-…" value={f.partnerCode} onChange={set("partnerCode")} /></Field>
+          <Field label="Term (months)"><input aria-label="Contract months" className={input} value={f.months} onChange={set("months")} /></Field>
+          <Field label="Renewal commission %"><input aria-label="Renewal commission percent" className={input} value={f.renewalPct} onChange={set("renewalPct")} /></Field>
           <Field label="Contract / PO reference"><input className={input} value={f.reference} onChange={set("reference")} /></Field>
           <div className="flex items-end"><button className={btn}>Record contract</button></div>
           <div className="sm:col-span-3">{create.feedback}</div>
@@ -113,7 +113,7 @@ function ContractRow({ c, canEdit }: { c: D["contracts"][number]; canEdit: boole
   const end = useAction(`/admin/contracts/${c.id}/end`, KEY);
   const [reason, setReason] = useState("");
   return (
-    <li className="py-2">
+    <li data-testid={`contract-${c.email}`} className="py-2">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <span>{c.customer} → {c.partner} · {(c.renewalCommissionBps / 100).toFixed(2)}% until {when(c.endsAt)} <Badge>{c.status}</Badge>{c.endedReason && <span className="text-xs"> — {c.endedReason}</span>}</span>
         {canEdit && c.status === "active" && (

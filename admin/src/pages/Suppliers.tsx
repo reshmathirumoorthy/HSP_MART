@@ -20,10 +20,10 @@ export default function Suppliers() {
       <Card title="Add supplier">
         <form onSubmit={submit} className="grid gap-2 md:grid-cols-5">
           {(["name", "city", "gstin", "loginEmail"] as const).map((k) => (
-            <input key={k} aria-label={k} placeholder={{ name: "Name", city: "City", gstin: "GSTIN", loginEmail: "Login email (optional)" }[k]}
+            <input key={k} aria-label={{ name: "Supplier name", city: "City", gstin: "GSTIN", loginEmail: "Supplier login email" }[k]} placeholder={{ name: "Name", city: "City", gstin: "GSTIN", loginEmail: "Login email (optional)" }[k]}
               className={input} value={form[k]} required={k === "name"} onChange={(e) => setForm({ ...form, [k]: e.target.value })} />
           ))}
-          <button className={btn} disabled={create.pending}>Add</button>
+          <button className={btn} disabled={create.pending}>Add (pending approval)</button>
         </form>
         <div className="mt-2">{create.feedback}</div>
       </Card>
@@ -59,9 +59,9 @@ function SupplierCard({ s }: { s: S }) {
         e.preventDefault();
         rate.run({ sku, costPaise: rupeesToPaise(cost), leadTimeDays: Number(lead) || 7 }, "Rate saved");
       }}>
-        <input aria-label="SKU" placeholder="SKU" className={`${input} w-36`} value={sku} onChange={(e) => setSku(e.target.value)} required />
-        <input aria-label="Cost (₹)" placeholder="Cost ₹" type="number" step="0.01" min="0.01" className={`${input} w-28`} value={cost} onChange={(e) => setCost(e.target.value)} required />
-        <input aria-label="Lead time (days)" type="number" min="1" className={`${input} w-20`} value={lead} onChange={(e) => setLead(e.target.value)} />
+        <input aria-label="Rate SKU" placeholder="SKU" className={`${input} w-36`} value={sku} onChange={(e) => setSku(e.target.value)} required />
+        <input aria-label="Rate cost" placeholder="Cost ₹" type="number" step="0.01" min="0.01" className={`${input} w-28`} value={cost} onChange={(e) => setCost(e.target.value)} required />
+        <input aria-label="Lead time" type="number" min="1" className={`${input} w-20`} value={lead} onChange={(e) => setLead(e.target.value)} />
         <button className={btnGhost} disabled={rate.pending}>Save rate</button>
       </form>
       <div className="mt-2">{rate.feedback}</div>

@@ -15,7 +15,6 @@ test("an admin adds staff, changes their role and deactivates them", async ({ br
   await createUser(adminEmail, "hsp_admin", "Users Admin");
   const admin = await asUser(browser, adminEmail);
   const page = admin.page;
-  page.on("dialog", (d) => d.accept());
   await page.goto(`${ADMIN_APP}/users`);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Staff & roles");
 
@@ -30,7 +29,7 @@ test("an admin adds staff, changes their role and deactivates them", async ({ br
   const ctx = await browser.newContext();
   const theirs = await ctx.newPage();
   await signIn(theirs, staff);
-  await expect(theirs).toHaveURL(/\/admin$/);
+  await expect(theirs).toHaveURL(`${ADMIN_APP}/`);
   await expect(theirs.getByTestId("portal-role")).toHaveText("hsp_procurement");
 
   // Search finds them; changing the role signs them out.

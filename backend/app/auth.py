@@ -75,11 +75,11 @@ def create_session(conn: Connection, response: Response, user_id: str, role: str
     token = jwt.encode({"sid": sid, "uid": user_id, "role": role, "iat": int(datetime.now(timezone.utc).timestamp()),
                         "exp": int(expires.timestamp())}, settings().session_secret, algorithm="HS256")
     response.set_cookie(SESSION_COOKIE, token, httponly=True, secure=settings().production, samesite="lax",
-                        path="/", expires=expires)
+                        path="/", expires=expires, domain=settings().session_cookie_domain or None)
 
 
 def destroy_session(conn: Connection, request: Request, response: Response):
     payload = read_token(request.cookies.get(SESSION_COOKIE))
     if payload and "sid" in payload:
         run(conn, "update sessions set revoked_at = now() where id = cast(:sid as uuid)", sid=payload["sid"])
-    response.delete_cookie(SESSION_COOKIE, path="/")
+    response.delete_cookie(SESSION_COOKIE, path="/", domain=settings().session_cookie_domain or None)

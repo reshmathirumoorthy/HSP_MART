@@ -10,6 +10,8 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql://localhost:5432/hsp_giftos"
     session_secret: str = ""
+    # e.g. ".hspmart.com" so one sign-in covers hspmart.com and admin.hspmart.com; empty = current host only.
+    session_cookie_domain: str = ""
     auth_dev_otp: str = ""
     environment: str = "development"
     cors_origins: str = "http://localhost:5173"
