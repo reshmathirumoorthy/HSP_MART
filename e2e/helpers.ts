@@ -32,6 +32,9 @@ export async function signIn(page: Page, identifier: string, next?: string) {
   await page.getByLabel("Sign-in code").fill(code);
   await page.getByRole("button", { name: "Sign in" }).click();
   await expect(page).not.toHaveURL(/\/login/);
+  // Staff go store /admin → admin app: wait for the final page, not the intermediate hop, or the next navigation
+  // in the test can be interrupted by the redirect.
+  await page.waitForURL((u) => !(u.pathname.startsWith("/admin") && u.port !== String(ADMIN_PORT)));
   // Let the post-login page finish loading; otherwise an immediate page.goto() can be aborted (seen in Firefox).
   await page.waitForLoadState("load");
 }
