@@ -15,7 +15,7 @@ type D = {
   forecast: { division: string; history: { month: string; units: number }[]; forecast: { month: string; units: number; season: string | null }[] }[];
   franchises: { code: string; city: string | null; status: string; leads: number; quotes: number; orders: number; revenuePaise: number;
     contributionPaise: number; avgOrderPaise: number; complaints: number; securityDepositPaise: number }[];
-  suppliers: { name: string; city: string | null; status: string; purchaseOrders: number; delivered: number; avgDaysToDeliver: number | null; complaints: number }[];
+  suppliers: { id: string; name: string; city: string | null; status: string; purchaseOrders: number; delivered: number; avgDaysToDeliver: number | null; complaints: number }[];
   alerts: { kind: string; severity: string; message: string }[];
   outbox: { id: string; channel: string; recipient: string; template: string; status: string; reason: string | null; createdAt: string }[];
 };
@@ -117,7 +117,7 @@ export default function Insights({ role }: { role: string }) {
             <thead className="text-xs uppercase text-muted"><tr><th className="text-left">Supplier</th><th className="text-right">POs</th><th className="text-right">Delivered</th><th className="text-right">Avg days</th><th className="text-right">Complaints</th></tr></thead>
             <tbody>
               {d.suppliers.map((s) => (
-                <tr key={s.name} className="border-t border-line">
+                <tr key={s.id} className="border-t border-line">
                   <td className="py-1.5">{s.name} <Badge>{s.status}</Badge></td><td className="text-right">{s.purchaseOrders}</td>
                   <td className="text-right">{s.delivered}</td><td className="text-right">{s.avgDaysToDeliver ?? "—"}</td><td className="text-right">{s.complaints}</td>
                 </tr>

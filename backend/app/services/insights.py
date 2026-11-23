@@ -117,7 +117,7 @@ def franchise_analytics(conn: Connection):
 
 def supplier_scorecard(conn: Connection):
     """Supplier optimisation input: fulfilment speed, completion and defect rate per approved supplier."""
-    return all_(conn, """select s.name, s.city, s.status::text as status,
+    return all_(conn, """select s.id::text, s.name, s.city, s.status::text as status,
                                 count(distinct po.id)::int as purchase_orders,
                                 count(distinct po.id) filter (where po.status = 'delivered')::int as delivered,
                                 round(avg(extract(epoch from sh.delivered_at - po.created_at) / 86400)::numeric, 1)::float as avg_days_to_deliver,

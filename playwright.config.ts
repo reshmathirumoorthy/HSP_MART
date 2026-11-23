@@ -13,6 +13,8 @@ export const E2E_WEBHOOK_SECRET = "e2e-razorpay-webhook-secret";
 export const E2E_CRON_SECRET = "e2e-cron-secret-value";
 
 // E2E_BROWSERS=chromium,firefox,webkit selects browsers (default chromium only, to keep the serial suite fast).
+// Several browsers in ONE run share the test database (reset once), so one browser's data leaks into the next;
+// `npm run test:e2e:all-browsers` runs each browser as its own pass instead.
 const BROWSERS = (process.env.E2E_BROWSERS ?? "chromium").split(",").map((b) => b.trim());
 const ALL_PROJECTS = [
   { name: "chromium", use: { ...devices["Desktop Chrome"] } },
