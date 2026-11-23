@@ -92,7 +92,9 @@ test.describe("1.2 authentication & roles", () => {
   });
 
   test("staff land on /admin and see the DB catalogue by division", async ({ page }) => {
-    await signIn(page, "admin@hspmart.test");
+    const staff = uniqueEmail("staff-admin"); // fresh account: shared ones are OTP rate limited across runs
+    await createUser(staff, "hsp_admin");
+    await signIn(page, staff);
     await expect(page).toHaveURL(/\/admin$/);
     await expect(page.getByTestId("portal-role")).toHaveText("hsp_admin");
     await expect(page.getByTestId("stat-products")).toHaveText(String(staticCatalogue.length));
@@ -145,7 +147,9 @@ test.describe("1.2 authentication & roles", () => {
 
 test.describe("1.2 sessions", () => {
   test("sign out revokes the session server-side; a replayed cookie is useless", async ({ page, context }) => {
-    await signIn(page, "finance@hspmart.test");
+    const finance = uniqueEmail("staff-finance");
+    await createUser(finance, "hsp_finance");
+    await signIn(page, finance);
     await expect(page).toHaveURL(/\/admin$/);
     const cookie = (await context.cookies()).find((c) => c.name === "hsp_session")!;
 
@@ -158,7 +162,9 @@ test.describe("1.2 sessions", () => {
   });
 
   test("a tampered session cookie is rejected", async ({ page, context }) => {
-    await signIn(page, "procurement@hspmart.test");
+    const procurement = uniqueEmail("staff-procurement");
+    await createUser(procurement, "hsp_procurement");
+    await signIn(page, procurement);
     const cookie = (await context.cookies()).find((c) => c.name === "hsp_session")!;
     const [h, p, s] = cookie.value.split(".");
     const claims = JSON.parse(Buffer.from(p, "base64url").toString());
@@ -182,7 +188,9 @@ test.describe("1.3 audit log", () => {
     expect(actions.map((a) => a.action)).toEqual(["user.signup", "auth.login"]);
 
     await page.context().clearCookies();
-    await signIn(page, "admin@hspmart.test");
+    const viewer = uniqueEmail("staff-auditor");
+    await createUser(viewer, "hsp_admin");
+    await signIn(page, viewer);
     await expect(page.getByTestId("audit-table")).toContainText("auth.login");
     await expect(page.getByTestId("audit-table")).toContainText("user.signup");
   });

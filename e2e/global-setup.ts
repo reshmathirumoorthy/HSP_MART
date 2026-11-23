@@ -1,5 +1,6 @@
 /** Resets the test database to a clean, migrated and seeded state before every run. */
 import { execSync } from "node:child_process";
+import { rmSync } from "node:fs";
 import postgres from "postgres";
 import { TEST_DATABASE_URL } from "../playwright.config";
 
@@ -7,6 +8,8 @@ export default async function globalSetup() {
   if (!/_test\b|_test$/.test(new URL(TEST_DATABASE_URL).pathname)) {
     throw new Error(`Refusing to reset non-test database: ${TEST_DATABASE_URL}`);
   }
+  // Cached sign-in sessions belong to the previous database; drop them.
+  rmSync("test-results/.auth", { recursive: true, force: true }); // = SESSION_DIR in helpers.ts
   const sql = postgres(TEST_DATABASE_URL, { max: 1, onnotice: () => {} });
   await sql.unsafe("drop schema if exists public cascade; drop schema if exists drizzle cascade; create schema public;");
   await sql.end();

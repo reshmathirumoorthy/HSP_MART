@@ -36,7 +36,22 @@ npm run test:api                                # pytest against hsp_giftos_test
 npm run test:e2e                                # Playwright: starts API, admin app and Next.js; resets hsp_giftos_test
 ```
 
-End-to-end specs: `e2e/phase1-foundation` … `e2e/phase10-grievances-deposits`. API tests: `backend/tests/`.
+End-to-end specs: `e2e/phase1-foundation` … `e2e/phase12-app-integrity` (Playwright starts the API, the admin app and
+the storefront itself and resets `hsp_giftos_test`). API tests: `backend/tests/`.
+
+| Command | What it does |
+| --- | --- |
+| `npm run test:e2e` | All E2E specs, headless Chromium, storefront on `next dev` |
+| `npm run test:e2e:prod` | Same, storefront from a production build (faster, closer to production; used in CI) |
+| `npm run test:e2e:headed` | Watch the browser (add `-- e2e/phase8-backend.spec.ts` to pick a spec) |
+| `npm run test:e2e:ui` | Playwright UI mode: pick, re-run and time-travel through tests |
+| `npm run test:e2e:all-browsers` | Chromium, Firefox and WebKit (`npx playwright install` first) |
+| `npm run test:e2e:report` | Open the last HTML report (`playwright-report/`) |
+| `npm run test:all` | API tests, then E2E |
+
+Failures keep a trace, screenshot and video in `test-results/`. Shared staff sessions are cached in
+`test-results/.auth` (cleared each run) because sign-in codes are limited to 5 per account per 15 minutes.
+CI: `.github/workflows/tests.yml` runs the production-build E2E suite and the API tests on every push and PR.
 
 ## Deploying anywhere with Docker
 
@@ -150,6 +165,23 @@ plan and all four cron jobs work through the gateway.
   prices), 2 (12 months of sales → `sales_history`), 3 (suppliers, rates, lead times, stock; new suppliers start
   *pending*), and the CA's signed `gst-review.csv` (only rows with a decision and initials are applied, each audited).
   Every file is validated in full first; nothing is written unless all rows are valid.
+
+## Added after the codebase audit
+
+- **Staff & roles** (admin app, admins only; `backend/app/services/users.py`): add staff by email (an existing customer
+  account is promoted), change between Admin / Finance / Procurement, deactivate and reactivate, with search and paging.
+  Partner and supplier access is still granted from their own pages. Every change is audited and ends that person's
+  sessions; you cannot change your own account, and at least one active admin always remains.
+- **Security headers**: the store (`next.config.ts`), the API (`backend/app/main.py`) and the admin app
+  (`admin/nginx.conf`) send `X-Frame-Options: DENY`, `nosniff`, a referrer policy and a CSP limited to
+  `frame-ancestors`/`base-uri`/`object-src` (a full script policy with nonces is a follow-up); private API responses are
+  `Cache-Control: no-store`.
+- **API logging**: one line per request (method, path, status, duration, request id; no query strings) and a full
+  traceback for unexpected errors, which return a generic message with a `requestId` customers can quote.
+  `X-Request-Id` is accepted from a proxy or generated.
+- **Dependencies**: Next.js 16.4.6 (fixes a critical advisory); unused `@vercel/blob`, `@anthropic-ai/sdk` and
+  `class-variance-authority` removed. `npm audit --omit=dev` reports 0 vulnerabilities.
+- **Fixes**: `sitemap.xml` now lists the live catalogue (it listed no products); JSON-LD output escapes `<`.
 
 ## Scheduled jobs
 

@@ -2,7 +2,22 @@ import type { NextConfig } from "next";
 
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
 
+// Security headers for every page. The CSP is deliberately limited to directives that cannot break scripts,
+// Razorpay checkout, the Maps embed or remote images; a full script-src policy needs nonces and is a follow-up.
+const SECURITY_HEADERS = [
+  { key: "Content-Security-Policy", value: "frame-ancestors 'none'; base-uri 'self'; object-src 'none'" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(self \"https://checkout.razorpay.com\")" },
+  // Browsers ignore HSTS over plain http, so this is safe locally and takes effect behind TLS.
+  { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+];
+
 const nextConfig: NextConfig = {
+  async headers() {
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
+  },
   // Every /api/* request (webhooks, file downloads, exports, cron, storefront calls) is served by
   // the FastAPI backend.
   async rewrites() {
