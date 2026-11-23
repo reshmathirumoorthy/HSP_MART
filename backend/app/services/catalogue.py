@@ -7,7 +7,6 @@ Site content: one JSON document per key, edited in the admin app.
 import hashlib
 import json
 import re
-import threading
 import httpx
 from sqlalchemy import Connection
 from ..audit import audit
@@ -348,15 +347,17 @@ def _post_refresh():
         return
     try:
         httpx.post(s.next_revalidate_url, headers={"x-revalidate-secret": s.revalidate_secret}, timeout=5)
-    except httpx.HTTPError:
-        pass  # the storefront also refreshes on its own every 5 minutes
+    except Exception:  # noqa: BLE001 — best effort: the storefront also refreshes on its own every 5 minutes
+        pass
 
 
 def request_storefront_refresh(conn: Connection):
-    """After the transaction commits, tell Next.js to drop its cached catalogue/content."""
+    """After the transaction commits, tell Next.js to drop its cached catalogue/content.
+
+    Runs synchronously inside the commit, which happens before the response is sent (get_conn uses
+    scope="function"), so an admin edit is visible on the very next storefront request. A background
+    thread here would race that request.
+    """
     from sqlalchemy import event
 
-    def after_commit(_conn):
-        threading.Thread(target=_post_refresh, daemon=True).start()
-
-    event.listen(conn, "commit", after_commit, once=True)
+    event.listen(conn, "commit", lambda _conn: _post_refresh(), once=True)
