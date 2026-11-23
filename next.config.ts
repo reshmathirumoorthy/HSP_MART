@@ -2,10 +2,8 @@ import type { NextConfig } from "next";
 
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:8000";
 
-// Security headers for every page. The CSP is deliberately limited to directives that cannot break scripts,
-// Razorpay checkout, the Maps embed or remote images; a full script-src policy needs nonces and is a follow-up.
+// Security headers for every response. The Content-Security-Policy is set per request (with a nonce) in src/proxy.ts.
 const SECURITY_HEADERS = [
-  { key: "Content-Security-Policy", value: "frame-ancestors 'none'; base-uri 'self'; object-src 'none'" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },

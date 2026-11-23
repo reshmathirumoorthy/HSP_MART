@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { getOrNull } from "@/lib/api";
 import { Badge, btnCls, btnGhostCls, Card, Flash, inputCls, Row } from "@/components/portal/ui";
@@ -84,6 +85,7 @@ export default async function CustomerOrderPage({
                 amountPaise={pending.amountPaise}
                 orderNumber={o.number}
                 email={user.email}
+                nonce={(await headers()).get("x-nonce") ?? undefined}
               />
             ) : (
               <p>
