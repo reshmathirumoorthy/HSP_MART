@@ -18,7 +18,7 @@ router = APIRouter(prefix="/api", tags=["platform"])
 
 
 @router.get("/files/{file_id}")
-def download(file_id: str, user: CurrentUser | None = Depends(current_user), conn: Connection = Depends(get_conn)):
+def download(file_id: str, user: CurrentUser | None = Depends(current_user), conn: Connection = Depends(get_conn, scope="function")):
     if not user:
         return Response("Unauthorized", status_code=401)
     f = one(conn, "select * from files where id = :id", id=file_id) if is_uuid(file_id) else None
@@ -33,7 +33,7 @@ def download(file_id: str, user: CurrentUser | None = Depends(current_user), con
 
 
 @router.post("/webhooks/razorpay")
-async def razorpay_webhook(request: Request, conn: Connection = Depends(get_conn)):
+async def razorpay_webhook(request: Request, conn: Connection = Depends(get_conn, scope="function")):
     raw = await request.body()
     if not verify_webhook_signature(raw, request.headers.get("x-razorpay-signature")):
         return JSONResponse({"error": "invalid_signature"}, status_code=401)
@@ -90,7 +90,7 @@ class LocaleIn(BaseModel):
 
 
 @router.post("/me/locale")
-def set_locale(body: LocaleIn, user: CurrentUser = Depends(require_user), conn: Connection = Depends(get_conn)):
+def set_locale(body: LocaleIn, user: CurrentUser = Depends(require_user), conn: Connection = Depends(get_conn, scope="function")):
     if body.locale not in ("en", "hi"):
         raise HTTPException(400, "Unsupported language.")
     run(conn, "update users set locale = :l where id = cast(:u as uuid)", l=body.locale, u=user.id)

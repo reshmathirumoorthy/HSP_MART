@@ -33,7 +33,7 @@ def read_token(token: str | None) -> dict | None:
         return None
 
 
-def current_user(request: Request, conn: Connection = Depends(get_conn)) -> CurrentUser | None:
+def current_user(request: Request, conn: Connection = Depends(get_conn, scope="function")) -> CurrentUser | None:
     payload = read_token(request.cookies.get(SESSION_COOKIE))
     if not payload or "sid" not in payload:
         return None

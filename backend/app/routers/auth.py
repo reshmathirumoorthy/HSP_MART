@@ -20,7 +20,7 @@ class OtpVerify(BaseModel):
 
 
 @router.post("/otp")
-def request_otp(body: OtpRequest, conn: Connection = Depends(get_conn)):
+def request_otp(body: OtpRequest, conn: Connection = Depends(get_conn, scope="function")):
     ident = normalize_identifier(body.identifier)
     if not ident:
         raise HTTPException(400, "Enter a valid email or 10-digit mobile number.")
@@ -31,7 +31,7 @@ def request_otp(body: OtpRequest, conn: Connection = Depends(get_conn)):
 
 
 @router.post("/verify")
-def verify(body: OtpVerify, response: Response, conn: Connection = Depends(get_conn)):
+def verify(body: OtpVerify, response: Response, conn: Connection = Depends(get_conn, scope="function")):
     ident = normalize_identifier(body.identifier)
     # The failed-attempt counter must persist even though we reject: commit before raising.
     if not ident or not re.fullmatch(r"\d{6}", body.code.strip()) or not verify_otp(conn, ident, body.code):
@@ -59,7 +59,7 @@ def me(user: CurrentUser | None = Depends(current_user)):
 
 
 @router.post("/logout")
-def logout(request: Request, response: Response, conn: Connection = Depends(get_conn),
+def logout(request: Request, response: Response, conn: Connection = Depends(get_conn, scope="function"),
            user: CurrentUser | None = Depends(current_user)):
     destroy_session(conn, request, response)
     if user:
