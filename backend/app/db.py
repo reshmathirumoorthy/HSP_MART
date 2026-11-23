@@ -13,7 +13,11 @@ def engine() -> Engine:
 
 def get_conn() -> Iterator[Connection]:
     """One transaction per request: commits on success, rolls back on any error. Services may
-    commit part-way (e.g. before calling a payment provider) and carry on in a new transaction."""
+    commit part-way (e.g. before calling a payment provider) and carry on in a new transaction.
+
+    Always use as Depends(get_conn, scope="function"): FastAPI's default for yield dependencies ("request") runs the
+    commit AFTER the response is sent, so a fast follow-up request (e.g. verifying a just-issued sign-in code) could
+    read data that is not yet committed, and a failed commit would follow a success response."""
     with engine().connect() as conn:
         try:
             yield conn

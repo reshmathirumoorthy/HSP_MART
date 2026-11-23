@@ -23,7 +23,7 @@ OK = {"ok": True}
 
 
 @router.get("/dashboard")
-def dashboard(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def dashboard(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel({
         "divisions": all_(conn, "select division::text as division, count(*)::int as n from products group by 1 order by 1"),
         "roles": all_(conn, "select role::text as role, count(*)::int as n from users group by 1 order by 1"),
@@ -37,7 +37,7 @@ def dashboard(_: CurrentUser = Depends(require_staff), conn: Connection = Depend
 # ── Orders ──
 
 @router.get("/orders")
-def list_orders(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_orders(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel(all_(conn, """select o.number, o.status::text as status, o.source, o.requires_artwork, o.total_paise, o.paid_paise,
                                      o.refunded_paise, o.credited_paise, o.created_at, c.name as customer, p.code as partner
                               from orders o join customers c on c.id = o.customer_id left join partners p on p.id = o.partner_id
@@ -46,7 +46,7 @@ def list_orders(status: str | None = None, _: CurrentUser = Depends(require_staf
 
 
 @router.get("/orders/{number}")
-def order_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def order_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     o = one(conn, """select o.*, o.status::text as status, c.name as customer, c.email as customer_email, c.phone as customer_phone,
                             p.code as partner
                      from orders o join customers c on c.id = o.customer_id left join partners p on p.id = o.partner_id
@@ -87,7 +87,7 @@ def order_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Con
 @router.post("/orders/{number}/steps")
 def order_step(number: str, step: Literal["production", "po", "dispatch", "book_courier", "deliver", "close", "cancel"] = Form(...),
                supplierId: str = Form(""), courier: str = Form(""), tracking: str = Form(""), proof: str = Form(""),
-               proofFile: UploadFile | None = File(None), user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
+               proofFile: UploadFile | None = File(None), user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn, scope="function")):
     """Accepts form data (portal forms, with an optional POD scan) or the same fields as JSON-free form posts."""
     if step == "deliver" and proofFile is not None and proofFile.filename:
         data = proofFile.file.read(10 * 1024 * 1024 + 1)
@@ -111,7 +111,7 @@ class Review(BaseModel):
 
 
 @router.post("/files/{file_id}/review")
-def review_artwork(file_id: str, body: Review, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
+def review_artwork(file_id: str, body: Review, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn, scope="function")):
     files.review_artwork(conn, user, file_id, body.decision, body.note)
     return OK
 
@@ -124,7 +124,7 @@ class CreditNoteIn(BaseModel):
 
 
 @router.post("/orders/{number}/credit-notes")
-def create_credit_note(number: str, body: CreditNoteIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def create_credit_note(number: str, body: CreditNoteIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     lines = [{"orderLineId": str(l.get("orderLineId")), "quantity": l.get("quantity")} for l in body.lines
              if isinstance(l.get("quantity"), int) and l.get("quantity") > 0]
     cn = credit_notes.create_credit_note(conn, user, number, reason=body.reason, lines=lines,
@@ -134,7 +134,7 @@ def create_credit_note(number: str, body: CreditNoteIn, user: CurrentUser = Depe
 
 @router.post("/credit-notes/{cn}/{step}")
 def credit_note_step(cn: str, step: Literal["approve", "void", "retry"], user: CurrentUser = Depends(FINANCE),
-                     conn: Connection = Depends(get_conn)):
+                     conn: Connection = Depends(get_conn, scope="function")):
     {"approve": credit_notes.approve_credit_note, "void": credit_notes.void_credit_note,
      "retry": credit_notes.retry_credit_note_refund}[step](conn, user, cn)
     return OK
@@ -145,14 +145,14 @@ class RecipientsIn(BaseModel):
 
 
 @router.post("/orders/{number}/recipients")
-def upload_recipients(number: str, body: RecipientsIn, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
+def upload_recipients(number: str, body: RecipientsIn, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn, scope="function")):
     return recipients.upload_recipients(conn, user, number, body.csv)
 
 
 # ── Quotes ──
 
 @router.get("/quotes")
-def list_quotes(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_quotes(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel(all_(conn, """select q.number, q.status::text as status, q.channel, q.total_paise, q.contribution_bps, q.below_minimum,
                                      q.valid_until, q.created_at, c.name as customer, p.code as partner
                               from quotations q join customers c on c.id = q.customer_id left join partners p on p.id = q.partner_id
@@ -160,7 +160,7 @@ def list_quotes(_: CurrentUser = Depends(require_staff), conn: Connection = Depe
 
 
 @router.get("/quotes/{number}")
-def quote_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def quote_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     q = one(conn, """select q.*, q.status::text as status, c.name as customer, c.email as customer_email, c.gstin as customer_gstin,
                             p.code as partner, o.number as order_number
                      from quotations q join customers c on c.id = q.customer_id left join partners p on p.id = q.partner_id
@@ -182,7 +182,7 @@ class QuoteIn(BaseModel):
 
 
 @router.post("/quotes")
-def create_quote(body: QuoteIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def create_quote(body: QuoteIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     from ..services.common import is_email
     if not is_email(body.customerEmail):
         fail("Enter the customer's email.")
@@ -199,26 +199,26 @@ class Reason(BaseModel):
 
 
 @router.post("/quotes/{number}/approve-exception")
-def approve_exception(number: str, body: Reason, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def approve_exception(number: str, body: Reason, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     quotes.approve_quote_exception(conn, user, number, body.reason)
     return OK
 
 
 @router.post("/quotes/{number}/send")
-def send_quote(number: str, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def send_quote(number: str, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     quotes.send_quote(conn, user, number)
     return OK
 
 
 @router.get("/assistant")
-def assistant(q: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def assistant(q: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return ai.draft_quote(conn, q[:2000])
 
 
 # ── Suppliers ──
 
 @router.get("/suppliers")
-def list_suppliers(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_suppliers(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     rows = all_(conn, """select s.id::text, s.name, s.city, s.gstin, s.status::text as status, s.created_at, u.email as login_email
                          from suppliers s left join users u on u.id = s.user_id order by s.created_at desc""")
     rates = all_(conn, """select r.id::text, r.supplier_id::text, p.sku, p.name, r.cost_paise, r.lead_time_days, r.stock_quantity
@@ -236,7 +236,7 @@ class NewSupplier(BaseModel):
 
 
 @router.post("/suppliers")
-def create_supplier(body: NewSupplier, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def create_supplier(body: NewSupplier, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return sup.create_supplier(conn, user, body.name, body.city, body.gstin, body.loginEmail)
 
 
@@ -245,7 +245,7 @@ class SupplierStatus(BaseModel):
 
 
 @router.post("/suppliers/{supplier_id}/status")
-def supplier_status(supplier_id: str, body: SupplierStatus, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def supplier_status(supplier_id: str, body: SupplierStatus, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     sup.set_supplier_status(conn, user, supplier_id, body.status)
     return OK
 
@@ -257,7 +257,7 @@ class SupplierRate(BaseModel):
 
 
 @router.post("/suppliers/{supplier_id}/rates")
-def supplier_rate(supplier_id: str, body: SupplierRate, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
+def supplier_rate(supplier_id: str, body: SupplierRate, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn, scope="function")):
     sup.set_supplier_rate(conn, user, supplier_id, body.sku, body.costPaise, body.leadTimeDays)
     return OK
 
@@ -265,7 +265,7 @@ def supplier_rate(supplier_id: str, body: SupplierRate, user: CurrentUser = Depe
 # ── Partners ──
 
 @router.get("/partners")
-def list_partners(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_partners(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     rows = all_(conn, """select p.id::text, p.code, p.type::text as type, p.status::text as status, p.city, p.state, p.pan, p.gstin,
                                 p.bank_ifsc, p.bank_account_last4, p.agreement_version, p.kyc_verified_at, p.commission_bps,
                                 p.service_fee_bps, p.security_deposit_paise, p.created_at, u.email, u.phone
@@ -288,7 +288,7 @@ def list_partners(_: CurrentUser = Depends(require_staff), conn: Connection = De
 
 
 @router.post("/partners/{partner_id}/verify")
-def verify_partner(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def verify_partner(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     partners.verify_partner(conn, user, partner_id)
     return OK
 
@@ -298,7 +298,7 @@ class PartnerStatus(BaseModel):
 
 
 @router.post("/partners/{partner_id}/status")
-def partner_status(partner_id: str, body: PartnerStatus, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def partner_status(partner_id: str, body: PartnerStatus, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     partners.set_partner_status(conn, user, partner_id, body.status)
     return OK
 
@@ -308,7 +308,7 @@ class Deposit(BaseModel):
 
 
 @router.post("/partners/{partner_id}/deposit")
-def deposit(partner_id: str, body: Deposit, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def deposit(partner_id: str, body: Deposit, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     partners.record_deposit(conn, user, partner_id, body.depositPaise)
     return OK
 
@@ -324,7 +324,7 @@ class SettlementIn(BaseModel):
 
 
 @router.post("/partners/{partner_id}/deposit-settlement")
-def request_settlement(partner_id: str, body: SettlementIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def request_settlement(partner_id: str, body: SettlementIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     s = deposits.request_settlement(conn, user, partner_id, reason=body.reason, deductions=[d.model_dump() for d in body.deductions])
     return {"number": s["number"]}
 
@@ -336,13 +336,13 @@ class SettlementDecision(BaseModel):
 
 @router.post("/deposit-settlements/{settlement_id}/decide")
 def decide_settlement(settlement_id: str, body: SettlementDecision, user: CurrentUser = Depends(FINANCE),
-                      conn: Connection = Depends(get_conn)):
+                      conn: Connection = Depends(get_conn, scope="function")):
     deposits.decide_settlement(conn, user, settlement_id, approve=body.approve, payout_reference=body.payoutReference)
     return OK
 
 
 @router.post("/partners/{partner_id}/approve-commissions")
-def approve_commissions(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def approve_commissions(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     return {"approved": partners.approve_commissions(conn, user, partner_id)}
 
 
@@ -351,7 +351,7 @@ class KeyAccount(BaseModel):
 
 
 @router.post("/customers/{customer_id}/key-account")
-def key_account(customer_id: str, body: KeyAccount, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def key_account(customer_id: str, body: KeyAccount, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     partners.flag_key_account(conn, user, customer_id, body.on)
     return OK
 
@@ -365,13 +365,13 @@ class ContractIn(BaseModel):
 
 
 @router.post("/contracts")
-def create_contract(body: ContractIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def create_contract(body: ContractIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     return partners.create_contract(conn, user, customer_email=body.customerEmail, partner_code=body.partnerCode, months=body.months,
                                     renewal_commission_bps=body.renewalCommissionBps, reference=body.reference)
 
 
 @router.post("/contracts/{contract_id}/end")
-def end_contract(contract_id: str, body: Reason, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def end_contract(contract_id: str, body: Reason, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     partners.end_contract(conn, user, contract_id, body.reason)
     return OK
 
@@ -379,7 +379,7 @@ def end_contract(contract_id: str, body: Reason, user: CurrentUser = Depends(FIN
 # ── Payouts & finance ──
 
 @router.get("/payouts")
-def list_payouts(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_payouts(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     due: dict[str, int] = {}
     for r in latest_ledger(conn):
         if r["status"] == "approved" and not r["payout_id"]:
@@ -395,18 +395,18 @@ def list_payouts(_: CurrentUser = Depends(require_staff), conn: Connection = Dep
 
 
 @router.post("/partners/{partner_id}/payouts")
-def request_payout(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def request_payout(partner_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     return payouts.request_payout(conn, user, partner_id)
 
 
 @router.post("/payouts/{payout_id}/approve")
-def approve_payout(payout_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def approve_payout(payout_id: str, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     payouts.approve_payout(conn, user, payout_id)
     return OK
 
 
 @router.get("/insights")
-def get_insights(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def get_insights(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel({
         "channels": insights.channel_economics(conn), "overdue": insights.overdue_orders(conn),
         "income": insights.associate_income_distribution(conn), "inactive": insights.inactive_partners(conn),
@@ -425,12 +425,12 @@ class Campaign(BaseModel):
 
 
 @router.post("/campaigns")
-def send_campaign(body: Campaign, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def send_campaign(body: Campaign, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     return campaigns.send_campaign(conn, user, body.template.strip() or "festive.diwali")
 
 
 @router.get("/exports/{kind}")
-def export(kind: str, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def export(kind: str, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     from datetime import date
     today = date.today().isoformat()
     if kind == "tally":
@@ -452,7 +452,7 @@ def export(kind: str, user: CurrentUser = Depends(require_staff), conn: Connecti
 # ── Programmes ──
 
 @router.get("/programmes")
-def list_programmes(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_programmes(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel(all_(conn, """select p.id::text, p.name, p.occasion, p.next_date, p.lead_days, p.lines, p.active, c.name as customer,
                                      q.number as quote
                               from programmes p join customers c on c.id = p.customer_id
@@ -470,7 +470,7 @@ class ProgrammeIn(BaseModel):
 
 
 @router.post("/programmes")
-def create_programme(body: ProgrammeIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def create_programme(body: ProgrammeIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     p = programmes.create_programme(conn, user, customer_name=body.customerName, customer_email=body.customerEmail, name=body.name,
                                     occasion=body.occasion, next_date=body.nextDate, lead_days=body.leadDays, lines=body.lines)
     return camel(p)
@@ -484,7 +484,7 @@ def run_programmes(_: CurrentUser = Depends(ADMIN)):
 # ── Enquiries (storefront bulk quotes & contact) ──
 
 @router.get("/enquiries")
-def list_enquiries(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_enquiries(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel(enquiries.list_enquiries(conn, status))
 
 
@@ -493,13 +493,13 @@ class EnquiryStatus(BaseModel):
 
 
 @router.post("/enquiries/{enquiry_id}/status")
-def enquiry_status(enquiry_id: str, body: EnquiryStatus, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def enquiry_status(enquiry_id: str, body: EnquiryStatus, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     enquiries.set_enquiry_status(conn, user, enquiry_id, body.status)
     return OK
 
 
 @router.post("/enquiries/{enquiry_id}/quote")
-def enquiry_quote(enquiry_id: str, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def enquiry_quote(enquiry_id: str, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     return enquiries.quote_from_enquiry(conn, user, enquiry_id)
 
 
@@ -512,30 +512,30 @@ CATALOGUE_EDIT = require_roles("hsp_admin", "hsp_procurement")
 
 @router.get("/products")
 def admin_products(q: str = "", category: str = "", status: str = "", limit: int = 50, offset: int = 0,
-                   _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+                   _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel(catalogue.list_products(conn, q, category, status, limit, offset))
 
 
 @router.get("/products/{product_id}")
-def admin_product(product_id: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def admin_product(product_id: str, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     row = catalogue.get_product(conn, product_id)
     content = row.pop("content")
     return {**camel(row), "content": content}
 
 
 @router.post("/products")
-def create_product(body: dict, user: CurrentUser = Depends(CATALOGUE_EDIT), conn: Connection = Depends(get_conn)):
+def create_product(body: dict, user: CurrentUser = Depends(CATALOGUE_EDIT), conn: Connection = Depends(get_conn, scope="function")):
     return {"id": catalogue.save_product(conn, user, body)["id"]}
 
 
 @router.post("/products/{product_id}")
-def update_product(product_id: str, body: dict, user: CurrentUser = Depends(CATALOGUE_EDIT), conn: Connection = Depends(get_conn)):
+def update_product(product_id: str, body: dict, user: CurrentUser = Depends(CATALOGUE_EDIT), conn: Connection = Depends(get_conn, scope="function")):
     catalogue.save_product(conn, user, body, product_id)
     return OK
 
 
 @router.get("/content")
-def admin_content(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def admin_content(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     content = catalogue.get_content(conn)
     content.pop("commerce", None)
     meta = {r["key"]: r for r in all_(conn, """select sc.key, sc.updated_at, u.email as updated_by from site_content sc
@@ -544,7 +544,7 @@ def admin_content(_: CurrentUser = Depends(require_staff), conn: Connection = De
 
 
 @router.post("/content/{key}")
-def save_content(key: str, body: dict, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def save_content(key: str, body: dict, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     if "value" not in body:
         fail("Send the new value.")
     catalogue.save_content(conn, user, key, body["value"])
@@ -554,7 +554,7 @@ def save_content(key: str, body: dict, user: CurrentUser = Depends(ADMIN), conn:
 # ── Customer grievances ──
 
 @router.get("/grievances")
-def list_grievances(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def list_grievances(status: str | None = None, _: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     rows = grievances.for_admin(conn, status or None)
     for g in rows:
         g["suppliers"] = all_(conn, """select distinct s.id::text, s.name from purchase_orders po join suppliers s on s.id = po.supplier_id
@@ -568,7 +568,7 @@ class GrievanceIn(BaseModel):
 
 
 @router.post("/orders/{number}/grievances")
-def staff_raise_grievance(number: str, body: GrievanceIn, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def staff_raise_grievance(number: str, body: GrievanceIn, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return {"number": grievances.raise_grievance(conn, user, number, category=body.category, description=body.description)["number"]}
 
 
@@ -577,7 +577,7 @@ class AssignIn(BaseModel):
 
 
 @router.post("/grievances/{number}/assign")
-def assign_grievance(number: str, body: AssignIn, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn)):
+def assign_grievance(number: str, body: AssignIn, user: CurrentUser = Depends(OPS), conn: Connection = Depends(get_conn, scope="function")):
     grievances.assign_supplier(conn, user, number, body.supplierId)
     return OK
 
@@ -588,31 +588,31 @@ class ResolveIn(BaseModel):
 
 
 @router.post("/grievances/{number}/resolve")
-def resolve_grievance(number: str, body: ResolveIn, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def resolve_grievance(number: str, body: ResolveIn, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     grievances.resolve(conn, user, number, body.resolution, body.creditNote)
     return OK
 
 
 @router.post("/grievances/{number}/close")
-def close_grievance(number: str, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def close_grievance(number: str, user: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     grievances.close(conn, user, number)
     return OK
 
 
 @router.get("/search/status")
-def search_status(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def search_status(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return search.status(conn)
 
 
 @router.post("/search/reindex")
-def search_reindex(_: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def search_reindex(_: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     return {"embedded": search.refresh_embeddings(conn)}
 
 
 # ── Financial plan, scale readiness and data imports ──
 
 @router.get("/plan")
-def get_plan(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def get_plan(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return camel(plan.get(conn))
 
 
@@ -621,17 +621,17 @@ class PlanIn(BaseModel):
 
 
 @router.post("/plan")
-def save_plan(body: PlanIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def save_plan(body: PlanIn, user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     return camel(plan.save(conn, user, body.assumptions))
 
 
 @router.post("/plan/reset")
-def reset_plan(user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn)):
+def reset_plan(user: CurrentUser = Depends(FINANCE), conn: Connection = Depends(get_conn, scope="function")):
     return camel(plan.reset(conn, user))
 
 
 @router.get("/readiness")
-def get_readiness(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn)):
+def get_readiness(_: CurrentUser = Depends(require_staff), conn: Connection = Depends(get_conn, scope="function")):
     return readiness.summary(conn)
 
 
@@ -648,7 +648,7 @@ def import_template(kind: str, _: CurrentUser = Depends(require_staff)):
 
 @router.post("/imports/{kind}")
 def run_import(kind: str, file: UploadFile = File(...), apply: bool = Form(False), user: CurrentUser = Depends(require_staff),
-               conn: Connection = Depends(get_conn)):
+               conn: Connection = Depends(get_conn, scope="function")):
     data = file.file.read(5 * 1024 * 1024 + 1)
     if len(data) > 5 * 1024 * 1024:
         fail("Files must be 5 MB or smaller.")
@@ -658,7 +658,7 @@ def run_import(kind: str, file: UploadFile = File(...), apply: bool = Form(False
 # ── Staff users and roles ──
 
 @router.get("/users")
-def list_users(q: str = "", role: str = "", page: int = 1, _: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def list_users(q: str = "", role: str = "", page: int = 1, _: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     return camel(users.list_users(conn, q=q, role=role, page=page))
 
 
@@ -669,7 +669,7 @@ class StaffIn(BaseModel):
 
 
 @router.post("/users")
-def create_staff(body: StaffIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def create_staff(body: StaffIn, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     return users.create_staff(conn, user, email=body.email, name=body.name, role=body.role)
 
 
@@ -679,6 +679,6 @@ class StaffUpdate(BaseModel):
 
 
 @router.post("/users/{user_id}")
-def update_staff(user_id: str, body: StaffUpdate, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn)):
+def update_staff(user_id: str, body: StaffUpdate, user: CurrentUser = Depends(ADMIN), conn: Connection = Depends(get_conn, scope="function")):
     users.update_staff(conn, user, user_id, role=body.role, active=body.active)
     return OK
