@@ -38,6 +38,12 @@ npm run db:seed
 
 The seed only inserts missing rows, so you can re-run it safely. It never overwrites edits made in the admin portal.
 
+## Product images
+
+Catalogue photos are stored in the repository under `public/images/catalog/` as WebP files, at most 1600px on the longest side. The seed data links to them as `/images/catalog/<file>.webp`, and the storefront serves them through `next/image` (use the `CatalogImage` component). No external image host is used; Shopify is no longer part of the stack.
+
+To add a product photo, put a WebP file in `public/images/catalog/` and reference that path in the product's images.
+
 ## Running all three
 
 Open three terminals in the repository root:
@@ -80,3 +86,4 @@ npx tsc --noEmit && npm run lint  # type check and lint
 - Set `BACKEND_URL` on Next.js so it can reach the API.
 - Point the admin portal's `/api` at the API, either through a proxy or with `CORS_ORIGINS` on the API.
 - Run `npm run db:migrate` on every deploy.
+- A database seeded before the move away from Shopify still has `https://cdn.shopify.com/...` image links in `products.content`. Re-running the seed won't fix them, because it never overwrites existing rows. Rewrite each link to `/images/catalog/<same file name>.webp` before the Shopify store is closed. Three names clashed across file types, and those keep the old extension in the new name, for example `12.png` → `12-png.webp`.
