@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { shopifyImageLoader } from "@/lib/imageLoader";
 import type { Product } from "@/data/products";
 import { ProductVisual } from "@/components/ProductVisual";
 import { trapTabKey } from "@/lib/focusTrap";
@@ -174,7 +173,6 @@ export function ProductGallery({
               >
                 <Image
                   src={productDisplayImageSrc(src)}
-                  loader={shopifyImageLoader(productDisplayImageSrc(src))}
                   alt=""
                   width={80}
                   height={80}
@@ -208,7 +206,6 @@ export function ProductGallery({
           <div className={styles.lightboxPanel}>
             <Image
               src={productDisplayImageSrc(images[safeIndex])}
-              loader={shopifyImageLoader(productDisplayImageSrc(images[safeIndex]))}
               alt={galleryAlt(product, safeIndex, images.length)}
               width={1200}
               height={1200}

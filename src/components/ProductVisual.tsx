@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { shopifyImageLoader } from "@/lib/imageLoader";
 import type { Product, ProductVisualKind } from "@/data/products";
 import { productDisplayImageSrc, productOriginalImageSrc } from "@/lib/productImageSrc";
 import styles from "./ProductVisual.module.css";
@@ -105,7 +104,6 @@ export function ProductVisual({
         <div className={styles.photoFrame}>
           <Image
             src={primarySrc}
-            loader={shopifyImageLoader(primarySrc)}
             alt={imageAlt(product, imageIndex, altSuffix)}
             fill
             sizes={sizes}
@@ -116,7 +114,6 @@ export function ProductVisual({
           {showSecondary && secondarySrc ? (
             <Image
               src={secondarySrc}
-              loader={shopifyImageLoader(secondarySrc)}
               alt=""
               fill
               sizes={sizes}

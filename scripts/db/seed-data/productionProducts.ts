@@ -18,7 +18,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/OrnateNavyVelvetFloralBasket.png?v=1791623839"
+      "/images/catalog/OrnateNavyVelvetFloralBasket.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -54,7 +54,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/LuxuryGoldandPinkGiftDisplay.png?v=1791619853"
+      "/images/catalog/LuxuryGoldandPinkGiftDisplay.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -88,9 +88,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ererererer.jpg?v=1791352076",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tre.jpg?v=1791352076",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sdds_e9465093-44a6-4f9f-bb6a-bcdf7dbad9a8.jpg?v=1791352076"
+      "/images/catalog/ererererer.webp",
+      "/images/catalog/tre.webp",
+      "/images/catalog/sdds_e9465093-44a6-4f9f-bb6a-bcdf7dbad9a8.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -125,7 +125,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul15_2026_02_45_30PM.png?v=1784107063"
+      "/images/catalog/ChatGPTImageJul15_2026_02_45_30PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -165,7 +165,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul15_2026_12_30_50PM.png?v=1784098867"
+      "/images/catalog/ChatGPTImageJul15_2026_12_30_50PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -201,7 +201,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_06_02_58PM.png?v=1784032457"
+      "/images/catalog/ChatGPTImageJul14_2026_06_02_58PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -243,7 +243,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_05_58_28PM.png?v=1784032158"
+      "/images/catalog/ChatGPTImageJul14_2026_05_58_28PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -284,7 +284,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_05_51_32PM.png?v=1784031711"
+      "/images/catalog/ChatGPTImageJul14_2026_05_51_32PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -325,7 +325,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_04_40_59PM.png?v=1784027486"
+      "/images/catalog/ChatGPTImageJul14_2026_04_40_59PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -365,7 +365,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_04_35_40PM.png?v=1784027167"
+      "/images/catalog/ChatGPTImageJul14_2026_04_35_40PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -406,7 +406,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_03_05_39PM.png?v=1784021822"
+      "/images/catalog/ChatGPTImageJul14_2026_03_05_39PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -442,7 +442,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_02_55_02PM.png?v=1784021124"
+      "/images/catalog/ChatGPTImageJul14_2026_02_55_02PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -479,7 +479,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul12_2026_03_09_52PM.png?v=1784019666"
+      "/images/catalog/ChatGPTImageJul12_2026_03_09_52PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -514,7 +514,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul14_2026_02_23_58PM.png?v=1784019323"
+      "/images/catalog/ChatGPTImageJul14_2026_02_23_58PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -552,8 +552,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul12_2026_02_32_37PM.png?v=1783847245",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul12_2026_02_35_46PM.png?v=1783847261"
+      "/images/catalog/ChatGPTImageJul12_2026_02_32_37PM.webp",
+      "/images/catalog/ChatGPTImageJul12_2026_02_35_46PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -590,7 +590,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul12_2026_02_13_24PM.png?v=1783846447"
+      "/images/catalog/ChatGPTImageJul12_2026_02_13_24PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -630,7 +630,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul12_2026_01_54_22PM.png?v=1783844967"
+      "/images/catalog/ChatGPTImageJul12_2026_01_54_22PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -664,7 +664,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_484f4221-aac8-4a96-a59e-184c45597261.png?v=1783839840"
+      "/images/catalog/12_484f4221-aac8-4a96-a59e-184c45597261.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -700,7 +700,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul11_2026_03_23_07PM.png?v=1783763862"
+      "/images/catalog/ChatGPTImageJul11_2026_03_23_07PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -741,7 +741,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul11_2026_02_53_56PM.png?v=1783761908"
+      "/images/catalog/ChatGPTImageJul11_2026_02_53_56PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -782,7 +782,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul11_2026_02_37_30PM.png?v=1783760904"
+      "/images/catalog/ChatGPTImageJul11_2026_02_37_30PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -822,7 +822,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul11_2026_12_36_21PM.png?v=1783753718"
+      "/images/catalog/ChatGPTImageJul11_2026_12_36_21PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -865,7 +865,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_04_46_40PM.png?v=1783753277"
+      "/images/catalog/ChatGPTImageJul10_2026_04_46_40PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -901,7 +901,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_04_12_13PM.png?v=1783680207"
+      "/images/catalog/ChatGPTImageJul10_2026_04_12_13PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -942,7 +942,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_04_03_44PM.png?v=1783679653"
+      "/images/catalog/ChatGPTImageJul10_2026_04_03_44PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -976,7 +976,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_03_29_09PM.png?v=1783677660"
+      "/images/catalog/ChatGPTImageJul10_2026_03_29_09PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1013,8 +1013,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_02_57_39PM.png?v=1783676362",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_02_57_53PM.png?v=1783676361"
+      "/images/catalog/ChatGPTImageJul10_2026_02_57_39PM.webp",
+      "/images/catalog/ChatGPTImageJul10_2026_02_57_53PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1050,8 +1050,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul10_2026_01_43_34PM_1043d3ed-4b98-40c2-a06a-aa461d2b3910.png?v=1783671658",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_10_2026_02_02_19_PM.png?v=1783672391"
+      "/images/catalog/ChatGPTImageJul10_2026_01_43_34PM_1043d3ed-4b98-40c2-a06a-aa461d2b3910.webp",
+      "/images/catalog/ChatGPT_Image_Jul_10_2026_02_02_19_PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1085,7 +1085,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul9_2026_07_01_40PM.png?v=1783603996"
+      "/images/catalog/ChatGPTImageJul9_2026_07_01_40PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1123,7 +1123,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul9_2026_04_05_34PM.png?v=1783594042"
+      "/images/catalog/ChatGPTImageJul9_2026_04_05_34PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1165,7 +1165,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_06_51_59PM.png?v=1783171353"
+      "/images/catalog/ChatGPTImageJul4_2026_06_51_59PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1199,7 +1199,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_01_37_59PM.png?v=1783152648"
+      "/images/catalog/ChatGPTImageJul4_2026_01_37_59PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1234,7 +1234,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/121221_ff6e563b-1d52-49a7-8e29-b20ce2419a09.jpg?v=1783152177"
+      "/images/catalog/121221_ff6e563b-1d52-49a7-8e29-b20ce2419a09.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1268,7 +1268,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_01_04_54PM.png?v=1783150709"
+      "/images/catalog/ChatGPTImageJul4_2026_01_04_54PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1304,7 +1304,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_10_10_50AM_1.png?v=1783148646"
+      "/images/catalog/ChatGPTImageJul4_2026_10_10_50AM_1.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1338,7 +1338,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_10_20_28AM.png?v=1783148318"
+      "/images/catalog/ChatGPTImageJul4_2026_10_20_28AM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1373,7 +1373,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_10_27_54AM.png?v=1783147937"
+      "/images/catalog/ChatGPTImageJul4_2026_10_27_54AM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1414,7 +1414,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_11_57_04AM.png?v=1783146468"
+      "/images/catalog/ChatGPTImageJul4_2026_11_57_04AM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1454,7 +1454,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_10_51_00AM.png?v=1783145758"
+      "/images/catalog/ChatGPTImageJul4_2026_10_51_00AM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1489,7 +1489,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_10_54_51AM.png?v=1783145557"
+      "/images/catalog/ChatGPTImageJul4_2026_10_54_51AM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1523,8 +1523,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_11_07_19AM.png?v=1783145257",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul4_2026_10_47_43AM.png?v=1783145257"
+      "/images/catalog/ChatGPTImageJul4_2026_11_07_19AM.webp",
+      "/images/catalog/ChatGPTImageJul4_2026_10_47_43AM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1562,10 +1562,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61puGIXpxiL._SL1001.jpg?v=1780490115",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61YBgpAKxAL.jpg?v=1780490115",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/510MoSzjgyL._SL1001.jpg?v=1780490116",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/614X7ZB29tL.jpg?v=1780490115"
+      "/images/catalog/61puGIXpxiL._SL1001.webp",
+      "/images/catalog/61YBgpAKxAL.webp",
+      "/images/catalog/510MoSzjgyL._SL1001.webp",
+      "/images/catalog/614X7ZB29tL.webp"
     ],
     "price": 250,
     "compareAtPrice": 280,
@@ -1596,8 +1596,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_5_2026_12_38_41_PM.png?v=1783235365",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_28926014-1782-4280-a6eb-487f4e280617.png?v=1779890650"
+      "/images/catalog/ChatGPT_Image_Jul_5_2026_12_38_41_PM.webp",
+      "/images/catalog/8_28926014-1782-4280-a6eb-487f4e280617.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1631,8 +1631,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_5_2026_12_44_24_PM.png?v=1783235711",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_516029b1-da13-4087-9ba3-7a512f80c4dd.png?v=1779890528"
+      "/images/catalog/ChatGPT_Image_Jul_5_2026_12_44_24_PM.webp",
+      "/images/catalog/7_516029b1-da13-4087-9ba3-7a512f80c4dd.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1667,8 +1667,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_5_2026_12_49_47_PM_0d4cf3aa-3238-4ef1-a4ff-b69edf53caec.png?v=1783236154",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_2.png?v=1779889941"
+      "/images/catalog/ChatGPT_Image_Jul_5_2026_12_49_47_PM_0d4cf3aa-3238-4ef1-a4ff-b69edf53caec.webp",
+      "/images/catalog/3_2.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1703,8 +1703,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_8b20d1ef-5156-4241-a539-698c51af8856.png?v=1779884482",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_d4c2b193-7922-45f9-92e5-eab422fabbda.png?v=1779884483"
+      "/images/catalog/2_8b20d1ef-5156-4241-a539-698c51af8856.webp",
+      "/images/catalog/4_d4c2b193-7922-45f9-92e5-eab422fabbda.webp"
     ],
     "price": 990,
     "compareAtPrice": 1220,
@@ -1737,8 +1737,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul5_2026_01_27_13PM.png?v=1783238506",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul5_2026_01_30_26PM.png?v=1783238506"
+      "/images/catalog/ChatGPTImageJul5_2026_01_27_13PM.webp",
+      "/images/catalog/ChatGPTImageJul5_2026_01_30_26PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1772,8 +1772,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/21_a3bb095e-64d7-476f-9f4f-29a141b88d73.png?v=1783237065",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_799db8a6-a916-4310-8166-080df0e220d6.png?v=1783237065"
+      "/images/catalog/21_a3bb095e-64d7-476f-9f4f-29a141b88d73.webp",
+      "/images/catalog/12_799db8a6-a916-4310-8166-080df0e220d6.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1808,8 +1808,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_5_2026_01_14_13_PM.png?v=1783237528",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_99ca5985-9e45-4ba9-9ad5-ce4fa3e99df8.png?v=1779882461"
+      "/images/catalog/ChatGPT_Image_Jul_5_2026_01_14_13_PM.webp",
+      "/images/catalog/6_99ca5985-9e45-4ba9-9ad5-ce4fa3e99df8.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1843,8 +1843,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_5_2026_01_18_55_PM.png?v=1783237802",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/hamper4_ec54ea2e-d4ad-45ba-8069-d3f5a22c46e5.png?v=1779798432"
+      "/images/catalog/ChatGPT_Image_Jul_5_2026_01_18_55_PM.webp",
+      "/images/catalog/hamper4_ec54ea2e-d4ad-45ba-8069-d3f5a22c46e5.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1879,8 +1879,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5900.png?v=1783246700",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/eure.png?v=1783246700"
+      "/images/catalog/5900.webp",
+      "/images/catalog/eure.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1914,7 +1914,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_e9b3b336-2a9d-4e4b-8ed1-f7147b4bb170.png?v=1783247656"
+      "/images/catalog/3_e9b3b336-2a9d-4e4b-8ed1-f7147b4bb170.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1949,7 +1949,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/445_658294cd-123c-4438-bffb-d93c1c79728a.png?v=1783242472"
+      "/images/catalog/445_658294cd-123c-4438-bffb-d93c1c79728a.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -1982,7 +1982,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dfd.png?v=1783248431"
+      "/images/catalog/dfd.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2016,7 +2016,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Cashhamper_cb7d2fca-7296-4c73-a1b4-838b93b8349e.png?v=1783250958"
+      "/images/catalog/Cashhamper_cb7d2fca-7296-4c73-a1b4-838b93b8349e.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2050,7 +2050,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/0987.png?v=1783254785"
+      "/images/catalog/0987.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2085,7 +2085,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/rtrtr.jpg?v=1779621473"
+      "/images/catalog/rtrtr.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2118,7 +2118,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dff_e3e3256d-d5bc-4697-9075-b03aeb4ce903.jpg?v=1779619585"
+      "/images/catalog/dff_e3e3256d-d5bc-4697-9075-b03aeb4ce903.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2149,7 +2149,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/789.png?v=1783251613"
+      "/images/catalog/789.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2184,7 +2184,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/778.png?v=1783251972"
+      "/images/catalog/778.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2223,7 +2223,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/988.png?v=1783252502"
+      "/images/catalog/988.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2262,7 +2262,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/78_4170fce1-16f2-4a02-b985-2d7e564725f4.png?v=1783241728"
+      "/images/catalog/78_4170fce1-16f2-4a02-b985-2d7e564725f4.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2300,9 +2300,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/56_2bab0d2a-aae7-4019-b6b3-36003710ed70.png?v=1783239222",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/99_7ff6cff0-60b0-4da8-adce-5fbcd67b937e.png?v=1783239711",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/55_9fe397cf-0b93-451e-bbee-6016b0c5c5b9.png?v=1783239435"
+      "/images/catalog/56_2bab0d2a-aae7-4019-b6b3-36003710ed70.webp",
+      "/images/catalog/99_7ff6cff0-60b0-4da8-adce-5fbcd67b937e.webp",
+      "/images/catalog/55_9fe397cf-0b93-451e-bbee-6016b0c5c5b9.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2336,7 +2336,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "custom",
     "subcategory": "Customised Platters",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/wwewe.png?v=1783253098"
+      "/images/catalog/wwewe.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -2375,9 +2375,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_0cc28164-71b0-472a-aaa7-162d163e9ce0.jpg?v=1777980663",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34_a189f322-ad9a-4c5a-b9a2-38607b904cab.jpg?v=1777980663",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/56_b3339cad-21ba-422c-8b36-ae66382d15b0.jpg?v=1777980662"
+      "/images/catalog/12_0cc28164-71b0-472a-aaa7-162d163e9ce0.webp",
+      "/images/catalog/34_a189f322-ad9a-4c5a-b9a2-38607b904cab.webp",
+      "/images/catalog/56_b3339cad-21ba-422c-8b36-ae66382d15b0.webp"
     ],
     "price": 10219,
     "compareAtPrice": 11355,
@@ -2411,9 +2411,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_a30fc3dc-abd1-457b-a6db-2cb05b9d4565.jpg?v=1777972993",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34_3879a821-5e5e-48d8-9101-6969c084b535.jpg?v=1777972993",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/56_299d069e-7cf0-46a5-bac5-5fe133e42e33.jpg?v=1777972993"
+      "/images/catalog/12_a30fc3dc-abd1-457b-a6db-2cb05b9d4565.webp",
+      "/images/catalog/34_3879a821-5e5e-48d8-9101-6969c084b535.webp",
+      "/images/catalog/56_299d069e-7cf0-46a5-bac5-5fe133e42e33.webp"
     ],
     "price": 15354,
     "compareAtPrice": 17060,
@@ -2447,9 +2447,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_c4da74ae-ec2d-4528-859e-8b4f26380ac3.jpg?v=1777907545",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34_a1f36ba2-e88f-4ca2-86cc-0da6d026660a.jpg?v=1777907545",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/56.jpg?v=1777902922"
+      "/images/catalog/12_c4da74ae-ec2d-4528-859e-8b4f26380ac3.webp",
+      "/images/catalog/34_a1f36ba2-e88f-4ca2-86cc-0da6d026660a.webp",
+      "/images/catalog/56.webp"
     ],
     "price": 3790,
     "compareAtPrice": 4710,
@@ -2483,9 +2483,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_622faa2c-e7e3-4857-ad6d-86550569f804.jpg?v=1777902922",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34_648119aa-1923-4887-a420-de0e07b320d0.jpg?v=1777902922",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/56.jpg?v=1777902922"
+      "/images/catalog/12_622faa2c-e7e3-4857-ad6d-86550569f804.webp",
+      "/images/catalog/34_648119aa-1923-4887-a420-de0e07b320d0.webp",
+      "/images/catalog/56.webp"
     ],
     "price": 7677,
     "compareAtPrice": 8530,
@@ -2519,11 +2519,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61z0HpgdSSL_1.jpg?v=1775914060",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41Kgp0aqSBL.jpg?v=1775914059",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41-Tvq-DVDL.jpg?v=1775914060",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51et6jIl5lL.jpg?v=1775914060",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51mHUkY_vqL._SL1080.jpg?v=1775914059"
+      "/images/catalog/61z0HpgdSSL_1.webp",
+      "/images/catalog/41Kgp0aqSBL.webp",
+      "/images/catalog/41-Tvq-DVDL.webp",
+      "/images/catalog/51et6jIl5lL.webp",
+      "/images/catalog/51mHUkY_vqL._SL1080.webp"
     ],
     "price": 1249,
     "compareAtPrice": 2499,
@@ -2556,11 +2556,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/81CYtJxnOOL._SL1500.jpg?v=1775912891",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/81lzcSDdM-L._SL1500.jpg?v=1775912891",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61AksVyjuML._SL1500.jpg?v=1775912891",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71T3dL9fjLL._SL1500.jpg?v=1775912891",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/713VjgDR7xL._SL1500.jpg?v=1775912891"
+      "/images/catalog/81CYtJxnOOL._SL1500.webp",
+      "/images/catalog/81lzcSDdM-L._SL1500.webp",
+      "/images/catalog/61AksVyjuML._SL1500.webp",
+      "/images/catalog/71T3dL9fjLL._SL1500.webp",
+      "/images/catalog/713VjgDR7xL._SL1500.webp"
     ],
     "price": 1299,
     "compareAtPrice": 2598,
@@ -2593,10 +2593,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard10_065890f8-7508-4ac6-8686-4b33799ab4bc.webp?v=1775910068",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard20_90ceaacb-f54a-4b04-a02a-74fa3c8d622f.webp?v=1775910068",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard56_9d0bd401-cd33-4e37-8a63-7a15bb8d27d3.webp?v=1775910068",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard58_51fb6730-ff62-4692-83d3-aba320fb63f4.webp?v=1775910068"
+      "/images/catalog/Artboard10_065890f8-7508-4ac6-8686-4b33799ab4bc.webp",
+      "/images/catalog/Artboard20_90ceaacb-f54a-4b04-a02a-74fa3c8d622f.webp",
+      "/images/catalog/Artboard56_9d0bd401-cd33-4e37-8a63-7a15bb8d27d3.webp",
+      "/images/catalog/Artboard58_51fb6730-ff62-4692-83d3-aba320fb63f4.webp"
     ],
     "price": 4575,
     "compareAtPrice": 6360,
@@ -2627,10 +2627,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard7_669b4da2-7b1a-47b9-ab9c-fcf3e666269d.webp?v=1775909689",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard8_fc405d02-11e5-4baf-85e4-51291cace48e.webp?v=1775909689",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard9_cae8bd16-4394-4a0c-b438-44d0c2e611ae.webp?v=1775909689",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard54_880984b2-0578-49e0-bc3b-1942b6717fb5.webp?v=1775909689"
+      "/images/catalog/Artboard7_669b4da2-7b1a-47b9-ab9c-fcf3e666269d.webp",
+      "/images/catalog/Artboard8_fc405d02-11e5-4baf-85e4-51291cace48e.webp",
+      "/images/catalog/Artboard9_cae8bd16-4394-4a0c-b438-44d0c2e611ae.webp",
+      "/images/catalog/Artboard54_880984b2-0578-49e0-bc3b-1942b6717fb5.webp"
     ],
     "price": 3705,
     "compareAtPrice": 5145,
@@ -2661,13 +2661,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard7.png?v=1775908851",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard8.png?v=1775908851",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard9.png?v=1775908851",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard54.png?v=1775908851",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/black_a4_7.jpg?v=1775908851",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/black_a4_8.jpg?v=1775908851",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/black_a4_9.jpg?v=1775908851"
+      "/images/catalog/Artboard7.webp",
+      "/images/catalog/Artboard8.webp",
+      "/images/catalog/Artboard9.webp",
+      "/images/catalog/Artboard54.webp",
+      "/images/catalog/black_a4_7.webp",
+      "/images/catalog/black_a4_8.webp",
+      "/images/catalog/black_a4_9.webp"
     ],
     "price": 3460,
     "compareAtPrice": 4810,
@@ -2698,10 +2698,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard10.png?v=1775905244",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard20.png?v=1775905244",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard56.png?v=1775905244",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard58.png?v=1775905244"
+      "/images/catalog/Artboard10.webp",
+      "/images/catalog/Artboard20.webp",
+      "/images/catalog/Artboard56.webp",
+      "/images/catalog/Artboard58.webp"
     ],
     "price": 3848,
     "compareAtPrice": 4810,
@@ -2732,14 +2732,14 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WBCB-02_5.jpg?v=1775904550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71fveuSE8RL._SL1500.jpg?v=1775904549",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71sEnnsp8XL._SL1500.jpg?v=1775904549",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WBCB02_2.jpg?v=1775904550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WBCB02_3.jpg?v=1775904550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WBCB-02_6.jpg?v=1775904550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WBCB-02_8.jpg?v=1775904550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WBCB021.jpg?v=1775904550"
+      "/images/catalog/WBCB-02_5.webp",
+      "/images/catalog/71fveuSE8RL._SL1500.webp",
+      "/images/catalog/71sEnnsp8XL._SL1500.webp",
+      "/images/catalog/WBCB02_2.webp",
+      "/images/catalog/WBCB02_3.webp",
+      "/images/catalog/WBCB-02_6.webp",
+      "/images/catalog/WBCB-02_8.webp",
+      "/images/catalog/WBCB021.webp"
     ],
     "price": 3525,
     "compareAtPrice": 4900,
@@ -2772,11 +2772,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/001_05754994-f50a-40f3-8869-836a0c935648.jpg?v=1775902797",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/002.jpg?v=1775902797",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/MWS-012.jpg?v=1775902797",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/MWS-013.jpg?v=1775902797",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/MWS-014.jpg?v=1775902797"
+      "/images/catalog/001_05754994-f50a-40f3-8869-836a0c935648.webp",
+      "/images/catalog/002.webp",
+      "/images/catalog/MWS-012.webp",
+      "/images/catalog/MWS-013.webp",
+      "/images/catalog/MWS-014.webp"
     ],
     "price": 335,
     "compareAtPrice": 580,
@@ -2812,14 +2812,14 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard15.png?v=1775900478",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard15copy.png?v=1775900478",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard51.png?v=1775900478",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Artboard53.png?v=1775900478",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dds.jpg?v=1775900477",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dffdf.png?v=1775900477",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/TS01_2.jpg?v=1775900477",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/TS01_4.jpg?v=1775900478"
+      "/images/catalog/Artboard15.webp",
+      "/images/catalog/Artboard15copy.webp",
+      "/images/catalog/Artboard51.webp",
+      "/images/catalog/Artboard53.webp",
+      "/images/catalog/dds.webp",
+      "/images/catalog/dffdf.webp",
+      "/images/catalog/TS01_2.webp",
+      "/images/catalog/TS01_4.webp"
     ],
     "price": 1240,
     "compareAtPrice": 1470,
@@ -2852,17 +2852,17 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_55d7c7f9-b6b6-4fc0-b0e5-19e48e788d1e.jpg?v=1775899058",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_2_fb1a5cc9-238c-4768-bf27-d1e267d1cf7f.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_3_b1b62404-59b2-465b-8390-a641e7fc4933.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_4_df0af005-48b2-4703-8abf-39a179c97b94.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_5_bd379192-9b4c-493f-8cf5-cee8bb5319df.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_6_ff67bef3-a5c7-4537-89c2-2580734e62c8.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_7_8a547099-5cb0-4d72-bdf0-01941810329e.jpg?v=1775899058",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_8.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_9.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_10_7187df99-2237-4ca4-9f5d-41513d15ee3d.jpg?v=1775899057",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3x4_360_combo_11_b5812ec8-ff66-477e-9365-75f04f1e800b.jpg?v=1775899057"
+      "/images/catalog/3x4_360_combo_55d7c7f9-b6b6-4fc0-b0e5-19e48e788d1e.webp",
+      "/images/catalog/3x4_360_combo_2_fb1a5cc9-238c-4768-bf27-d1e267d1cf7f.webp",
+      "/images/catalog/3x4_360_combo_3_b1b62404-59b2-465b-8390-a641e7fc4933.webp",
+      "/images/catalog/3x4_360_combo_4_df0af005-48b2-4703-8abf-39a179c97b94.webp",
+      "/images/catalog/3x4_360_combo_5_bd379192-9b4c-493f-8cf5-cee8bb5319df.webp",
+      "/images/catalog/3x4_360_combo_6_ff67bef3-a5c7-4537-89c2-2580734e62c8.webp",
+      "/images/catalog/3x4_360_combo_7_8a547099-5cb0-4d72-bdf0-01941810329e.webp",
+      "/images/catalog/3x4_360_combo_8.webp",
+      "/images/catalog/3x4_360_combo_9.webp",
+      "/images/catalog/3x4_360_combo_10_7187df99-2237-4ca4-9f5d-41513d15ee3d.webp",
+      "/images/catalog/3x4_360_combo_11_b5812ec8-ff66-477e-9365-75f04f1e800b.webp"
     ],
     "price": 10960,
     "compareAtPrice": 14290,
@@ -2895,12 +2895,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61rTXRuASIL._SL1500.jpg?v=1775898373",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61H6MaLEYyL._SL1500.jpg?v=1775898373",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61sAS62VpdL._SL1500.jpg?v=1775898229",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71Qmf05YvHL._SL1500.jpg?v=1775898229",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FCWB01_2.jpg?v=1775898229",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FCWB01_3.jpg?v=1775898229"
+      "/images/catalog/61rTXRuASIL._SL1500.webp",
+      "/images/catalog/61H6MaLEYyL._SL1500.webp",
+      "/images/catalog/61sAS62VpdL._SL1500.webp",
+      "/images/catalog/71Qmf05YvHL._SL1500.webp",
+      "/images/catalog/FCWB01_2.webp",
+      "/images/catalog/FCWB01_3.webp"
     ],
     "price": 10989,
     "compareAtPrice": 14210,
@@ -2931,13 +2931,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61kL2Ut8vwL._SL1500.jpg?v=1775897350",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61i3NQg4jDL._SL1500.jpg?v=1775897351",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61sbFNlvmmL._SL1500.jpg?v=1775897350",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61TkFM2LuUL._SL1500.jpg?v=1775897350",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/719RgkhKIzL._SL1500.jpg?v=1775897350",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ws-01_1.jpg?v=1775897350",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ws-01_2.jpg?v=1775897350"
+      "/images/catalog/61kL2Ut8vwL._SL1500.webp",
+      "/images/catalog/61i3NQg4jDL._SL1500.webp",
+      "/images/catalog/61sbFNlvmmL._SL1500.webp",
+      "/images/catalog/61TkFM2LuUL._SL1500.webp",
+      "/images/catalog/719RgkhKIzL._SL1500.webp",
+      "/images/catalog/ws-01_1.webp",
+      "/images/catalog/ws-01_2.webp"
     ],
     "price": 3540,
     "compareAtPrice": 4165,
@@ -2970,12 +2970,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/619tPcFK3ZL._SL1500.jpg?v=1775895885",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61BfdeSlyDL._SL1500.jpg?v=1775895885",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61C8OE586PL._SL1500.jpg?v=1775895885",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/716CVr6IcBL._SL1500.jpg?v=1775895885",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WS-02_5.jpg?v=1775895885",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WS-02_6.jpg?v=1775895885"
+      "/images/catalog/619tPcFK3ZL._SL1500.webp",
+      "/images/catalog/61BfdeSlyDL._SL1500.webp",
+      "/images/catalog/61C8OE586PL._SL1500.webp",
+      "/images/catalog/716CVr6IcBL._SL1500.webp",
+      "/images/catalog/WS-02_5.webp",
+      "/images/catalog/WS-02_6.webp"
     ],
     "price": 3990,
     "compareAtPrice": 5230,
@@ -3008,11 +3008,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51kQZEUio_L._SL1500_87737c85-c362-492d-91c9-14cf6d6c2d7b.jpg?v=1775894811",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51uJkWOzU1L._SL1500_73aeddab-ae6f-4445-adfe-5267a6981a50.jpg?v=1775894811",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61B9HRNXAHL._SL1500_451fd729-aa7e-41b1-8bcc-0fa19b1cdcc2.jpg?v=1775894811",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61Reapm_TcL._SL1500_78f814df-87c5-4727-8b79-ff89de67b830.jpg?v=1775894811",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71NAD4eF_xL._SL1500_aeb364e1-5d23-43a0-bf12-b0a675c7868b.jpg?v=1775894811"
+      "/images/catalog/51kQZEUio_L._SL1500_87737c85-c362-492d-91c9-14cf6d6c2d7b.webp",
+      "/images/catalog/51uJkWOzU1L._SL1500_73aeddab-ae6f-4445-adfe-5267a6981a50.webp",
+      "/images/catalog/61B9HRNXAHL._SL1500_451fd729-aa7e-41b1-8bcc-0fa19b1cdcc2.webp",
+      "/images/catalog/61Reapm_TcL._SL1500_78f814df-87c5-4727-8b79-ff89de67b830.webp",
+      "/images/catalog/71NAD4eF_xL._SL1500_aeb364e1-5d23-43a0-bf12-b0a675c7868b.webp"
     ],
     "price": 11170,
     "compareAtPrice": 15520,
@@ -3045,12 +3045,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Presentation Supplies",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/716ktPwHv_L._SL1500.jpg?v=1775891494",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61fIws7j3QL._SL1500.jpg?v=1775891494",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71KYtJ8SNyL._SL1500.jpg?v=1775891494",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71KQSr8uyJL._SL1500.jpg?v=1775891494",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71XbgvBaerL._SL1500.jpg?v=1775891494",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/614ew63zBKL._SL1500.jpg?v=1775891494"
+      "/images/catalog/716ktPwHv_L._SL1500.webp",
+      "/images/catalog/61fIws7j3QL._SL1500.webp",
+      "/images/catalog/71KYtJ8SNyL._SL1500.webp",
+      "/images/catalog/71KQSr8uyJL._SL1500.webp",
+      "/images/catalog/71XbgvBaerL._SL1500.webp",
+      "/images/catalog/614ew63zBKL._SL1500.webp"
     ],
     "price": 2920,
     "compareAtPrice": 4080,
@@ -3083,10 +3083,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51MPFaz-13L._SL1500.jpg?v=1769494845",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71LOovjw_KL._SL1500.jpg?v=1769494845",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41pBCEng2bL._SL1080.jpg?v=1769494845",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51getbTgjPL._SL1500.jpg?v=1769494845"
+      "/images/catalog/51MPFaz-13L._SL1500.webp",
+      "/images/catalog/71LOovjw_KL._SL1500.webp",
+      "/images/catalog/41pBCEng2bL._SL1080.webp",
+      "/images/catalog/51getbTgjPL._SL1500.webp"
     ],
     "price": 4770,
     "compareAtPrice": 5300,
@@ -3120,8 +3120,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sjhd_f85c65be-78c5-4347-af35-c4a68d00c790.jpg?v=1769240647",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/skjhd_b71fd829-0f2e-468a-a4b5-6a241426744e.jpg?v=1769240647"
+      "/images/catalog/sjhd_f85c65be-78c5-4347-af35-c4a68d00c790.webp",
+      "/images/catalog/skjhd_b71fd829-0f2e-468a-a4b5-6a241426744e.webp"
     ],
     "price": 3150,
     "compareAtPrice": 3300,
@@ -3156,11 +3156,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/81V74yLnGiL._SL1500.jpg?v=1768553260",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71yin_mSxfL._SL1500.jpg?v=1768553260",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71sr27_kPJL._SL1500.jpg?v=1768553260",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/81TEFqLSHoL._SL1500.jpg?v=1768553260",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61LVuozujtL._SL1500.jpg?v=1768553260"
+      "/images/catalog/81V74yLnGiL._SL1500.webp",
+      "/images/catalog/71yin_mSxfL._SL1500.webp",
+      "/images/catalog/71sr27_kPJL._SL1500.webp",
+      "/images/catalog/81TEFqLSHoL._SL1500.webp",
+      "/images/catalog/61LVuozujtL._SL1500.webp"
     ],
     "price": 4955,
     "compareAtPrice": 5200,
@@ -3195,10 +3195,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51zZHlOnM4L._SL1000.jpg?v=1768482677",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41V2gRNxEuL._SL1000.jpg?v=1768482677",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71j5Dmsi_AL._SL1500.jpg?v=1768482677",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41DBXvq37PL._SL1000.jpg?v=1768482677"
+      "/images/catalog/51zZHlOnM4L._SL1000.webp",
+      "/images/catalog/41V2gRNxEuL._SL1000.webp",
+      "/images/catalog/71j5Dmsi_AL._SL1500.webp",
+      "/images/catalog/41DBXvq37PL._SL1000.webp"
     ],
     "price": 1760,
     "compareAtPrice": 1850,
@@ -3232,10 +3232,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/719A31JeBNL._SL1500.jpg?v=1768481942",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71X5-weK_YL._SL1500.jpg?v=1768481942",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/31ci0dnWBZL.jpg?v=1768481942",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61ITkMMDP2L._SL1500_aed32fd2-4d8c-40ed-8f18-5cc7b43faccf.jpg?v=1768481942"
+      "/images/catalog/719A31JeBNL._SL1500.webp",
+      "/images/catalog/71X5-weK_YL._SL1500.webp",
+      "/images/catalog/31ci0dnWBZL.webp",
+      "/images/catalog/61ITkMMDP2L._SL1500_aed32fd2-4d8c-40ed-8f18-5cc7b43faccf.webp"
     ],
     "price": 2675,
     "compareAtPrice": 3000,
@@ -3269,10 +3269,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71Dv9mFGr5L._SL1500.jpg?v=1768481265",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61wZ6IFuPOL._SL1500.jpg?v=1768481266",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/21rtucPAmCL.jpg?v=1768481265",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61ITkMMDP2L._SL1500.jpg?v=1768481266"
+      "/images/catalog/71Dv9mFGr5L._SL1500.webp",
+      "/images/catalog/61wZ6IFuPOL._SL1500.webp",
+      "/images/catalog/21rtucPAmCL.webp",
+      "/images/catalog/61ITkMMDP2L._SL1500.webp"
     ],
     "price": 3850,
     "compareAtPrice": 4045,
@@ -3306,11 +3306,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71DhEkLt8bL._SL1500.jpg?v=1768480024",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71WR7FaFdqL._SL1500.jpg?v=1768480048",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71hZuJsfwZL._SL1500.jpg?v=1768480048",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71On8gVOOoL._SL1500.jpg?v=1768480048",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71Pcs61qBnL._SL1500.jpg?v=1768480048"
+      "/images/catalog/71DhEkLt8bL._SL1500.webp",
+      "/images/catalog/71WR7FaFdqL._SL1500.webp",
+      "/images/catalog/71hZuJsfwZL._SL1500.webp",
+      "/images/catalog/71On8gVOOoL._SL1500.webp",
+      "/images/catalog/71Pcs61qBnL._SL1500.webp"
     ],
     "price": 2520,
     "compareAtPrice": 2900,
@@ -3343,10 +3343,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61Pu-5ceMxL._SL1500.jpg?v=1768473801",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51QCy8aAhIL._SL1500.jpg?v=1768473801",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61ADVk88XWL._SL1500.jpg?v=1768473801",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41hrgyxfFzL._SL1500.jpg?v=1768473801"
+      "/images/catalog/61Pu-5ceMxL._SL1500.webp",
+      "/images/catalog/51QCy8aAhIL._SL1500.webp",
+      "/images/catalog/61ADVk88XWL._SL1500.webp",
+      "/images/catalog/41hrgyxfFzL._SL1500.webp"
     ],
     "price": 545,
     "compareAtPrice": 650,
@@ -3380,10 +3380,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71m-Qd-9BCL._SL1200.jpg?v=1768471085",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61wgr83R3ML._SL1081.jpg?v=1768471086",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/614uJI0OLnL._SL1081.jpg?v=1768471085",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51e4dK6_ydL._SL1081.jpg?v=1768471085"
+      "/images/catalog/71m-Qd-9BCL._SL1200.webp",
+      "/images/catalog/61wgr83R3ML._SL1081.webp",
+      "/images/catalog/614uJI0OLnL._SL1081.webp",
+      "/images/catalog/51e4dK6_ydL._SL1081.webp"
     ],
     "price": 380,
     "compareAtPrice": 420,
@@ -3416,11 +3416,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61gO6E9ljLL._SL1500.jpg?v=1768470443",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51j-wtgEFhL._SL1500.jpg?v=1768470442",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51RJRbUQWYL._SL1500.jpg?v=1768470442",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51RwXIule0L._SL1500.jpg?v=1768470442",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61G9HCqHZpL._SL1500.jpg?v=1768470442"
+      "/images/catalog/61gO6E9ljLL._SL1500.webp",
+      "/images/catalog/51j-wtgEFhL._SL1500.webp",
+      "/images/catalog/51RJRbUQWYL._SL1500.webp",
+      "/images/catalog/51RwXIule0L._SL1500.webp",
+      "/images/catalog/61G9HCqHZpL._SL1500.webp"
     ],
     "price": 490,
     "compareAtPrice": 550,
@@ -3454,10 +3454,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61_eQXJCqsL._SL1500.jpg?v=1768463412",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51XKLvbwobL._SL1500.jpg?v=1768463412",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51-L1EeioRL._SL1500.jpg?v=1768463412",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61bjVPWEYtL._SL1500.jpg?v=1768463203"
+      "/images/catalog/61_eQXJCqsL._SL1500.webp",
+      "/images/catalog/51XKLvbwobL._SL1500.webp",
+      "/images/catalog/51-L1EeioRL._SL1500.webp",
+      "/images/catalog/61bjVPWEYtL._SL1500.webp"
     ],
     "price": 480,
     "compareAtPrice": 550,
@@ -3491,10 +3491,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71v-QOtlTmL._SL1280.jpg?v=1768462731",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51LB33z-t1L._SL1280.jpg?v=1768462731",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51x-xOJWCKL._SL1280.jpg?v=1768462731",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61cIC3ZARiL._SL1280.jpg?v=1768462731"
+      "/images/catalog/71v-QOtlTmL._SL1280.webp",
+      "/images/catalog/51LB33z-t1L._SL1280.webp",
+      "/images/catalog/51x-xOJWCKL._SL1280.webp",
+      "/images/catalog/61cIC3ZARiL._SL1280.webp"
     ],
     "price": 1250,
     "compareAtPrice": 1600,
@@ -3528,10 +3528,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61TUWw3WpUL._SL1500.jpg?v=1768461683",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41humPNMPQL._SL1500.jpg?v=1768461683",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51PaEv02EGL._SL1500.jpg?v=1768461683",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/51QlvHkfxAL._SL1500.jpg?v=1768461683"
+      "/images/catalog/61TUWw3WpUL._SL1500.webp",
+      "/images/catalog/41humPNMPQL._SL1500.webp",
+      "/images/catalog/51PaEv02EGL._SL1500.webp",
+      "/images/catalog/51QlvHkfxAL._SL1500.webp"
     ],
     "price": 400,
     "compareAtPrice": 450,
@@ -3565,18 +3565,18 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dfsfff.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ghfg.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/61L7YgiZDrL._SL1500_16627d71-1b31-4fb6-99bc-010a20873352.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71oPJlkoaDL._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71rD9GAxbmL._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71sEd32TMqL._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71S-UQsKY3L._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71unQ_9M-0L._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/71x9pB31fUL._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/81Uv9WQLfjL._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/516daVNZevL._SL1500.jpg?v=1767687536",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/819683ID-vL._SL1500.jpg?v=1767687536"
+      "/images/catalog/dfsfff.webp",
+      "/images/catalog/ghfg.webp",
+      "/images/catalog/61L7YgiZDrL._SL1500_16627d71-1b31-4fb6-99bc-010a20873352.webp",
+      "/images/catalog/71oPJlkoaDL._SL1500.webp",
+      "/images/catalog/71rD9GAxbmL._SL1500.webp",
+      "/images/catalog/71sEd32TMqL._SL1500.webp",
+      "/images/catalog/71S-UQsKY3L._SL1500.webp",
+      "/images/catalog/71unQ_9M-0L._SL1500.webp",
+      "/images/catalog/71x9pB31fUL._SL1500.webp",
+      "/images/catalog/81Uv9WQLfjL._SL1500.webp",
+      "/images/catalog/516daVNZevL._SL1500.webp",
+      "/images/catalog/819683ID-vL._SL1500.webp"
     ],
     "price": 710,
     "compareAtPrice": 799,
@@ -3607,9 +3607,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/XCCXC.jpg?v=1767356413",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DCXCV.png?v=1767356413",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DFFDFD_2.png?v=1767356413"
+      "/images/catalog/XCCXC.webp",
+      "/images/catalog/DCXCV.webp",
+      "/images/catalog/DFFDFD_2.webp"
     ],
     "price": 1530,
     "compareAtPrice": 1910,
@@ -3642,9 +3642,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/without_brand.png?v=1768028355",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FDFDFDF.png?v=1768028355",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DJHDHDD.png?v=1768028355"
+      "/images/catalog/without_brand.webp",
+      "/images/catalog/FDFDFDF.webp",
+      "/images/catalog/DJHDHDD.webp"
     ],
     "price": 899,
     "compareAtPrice": 1140,
@@ -3677,10 +3677,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Dark_blue_leather_notebook.png?v=1791452206",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSDDSD_1220f880-76ad-4a7d-8f40-566d6a5e31b1.png?v=1768034053",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDDSDDSDSD.png?v=1768034053",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDDEEE_ab5d5f91-e9f1-46a6-b38c-8a75c1e05532.png?v=1768034053"
+      "/images/catalog/Dark_blue_leather_notebook.webp",
+      "/images/catalog/SDSDDSD_1220f880-76ad-4a7d-8f40-566d6a5e31b1.webp",
+      "/images/catalog/SDDSDDSDSD.webp",
+      "/images/catalog/SDDEEE_ab5d5f91-e9f1-46a6-b38c-8a75c1e05532.webp"
     ],
     "price": 899,
     "compareAtPrice": 1140,
@@ -3713,9 +3713,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/diary.png?v=1768034710",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ASADADD.png?v=1768034710",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FFGDFD.png?v=1768034710"
+      "/images/catalog/diary.webp",
+      "/images/catalog/ASADADD.webp",
+      "/images/catalog/FFGDFD.webp"
     ],
     "price": 899,
     "compareAtPrice": 1140,
@@ -3748,9 +3748,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSDSD_b647bcdb-8ab7-4ae5-836d-d3db3372eb85.jpg?v=1767347419",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/KLFJKF.png?v=1767347419",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DJHSDHJH.png?v=1767347419"
+      "/images/catalog/SDSDSD_b647bcdb-8ab7-4ae5-836d-d3db3372eb85.webp",
+      "/images/catalog/KLFJKF.webp",
+      "/images/catalog/DJHSDHJH.webp"
     ],
     "price": 899,
     "compareAtPrice": 1140,
@@ -3781,9 +3781,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/bron.png?v=1768035737",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/V.png?v=1768035737",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/G.png?v=1768035737"
+      "/images/catalog/bron.webp",
+      "/images/catalog/V.webp",
+      "/images/catalog/G.webp"
     ],
     "price": 899,
     "compareAtPrice": 1140,
@@ -3816,9 +3816,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dark_brwon.png?v=1768036247",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ASSASA.png?v=1768036247",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSSXS.png?v=1768036247"
+      "/images/catalog/dark_brwon.webp",
+      "/images/catalog/ASSASA.webp",
+      "/images/catalog/SDSSXS.webp"
     ],
     "price": 899,
     "compareAtPrice": 1140,
@@ -3851,9 +3851,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/gray5.png?v=1768036769",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/wwee.png?v=1768036769",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dv_16692a35-1ee7-474d-b727-34d35e307496.png?v=1768036769"
+      "/images/catalog/gray5.webp",
+      "/images/catalog/wwee.webp",
+      "/images/catalog/dv_16692a35-1ee7-474d-b727-34d35e307496.webp"
     ],
     "price": 670,
     "compareAtPrice": 840,
@@ -3886,9 +3886,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/staan.png?v=1768372839",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/22_c44072b1-5512-4e9e-99ac-42864b02ee84.png?v=1768372839",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/33_55598869-f45f-4e8f-9586-c107ebefcc39.png?v=1768372839"
+      "/images/catalog/staan.webp",
+      "/images/catalog/22_c44072b1-5512-4e9e-99ac-42864b02ee84.webp",
+      "/images/catalog/33_55598869-f45f-4e8f-9586-c107ebefcc39.webp"
     ],
     "price": 620,
     "compareAtPrice": 780,
@@ -3921,9 +3921,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tir.png?v=1768375205",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_f8b6f9bb-daf3-4a69-9c3e-d464206d7469.png?v=1768375205",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ASASSASA.png?v=1768375205"
+      "/images/catalog/tir.webp",
+      "/images/catalog/12_f8b6f9bb-daf3-4a69-9c3e-d464206d7469.webp",
+      "/images/catalog/ASASSASA.webp"
     ],
     "price": 620,
     "compareAtPrice": 780,
@@ -3956,8 +3956,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_c0859a0e-197a-4fea-b0f2-e180df53d725.png?v=1767265774",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_a75e0114-578c-4230-b9cc-d1e994f551e6.png?v=1767265799"
+      "/images/catalog/1_c0859a0e-197a-4fea-b0f2-e180df53d725.webp",
+      "/images/catalog/3_a75e0114-578c-4230-b9cc-d1e994f551e6.webp"
     ],
     "price": 5249,
     "compareAtPrice": 6630,
@@ -3991,9 +3991,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_bf19e751-9687-4cc1-80a6-d2d83eb23c8e.png?v=1767264388",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_cec6a524-c52f-4721-80bc-517b0f7e017d.png?v=1767264387",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/123_9db4f2e4-f8be-4f21-a9f5-f046ee1fd523.png?v=1767265112"
+      "/images/catalog/6_bf19e751-9687-4cc1-80a6-d2d83eb23c8e.webp",
+      "/images/catalog/2_cec6a524-c52f-4721-80bc-517b0f7e017d.webp",
+      "/images/catalog/123_9db4f2e4-f8be-4f21-a9f5-f046ee1fd523.webp"
     ],
     "price": 5900,
     "compareAtPrice": 7375,
@@ -4027,9 +4027,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_2936cc15-9093-415b-8198-9a838a619f73.png?v=1767263831",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5_d5cbb45b-e165-4aec-b211-6ba0832a0a96.png?v=1767263831",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_2cc0a4fe-0b9d-4874-b82a-984cfb68f617.png?v=1767263959"
+      "/images/catalog/7_2936cc15-9093-415b-8198-9a838a619f73.webp",
+      "/images/catalog/5_d5cbb45b-e165-4aec-b211-6ba0832a0a96.webp",
+      "/images/catalog/4_2cc0a4fe-0b9d-4874-b82a-984cfb68f617.webp"
     ],
     "price": 5530,
     "compareAtPrice": 6975,
@@ -4063,9 +4063,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_7cca1871-635c-4254-ad91-e1b28cecdc06.png?v=1767263349",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/9_b70d53a1-d622-465b-8900-e57bd293645a.png?v=1767263348",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_113d812e-1bdd-4eb6-9927-43daa358f23c.png?v=1767263348"
+      "/images/catalog/8_7cca1871-635c-4254-ad91-e1b28cecdc06.webp",
+      "/images/catalog/9_b70d53a1-d622-465b-8900-e57bd293645a.webp",
+      "/images/catalog/10_113d812e-1bdd-4eb6-9927-43daa358f23c.webp"
     ],
     "price": 4500,
     "compareAtPrice": 5650,
@@ -4099,11 +4099,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ASAS.png?v=1767258766",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/QWQEE.png?v=1767258766",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34_ec2adf42-84d0-4674-a448-c1a1052d1afe.png?v=1767258766",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/JHG.png?v=1767258766",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FSFSF.png?v=1767258766"
+      "/images/catalog/ASAS.webp",
+      "/images/catalog/QWQEE.webp",
+      "/images/catalog/34_ec2adf42-84d0-4674-a448-c1a1052d1afe.webp",
+      "/images/catalog/JHG.webp",
+      "/images/catalog/FSFSF.webp"
     ],
     "price": 3149,
     "compareAtPrice": 3980,
@@ -4137,9 +4137,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/121333.jpg?v=1767256722",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_64142e94-0a39-4c61-ac45-54a7c765df7e.png?v=1767256722",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_5e773212-cf4c-485e-bb37-f46fdd6872ed.png?v=1767256722"
+      "/images/catalog/121333.webp",
+      "/images/catalog/2_64142e94-0a39-4c61-ac45-54a7c765df7e.webp",
+      "/images/catalog/1_5e773212-cf4c-485e-bb37-f46fdd6872ed.webp"
     ],
     "price": 2049,
     "compareAtPrice": 2580,
@@ -4173,9 +4173,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_ba7c1844-ae97-4774-9ef9-5961903a7517.jpg?v=1767256028",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5_dc8fe735-41bf-43fa-bc94-7c72d8d284d1.png?v=1767256028",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_60a140ff-9534-4ae2-82c6-43677a20ac1b.png?v=1767256028"
+      "/images/catalog/12_ba7c1844-ae97-4774-9ef9-5961903a7517.webp",
+      "/images/catalog/5_dc8fe735-41bf-43fa-bc94-7c72d8d284d1.webp",
+      "/images/catalog/3_60a140ff-9534-4ae2-82c6-43677a20ac1b.webp"
     ],
     "price": 1999,
     "compareAtPrice": 2510,
@@ -4209,9 +4209,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_9e7a64a0-56c6-466a-b6f1-2f73ccfa4483.jpg?v=1767254364",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DV_d6894a75-fcdd-4cca-8a6d-291acf8aeff0.png?v=1767254366",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SFSSD.png?v=1767254365"
+      "/images/catalog/1_9e7a64a0-56c6-466a-b6f1-2f73ccfa4483.webp",
+      "/images/catalog/DV_d6894a75-fcdd-4cca-8a6d-291acf8aeff0.webp",
+      "/images/catalog/SFSSD.webp"
     ],
     "price": 1999,
     "compareAtPrice": 2510,
@@ -4245,12 +4245,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_41019c17-e87a-458d-b0e6-ce0c58ed2a4c.png?v=1768375678",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_4db54eef-82a6-4b26-8d46-3b656b8c66f0.jpg?v=1768375678",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_0ccec9e4-c2b8-4b7b-9fe0-fc50c98cc356.jpg?v=1768375678",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5_da2ce7c9-151f-4deb-bb04-8605807b57c8.jpg?v=1768375678",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/87_88d96226-9706-44b4-adbe-ca9d97714dbd.png?v=1768375678",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/78_3bdf7c22-0342-4e45-b3ea-0e3961fb29b2.png?v=1768375678"
+      "/images/catalog/1_41019c17-e87a-458d-b0e6-ce0c58ed2a4c.webp",
+      "/images/catalog/1_4db54eef-82a6-4b26-8d46-3b656b8c66f0.webp",
+      "/images/catalog/4_0ccec9e4-c2b8-4b7b-9fe0-fc50c98cc356.webp",
+      "/images/catalog/5_da2ce7c9-151f-4deb-bb04-8605807b57c8.webp",
+      "/images/catalog/87_88d96226-9706-44b4-adbe-ca9d97714dbd.webp",
+      "/images/catalog/78_3bdf7c22-0342-4e45-b3ea-0e3961fb29b2.webp"
     ],
     "price": 760,
     "compareAtPrice": 960,
@@ -4283,10 +4283,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/g1.png?v=1768380518",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_7673c682-d67a-4d25-9913-5833a3cb0da3.jpg?v=1768380518",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_8943efee-f99d-40dc-92a1-ad12e3cc31f0.png?v=1768380518",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_005c75d5-ae34-4c30-a0fd-3d9c405c9be8.png?v=1768380518"
+      "/images/catalog/g1.webp",
+      "/images/catalog/2_7673c682-d67a-4d25-9913-5833a3cb0da3.webp",
+      "/images/catalog/3_8943efee-f99d-40dc-92a1-ad12e3cc31f0.webp",
+      "/images/catalog/4_005c75d5-ae34-4c30-a0fd-3d9c405c9be8.webp"
     ],
     "price": 790,
     "compareAtPrice": 950,
@@ -4319,10 +4319,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/454.png?v=1768388135",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DV_d1cdb681-6e31-406f-a1c6-df14433cd4a7.jpg?v=1768388135",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/VD.jpg?v=1768388135",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12345.png?v=1768388135"
+      "/images/catalog/454.webp",
+      "/images/catalog/DV_d1cdb681-6e31-406f-a1c6-df14433cd4a7.webp",
+      "/images/catalog/VD.webp",
+      "/images/catalog/12345.webp"
     ],
     "price": 1120,
     "compareAtPrice": 1410,
@@ -4355,10 +4355,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/g5.png?v=1768388467",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_1f8c2f99-1a96-496d-8ce0-17d7d786fdb0.jpg?v=1768388467",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/123_005c136b-e649-45cd-b7da-731e3c500fe7.png?v=1768388467",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3456.png?v=1768388467"
+      "/images/catalog/g5.webp",
+      "/images/catalog/1_1f8c2f99-1a96-496d-8ce0-17d7d786fdb0.webp",
+      "/images/catalog/123_005c136b-e649-45cd-b7da-731e3c500fe7.webp",
+      "/images/catalog/3456.webp"
     ],
     "price": 999,
     "compareAtPrice": 1250,
@@ -4391,10 +4391,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/red_k.png?v=1768388771",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_5e9bef3e-8977-49cf-b001-a8da4ac33fc9.jpg?v=1768388771",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_dc2493cd-53da-4eb7-8914-cdf4a697d51e.png?v=1768388771",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5_b00f7ad0-9c25-4592-8c20-5009135bfe48.png?v=1768388771"
+      "/images/catalog/red_k.webp",
+      "/images/catalog/12_5e9bef3e-8977-49cf-b001-a8da4ac33fc9.webp",
+      "/images/catalog/2_dc2493cd-53da-4eb7-8914-cdf4a697d51e.webp",
+      "/images/catalog/5_b00f7ad0-9c25-4592-8c20-5009135bfe48.webp"
     ],
     "price": 920,
     "compareAtPrice": 1150,
@@ -4427,12 +4427,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/red_jij.png?v=1768389719",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_e776bb3d-4c4a-47c3-b8cf-c7c2318e1a5d.jpg?v=1768389719",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/321_20a7c01f-37e1-4c21-88f5-b3440f515245.png?v=1768389719",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_56a4d0de-8ec2-4020-891c-436a728f66f8.png?v=1768389719",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_a019759c-f8f1-499e-8068-a1552a54a63e.png?v=1768389719",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_62dda207-859d-41bc-ae4b-5112b958da3c.png?v=1768389719"
+      "/images/catalog/red_jij.webp",
+      "/images/catalog/1_e776bb3d-4c4a-47c3-b8cf-c7c2318e1a5d.webp",
+      "/images/catalog/321_20a7c01f-37e1-4c21-88f5-b3440f515245.webp",
+      "/images/catalog/4_56a4d0de-8ec2-4020-891c-436a728f66f8.webp",
+      "/images/catalog/6_a019759c-f8f1-499e-8068-a1552a54a63e.webp",
+      "/images/catalog/8_62dda207-859d-41bc-ae4b-5112b958da3c.webp"
     ],
     "price": 695,
     "compareAtPrice": 870,
@@ -4465,11 +4465,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/cream_9b619485-a24e-4930-a33e-d95304b2ada7.png?v=1768390432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_c8f8c90b-471b-498b-9c32-86e92921d9c9.jpg?v=1768390432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DVD_8a773769-b9d0-44bc-a6c8-cd4373384522.jpg?v=1768390432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_35c53e8f-959f-4e62-b239-7fbb45e779a8.png?v=1768390432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_48fd9f99-3a2e-4b72-937b-90182a97c141.png?v=1768390432"
+      "/images/catalog/cream_9b619485-a24e-4930-a33e-d95304b2ada7.webp",
+      "/images/catalog/3_c8f8c90b-471b-498b-9c32-86e92921d9c9.webp",
+      "/images/catalog/DVD_8a773769-b9d0-44bc-a6c8-cd4373384522.webp",
+      "/images/catalog/4_35c53e8f-959f-4e62-b239-7fbb45e779a8.webp",
+      "/images/catalog/8_48fd9f99-3a2e-4b72-937b-90182a97c141.webp"
     ],
     "price": 590,
     "compareAtPrice": 750,
@@ -4502,10 +4502,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/blue_0da8585f-dd62-4f22-a601-19095c9ae717.png?v=1768391635",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_6ba9569c-7029-4cee-8336-980b8a4cc411.jpg?v=1768391635",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_c6930734-7e86-4d63-a439-e9e8ecd47a32.png?v=1768391635",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_98a06043-7396-4e57-b2cf-23f43eab1f8e.png?v=1768391635"
+      "/images/catalog/blue_0da8585f-dd62-4f22-a601-19095c9ae717.webp",
+      "/images/catalog/6_6ba9569c-7029-4cee-8336-980b8a4cc411.webp",
+      "/images/catalog/7_c6930734-7e86-4d63-a439-e9e8ecd47a32.webp",
+      "/images/catalog/8_98a06043-7396-4e57-b2cf-23f43eab1f8e.webp"
     ],
     "price": 590,
     "compareAtPrice": 750,
@@ -4538,10 +4538,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/d_brown.png?v=1768470074",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSDDS123.jpg?v=1768470074",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/321.png?v=1768470074",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1234412222.png?v=1768470074"
+      "/images/catalog/d_brown.webp",
+      "/images/catalog/SDSDDS123.webp",
+      "/images/catalog/321.webp",
+      "/images/catalog/1234412222.webp"
     ],
     "price": 590,
     "compareAtPrice": 750,
@@ -4574,9 +4574,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ABCDEFG.jpg?v=1767172884",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DV.png?v=1767172884",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/GIUUI.png?v=1767172884"
+      "/images/catalog/ABCDEFG.webp",
+      "/images/catalog/DV.webp",
+      "/images/catalog/GIUUI.webp"
     ],
     "price": 1530,
     "compareAtPrice": 2110,
@@ -4609,9 +4609,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DVDG.jpg?v=1767167550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DCDC.png?v=1767167550",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/AS.png?v=1767167550"
+      "/images/catalog/DVDG.webp",
+      "/images/catalog/DCDC.webp",
+      "/images/catalog/AS.webp"
     ],
     "price": 1530,
     "compareAtPrice": 2110,
@@ -4644,10 +4644,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DVD_d0bd1ac6-f571-4946-b82f-6a2ac1217b85.jpg?v=1767166019",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DVDVRREE.png?v=1767166019",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DVDGF.png?v=1767166019",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/TRRE.jpg?v=1767166592"
+      "/images/catalog/DVD_d0bd1ac6-f571-4946-b82f-6a2ac1217b85.webp",
+      "/images/catalog/DVDVRREE.webp",
+      "/images/catalog/DVDGF.webp",
+      "/images/catalog/TRRE.webp"
     ],
     "price": 1530,
     "compareAtPrice": 2010,
@@ -4683,9 +4683,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SWRWR.jpg?v=1767165292",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DVDVDV_7f53bd7e-67ec-499b-b538-6f70473d16d2.png?v=1767165293",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WEWWR.png?v=1767165293"
+      "/images/catalog/SWRWR.webp",
+      "/images/catalog/DVDVDV_7f53bd7e-67ec-499b-b538-6f70473d16d2.webp",
+      "/images/catalog/WEWWR.webp"
     ],
     "price": 1475,
     "compareAtPrice": 1850,
@@ -4718,9 +4718,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SASSA.jpg?v=1767164643",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/KDH.png?v=1767164644",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/JKDHJDHKH.png?v=1767164643"
+      "/images/catalog/SASSA.webp",
+      "/images/catalog/KDH.webp",
+      "/images/catalog/JKDHJDHKH.webp"
     ],
     "price": 1120,
     "compareAtPrice": 1410,
@@ -4753,9 +4753,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DFDFF.jpg?v=1767164135",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ADSDD.png?v=1767164135",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/EWEEEW.png?v=1767164135"
+      "/images/catalog/DFDFF.webp",
+      "/images/catalog/ADSDD.webp",
+      "/images/catalog/EWEEEW.webp"
     ],
     "price": 999,
     "compareAtPrice": 1250,
@@ -4788,9 +4788,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSDSD.png?v=1767162747",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DADD.png?v=1767162747",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SASASASA_6d842c66-962f-4bef-aa7e-b33e7ea5db1f.png?v=1767162747"
+      "/images/catalog/SDSDSD.webp",
+      "/images/catalog/DADD.webp",
+      "/images/catalog/SASASASA_6d842c66-962f-4bef-aa7e-b33e7ea5db1f.webp"
     ],
     "price": 2950,
     "compareAtPrice": 3690,
@@ -4823,8 +4823,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_pcs.png?v=1768902213",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDDDAD.png?v=1768902213"
+      "/images/catalog/4_pcs.webp",
+      "/images/catalog/SDDDAD.webp"
     ],
     "price": 1290,
     "compareAtPrice": 1630,
@@ -4859,9 +4859,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/holder.png?v=1768461299",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/JKHSDHKD.png?v=1768461299",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSS.png?v=1768461299"
+      "/images/catalog/holder.webp",
+      "/images/catalog/JKHSDHKD.webp",
+      "/images/catalog/SDSS.webp"
     ],
     "price": 1770,
     "compareAtPrice": 2250,
@@ -4896,10 +4896,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/gy.png?v=1768470012",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/CapturehjghSDWSDSD.jpg?v=1768470012",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dffdadKDHKH.jpg?v=1768470012",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FDSF.jpg?v=1768470012"
+      "/images/catalog/gy.webp",
+      "/images/catalog/CapturehjghSDWSDSD.webp",
+      "/images/catalog/dffdadKDHKH.webp",
+      "/images/catalog/FDSF.webp"
     ],
     "price": 410,
     "compareAtPrice": 520,
@@ -4932,10 +4932,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/bw.png?v=1768470767",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12.jpg?v=1768470767",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SDSF.png?v=1768470767",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/FGDF.png?v=1768470767"
+      "/images/catalog/bw.webp",
+      "/images/catalog/12-jpg.webp",
+      "/images/catalog/SDSF.webp",
+      "/images/catalog/FGDF.webp"
     ],
     "price": 590,
     "compareAtPrice": 740,
@@ -4968,9 +4968,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/volvo.png?v=1768902836",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/rotete.png?v=1768902836",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/r2.png?v=1768902836"
+      "/images/catalog/volvo.webp",
+      "/images/catalog/rotete.webp",
+      "/images/catalog/r2.webp"
     ],
     "price": 1599,
     "compareAtPrice": 2280,
@@ -5003,10 +5003,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/god.png?v=1768914838",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/wmscureside_582d6433-d067-4ebd-8f05-c26866cbca65.jpg?v=1768914838",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/wmscureside2.jpg?v=1768914838",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/wmscureside1100.jpg?v=1768914838"
+      "/images/catalog/god.webp",
+      "/images/catalog/wmscureside_582d6433-d067-4ebd-8f05-c26866cbca65.webp",
+      "/images/catalog/wmscureside2.webp",
+      "/images/catalog/wmscureside1100.webp"
     ],
     "price": 1299,
     "compareAtPrice": 1900,
@@ -5039,8 +5039,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/rounded.png?v=1768540847",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/LSDLK.png?v=1768540847"
+      "/images/catalog/rounded.webp",
+      "/images/catalog/LSDLK.webp"
     ],
     "price": 590,
     "compareAtPrice": 740,
@@ -5073,11 +5073,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/JANUARY.png?v=1768983286",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/amazonwoodenwithmatel.jpg?v=1768983286",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/wsliedecalender.jpg?v=1768983286",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/backwslidecal.jpg?v=1768983286",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/silede.jpg?v=1768983286"
+      "/images/catalog/JANUARY.webp",
+      "/images/catalog/amazonwoodenwithmatel.webp",
+      "/images/catalog/wsliedecalender.webp",
+      "/images/catalog/backwslidecal.webp",
+      "/images/catalog/silede.webp"
     ],
     "price": 910,
     "compareAtPrice": 1300,
@@ -5110,10 +5110,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/BBB.png?v=1768473995",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DFSD.png?v=1768474011",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ASDDD.png?v=1768474011",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/JKSHKSDHJH.png?v=1768473995"
+      "/images/catalog/BBB.webp",
+      "/images/catalog/DFSD.webp",
+      "/images/catalog/ASDDD.webp",
+      "/images/catalog/JKSHKSDHJH.webp"
     ],
     "price": 575,
     "compareAtPrice": 730,
@@ -5146,10 +5146,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/METAL.png?v=1768995696",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/w_M.jpg?v=1768995696",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/w_m_2.jpg?v=1768995696",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/w_m_1.jpg?v=1768995696"
+      "/images/catalog/METAL.webp",
+      "/images/catalog/w_M.webp",
+      "/images/catalog/w_m_2.webp",
+      "/images/catalog/w_m_1.webp"
     ],
     "price": 1299,
     "compareAtPrice": 1900,
@@ -5182,10 +5182,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/b_t_c.png?v=1769320977",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/w1.jpg?v=1769320977",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/w2.jpg?v=1769320977",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/woodentablecalendar.jpg?v=1769320977"
+      "/images/catalog/b_t_c.webp",
+      "/images/catalog/w1.webp",
+      "/images/catalog/w2.webp",
+      "/images/catalog/woodentablecalendar.webp"
     ],
     "price": 1060,
     "compareAtPrice": 1530,
@@ -5218,10 +5218,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/bg.png?v=1768483307",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DFGFF.jpg?v=1768483307",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DGDGG.jpg?v=1768483307",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SINKSNKX.jpg?v=1768483307"
+      "/images/catalog/bg.webp",
+      "/images/catalog/DFGFF.webp",
+      "/images/catalog/DGDGG.webp",
+      "/images/catalog/SINKSNKX.webp"
     ],
     "price": 530,
     "compareAtPrice": 675,
@@ -5254,11 +5254,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_99530891-cea3-424a-b645-d51c48a97960.png?v=1768545160",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/lhjkkh.jpg?v=1768545160",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/KDHKLDFKLJ.jpg?v=1768545160",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/KDFIHFK.jpg?v=1768545160",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/SFSFSFSF.jpg?v=1768545160"
+      "/images/catalog/1_99530891-cea3-424a-b645-d51c48a97960.webp",
+      "/images/catalog/lhjkkh.webp",
+      "/images/catalog/KDHKLDFKLJ.webp",
+      "/images/catalog/KDFIHFK.webp",
+      "/images/catalog/SFSFSFSF.webp"
     ],
     "price": 530,
     "compareAtPrice": 690,
@@ -5291,8 +5291,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Captureghfghjgh.jpg?v=1767089286",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/destune.jpg?v=1767089323"
+      "/images/catalog/Captureghfghjgh.webp",
+      "/images/catalog/destune.webp"
     ],
     "price": 330,
     "compareAtPrice": 555,
@@ -5325,8 +5325,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sdsdssd.png?v=1767088764",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1767088647630-019b6eb0-beaa-76ba-b2bc-aedaf9ab46f8hhhhh.png?v=1767088795"
+      "/images/catalog/sdsdssd.webp",
+      "/images/catalog/1767088647630-019b6eb0-beaa-76ba-b2bc-aedaf9ab46f8hhhhh.webp"
     ],
     "price": 350,
     "compareAtPrice": 455,
@@ -5359,9 +5359,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sfere.jpg?v=1767087049",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dvdvdv.png?v=1767087251",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dsdsdddsdsdsd.png?v=1767087402"
+      "/images/catalog/sfere.webp",
+      "/images/catalog/dvdvdv.webp",
+      "/images/catalog/dsdsdddsdsdsd.webp"
     ],
     "price": 410,
     "compareAtPrice": 530,
@@ -5394,9 +5394,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/divided.png?v=1768722008",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dvdvv.jpg?v=1768722008",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sffssf.jpg?v=1768722008"
+      "/images/catalog/divided.webp",
+      "/images/catalog/dvdvv.webp",
+      "/images/catalog/sffssf.webp"
     ],
     "price": 350,
     "compareAtPrice": 455,
@@ -5429,9 +5429,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2026.png?v=1768639601",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sdsdf.jpg?v=1768639601",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dfsdf.jpg?v=1768639601"
+      "/images/catalog/2026.webp",
+      "/images/catalog/sdsdf.webp",
+      "/images/catalog/dfsdf.webp"
     ],
     "price": 405,
     "compareAtPrice": 510,
@@ -5464,10 +5464,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/check.png?v=1768799979",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/sfsdfd.png?v=1768799979",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dgg.png?v=1768799979",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ugsfhf.jpg?v=1768799979"
+      "/images/catalog/check.webp",
+      "/images/catalog/sfsdfd.webp",
+      "/images/catalog/dgg.webp",
+      "/images/catalog/ugsfhf.webp"
     ],
     "price": 410,
     "compareAtPrice": 530,
@@ -5500,9 +5500,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tajmehalcalendar.jpg?v=1767077402",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tajmehal1.jpg?v=1767077403",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tajmehal2.jpg?v=1767077403"
+      "/images/catalog/tajmehalcalendar.webp",
+      "/images/catalog/tajmehal1.webp",
+      "/images/catalog/tajmehal2.webp"
     ],
     "price": 1299,
     "compareAtPrice": 1900,
@@ -5536,10 +5536,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_81a59f36-10f2-415c-9443-b5183546de55.png?v=1768889340",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dsdsc_a986e8a9-fda1-41fe-9e63-450cfdde9e3d.jpg?v=1768889340",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/asd.png?v=1768889340",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ssff.png?v=1768889340"
+      "/images/catalog/1_81a59f36-10f2-415c-9443-b5183546de55.webp",
+      "/images/catalog/dsdsc_a986e8a9-fda1-41fe-9e63-450cfdde9e3d.webp",
+      "/images/catalog/asd.webp",
+      "/images/catalog/ssff.webp"
     ],
     "price": 410,
     "compareAtPrice": 530,
@@ -5572,9 +5572,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Brown_notebook.png?v=1791452183",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/s.jpg?v=1768890469",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1fcbd76a-0843-4875-9ed3-f8cea6cf0e55_c4d1a86a-ab16-4dbc-b3eb-192151042753.png?v=1768890469"
+      "/images/catalog/Brown_notebook.webp",
+      "/images/catalog/s.webp",
+      "/images/catalog/1fcbd76a-0843-4875-9ed3-f8cea6cf0e55_c4d1a86a-ab16-4dbc-b3eb-192151042753.webp"
     ],
     "price": 299,
     "compareAtPrice": 410,
@@ -5607,8 +5607,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/brown_2.png?v=1768893595",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/hdk.jpg?v=1768893595"
+      "/images/catalog/brown_2.webp",
+      "/images/catalog/hdk.webp"
     ],
     "price": 899,
     "compareAtPrice": 1160,
@@ -5642,9 +5642,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/gray.png?v=1768899275",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/dgf.jpg?v=1768899275",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/hfjh.jpg?v=1768899275"
+      "/images/catalog/gray.webp",
+      "/images/catalog/dgf.webp",
+      "/images/catalog/hfjh.webp"
     ],
     "price": 2950,
     "compareAtPrice": 4220,
@@ -5679,25 +5679,25 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_5d767df6-53a9-4b96-b9c3-bb8e5811c76d.png?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/blue.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/blue3.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/bue11.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/bue2.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/orange.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_f5ee0a70-1467-4ab5-8776-8998fc2a6cc1.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_cd59a89e-a8c3-443b-8f66-93c655e47511.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_27861142-77b2-4270-82f6-bc1b0e0d9a7b.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/red3.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/red1.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/red.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tbcalendar.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tbcalendar2.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tb4.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tb3.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/orangecalendar.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/orange_calendar2.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/org3.jpg?v=1768901414"
+      "/images/catalog/4_5d767df6-53a9-4b96-b9c3-bb8e5811c76d.webp",
+      "/images/catalog/blue.webp",
+      "/images/catalog/blue3.webp",
+      "/images/catalog/bue11.webp",
+      "/images/catalog/bue2.webp",
+      "/images/catalog/orange.webp",
+      "/images/catalog/3_f5ee0a70-1467-4ab5-8776-8998fc2a6cc1.webp",
+      "/images/catalog/2_cd59a89e-a8c3-443b-8f66-93c655e47511.webp",
+      "/images/catalog/4_27861142-77b2-4270-82f6-bc1b0e0d9a7b.webp",
+      "/images/catalog/red3.webp",
+      "/images/catalog/red1.webp",
+      "/images/catalog/red.webp",
+      "/images/catalog/tbcalendar.webp",
+      "/images/catalog/tbcalendar2.webp",
+      "/images/catalog/tb4.webp",
+      "/images/catalog/tb3.webp",
+      "/images/catalog/orangecalendar.webp",
+      "/images/catalog/orange_calendar2.webp",
+      "/images/catalog/org3.webp"
     ],
     "price": 1060,
     "compareAtPrice": 1530,
@@ -5731,10 +5731,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tbcalendar.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tb3.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tb4.jpg?v=1768901414",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/tbcalendar2.jpg?v=1768901414"
+      "/images/catalog/tbcalendar.webp",
+      "/images/catalog/tb3.webp",
+      "/images/catalog/tb4.webp",
+      "/images/catalog/tbcalendar2.webp"
     ],
     "price": 1120,
     "compareAtPrice": 1600,
@@ -5767,8 +5767,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Brass_Lobandan_Incense_Holder.png?v=1760358656",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/Brass_Lobandan_Incense_Holder_white_bg.png?v=1760360895"
+      "/images/catalog/Brass_Lobandan_Incense_Holder.webp",
+      "/images/catalog/Brass_Lobandan_Incense_Holder_white_bg.webp"
     ],
     "price": 1250,
     "compareAtPrice": 2500,
@@ -5805,8 +5805,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/jyot.png?v=1758437522",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/image-removebg-preview.png?v=1758448658"
+      "/images/catalog/jyot.webp",
+      "/images/catalog/image-removebg-preview.webp"
     ],
     "price": 1500,
     "compareAtPrice": 3000,
@@ -5841,8 +5841,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/omthali.jpg?v=1758374632",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/thali-removebg-preview_1.png?v=1758374863"
+      "/images/catalog/omthali.webp",
+      "/images/catalog/thali-removebg-preview_1.webp"
     ],
     "price": 3000,
     "compareAtPrice": 6000,
@@ -5878,8 +5878,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPT_Image_Jul_6_2026_04_24_39_PM.png?v=1783335394",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/hourse_4_jar.png?v=1758365074"
+      "/images/catalog/ChatGPT_Image_Jul_6_2026_04_24_39_PM.webp",
+      "/images/catalog/hourse_4_jar.webp"
     ],
     "price": 6299,
     "compareAtPrice": 12600,
@@ -5915,7 +5915,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/09876.png?v=1783341085"
+      "/images/catalog/09876.webp"
     ],
     "price": 3500,
     "compareAtPrice": 7000,
@@ -5952,8 +5952,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul5_2026_02_44_27PM_a035f076-6cf0-4725-8758-411518d59b9c.png?v=1783242981",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul5_2026_02_44_23PM.png?v=1783242981"
+      "/images/catalog/ChatGPTImageJul5_2026_02_44_27PM_a035f076-6cf0-4725-8758-411518d59b9c.webp",
+      "/images/catalog/ChatGPTImageJul5_2026_02_44_23PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -5986,7 +5986,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/platter.png?v=1783244063"
+      "/images/catalog/platter.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -6019,7 +6019,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul5_2026_03_13_38PM.png?v=1783244668"
+      "/images/catalog/ChatGPTImageJul5_2026_03_13_38PM.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -6052,7 +6052,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/BabyshowerHamper.png?v=1783245229"
+      "/images/catalog/BabyshowerHamper.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -6085,7 +6085,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_e69e794c-ece6-4a94-b609-50f62bf09323.png?v=1717657309"
+      "/images/catalog/3_e69e794c-ece6-4a94-b609-50f62bf09323.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -6118,10 +6118,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_582b0182-3f02-436e-ba20-588bc2f2d1f0.png?v=1714649751",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_a1e9359e-adec-4dcd-855e-41addbd8fa2f.png?v=1714649751",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_7702e615-a463-4450-89df-fbb266cd2eb3.png?v=1714649080",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_51e96286-bb75-4671-b250-0a564d27f4d8.png?v=1714649080"
+      "/images/catalog/7_582b0182-3f02-436e-ba20-588bc2f2d1f0.webp",
+      "/images/catalog/6_a1e9359e-adec-4dcd-855e-41addbd8fa2f.webp",
+      "/images/catalog/8_7702e615-a463-4450-89df-fbb266cd2eb3.webp",
+      "/images/catalog/10_51e96286-bb75-4671-b250-0a564d27f4d8.webp"
     ],
     "price": 2399,
     "compareAtPrice": 3999,
@@ -6152,7 +6152,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/ChatGPTImageJul5_2026_05_38_05PM.png?v=1783253326"
+      "/images/catalog/ChatGPTImageJul5_2026_05_38_05PM.webp"
     ],
     "price": 6000,
     "compareAtPrice": 7200,
@@ -6185,9 +6185,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/b16e9f5b-89e5-4d7c-ac91-6b793c81010f.jpg?v=1701951640",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/33eb2119-81a8-4725-a367-27615a77f75d.jpg?v=1701951640",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/d5f2e545-9aba-43a8-944a-ae5c2c5a158d.jpg?v=1701951636"
+      "/images/catalog/b16e9f5b-89e5-4d7c-ac91-6b793c81010f.webp",
+      "/images/catalog/33eb2119-81a8-4725-a367-27615a77f75d.webp",
+      "/images/catalog/d5f2e545-9aba-43a8-944a-ae5c2c5a158d.webp"
     ],
     "price": 400,
     "compareAtPrice": 600,
@@ -6221,8 +6221,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/24_a3828917-45d2-4a54-8700-36c8c8271328.png?v=1696848352",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/27_c4fbefe8-c903-4fd1-90c1-f6dfe9365ef8.png?v=1696848352"
+      "/images/catalog/24_a3828917-45d2-4a54-8700-36c8c8271328.webp",
+      "/images/catalog/27_c4fbefe8-c903-4fd1-90c1-f6dfe9365ef8.webp"
     ],
     "price": 850,
     "compareAtPrice": 999,
@@ -6256,9 +6256,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_1_108a3c3a-ca6d-4b51-9c85-a6034dc37da9.png?v=1696848003",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_1.png?v=1696848002",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/15_752b0218-5480-42be-ae35-af161b8b8b1f.png?v=1696848003"
+      "/images/catalog/2_1_108a3c3a-ca6d-4b51-9c85-a6034dc37da9.webp",
+      "/images/catalog/3_1.webp",
+      "/images/catalog/15_752b0218-5480-42be-ae35-af161b8b8b1f.webp"
     ],
     "price": 320,
     "compareAtPrice": 520,
@@ -6291,8 +6291,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_62277744-34ba-4622-af28-4622783c452d.jpg?v=1695732964",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_51193bc8-fc1d-4a7e-bcf3-9ced40c6ed4e.jpg?v=1695732964"
+      "/images/catalog/700x700_62277744-34ba-4622-af28-4622783c452d.webp",
+      "/images/catalog/700x700_51193bc8-fc1d-4a7e-bcf3-9ced40c6ed4e.webp"
     ],
     "price": 54,
     "compareAtPrice": 60,
@@ -6325,9 +6325,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_3337d0ef-3415-40b9-bc94-0b6d788e628d.jpg?v=1695732890",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_487c4e66-8db9-49a9-8224-0d664701d982.jpg?v=1695732890",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/200x200_5a864553-4d23-45d2-b9f8-0a3e3ed7fa04.jpg?v=1695732891"
+      "/images/catalog/700x700_3337d0ef-3415-40b9-bc94-0b6d788e628d.webp",
+      "/images/catalog/700x700_487c4e66-8db9-49a9-8224-0d664701d982.webp",
+      "/images/catalog/200x200_5a864553-4d23-45d2-b9f8-0a3e3ed7fa04.webp"
     ],
     "price": 135,
     "compareAtPrice": 150,
@@ -6360,9 +6360,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_9dfac750-5baf-48e0-bf0a-4d52796deca8.jpg?v=1695732826",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_fa905d9c-b645-4418-b623-07cc29dbdc64.jpg?v=1695732826",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_e02a9933-d2e6-46e9-953f-11b91d5ecdfe.jpg?v=1695732826"
+      "/images/catalog/700x700_9dfac750-5baf-48e0-bf0a-4d52796deca8.webp",
+      "/images/catalog/700x700_fa905d9c-b645-4418-b623-07cc29dbdc64.webp",
+      "/images/catalog/700x700_e02a9933-d2e6-46e9-953f-11b91d5ecdfe.webp"
     ],
     "price": 285,
     "currency": "INR",
@@ -6394,10 +6394,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_6a3ff749-a3ac-4335-99b4-442cea8b6492.jpg?v=1695732759",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_03ca7be6-39a8-465d-9cee-49b5f0660269.jpg?v=1695732759",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/200x200_9c887934-91a9-47ed-a6a1-b5505ececf27.jpg?v=1695732758",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/200x200_2b966805-95f4-4e7e-bdfc-0c29210268aa.jpg?v=1695732758"
+      "/images/catalog/700x700_6a3ff749-a3ac-4335-99b4-442cea8b6492.webp",
+      "/images/catalog/700x700_03ca7be6-39a8-465d-9cee-49b5f0660269.webp",
+      "/images/catalog/200x200_9c887934-91a9-47ed-a6a1-b5505ececf27.webp",
+      "/images/catalog/200x200_2b966805-95f4-4e7e-bdfc-0c29210268aa.webp"
     ],
     "price": 855,
     "compareAtPrice": 950,
@@ -6430,8 +6430,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_1f7b0032-7c0c-4465-b0c7-3fa35aee3e4c.jpg?v=1695732491",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_c0262950-4cc6-4cc1-bd30-c5fd7a7925f6.jpg?v=1695732491"
+      "/images/catalog/700x700_1f7b0032-7c0c-4465-b0c7-3fa35aee3e4c.webp",
+      "/images/catalog/700x700_c0262950-4cc6-4cc1-bd30-c5fd7a7925f6.webp"
     ],
     "price": 155,
     "compareAtPrice": 170,
@@ -6464,9 +6464,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Easel Stands",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_d323286e-8630-4a62-bf92-61e1df2aee85.jpg?v=1695732405",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_df53bd3e-e121-4fdf-9148-eb4886c0549d.jpg?v=1695732405",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_ae92290a-81e8-4314-bff5-94322af12466.jpg?v=1695732404"
+      "/images/catalog/700x700_d323286e-8630-4a62-bf92-61e1df2aee85.webp",
+      "/images/catalog/700x700_df53bd3e-e121-4fdf-9148-eb4886c0549d.webp",
+      "/images/catalog/700x700_ae92290a-81e8-4314-bff5-94322af12466.webp"
     ],
     "price": 1350,
     "compareAtPrice": 1500,
@@ -6499,10 +6499,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/CFM-GD_2.jpg?v=1695717032",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/CFM-GD_3.jpg?v=1695717032",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/CFM-GD.jpg?v=1695717032",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/CFM-GD_1.jpg?v=1695717032"
+      "/images/catalog/CFM-GD_2.webp",
+      "/images/catalog/CFM-GD_3.webp",
+      "/images/catalog/CFM-GD.webp",
+      "/images/catalog/CFM-GD_1.webp"
     ],
     "price": 140,
     "compareAtPrice": 200,
@@ -6533,12 +6533,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_87757080-fe84-4a37-b7f7-af470cff6726.png?v=1695556868",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/9_226050cc-bcec-48a9-a75b-186851ecf6b7.png?v=1695556868",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_97075f81-4e41-4e54-a144-6d36256529b3.png?v=1695556867",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_2a0c5e01-b8d2-4c99-b72c-dc873c1f55ee.png?v=1695556868",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_8d70d4a5-300a-4486-a1da-ac4498c11997.png?v=1695556868",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_43023e8e-0e04-42f2-965c-ceba704222c5.png?v=1695556868"
+      "/images/catalog/7_87757080-fe84-4a37-b7f7-af470cff6726.webp",
+      "/images/catalog/9_226050cc-bcec-48a9-a75b-186851ecf6b7.webp",
+      "/images/catalog/10_97075f81-4e41-4e54-a144-6d36256529b3.webp",
+      "/images/catalog/1_2a0c5e01-b8d2-4c99-b72c-dc873c1f55ee.webp",
+      "/images/catalog/2_8d70d4a5-300a-4486-a1da-ac4498c11997.webp",
+      "/images/catalog/6_43023e8e-0e04-42f2-965c-ceba704222c5.webp"
     ],
     "price": 3200,
     "compareAtPrice": 4160,
@@ -6571,8 +6571,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_ffea9c5e-3564-4f58-8d1a-c4737825c1b5.png?v=1695043038",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_6002245e-69f0-4cc5-b4ef-86408bf2d49a.png?v=1695043038"
+      "/images/catalog/1_ffea9c5e-3564-4f58-8d1a-c4737825c1b5.webp",
+      "/images/catalog/2_6002245e-69f0-4cc5-b4ef-86408bf2d49a.webp"
     ],
     "price": 1750,
     "compareAtPrice": 2500,
@@ -6606,10 +6606,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/25_13a3d3d1-b4a5-493e-96d1-4b230ae5d26b.png?v=1695031737",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/27_473c9b90-3145-486a-88f1-90abf03cf368.png?v=1695031737",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_27a91291-9f54-4853-b225-e84bd1aa7528.png?v=1695040678",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_eac6c71c-de5a-462f-9338-bcd4efa4737f.png?v=1695040679"
+      "/images/catalog/25_13a3d3d1-b4a5-493e-96d1-4b230ae5d26b.webp",
+      "/images/catalog/27_473c9b90-3145-486a-88f1-90abf03cf368.webp",
+      "/images/catalog/7_27a91291-9f54-4853-b225-e84bd1aa7528.webp",
+      "/images/catalog/10_eac6c71c-de5a-462f-9338-bcd4efa4737f.webp"
     ],
     "price": 1350,
     "compareAtPrice": 2300,
@@ -6643,11 +6643,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/20_0c2f899f-f580-4934-9b82-1106b10beb40.png?v=1695031628",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/21_15c0fae7-85d3-4d68-9fcd-df2e30f04512.png?v=1695031628",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/22_3d4a3e0d-24a9-4172-9fab-af5f5c880833.png?v=1695031629",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/23_030d801a-fd65-4c29-bbeb-d3dc2d0655b2.png?v=1695031628",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/24_9d0705a1-93aa-49aa-a948-75ccc4173633.png?v=1695031629"
+      "/images/catalog/20_0c2f899f-f580-4934-9b82-1106b10beb40.webp",
+      "/images/catalog/21_15c0fae7-85d3-4d68-9fcd-df2e30f04512.webp",
+      "/images/catalog/22_3d4a3e0d-24a9-4172-9fab-af5f5c880833.webp",
+      "/images/catalog/23_030d801a-fd65-4c29-bbeb-d3dc2d0655b2.webp",
+      "/images/catalog/24_9d0705a1-93aa-49aa-a948-75ccc4173633.webp"
     ],
     "price": 1390,
     "compareAtPrice": 1999,
@@ -6681,11 +6681,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/15_7d4406ee-2b3d-4f08-9695-6a658d1fe3c5.png?v=1695031543",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/16_8c77bdd2-9241-4252-bc49-c189b36e49d9.png?v=1695031542",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/17_fa421ba1-1cca-430d-9d49-30c9cd7bd17f.png?v=1695031543",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/18_cff1823b-72c4-4091-9007-6745233e3d3c.png?v=1695031542",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/19_aad8216e-8d21-4692-b182-9790117f5dc3.png?v=1695031542"
+      "/images/catalog/15_7d4406ee-2b3d-4f08-9695-6a658d1fe3c5.webp",
+      "/images/catalog/16_8c77bdd2-9241-4252-bc49-c189b36e49d9.webp",
+      "/images/catalog/17_fa421ba1-1cca-430d-9d49-30c9cd7bd17f.webp",
+      "/images/catalog/18_cff1823b-72c4-4091-9007-6745233e3d3c.webp",
+      "/images/catalog/19_aad8216e-8d21-4692-b182-9790117f5dc3.webp"
     ],
     "price": 1999,
     "compareAtPrice": 2550,
@@ -6719,8 +6719,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/13_ab002abd-ddd2-46c5-9ddf-50b4c7dc2246.png?v=1695031426",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_f7254a35-5efa-4543-835c-1cd59dfa39b4.png?v=1695031427"
+      "/images/catalog/13_ab002abd-ddd2-46c5-9ddf-50b4c7dc2246.webp",
+      "/images/catalog/10_f7254a35-5efa-4543-835c-1cd59dfa39b4.webp"
     ],
     "price": 1399,
     "compareAtPrice": 1999,
@@ -6754,8 +6754,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/14_df2a03ef-992e-4b4f-9738-05dbf51779c4.png?v=1695032239",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/123.png?v=1695032602"
+      "/images/catalog/14_df2a03ef-992e-4b4f-9738-05dbf51779c4.webp",
+      "/images/catalog/123.webp"
     ],
     "price": 1200,
     "compareAtPrice": 1999,
@@ -6789,9 +6789,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_b24c654c-d574-415f-b91c-9dca912d9904.png?v=1695031158",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8_dca599ad-b2f6-4f68-bfc6-27a0363ecd26.png?v=1695031159",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/9_8b161f02-539c-4bf2-b5fd-142fa9202b79.png?v=1695031158"
+      "/images/catalog/7_b24c654c-d574-415f-b91c-9dca912d9904.webp",
+      "/images/catalog/8_dca599ad-b2f6-4f68-bfc6-27a0363ecd26.webp",
+      "/images/catalog/9_8b161f02-539c-4bf2-b5fd-142fa9202b79.webp"
     ],
     "price": 1150,
     "compareAtPrice": 1999,
@@ -6825,9 +6825,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5_e72924fb-4b70-4f4c-9725-1ab63844bedc.png?v=1695030862",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6_ffb56079-1a6a-45da-973e-a4e7442681b9.png?v=1695030862",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/11_a2f2c9ed-a8d2-45a6-9b7f-abca0849780a.png?v=1695030862"
+      "/images/catalog/5_e72924fb-4b70-4f4c-9725-1ab63844bedc.webp",
+      "/images/catalog/6_ffb56079-1a6a-45da-973e-a4e7442681b9.webp",
+      "/images/catalog/11_a2f2c9ed-a8d2-45a6-9b7f-abca0849780a.webp"
     ],
     "price": 999,
     "compareAtPrice": 1599,
@@ -6861,10 +6861,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_e7bca40e-87b6-4b19-a630-083526657179.png?v=1695030526",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_fce2f59e-efef-497e-955d-5aaa8de4b04c.png?v=1695030526",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_e6566a69-75a7-47df-82b5-764b3e7f777f.png?v=1695030526",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_aeb6ce0b-6af8-4d59-8c3b-ea6a8b76bd6e.png?v=1695030526"
+      "/images/catalog/3_e7bca40e-87b6-4b19-a630-083526657179.webp",
+      "/images/catalog/1_fce2f59e-efef-497e-955d-5aaa8de4b04c.webp",
+      "/images/catalog/2_e6566a69-75a7-47df-82b5-764b3e7f777f.webp",
+      "/images/catalog/4_aeb6ce0b-6af8-4d59-8c3b-ea6a8b76bd6e.webp"
     ],
     "price": 1230,
     "compareAtPrice": 1999,
@@ -6898,8 +6898,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41_4fc11946-87b4-451d-ad78-dff1648e8015.png?v=1695026735",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_a593f7b8-69e7-4b56-95f6-4e87f77275a1.png?v=1695040561"
+      "/images/catalog/41_4fc11946-87b4-451d-ad78-dff1648e8015.webp",
+      "/images/catalog/1_a593f7b8-69e7-4b56-95f6-4e87f77275a1.webp"
     ],
     "price": 1399,
     "compareAtPrice": 1999,
@@ -6933,7 +6933,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1234.png?v=1783255163"
+      "/images/catalog/1234.webp"
     ],
     "price": 850,
     "compareAtPrice": 1299,
@@ -6969,10 +6969,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7_1.png?v=1695026453",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_8fd0d2c9-ba15-43b0-840c-c6a83c70781e.png?v=1695026454",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_1.png?v=1695026454",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/9_1.png?v=1695026454"
+      "/images/catalog/7_1.webp",
+      "/images/catalog/12_8fd0d2c9-ba15-43b0-840c-c6a83c70781e.webp",
+      "/images/catalog/10_1.webp",
+      "/images/catalog/9_1.webp"
     ],
     "price": 1530,
     "compareAtPrice": 1999,
@@ -7006,8 +7006,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/11_b0af519c-d775-47c0-bf69-9b8ba3bc8afc.png?v=1695026331",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/13_c6d1d40f-069b-4488-bb3d-282c7f5288ac.png?v=1695026331"
+      "/images/catalog/11_b0af519c-d775-47c0-bf69-9b8ba3bc8afc.webp",
+      "/images/catalog/13_c6d1d40f-069b-4488-bb3d-282c7f5288ac.webp"
     ],
     "price": 1550,
     "compareAtPrice": 2400,
@@ -7041,9 +7041,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/14_b529ba05-fd86-4ed7-b85d-0dd69ed1e609.png?v=1695024637",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/15_2d6c7a2f-79fd-4dbd-b07d-5be023bdd4c7.png?v=1695024637",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/19_b41af3a4-0bc3-4db2-bdad-f5ad07e60e99.png?v=1695024638"
+      "/images/catalog/14_b529ba05-fd86-4ed7-b85d-0dd69ed1e609.webp",
+      "/images/catalog/15_2d6c7a2f-79fd-4dbd-b07d-5be023bdd4c7.webp",
+      "/images/catalog/19_b41af3a4-0bc3-4db2-bdad-f5ad07e60e99.webp"
     ],
     "price": 1860,
     "compareAtPrice": 2599,
@@ -7077,10 +7077,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/23.png?v=1695024491",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/22_4fb02f1f-f33e-4863-8f9b-6c0b4c0be94c.png?v=1695024492",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/21.png?v=1695024491",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/20_3d26b86b-6b97-4979-b644-036f139e73be.png?v=1695024491"
+      "/images/catalog/23.webp",
+      "/images/catalog/22_4fb02f1f-f33e-4863-8f9b-6c0b4c0be94c.webp",
+      "/images/catalog/21.webp",
+      "/images/catalog/20_3d26b86b-6b97-4979-b644-036f139e73be.webp"
     ],
     "price": 1860,
     "compareAtPrice": 2550,
@@ -7114,10 +7114,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/25_88288134-c48e-4149-85ac-3e79afaf1666.png?v=1695024407",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/24.png?v=1695024406",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_03819e56-c8ac-4531-92c0-b1dd47e86eaa.png?v=1695024407",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_746256da-848f-4fd0-9726-1b540c21af05.png?v=1695024406"
+      "/images/catalog/25_88288134-c48e-4149-85ac-3e79afaf1666.webp",
+      "/images/catalog/24-png.webp",
+      "/images/catalog/1_03819e56-c8ac-4531-92c0-b1dd47e86eaa.webp",
+      "/images/catalog/2_746256da-848f-4fd0-9726-1b540c21af05.webp"
     ],
     "price": 2350,
     "compareAtPrice": 2500,
@@ -7151,8 +7151,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/27_dafb43e8-4710-4c10-aeee-21149ff280b5.png?v=1695023964",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/26_287fb793-2560-4c52-a95c-3d74a0963f4e.png?v=1695023964"
+      "/images/catalog/27_dafb43e8-4710-4c10-aeee-21149ff280b5.webp",
+      "/images/catalog/26_287fb793-2560-4c52-a95c-3d74a0963f4e.webp"
     ],
     "price": 1860,
     "compareAtPrice": 2550,
@@ -7186,8 +7186,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/28_ce0475ba-778b-4618-be56-18f425666d9a.png?v=1695023865",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/29_6ae34b18-13d1-491f-91b7-95ce2985939b.png?v=1695023865"
+      "/images/catalog/28_ce0475ba-778b-4618-be56-18f425666d9a.webp",
+      "/images/catalog/29_6ae34b18-13d1-491f-91b7-95ce2985939b.webp"
     ],
     "price": 1860,
     "compareAtPrice": 2599,
@@ -7221,9 +7221,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/32_7331aac1-79a1-495c-a106-ba068783be4f.png?v=1695023721",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/31_fefc0fee-2734-49b2-9e06-f76037960354.png?v=1695023721",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/30_53c1f6a3-72dd-49bb-a0e6-c4f45fcd7045.png?v=1695023721"
+      "/images/catalog/32_7331aac1-79a1-495c-a106-ba068783be4f.webp",
+      "/images/catalog/31_fefc0fee-2734-49b2-9e06-f76037960354.webp",
+      "/images/catalog/30_53c1f6a3-72dd-49bb-a0e6-c4f45fcd7045.webp"
     ],
     "price": 1920,
     "compareAtPrice": 2599,
@@ -7257,9 +7257,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34_ec939efc-55ef-4d4a-b7a3-ffe09a741bdc.png?v=1695023630",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/35_2c28eb5e-2944-4d97-92de-fa79978de653.png?v=1695023630",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/33_28c13de9-b627-4c9f-9cec-d8cf04870297.png?v=1695023630"
+      "/images/catalog/34_ec939efc-55ef-4d4a-b7a3-ffe09a741bdc.webp",
+      "/images/catalog/35_2c28eb5e-2944-4d97-92de-fa79978de653.webp",
+      "/images/catalog/33_28c13de9-b627-4c9f-9cec-d8cf04870297.webp"
     ],
     "price": 2399,
     "compareAtPrice": 2599,
@@ -7293,9 +7293,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/36_1.png?v=1695023458",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/36_956ed938-1492-4298-9d8c-1acd8a6b5ba2.png?v=1695023458",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/37_ae3e39da-7f22-454d-a081-53afdcd34fb6.png?v=1695023458"
+      "/images/catalog/36_1.webp",
+      "/images/catalog/36_956ed938-1492-4298-9d8c-1acd8a6b5ba2.webp",
+      "/images/catalog/37_ae3e39da-7f22-454d-a081-53afdcd34fb6.webp"
     ],
     "price": 1599,
     "compareAtPrice": 1780,
@@ -7329,7 +7329,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2334.png?v=1783255428"
+      "/images/catalog/2334.webp"
     ],
     "price": 1999,
     "compareAtPrice": 2300,
@@ -7363,8 +7363,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/786.png?v=1783256576",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/777.png?v=1783256761"
+      "/images/catalog/786.webp",
+      "/images/catalog/777.webp"
     ],
     "price": 3999,
     "compareAtPrice": 4500,
@@ -7398,7 +7398,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/9099.png?v=1783257576"
+      "/images/catalog/9099.webp"
     ],
     "price": 6999,
     "compareAtPrice": 7999,
@@ -7432,7 +7432,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/22222.png?v=1783258080"
+      "/images/catalog/22222.webp"
     ],
     "price": 2899,
     "compareAtPrice": 3500,
@@ -7466,8 +7466,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34344.png?v=1783260034",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/34434.png?v=1783260034"
+      "/images/catalog/34344.webp",
+      "/images/catalog/34434.webp"
     ],
     "price": 1700,
     "compareAtPrice": 2500,
@@ -7501,7 +7501,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/654.png?v=1783260907"
+      "/images/catalog/654.webp"
     ],
     "price": 2899,
     "compareAtPrice": 3300,
@@ -7536,7 +7536,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2121.png?v=1783261246"
+      "/images/catalog/2121.webp"
     ],
     "price": 1999,
     "compareAtPrice": 2500,
@@ -7571,7 +7571,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/222222222.png?v=1783261636"
+      "/images/catalog/222222222.webp"
     ],
     "price": 1699,
     "compareAtPrice": 2030,
@@ -7606,8 +7606,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Wedding Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/111_f10d4142-6ad8-4295-92fa-a2b3d7aece29.png?v=1783262222",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/33333.png?v=1783262222"
+      "/images/catalog/111_f10d4142-6ad8-4295-92fa-a2b3d7aece29.webp",
+      "/images/catalog/33333.webp"
     ],
     "price": 1499,
     "compareAtPrice": 2000,
@@ -7642,8 +7642,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_4d986568-85a9-4876-8cd4-0cf9eb7cefef.png?v=1693917360",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_e841f588-aefa-4cb8-9ffa-b11c8ff605a0.png?v=1693917360"
+      "/images/catalog/2_4d986568-85a9-4876-8cd4-0cf9eb7cefef.webp",
+      "/images/catalog/1_e841f588-aefa-4cb8-9ffa-b11c8ff605a0.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -7674,7 +7674,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/14_4392e22c-764d-476c-bd61-9613a56df02f.png?v=1693403208"
+      "/images/catalog/14_4392e22c-764d-476c-bd61-9613a56df02f.webp"
     ],
     "price": 1749,
     "compareAtPrice": 2099,
@@ -7707,8 +7707,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/14_2b14255b-e378-4ce9-917b-eef175d1ac29.png?v=1693393257",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12_12d16c82-84da-4431-b3ae-5779d1d65e6e.png?v=1693393257"
+      "/images/catalog/14_2b14255b-e378-4ce9-917b-eef175d1ac29.webp",
+      "/images/catalog/12_12d16c82-84da-4431-b3ae-5779d1d65e6e.webp"
     ],
     "price": 2420,
     "compareAtPrice": 2999,
@@ -7742,8 +7742,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/15.png?v=1693390204",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/16.png?v=1693390204"
+      "/images/catalog/15.webp",
+      "/images/catalog/16.webp"
     ],
     "price": 2150,
     "compareAtPrice": 2500,
@@ -7777,8 +7777,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_f6f4b835-a2a4-4189-9f72-79b303ec800c.png?v=1693387060",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_25675bc2-854e-4e86-b491-9cf54f66702f.png?v=1693387060"
+      "/images/catalog/4_f6f4b835-a2a4-4189-9f72-79b303ec800c.webp",
+      "/images/catalog/3_25675bc2-854e-4e86-b491-9cf54f66702f.webp"
     ],
     "price": 760,
     "compareAtPrice": 850,
@@ -7812,7 +7812,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_24886b7d-c13c-4703-8550-937823633c8a.png?v=1693380621"
+      "/images/catalog/4_24886b7d-c13c-4703-8550-937823633c8a.webp"
     ],
     "price": 2420,
     "compareAtPrice": 2999,
@@ -7848,7 +7848,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3_c532f486-07e8-4a1a-81aa-ab6c1d57b61d.png?v=1693380208"
+      "/images/catalog/3_c532f486-07e8-4a1a-81aa-ab6c1d57b61d.webp"
     ],
     "price": 2420,
     "currency": "INR",
@@ -7883,7 +7883,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3542.jpg?v=1691672047"
+      "/images/catalog/3542.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -7914,7 +7914,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3538.jpg?v=1691667774"
+      "/images/catalog/3538.webp"
     ],
     "price": 0,
     "currency": "INR",
@@ -7945,7 +7945,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/14.jpg?v=1691667060"
+      "/images/catalog/14.webp"
     ],
     "price": 8775,
     "currency": "INR",
@@ -7978,7 +7978,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/3IN1QUICKCHARGERCABLE.jpg?v=1691666538"
+      "/images/catalog/3IN1QUICKCHARGERCABLE.webp"
     ],
     "price": 7250,
     "currency": "INR",
@@ -8011,7 +8011,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/11.jpg?v=1691662864"
+      "/images/catalog/11.webp"
     ],
     "price": 8190,
     "currency": "INR",
@@ -8044,7 +8044,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10_8312a868-aa1b-48d3-992e-0098ef680ea6.jpg?v=1691662687"
+      "/images/catalog/10_8312a868-aa1b-48d3-992e-0098ef680ea6.webp"
     ],
     "price": 8190,
     "currency": "INR",
@@ -8077,7 +8077,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/BLUETOOTHSPEAKERSET8.jpg?v=1691662406"
+      "/images/catalog/BLUETOOTHSPEAKERSET8.webp"
     ],
     "price": 5655,
     "currency": "INR",
@@ -8109,7 +8109,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/10.jpg?v=1691662025"
+      "/images/catalog/10.webp"
     ],
     "price": 8190,
     "currency": "INR",
@@ -8141,7 +8141,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/7.jpg?v=1691661820"
+      "/images/catalog/7.webp"
     ],
     "price": 1270,
     "currency": "INR",
@@ -8173,7 +8173,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/6.jpg?v=1691659202"
+      "/images/catalog/6.webp"
     ],
     "price": 2650,
     "currency": "INR",
@@ -8205,7 +8205,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/5.jpg?v=1691657836"
+      "/images/catalog/5.webp"
     ],
     "price": 2047,
     "currency": "INR",
@@ -8237,7 +8237,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/4_fffc06b0-4a51-42f0-8e22-203150e5f651.jpg?v=1691657455"
+      "/images/catalog/4_fffc06b0-4a51-42f0-8e22-203150e5f651.webp"
     ],
     "price": 1527,
     "currency": "INR",
@@ -8269,7 +8269,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/DESKORGANIZERSET.jpg?v=1691656969"
+      "/images/catalog/DESKORGANIZERSET.webp"
     ],
     "price": 2827,
     "currency": "INR",
@@ -8301,7 +8301,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_f9f1fe72-19bd-404e-ada5-d2544844a60c.jpg?v=1691656372"
+      "/images/catalog/1_f9f1fe72-19bd-404e-ada5-d2544844a60c.webp"
     ],
     "price": 2925,
     "currency": "INR",
@@ -8334,7 +8334,7 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Corporate Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/MADEOFSPANISHLEATHER.jpg?v=1691655644"
+      "/images/catalog/MADEOFSPANISHLEATHER.webp"
     ],
     "price": 2100,
     "compareAtPrice": 2499,
@@ -8367,9 +8367,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1-removebg-preview_1.png?v=1690202288",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/2_b87263f2-387a-416f-a75f-0c9c9460d490.png?v=1690202288",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/19-removebg-preview_1.png?v=1690202288"
+      "/images/catalog/1-removebg-preview_1.webp",
+      "/images/catalog/2_b87263f2-387a-416f-a75f-0c9c9460d490.webp",
+      "/images/catalog/19-removebg-preview_1.webp"
     ],
     "price": 2699,
     "compareAtPrice": 3199,
@@ -8403,9 +8403,9 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/14-removebg-preview.png?v=1690199095",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/13-removebg-preview.png?v=1690199095",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/12.png?v=1690199095"
+      "/images/catalog/14-removebg-preview.webp",
+      "/images/catalog/13-removebg-preview.webp",
+      "/images/catalog/12-png.webp"
     ],
     "price": 2599,
     "compareAtPrice": 2999,
@@ -8438,10 +8438,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/31-removebg-preview.png?v=1690124773",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/30-removebg-preview.png?v=1690124773",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/9.png?v=1690124773",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/22.png?v=1690124773"
+      "/images/catalog/31-removebg-preview.webp",
+      "/images/catalog/30-removebg-preview.webp",
+      "/images/catalog/9.webp",
+      "/images/catalog/22.webp"
     ],
     "price": 2565,
     "compareAtPrice": 2999,
@@ -8476,8 +8476,8 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Festive Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/8.png?v=1690021505",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/24.jpg?v=1690021505"
+      "/images/catalog/8.webp",
+      "/images/catalog/24-jpg.webp"
     ],
     "price": 2699,
     "compareAtPrice": 2999,
@@ -8511,13 +8511,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "gifts",
     "subcategory": "Occasional Gifting",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_28.jpg?v=1689662276",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_30.jpg?v=1689662277",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_31.jpg?v=1689662276",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_29.jpg?v=1689662276",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_32.jpg?v=1689662277",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_33.jpg?v=1689662276",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_34.jpg?v=1689662276"
+      "/images/catalog/1400x1400_28.webp",
+      "/images/catalog/1400x1400_30.webp",
+      "/images/catalog/1400x1400_31.webp",
+      "/images/catalog/1400x1400_29.webp",
+      "/images/catalog/1400x1400_32.webp",
+      "/images/catalog/1400x1400_33.webp",
+      "/images/catalog/1400x1400_34.webp"
     ],
     "price": 1193,
     "compareAtPrice": 1560,
@@ -8548,14 +8548,14 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120353.048.jpg?v=1689662165",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120357.698.jpg?v=1689662164",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120401.798.jpg?v=1689662164",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120408.735.jpg?v=1689662165",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120414.949.jpg?v=1689662165",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120418.930.jpg?v=1689662165",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120422.985.jpg?v=1689662165",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120300.319_a9b991be-5d1e-42af-8c0a-32bc186aedda.jpg?v=1689662165"
+      "/images/catalog/700x700-2023-07-18T120353.048.webp",
+      "/images/catalog/700x700-2023-07-18T120357.698.webp",
+      "/images/catalog/700x700-2023-07-18T120401.798.webp",
+      "/images/catalog/700x700-2023-07-18T120408.735.webp",
+      "/images/catalog/700x700-2023-07-18T120414.949.webp",
+      "/images/catalog/700x700-2023-07-18T120418.930.webp",
+      "/images/catalog/700x700-2023-07-18T120422.985.webp",
+      "/images/catalog/700x700-2023-07-18T120300.319_a9b991be-5d1e-42af-8c0a-32bc186aedda.webp"
     ],
     "price": 1810,
     "compareAtPrice": 2580,
@@ -8588,12 +8588,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120239.383.jpg?v=1689662017",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120243.172.jpg?v=1689662017",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120247.539.jpg?v=1689662017",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120252.143.jpg?v=1689662017",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120255.628.jpg?v=1689662016",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120300.319.jpg?v=1689662016"
+      "/images/catalog/700x700-2023-07-18T120239.383.webp",
+      "/images/catalog/700x700-2023-07-18T120243.172.webp",
+      "/images/catalog/700x700-2023-07-18T120247.539.webp",
+      "/images/catalog/700x700-2023-07-18T120252.143.webp",
+      "/images/catalog/700x700-2023-07-18T120255.628.webp",
+      "/images/catalog/700x700-2023-07-18T120300.319.webp"
     ],
     "price": 214,
     "compareAtPrice": 590,
@@ -8626,13 +8626,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120030.238.jpg?v=1689661932",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120035.845.jpg?v=1689661932",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120040.582.jpg?v=1689661932",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T120046.926.jpg?v=1689661932",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115832.517_c61ec6e9-73f1-42c0-b571-3f64ad98ebcf.jpg?v=1689661932",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115837.899.jpg?v=1689661932",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115841.916.jpg?v=1689661933"
+      "/images/catalog/700x700-2023-07-18T120030.238.webp",
+      "/images/catalog/700x700-2023-07-18T120035.845.webp",
+      "/images/catalog/700x700-2023-07-18T120040.582.webp",
+      "/images/catalog/700x700-2023-07-18T120046.926.webp",
+      "/images/catalog/700x700-2023-07-18T115832.517_c61ec6e9-73f1-42c0-b571-3f64ad98ebcf.webp",
+      "/images/catalog/700x700-2023-07-18T115837.899.webp",
+      "/images/catalog/700x700-2023-07-18T115841.916.webp"
     ],
     "price": 390,
     "compareAtPrice": 990,
@@ -8665,13 +8665,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115816.791.jpg?v=1689661774",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115822.118.jpg?v=1689661774",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115647.365_8d3adb08-0c36-4563-bfef-dfeae2f555c5.jpg?v=1689661774",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115825.788.jpg?v=1689661774",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115832.517.jpg?v=1689661775",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115653.191.jpg?v=1689661775",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115657.232.jpg?v=1689661775"
+      "/images/catalog/700x700-2023-07-18T115816.791.webp",
+      "/images/catalog/700x700-2023-07-18T115822.118.webp",
+      "/images/catalog/700x700-2023-07-18T115647.365_8d3adb08-0c36-4563-bfef-dfeae2f555c5.webp",
+      "/images/catalog/700x700-2023-07-18T115825.788.webp",
+      "/images/catalog/700x700-2023-07-18T115832.517.webp",
+      "/images/catalog/700x700-2023-07-18T115653.191.webp",
+      "/images/catalog/700x700-2023-07-18T115657.232.webp"
     ],
     "price": 550,
     "compareAtPrice": 1290,
@@ -8704,12 +8704,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115633.339.jpg?v=1689661660",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115642.705.jpg?v=1689661660",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115647.365.jpg?v=1689661660",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115638.309.jpg?v=1689661659",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115518.251.jpg?v=1689661660",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115522.598.jpg?v=1689661660"
+      "/images/catalog/700x700-2023-07-18T115633.339.webp",
+      "/images/catalog/700x700-2023-07-18T115642.705.webp",
+      "/images/catalog/700x700-2023-07-18T115647.365.webp",
+      "/images/catalog/700x700-2023-07-18T115638.309.webp",
+      "/images/catalog/700x700-2023-07-18T115518.251.webp",
+      "/images/catalog/700x700-2023-07-18T115522.598.webp"
     ],
     "price": 958,
     "compareAtPrice": 1390,
@@ -8742,13 +8742,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115458.497.jpg?v=1689661568",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115502.738.jpg?v=1689661568",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115514.650.jpg?v=1689661568",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115507.584.jpg?v=1689661569",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115242.855_b092b94e-0bba-4f1d-a246-8da1d6d1dcf7.jpg?v=1689661569",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115246.445.jpg?v=1689661568",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115250.180.jpg?v=1689661568"
+      "/images/catalog/700x700-2023-07-18T115458.497.webp",
+      "/images/catalog/700x700-2023-07-18T115502.738.webp",
+      "/images/catalog/700x700-2023-07-18T115514.650.webp",
+      "/images/catalog/700x700-2023-07-18T115507.584.webp",
+      "/images/catalog/700x700-2023-07-18T115242.855_b092b94e-0bba-4f1d-a246-8da1d6d1dcf7.webp",
+      "/images/catalog/700x700-2023-07-18T115246.445.webp",
+      "/images/catalog/700x700-2023-07-18T115250.180.webp"
     ],
     "price": 1185,
     "compareAtPrice": 1590,
@@ -8781,11 +8781,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "desk",
     "subcategory": "Obasix Desk Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115229.775.jpg?v=1689661443",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115238.616.jpg?v=1689661443",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115234.707.jpg?v=1689661443",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115242.855.jpg?v=1689661443",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T115135.935.jpg?v=1689661443"
+      "/images/catalog/700x700-2023-07-18T115229.775.webp",
+      "/images/catalog/700x700-2023-07-18T115238.616.webp",
+      "/images/catalog/700x700-2023-07-18T115234.707.webp",
+      "/images/catalog/700x700-2023-07-18T115242.855.webp",
+      "/images/catalog/700x700-2023-07-18T115135.935.webp"
     ],
     "price": 1090,
     "compareAtPrice": 1490,
@@ -8818,11 +8818,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114712.936.jpg?v=1689661091",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114718.710.jpg?v=1689661091",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114721.800.jpg?v=1689661091",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114727.094.jpg?v=1689661092",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114731.068.jpg?v=1689661091"
+      "/images/catalog/700x700-2023-07-18T114712.936.webp",
+      "/images/catalog/700x700-2023-07-18T114718.710.webp",
+      "/images/catalog/700x700-2023-07-18T114721.800.webp",
+      "/images/catalog/700x700-2023-07-18T114727.094.webp",
+      "/images/catalog/700x700-2023-07-18T114731.068.webp"
     ],
     "price": 845,
     "compareAtPrice": 1190,
@@ -8856,11 +8856,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114523.493.jpg?v=1689661010",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114528.300.jpg?v=1689661009",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114531.775.jpg?v=1689661009",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114536.461.jpg?v=1689661009",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114328.251.jpg?v=1689661009"
+      "/images/catalog/700x700-2023-07-18T114523.493.webp",
+      "/images/catalog/700x700-2023-07-18T114528.300.webp",
+      "/images/catalog/700x700-2023-07-18T114531.775.webp",
+      "/images/catalog/700x700-2023-07-18T114536.461.webp",
+      "/images/catalog/700x700-2023-07-18T114328.251.webp"
     ],
     "price": 845,
     "compareAtPrice": 1190,
@@ -8894,11 +8894,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114306.878.jpg?v=1689660896",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114315.312.jpg?v=1689660897",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114311.631.jpg?v=1689660896",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114159.122_df3516cf-7d3b-488f-9b8b-49a267f9fac9.jpg?v=1689660896",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114202.276_fca9f649-a576-4f8b-8aa2-a11b322f1bf7.jpg?v=1689660897"
+      "/images/catalog/700x700-2023-07-18T114306.878.webp",
+      "/images/catalog/700x700-2023-07-18T114315.312.webp",
+      "/images/catalog/700x700-2023-07-18T114311.631.webp",
+      "/images/catalog/700x700-2023-07-18T114159.122_df3516cf-7d3b-488f-9b8b-49a267f9fac9.webp",
+      "/images/catalog/700x700-2023-07-18T114202.276_fca9f649-a576-4f8b-8aa2-a11b322f1bf7.webp"
     ],
     "price": 845,
     "compareAtPrice": 1190,
@@ -8932,13 +8932,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114136.044.jpg?v=1689660761",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114140.077.jpg?v=1689660760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114148.486.jpg?v=1689660761",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114152.116.jpg?v=1689660760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114156.205.jpg?v=1689660760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114159.122.jpg?v=1689660760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T114202.276.jpg?v=1689660761"
+      "/images/catalog/700x700-2023-07-18T114136.044.webp",
+      "/images/catalog/700x700-2023-07-18T114140.077.webp",
+      "/images/catalog/700x700-2023-07-18T114148.486.webp",
+      "/images/catalog/700x700-2023-07-18T114152.116.webp",
+      "/images/catalog/700x700-2023-07-18T114156.205.webp",
+      "/images/catalog/700x700-2023-07-18T114159.122.webp",
+      "/images/catalog/700x700-2023-07-18T114202.276.webp"
     ],
     "price": 895,
     "compareAtPrice": 1490,
@@ -8972,12 +8972,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113503.979.jpg?v=1689660368",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113512.772.jpg?v=1689660367",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113500.219.jpg?v=1689660367",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113508.033.jpg?v=1689660368",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113516.859.jpg?v=1689660367",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113521.123.jpg?v=1689660367"
+      "/images/catalog/700x700-2023-07-18T113503.979.webp",
+      "/images/catalog/700x700-2023-07-18T113512.772.webp",
+      "/images/catalog/700x700-2023-07-18T113500.219.webp",
+      "/images/catalog/700x700-2023-07-18T113508.033.webp",
+      "/images/catalog/700x700-2023-07-18T113516.859.webp",
+      "/images/catalog/700x700-2023-07-18T113521.123.webp"
     ],
     "price": 895,
     "compareAtPrice": 1490,
@@ -9011,12 +9011,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113252.133.jpg?v=1689660240",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113256.054.jpg?v=1689660240",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113241.125.jpg?v=1689660240",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113247.779.jpg?v=1689660240",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113300.594.jpg?v=1689660240",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113304.732.jpg?v=1689660240"
+      "/images/catalog/700x700-2023-07-18T113252.133.webp",
+      "/images/catalog/700x700-2023-07-18T113256.054.webp",
+      "/images/catalog/700x700-2023-07-18T113241.125.webp",
+      "/images/catalog/700x700-2023-07-18T113247.779.webp",
+      "/images/catalog/700x700-2023-07-18T113300.594.webp",
+      "/images/catalog/700x700-2023-07-18T113304.732.webp"
     ],
     "price": 895,
     "compareAtPrice": 1490,
@@ -9050,12 +9050,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113046.025.jpg?v=1689660133",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113055.221.jpg?v=1689660132",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113059.813.jpg?v=1689660132",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113050.587.jpg?v=1689660133",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113104.250.jpg?v=1689660132",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T113108.043.jpg?v=1689660132"
+      "/images/catalog/700x700-2023-07-18T113046.025.webp",
+      "/images/catalog/700x700-2023-07-18T113055.221.webp",
+      "/images/catalog/700x700-2023-07-18T113059.813.webp",
+      "/images/catalog/700x700-2023-07-18T113050.587.webp",
+      "/images/catalog/700x700-2023-07-18T113104.250.webp",
+      "/images/catalog/700x700-2023-07-18T113108.043.webp"
     ],
     "price": 852,
     "compareAtPrice": 1490,
@@ -9089,11 +9089,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_23.jpg?v=1689659795",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_24.jpg?v=1689659795",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_25.jpg?v=1689659795",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_26.jpg?v=1689659796",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_27.jpg?v=1689659795"
+      "/images/catalog/1400x1400_23.webp",
+      "/images/catalog/1400x1400_24.webp",
+      "/images/catalog/1400x1400_25.webp",
+      "/images/catalog/1400x1400_26.webp",
+      "/images/catalog/1400x1400_27.webp"
     ],
     "price": 852,
     "compareAtPrice": 1490,
@@ -9127,12 +9127,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105824.290.jpg?v=1689658285",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105838.003.jpg?v=1689658285",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105829.017.jpg?v=1689658285",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105832.943.jpg?v=1689658284",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105842.733.jpg?v=1689658284",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105850.688.jpg?v=1689658285"
+      "/images/catalog/700x700-2023-07-18T105824.290.webp",
+      "/images/catalog/700x700-2023-07-18T105838.003.webp",
+      "/images/catalog/700x700-2023-07-18T105829.017.webp",
+      "/images/catalog/700x700-2023-07-18T105832.943.webp",
+      "/images/catalog/700x700-2023-07-18T105842.733.webp",
+      "/images/catalog/700x700-2023-07-18T105850.688.webp"
     ],
     "price": 852,
     "compareAtPrice": 1490,
@@ -9166,13 +9166,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Board Accessories",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105329.578.jpg?v=1689657893",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105334.783.jpg?v=1689657893",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105339.159.jpg?v=1689657893",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105345.805.jpg?v=1689657894",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105354.179.jpg?v=1689657893",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105404.353.jpg?v=1689657894",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105411.676.jpg?v=1689657893"
+      "/images/catalog/700x700-2023-07-18T105329.578.webp",
+      "/images/catalog/700x700-2023-07-18T105334.783.webp",
+      "/images/catalog/700x700-2023-07-18T105339.159.webp",
+      "/images/catalog/700x700-2023-07-18T105345.805.webp",
+      "/images/catalog/700x700-2023-07-18T105354.179.webp",
+      "/images/catalog/700x700-2023-07-18T105404.353.webp",
+      "/images/catalog/700x700-2023-07-18T105411.676.webp"
     ],
     "price": 655,
     "compareAtPrice": 1190,
@@ -9206,12 +9206,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Chalk Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105052.557.jpg?v=1689657684",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T104959.165.jpg?v=1689657684",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105016.672.jpg?v=1689657685",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T104948.204.jpg?v=1689657684",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105011.461.jpg?v=1689657684",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T105025.595.jpg?v=1689657684"
+      "/images/catalog/700x700-2023-07-18T105052.557.webp",
+      "/images/catalog/700x700-2023-07-18T104959.165.webp",
+      "/images/catalog/700x700-2023-07-18T105016.672.webp",
+      "/images/catalog/700x700-2023-07-18T104948.204.webp",
+      "/images/catalog/700x700-2023-07-18T105011.461.webp",
+      "/images/catalog/700x700-2023-07-18T105025.595.webp"
     ],
     "price": 724,
     "compareAtPrice": 890,
@@ -9245,10 +9245,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Chalk Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T104016.987_d6d1472b-c8f2-4da4-83bf-8a434ef364e1.jpg?v=1689657211",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T104022.058_db32507c-6f5d-4cff-b856-ebc59389ea92.jpg?v=1689657211",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T104026.343_5efceb7d-053d-429f-bc8d-e8ac34d4f1e4.jpg?v=1689657212",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-18T104029.607_77ce89b7-853a-41c1-823f-21f9261c3f1c.jpg?v=1689657212"
+      "/images/catalog/700x700-2023-07-18T104016.987_d6d1472b-c8f2-4da4-83bf-8a434ef364e1.webp",
+      "/images/catalog/700x700-2023-07-18T104022.058_db32507c-6f5d-4cff-b856-ebc59389ea92.webp",
+      "/images/catalog/700x700-2023-07-18T104026.343_5efceb7d-053d-429f-bc8d-e8ac34d4f1e4.webp",
+      "/images/catalog/700x700-2023-07-18T104029.607_77ce89b7-853a-41c1-823f-21f9261c3f1c.webp"
     ],
     "price": 1110,
     "compareAtPrice": 1284,
@@ -9285,12 +9285,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WhatsAppImage2023-07-19at12.48.40PM.jpg?v=1689998692",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/03.jpg?v=1689998692",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/WhatsAppImage2023-07-19at12.48.39PM.jpg?v=1689998692",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/41ey_kwOQ-L.jpg?v=1689998692",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185902.003_f918f1b4-bb26-4259-bb1a-3dab8bb0a614.jpg?v=1689998692",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185906.458_a6c65288-ced7-48f9-a278-a54572664128.jpg?v=1689998692"
+      "/images/catalog/WhatsAppImage2023-07-19at12.48.40PM.webp",
+      "/images/catalog/03.webp",
+      "/images/catalog/WhatsAppImage2023-07-19at12.48.39PM.webp",
+      "/images/catalog/41ey_kwOQ-L.webp",
+      "/images/catalog/700x700-2023-07-17T185902.003_f918f1b4-bb26-4259-bb1a-3dab8bb0a614.webp",
+      "/images/catalog/700x700-2023-07-17T185906.458_a6c65288-ced7-48f9-a278-a54572664128.webp"
     ],
     "price": 820,
     "compareAtPrice": 1220,
@@ -9324,13 +9324,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T190005.079.jpg?v=1689998956",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T190008.306.jpg?v=1689998956",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T190011.219.jpg?v=1689998956",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T190015.149.jpg?v=1689998956",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185856.702_755e7b04-9e82-4f66-a528-db35b8a50fbb.jpg?v=1689998956",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185902.003_ebe42719-8174-4d93-ab9e-75c8e16fe97e.jpg?v=1689600682",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185906.458_d7bbdad6-6f17-459c-adbe-9aa0a8ab1dce.jpg?v=1689600683"
+      "/images/catalog/700x700-2023-07-17T190005.079.webp",
+      "/images/catalog/700x700-2023-07-17T190008.306.webp",
+      "/images/catalog/700x700-2023-07-17T190011.219.webp",
+      "/images/catalog/700x700-2023-07-17T190015.149.webp",
+      "/images/catalog/700x700-2023-07-17T185856.702_755e7b04-9e82-4f66-a528-db35b8a50fbb.webp",
+      "/images/catalog/700x700-2023-07-17T185902.003_ebe42719-8174-4d93-ab9e-75c8e16fe97e.webp",
+      "/images/catalog/700x700-2023-07-17T185906.458_d7bbdad6-6f17-459c-adbe-9aa0a8ab1dce.webp"
     ],
     "price": 820,
     "compareAtPrice": 1060,
@@ -9364,13 +9364,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185815.518.jpg?v=1689600598",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185841.723.jpg?v=1689600598",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185852.796.jpg?v=1689999223",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185847.085.jpg?v=1689999223",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185856.702.jpg?v=1689600598",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185902.003.jpg?v=1689600598",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185906.458.jpg?v=1689600598"
+      "/images/catalog/700x700-2023-07-17T185815.518.webp",
+      "/images/catalog/700x700-2023-07-17T185841.723.webp",
+      "/images/catalog/700x700-2023-07-17T185852.796.webp",
+      "/images/catalog/700x700-2023-07-17T185847.085.webp",
+      "/images/catalog/700x700-2023-07-17T185856.702.webp",
+      "/images/catalog/700x700-2023-07-17T185902.003.webp",
+      "/images/catalog/700x700-2023-07-17T185906.458.webp"
     ],
     "price": 825,
     "compareAtPrice": 1220,
@@ -9404,12 +9404,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185630.751.jpg?v=1689600482",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185637.448.jpg?v=1689600482",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185642.509.jpg?v=1689600483",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185646.451.jpg?v=1689600482",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185650.435.jpg?v=1689600482",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185654.340.jpg?v=1689600482"
+      "/images/catalog/700x700-2023-07-17T185630.751.webp",
+      "/images/catalog/700x700-2023-07-17T185637.448.webp",
+      "/images/catalog/700x700-2023-07-17T185642.509.webp",
+      "/images/catalog/700x700-2023-07-17T185646.451.webp",
+      "/images/catalog/700x700-2023-07-17T185650.435.webp",
+      "/images/catalog/700x700-2023-07-17T185654.340.webp"
     ],
     "price": 1170,
     "compareAtPrice": 1950,
@@ -9446,11 +9446,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185404.668.jpg?v=1689600377",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_21.jpg?v=1689600377",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_19.jpg?v=1689600377",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_20.jpg?v=1689600377",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_22.jpg?v=1689600377"
+      "/images/catalog/700x700-2023-07-17T185404.668.webp",
+      "/images/catalog/1400x1400_21.webp",
+      "/images/catalog/1400x1400_19.webp",
+      "/images/catalog/1400x1400_20.webp",
+      "/images/catalog/1400x1400_22.webp"
     ],
     "price": 1170,
     "compareAtPrice": 1950,
@@ -9487,11 +9487,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185142.584.jpg?v=1689600221",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185147.194.jpg?v=1689600220",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184630.472_053c1e12-d599-4602-867d-5dcdba51e5a1.jpg?v=1689600220",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184640.719_004af98f-48e5-44cc-81cd-d689e0dc23a8.jpg?v=1689600220",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184645.750_2c5c7ac5-a082-4a62-a868-5ee62f8c2a51.jpg?v=1689600220"
+      "/images/catalog/700x700-2023-07-17T185142.584.webp",
+      "/images/catalog/700x700-2023-07-17T185147.194.webp",
+      "/images/catalog/700x700-2023-07-17T184630.472_053c1e12-d599-4602-867d-5dcdba51e5a1.webp",
+      "/images/catalog/700x700-2023-07-17T184640.719_004af98f-48e5-44cc-81cd-d689e0dc23a8.webp",
+      "/images/catalog/700x700-2023-07-17T184645.750_2c5c7ac5-a082-4a62-a868-5ee62f8c2a51.webp"
     ],
     "price": 1285,
     "compareAtPrice": 2146,
@@ -9528,10 +9528,10 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185018.154.jpg?v=1689600089",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184630.472_b4f25ff7-8f57-4b10-b22e-3171bd2cbd8b.jpg?v=1689600089",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184640.719_11fc0c64-ac03-48f8-b66a-7e8643c7a13f.jpg?v=1689600088",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184645.750_6e165c1f-95dd-4d34-93d4-0e93ba368b28.jpg?v=1689600088"
+      "/images/catalog/700x700-2023-07-17T185018.154.webp",
+      "/images/catalog/700x700-2023-07-17T184630.472_b4f25ff7-8f57-4b10-b22e-3171bd2cbd8b.webp",
+      "/images/catalog/700x700-2023-07-17T184640.719_11fc0c64-ac03-48f8-b66a-7e8643c7a13f.webp",
+      "/images/catalog/700x700-2023-07-17T184645.750_6e165c1f-95dd-4d34-93d4-0e93ba368b28.webp"
     ],
     "price": 1285,
     "compareAtPrice": 2146,
@@ -9568,12 +9568,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184617.893.jpg?v=1689599873",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184622.385.jpg?v=1689599873",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184630.472.jpg?v=1689599874",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184634.888.jpg?v=1689599873",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184640.719.jpg?v=1689599873",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184645.750.jpg?v=1689599873"
+      "/images/catalog/700x700-2023-07-17T184617.893.webp",
+      "/images/catalog/700x700-2023-07-17T184622.385.webp",
+      "/images/catalog/700x700-2023-07-17T184630.472.webp",
+      "/images/catalog/700x700-2023-07-17T184634.888.webp",
+      "/images/catalog/700x700-2023-07-17T184640.719.webp",
+      "/images/catalog/700x700-2023-07-17T184645.750.webp"
     ],
     "price": 1285,
     "compareAtPrice": 2146,
@@ -9610,13 +9610,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184040.450.jpg?v=1689599760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184045.323.jpg?v=1689599760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184051.110.jpg?v=1689599761",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184059.144.jpg?v=1689599760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T184104.844.jpg?v=1689599760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183821.333.jpg?v=1689599760",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183811.971_432ffb46-5667-45ed-9626-986cc1521c50.jpg?v=1689599760"
+      "/images/catalog/700x700-2023-07-17T184040.450.webp",
+      "/images/catalog/700x700-2023-07-17T184045.323.webp",
+      "/images/catalog/700x700-2023-07-17T184051.110.webp",
+      "/images/catalog/700x700-2023-07-17T184059.144.webp",
+      "/images/catalog/700x700-2023-07-17T184104.844.webp",
+      "/images/catalog/700x700-2023-07-17T183821.333.webp",
+      "/images/catalog/700x700-2023-07-17T183811.971_432ffb46-5667-45ed-9626-986cc1521c50.webp"
     ],
     "price": 1285,
     "compareAtPrice": 2146,
@@ -9653,13 +9653,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183744.155.jpg?v=1689599429",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183750.951.jpg?v=1689599429",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183755.413.jpg?v=1689599429",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183801.215.jpg?v=1689599429",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183806.572.jpg?v=1689599429",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183354.797.jpg?v=1689599429",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183811.971.jpg?v=1689599429"
+      "/images/catalog/700x700-2023-07-17T183744.155.webp",
+      "/images/catalog/700x700-2023-07-17T183750.951.webp",
+      "/images/catalog/700x700-2023-07-17T183755.413.webp",
+      "/images/catalog/700x700-2023-07-17T183801.215.webp",
+      "/images/catalog/700x700-2023-07-17T183806.572.webp",
+      "/images/catalog/700x700-2023-07-17T183354.797.webp",
+      "/images/catalog/700x700-2023-07-17T183811.971.webp"
     ],
     "price": 1285,
     "compareAtPrice": 2146,
@@ -9696,13 +9696,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Notice & Pin-up Boards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/200x200_1_b6524e84-8f43-4dce-9b01-62c676b6b685.jpg?v=1689599197",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/200x200_2_2b898de5-954a-4762-8114-78dc8c431a70.jpg?v=1689599197",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185906.458_c3eb6e55-e1d0-4ea0-ae60-6ff025557358.jpg?v=1691052733",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185902.003_55244b6e-bc32-40fc-9e57-4f17a733543d.jpg?v=1691052733",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/011.jpg?v=1691052734",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/markerholder1.jpg?v=1691052734",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1_bd29a956-db2f-4aa0-bf91-faf4a44b4b4d.jpg?v=1691052734"
+      "/images/catalog/200x200_1_b6524e84-8f43-4dce-9b01-62c676b6b685.webp",
+      "/images/catalog/200x200_2_2b898de5-954a-4762-8114-78dc8c431a70.webp",
+      "/images/catalog/700x700-2023-07-17T185906.458_c3eb6e55-e1d0-4ea0-ae60-6ff025557358.webp",
+      "/images/catalog/700x700-2023-07-17T185902.003_55244b6e-bc32-40fc-9e57-4f17a733543d.webp",
+      "/images/catalog/011.webp",
+      "/images/catalog/markerholder1.webp",
+      "/images/catalog/1_bd29a956-db2f-4aa0-bf91-faf4a44b4b4d.webp"
     ],
     "price": 1285,
     "compareAtPrice": 2146,
@@ -9739,12 +9739,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183053.894.jpg?v=1689598959",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183059.048.jpg?v=1689598959",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183102.432.jpg?v=1689598959",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183105.666.jpg?v=1689598959",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183108.919.jpg?v=1689598958",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T183113.074.jpg?v=1689598958"
+      "/images/catalog/700x700-2023-07-17T183053.894.webp",
+      "/images/catalog/700x700-2023-07-17T183059.048.webp",
+      "/images/catalog/700x700-2023-07-17T183102.432.webp",
+      "/images/catalog/700x700-2023-07-17T183105.666.webp",
+      "/images/catalog/700x700-2023-07-17T183108.919.webp",
+      "/images/catalog/700x700-2023-07-17T183113.074.webp"
     ],
     "price": 1225,
     "compareAtPrice": 1490,
@@ -9781,12 +9781,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182152.581.jpg?v=1689598428",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182157.195.jpg?v=1689598428",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182202.265.jpg?v=1689598427",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182207.674.jpg?v=1689598428",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182212.285.jpg?v=1689598428",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182218.187.jpg?v=1689598427"
+      "/images/catalog/700x700-2023-07-17T182152.581.webp",
+      "/images/catalog/700x700-2023-07-17T182157.195.webp",
+      "/images/catalog/700x700-2023-07-17T182202.265.webp",
+      "/images/catalog/700x700-2023-07-17T182207.674.webp",
+      "/images/catalog/700x700-2023-07-17T182212.285.webp",
+      "/images/catalog/700x700-2023-07-17T182218.187.webp"
     ],
     "price": 2190,
     "compareAtPrice": 2331,
@@ -9820,11 +9820,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_2.png?v=1689598300",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_1.png?v=1689598300",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700_3.png?v=1689598300",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182040.151.jpg?v=1689598300",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T182044.993.jpg?v=1689598300"
+      "/images/catalog/700x700_2.webp",
+      "/images/catalog/700x700_1.webp",
+      "/images/catalog/700x700_3.webp",
+      "/images/catalog/700x700-2023-07-17T182040.151.webp",
+      "/images/catalog/700x700-2023-07-17T182044.993.webp"
     ],
     "price": 2190,
     "compareAtPrice": 2331,
@@ -9858,13 +9858,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_6.jpg?v=1689598071",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_7.jpg?v=1689598071",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_8.jpg?v=1689598071",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_12.jpg?v=1689937855",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_9.jpg?v=1689937855",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_10.jpg?v=1689937855",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1400x1400_11.jpg?v=1689937855"
+      "/images/catalog/1400x1400_6.webp",
+      "/images/catalog/1400x1400_7.webp",
+      "/images/catalog/1400x1400_8.webp",
+      "/images/catalog/1400x1400_12.webp",
+      "/images/catalog/1400x1400_9.webp",
+      "/images/catalog/1400x1400_10.webp",
+      "/images/catalog/1400x1400_11.webp"
     ],
     "price": 2055,
     "compareAtPrice": 3409,
@@ -9901,12 +9901,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/superior.jpg?v=1689936709",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181346.113.jpg?v=1689936709",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181353.127.jpg?v=1689936709",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181349.135.jpg?v=1689936709",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181357.120.jpg?v=1689936705",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181403.284.jpg?v=1689936705"
+      "/images/catalog/superior.webp",
+      "/images/catalog/700x700-2023-07-17T181346.113.webp",
+      "/images/catalog/700x700-2023-07-17T181353.127.webp",
+      "/images/catalog/700x700-2023-07-17T181349.135.webp",
+      "/images/catalog/700x700-2023-07-17T181357.120.webp",
+      "/images/catalog/700x700-2023-07-17T181403.284.webp"
     ],
     "price": 2170,
     "compareAtPrice": 3595,
@@ -9943,13 +9943,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicside_584520ba-b913-46e9-b00c-42b7681bd64f.jpg?v=1691060717",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicfrontm_b2286190-9eda-4581-b504-8e86609868fe.jpg?v=1691060717",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicH_V_abba9448-b9c5-40b2-85ec-0d0b60e18cc5.jpg?v=1691060717",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181206.813.jpg?v=1691060717",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicfront_ce22d2af-9854-49e7-9635-b62811a12a0b.jpg?v=1691060717",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T181211.556.jpg?v=1691060717",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T185906.458_d906a84a-99b5-4ad1-9fa7-43482f4b131a.jpg?v=1691060717"
+      "/images/catalog/classicside_584520ba-b913-46e9-b00c-42b7681bd64f.webp",
+      "/images/catalog/classicfrontm_b2286190-9eda-4581-b504-8e86609868fe.webp",
+      "/images/catalog/classicH_V_abba9448-b9c5-40b2-85ec-0d0b60e18cc5.webp",
+      "/images/catalog/700x700-2023-07-17T181206.813.webp",
+      "/images/catalog/classicfront_ce22d2af-9854-49e7-9635-b62811a12a0b.webp",
+      "/images/catalog/700x700-2023-07-17T181211.556.webp",
+      "/images/catalog/700x700-2023-07-17T185906.458_d906a84a-99b5-4ad1-9fa7-43482f4b131a.webp"
     ],
     "price": 720,
     "compareAtPrice": 1060,
@@ -9986,14 +9986,14 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180822.904.jpg?v=1689597641",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180827.926.jpg?v=1689597641",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180834.359.jpg?v=1689597641",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180840.207.jpg?v=1689597640",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180846.996.jpg?v=1689597641",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180855.765.jpg?v=1689597641",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180620.285_8e8f00db-5ed9-4fab-bbc2-060e34aa5181.jpg?v=1689597641",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T180912.062.jpg?v=1689597642"
+      "/images/catalog/700x700-2023-07-17T180822.904.webp",
+      "/images/catalog/700x700-2023-07-17T180827.926.webp",
+      "/images/catalog/700x700-2023-07-17T180834.359.webp",
+      "/images/catalog/700x700-2023-07-17T180840.207.webp",
+      "/images/catalog/700x700-2023-07-17T180846.996.webp",
+      "/images/catalog/700x700-2023-07-17T180855.765.webp",
+      "/images/catalog/700x700-2023-07-17T180620.285_8e8f00db-5ed9-4fab-bbc2-060e34aa5181.webp",
+      "/images/catalog/700x700-2023-07-17T180912.062.webp"
     ],
     "price": 1290,
     "compareAtPrice": 1497,
@@ -10030,11 +10030,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175639.452.jpg?v=1689596901",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175646.804.jpg?v=1689596900",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175651.451.jpg?v=1689596900",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175402.929_e113b4d4-e6fc-4ffe-9de3-25aaa6408cec.jpg?v=1689596901",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175656.608.jpg?v=1689596900"
+      "/images/catalog/700x700-2023-07-17T175639.452.webp",
+      "/images/catalog/700x700-2023-07-17T175646.804.webp",
+      "/images/catalog/700x700-2023-07-17T175651.451.webp",
+      "/images/catalog/700x700-2023-07-17T175402.929_e113b4d4-e6fc-4ffe-9de3-25aaa6408cec.webp",
+      "/images/catalog/700x700-2023-07-17T175656.608.webp"
     ],
     "price": 1041,
     "currency": "INR",
@@ -10070,13 +10070,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175323.889.jpg?v=1689938386",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175332.460.jpg?v=1689938386",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175337.785.jpg?v=1689938386",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175344.562.jpg?v=1689938386",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175349.641.jpg?v=1689938386",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175355.278.jpg?v=1689938386",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175402.929.jpg?v=1689938386"
+      "/images/catalog/700x700-2023-07-17T175323.889.webp",
+      "/images/catalog/700x700-2023-07-17T175332.460.webp",
+      "/images/catalog/700x700-2023-07-17T175337.785.webp",
+      "/images/catalog/700x700-2023-07-17T175344.562.webp",
+      "/images/catalog/700x700-2023-07-17T175349.641.webp",
+      "/images/catalog/700x700-2023-07-17T175355.278.webp",
+      "/images/catalog/700x700-2023-07-17T175402.929.webp"
     ],
     "price": 1420,
     "compareAtPrice": 2355,
@@ -10113,13 +10113,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/superior.jpg2.webp?v=1689938172",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175046.432.jpg?v=1689938172",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175051.169.jpg?v=1689938172",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175056.924.jpg?v=1689938172",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175105.819.jpg?v=1689938172",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175112.510.jpg?v=1689938172",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T175118.643.jpg?v=1689938172"
+      "/images/catalog/superior.jpg2.webp",
+      "/images/catalog/700x700-2023-07-17T175046.432.webp",
+      "/images/catalog/700x700-2023-07-17T175051.169.webp",
+      "/images/catalog/700x700-2023-07-17T175056.924.webp",
+      "/images/catalog/700x700-2023-07-17T175105.819.webp",
+      "/images/catalog/700x700-2023-07-17T175112.510.webp",
+      "/images/catalog/700x700-2023-07-17T175118.643.webp"
     ],
     "price": 1320,
     "compareAtPrice": 2175,
@@ -10156,13 +10156,13 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174735.982.jpg?v=1689596382",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174741.263.jpg?v=1689596383",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174746.148.jpg?v=1689596383",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174753.499.jpg?v=1689596382",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174800.682.jpg?v=1689596382",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174806.527.jpg?v=1689596382",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174817.952.jpg?v=1689596383"
+      "/images/catalog/700x700-2023-07-17T174735.982.webp",
+      "/images/catalog/700x700-2023-07-17T174741.263.webp",
+      "/images/catalog/700x700-2023-07-17T174746.148.webp",
+      "/images/catalog/700x700-2023-07-17T174753.499.webp",
+      "/images/catalog/700x700-2023-07-17T174800.682.webp",
+      "/images/catalog/700x700-2023-07-17T174806.527.webp",
+      "/images/catalog/700x700-2023-07-17T174817.952.webp"
     ],
     "price": 1998,
     "compareAtPrice": 2290,
@@ -10196,12 +10196,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicside.jpg?v=1691050078",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicfront.jpg?v=1691050078",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/classicH_V.jpg?v=1691050078",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174340.139.jpg?v=1691050078",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174345.478.jpg?v=1691050078",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T174351.560.jpg?v=1691050078"
+      "/images/catalog/classicside.webp",
+      "/images/catalog/classicfront.webp",
+      "/images/catalog/classicH_V.webp",
+      "/images/catalog/700x700-2023-07-17T174340.139.webp",
+      "/images/catalog/700x700-2023-07-17T174345.478.webp",
+      "/images/catalog/700x700-2023-07-17T174351.560.webp"
     ],
     "price": 635,
     "compareAtPrice": 890,
@@ -10238,12 +10238,12 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1.jpg?v=1691047432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/1.webp?v=1691047432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173905.712.jpg?v=1691047432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173917.756.jpg?v=1691047432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173922.830.jpg?v=1691047432",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173928.982.jpg?v=1691047432"
+      "/images/catalog/1-jpg.webp",
+      "/images/catalog/1-webp.webp",
+      "/images/catalog/700x700-2023-07-17T173905.712.webp",
+      "/images/catalog/700x700-2023-07-17T173917.756.webp",
+      "/images/catalog/700x700-2023-07-17T173922.830.webp",
+      "/images/catalog/700x700-2023-07-17T173928.982.webp"
     ],
     "price": 415,
     "compareAtPrice": 690,
@@ -10280,11 +10280,11 @@ export const productionProducts: Product[] = [
     "categorySlug": "presentation",
     "subcategory": "Whiteboards",
     "images": [
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173146.686.jpg?v=1689595457",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173154.958.jpg?v=1689595458",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173201.957.jpg?v=1689595457",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173209.725.jpg?v=1689595457",
-      "https://cdn.shopify.com/s/files/1/0780/9004/3676/files/700x700-2023-07-17T173215.564.jpg?v=1689595457"
+      "/images/catalog/700x700-2023-07-17T173146.686.webp",
+      "/images/catalog/700x700-2023-07-17T173154.958.webp",
+      "/images/catalog/700x700-2023-07-17T173201.957.webp",
+      "/images/catalog/700x700-2023-07-17T173209.725.webp",
+      "/images/catalog/700x700-2023-07-17T173215.564.webp"
     ],
     "price": 1420,
     "compareAtPrice": 2355,

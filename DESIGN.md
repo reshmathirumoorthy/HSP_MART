@@ -326,7 +326,7 @@ Four steps, each an italic Bodoni numeral in a 3.5rem gold-ringed circle on ivor
 A round emerald disc with an inset bright-gold hairline and a gold sparkle glyph. The desktop launcher is a compact round white button with a gold-tinted edge; on phones the launcher is hidden and the assistant opens from the menu, so nothing floats over content.
 
 ### Implementation rule: catalogue images
-Shopify-hosted photos (cdn.shopify.com) are resized by Shopify's CDN via a custom `next/image` loader (`?width=`) through `CatalogImage`; local images keep the built-in Next optimiser. New product imagery goes through `CatalogImage`, never a raw `img` or the default loader for Shopify URLs.
+Catalogue photos are self-hosted in `public/images/catalog/` as WebP (max 1600px) and served through `next/image`'s built-in optimiser via `CatalogImage`. New product imagery goes in that folder and through `CatalogImage`, never a raw `img` or an external host.
 
 ### Implementation rule: shadcn layer
 Tailwind v4 theme and utilities load without preflight; shadcn primitives get a scoped mini-preflight keyed on `[data-slot]`, and their theme variables map onto this palette (primary emerald, ring and gold antique gold, radius 10px). New primitives inherit the world through those variables, not hardcoded colours.

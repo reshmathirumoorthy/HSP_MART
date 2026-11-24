@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { shopifyImageLoader } from "@/lib/imageLoader";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { useQuoteSheet } from "@/context/QuoteSheetContext";
@@ -82,7 +81,6 @@ export function QuoteSheet() {
                       {product.images[0] ? (
                         <Image
                           src={product.images[0]}
-                          loader={shopifyImageLoader(product.images[0])}
                           alt=""
                           fill
                           sizes="64px"

@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import Image from "next/image";
-import { shopifyImageLoader } from "@/lib/imageLoader";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   productCategories,
@@ -257,7 +256,6 @@ export function ProductsCatalogue({ initialFilters }: Props) {
       <header className={styles.banner}>
         <Image
           src={bannerImage}
-          loader={shopifyImageLoader(bannerImage)}
           alt=""
           fill
           sizes="100vw"
