@@ -18,7 +18,7 @@ export function contentSecurityPolicy(nonce: string, dev = process.env.NODE_ENV 
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ""}`,
     // Components use React style={} attributes; scripts are the injection risk, not styles.
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob: https://cdn.shopify.com https://images.unsplash.com",
+    "img-src 'self' data: blob: https://images.unsplash.com",
     "font-src 'self'",
     "media-src 'self'",
     // Razorpay Checkout talks to its own API and logging endpoints.

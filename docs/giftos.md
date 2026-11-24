@@ -177,7 +177,7 @@ plan and all four cron jobs work through the gateway.
   `Cache-Control: no-store`.
 - **Content Security Policy**: the store sets a strict CSP per request in `src/proxy.ts` — a fresh nonce, scripts only
   with that nonce (`'strict-dynamic'`, so scripts it loads such as Razorpay Checkout are trusted), no inline scripts,
-  images only from this site, `cdn.shopify.com` and `images.unsplash.com`, frames only for Razorpay and the Google Maps
+  images only from this site and `images.unsplash.com`, frames only for Razorpay and the Google Maps
   embed. The admin app's nginx allows scripts from its own origin only. Adding a new third-party script, image host or
   embed means adding it to `contentSecurityPolicy()` in `src/proxy.ts` (and to `admin/nginx.conf` for the admin app);
   the E2E suite fails on any CSP violation. Before go-live, run one checkout with Razorpay test keys to confirm
