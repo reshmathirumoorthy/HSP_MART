@@ -116,6 +116,24 @@ export type Product = {
   customizationTypes?: CustomizationType[];
   /** Visualizer configuration — present only when live preview is supported. */
   customization?: ProductCustomizationConfig;
+  /** Outer size (inner size for a hamper box), integer mm, L × B × H (ISO 3394 order). Null until entered. */
+  dimensions?: ProductDimensions | null;
+  /** Weight in grams; empty (tare) weight for a hamper box. */
+  weightG?: number | null;
+  /** Hamper boxes only: maximum content weight in grams. */
+  maxLoadG?: number | null;
+  packingKind?: "item" | "hamper_box";
+  /** ISO 780 "this way up" when "upright". */
+  orientation?: "any" | "upright";
+  fragile?: boolean;
+  /** 3D model for the hamper preview: an uploaded .glb or photos of every side (step 6). */
+  model3d?: import("@/lib/product3d").Model3d;
+  /** Server-computed: size, weight and a complete 3D model are all present. */
+  hamperReady?: boolean;
+  /** Clean photo of the product alone (transparent PNG, front view) used in the hamper previews. */
+  hamperImage?: string;
+  /** Hamper boxes only: packing allowances and 3D look (stored in product content). */
+  hamperBox?: HamperBoxSettings;
   /** Composite “build your own hamper” configuration (Phase 10C). */
   hamperConfig?: HamperConfig;
   packagingOptions?: PackagingOption[];
@@ -136,4 +154,18 @@ export type Product = {
   visual: ProductVisualKind;
   /** Homepage preview placement — catalogue ignores this. */
   layout?: "featured" | "support" | "rail";
+};
+
+export type ProductDimensions = { lengthMm: number; breadthMm: number; heightMm: number };
+
+export type HamperBoxSettings = {
+  /** Filler allowance per side, mm (default 10). */
+  paddingMm?: number;
+  /** Largest share of usable volume contents may take (default 85). */
+  maxFillPercent?: number;
+  /** Wall thickness for the 3D render, mm (default 6). */
+  wallThicknessMm?: number;
+  boxStyle?: "kraft" | "rigid" | "basket";
+  /** What the box ships with around the products (shown in the preview). */
+  filler?: "shred" | "none";
 };

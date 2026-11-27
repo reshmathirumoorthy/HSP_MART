@@ -1,0 +1,39 @@
+.views {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.view { display: grid; gap: 0.35rem; margin: 0; }
+.view svg { width: 100%; height: auto; max-height: 22rem; }
+.caption { color: var(--color-text-muted); font-size: 0.85rem; text-align: center; }
+
+.boxOuter { fill: #c8a46e; stroke: #8c6c3c; stroke-width: 2; }
+.boxInner { fill: #f3ead8; stroke: #a8885a; stroke-width: 1; stroke-dasharray: 6 4; }
+.item { stroke: none; }
+.itemEdge { stroke: rgba(0, 0, 0, 0.35); stroke-width: 1.5; }
+.dim { font-size: 14px; fill: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+
+.three { display: grid; gap: 0.5rem; }
+
+.canvasHost {
+  width: 100%;
+  min-height: 14rem;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 35%, #fbf7ef, #ece4d4);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.canvasHost:active { cursor: grabbing; }
+.canvasHost canvas { display: block; width: 100% !important; height: auto !important; }
+.toggle { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; }
+
+@media (prefers-color-scheme: dark) {
+  .boxInner { fill: #3a3226; }
+  .canvasHost { background: radial-gradient(circle at 50% 35%, #2b2a26, #191816); }
+}
+
+.render { width: 100%; height: auto; max-height: 24rem; object-fit: contain; }
+.renderLoading { width: 100%; aspect-ratio: 4 / 3; border-radius: 12px; background: color-mix(in srgb, var(--color-border) 45%, transparent); }

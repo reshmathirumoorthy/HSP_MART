@@ -5,6 +5,7 @@
 import {
   bigint,
   boolean,
+  check,
   index,
   integer,
   json,
@@ -18,6 +19,7 @@ import {
   uuid,
   vector,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 const id = () => uuid("id").primaryKey().defaultRandom();
 const createdAt = () =>
@@ -281,9 +283,27 @@ export const products = pgTable("products", {
    * hamper configuration. Money, stock, MOQ and status live in the columns above and win.
    */
   content: json("content").notNull().default({}),
+  /**
+   * Physical size (ISO 80000 SI units: integer mm and g; order length × breadth × height per ISO 3394).
+   * External size for items; internal size for hamper boxes. Null until entered.
+   */
+  lengthMm: integer("length_mm"),
+  breadthMm: integer("breadth_mm"),
+  heightMm: integer("height_mm"),
+  /** Item weight, or empty (tare) weight for a hamper box. */
+  weightG: integer("weight_g"),
+  /** Hamper boxes only: maximum content weight. */
+  maxLoadG: integer("max_load_g"),
+  packingKind: text("packing_kind", { enum: ["item", "hamper_box"] }).notNull().default("item"),
+  /** ISO 780 handling: "upright" = this way up (may only turn about the vertical axis). */
+  orientation: text("orientation", { enum: ["any", "upright"] }).notNull().default("any"),
+  fragile: boolean("fragile").notNull().default(false),
   createdAt: createdAt(),
   updatedAt: updatedAt(),
-});
+}, (t) => [
+  check("products_dimensions_positive", sql`coalesce(${t.lengthMm}, 1) > 0 and coalesce(${t.breadthMm}, 1) > 0 and coalesce(${t.heightMm}, 1) > 0 and coalesce(${t.weightG}, 1) > 0 and coalesce(${t.maxLoadG}, 1) > 0`),
+  check("products_hamper_box_complete", sql`${t.packingKind} <> 'hamper_box' or (${t.lengthMm} is not null and ${t.breadthMm} is not null and ${t.heightMm} is not null and ${t.maxLoadG} is not null)`),
+]);
 
 /** Editable storefront content blocks (company, FAQs, categories, navigation, homepage…). */
 export const siteContent = pgTable("site_content", {
@@ -670,7 +690,7 @@ export const files = pgTable(
   "files",
   {
     id: id(),
-    kind: text("kind", { enum: ["artwork", "delivery_proof", "document"] }).notNull(),
+    kind: text("kind", { enum: ["artwork", "delivery_proof", "document", "product_media"] }).notNull(),
     entity: text("entity").notNull(),
     entityId: text("entity_id").notNull(),
     filename: text("filename").notNull(),

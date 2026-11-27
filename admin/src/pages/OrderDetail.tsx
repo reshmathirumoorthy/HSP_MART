@@ -10,6 +10,7 @@ type Detail = {
     totalPaise: number; paidPaise: number; refundedPaise: number; creditedPaise: number; balancePaise: number; advanceDuePaise: number;
     shippingAddress: Record<string, string> | null; customer: string; customerEmail: string; partner: string | null;
   };
+  parcel: { lengthCm: number; breadthCm: number; heightCm: number; actualKg: number; volumetricKg: number; billedKg: number };
   lines: { id: string; sku: string; name: string; quantity: number; creditedQuantity: number; unitPricePaise: number }[];
   payments: { id: string; providerOrderId: string; amountPaise: number; refundedPaise: number; status: string; createdAt: string }[];
   purchaseOrders: { id: string; number: string; status: string; totalCostPaise: number; supplier: string }[];
@@ -56,6 +57,9 @@ export default function OrderDetail({ role }: { role: string }) {
                 </li>
               ))}
             </ul>
+            <p className="mt-3 text-xs text-muted tabular-nums" data-testid="parcel">
+              Parcel {d.parcel.lengthCm} × {d.parcel.breadthCm} × {d.parcel.heightCm} cm · actual {d.parcel.actualKg} kg · volumetric {d.parcel.volumetricKg} kg · billed {d.parcel.billedKg} kg
+            </p>
             <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm tabular-nums">
               <Dt>Subtotal</Dt><Dd>{inr(o.subtotalPaise)}</Dd>
               <Dt>Freight</Dt><Dd>{inr(o.freightPaise)}</Dd>

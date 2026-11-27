@@ -18,7 +18,29 @@ from .programmes import system_actor
 
 API = "https://apiv2.shiprocket.in/v1/external"
 SIM = "simulated"
-DEFAULT_UNIT_WEIGHT_KG = 0.5  # until per-SKU weights are captured in the catalogue
+DEFAULT_UNIT_WEIGHT_KG = 0.5  # for products whose weight is not in the catalogue yet
+DEFAULT_PARCEL_CM = (30, 25, 15)
+VOLUMETRIC_DIVISOR = 5000  # cm³ per kg, the usual Indian courier rule
+
+
+def parcel(lines: list[dict]) -> dict:
+    """Parcel for courier booking from order lines (with product size/weight columns).
+
+    Actual weight uses catalogue weights (box tare + contents for hampers), falling back to 0.5 kg a unit. When the
+    order is a single hamper box its outer size is the parcel size; otherwise the default carton. The courier bills the
+    higher of actual and volumetric weight (L × B × H in cm / 5000).
+    """
+    grams = sum((l.get("weight_g") or DEFAULT_UNIT_WEIGHT_KG * 1000) * l["quantity"] for l in lines)
+    boxes = [l for l in lines if l.get("packing_kind") == "hamper_box"]
+    if len(boxes) == 1 and boxes[0]["quantity"] == 1:
+        b = boxes[0]
+        dims = tuple(round(b[k] / 10, 1) for k in ("length_mm", "breadth_mm", "height_mm"))
+    else:
+        dims = DEFAULT_PARCEL_CM
+    actual = round(grams / 1000, 2)
+    volumetric = round(dims[0] * dims[1] * dims[2] / VOLUMETRIC_DIVISOR, 2)
+    return {"lengthCm": dims[0], "breadthCm": dims[1], "heightCm": dims[2], "actualKg": actual,
+            "volumetricKg": volumetric, "billedKg": max(actual, volumetric)}
 
 
 def live() -> bool:
@@ -36,7 +58,7 @@ def _token() -> str:
 def _shiprocket_book(o, lines, addr) -> dict:
     tok = _token()
     h = {"Authorization": f"Bearer {tok}"}
-    units = sum(l["quantity"] for l in lines) or 1
+    pc = parcel(lines)
     body = {
         "order_id": o["number"], "order_date": o["created_at"].strftime("%Y-%m-%d %H:%M"),
         "pickup_location": settings().shiprocket_pickup_location,
@@ -47,7 +69,7 @@ def _shiprocket_book(o, lines, addr) -> dict:
         "order_items": [{"name": l["name"][:100], "sku": l["sku"], "units": l["quantity"],
                          "selling_price": f"{l['unit_price_paise'] / 100:.2f}", "hsn": l["hsn_code"] or ""} for l in lines],
         "payment_method": "Prepaid", "sub_total": f"{o['subtotal_paise'] / 100:.2f}",
-        "length": 30, "breadth": 25, "height": 15, "weight": round(units * DEFAULT_UNIT_WEIGHT_KG, 2),
+        "length": pc["lengthCm"], "breadth": pc["breadthCm"], "height": pc["heightCm"], "weight": pc["billedKg"],
     }
     r = httpx.post(f"{API}/orders/create/adhoc", headers=h, json=body, timeout=20)
     r.raise_for_status()
@@ -69,7 +91,8 @@ def book_and_dispatch(conn: Connection, actor, number: str) -> dict:
     if not addr.get("pincode"):
         fail("The order has no delivery address with a pincode.")
     if live():
-        lines = all_(conn, """select p.name, p.sku, p.hsn_code, l.quantity, l.unit_price_paise from order_lines l
+        lines = all_(conn, """select p.name, p.sku, p.hsn_code, l.quantity, l.unit_price_paise, p.weight_g, p.packing_kind,
+                                     p.length_mm, p.breadth_mm, p.height_mm from order_lines l
                               join products p on p.id = l.product_id where l.order_id = :id""", id=o["id"])
         try:
             b = _shiprocket_book(o, lines, addr)

@@ -75,3 +75,23 @@ def test_content_validation_roles_and_audit():
         assert ev["after"]["value"] == new
     finally:
         admin.post("/api/admin/content/announcement", json={"value": original})
+
+
+def test_dimensions_round_trip_and_hamper_box_rules():
+    admin = login(make_user("hsp_admin"))
+    size = {"lengthMm": 180, "breadthMm": 80, "heightMm": 60, "weightG": 350, "orientation": "upright", "fragile": True}
+    try:
+        assert admin.post(f"/api/admin/products/{ONLINE}", json=size).status_code == 200
+        got = admin.get(f"/api/admin/products/{ONLINE}").json()
+        assert (got["lengthMm"], got["breadthMm"], got["heightMm"], got["weightG"]) == (180, 80, 60, 350)
+        p = next(x for x in admin.get("/api/site-data").json()["products"] if x["id"] == ONLINE)
+        assert p["dimensions"] == {"lengthMm": 180, "breadthMm": 80, "heightMm": 60}
+        assert (p["weightG"], p["orientation"], p["fragile"], p["packingKind"]) == (350, "upright", True, "item")
+        for bad in ({"lengthMm": 0}, {"heightMm": 3000}, {"weightG": 1.5}, {"orientation": "sideways"}):
+            assert admin.post(f"/api/admin/products/{ONLINE}", json=bad).status_code == 400
+        r = admin.post(f"/api/admin/products/{ONLINE}", json={"packingKind": "hamper_box"})
+        assert r.status_code == 400 and "maximum load" in r.json()["detail"]
+        assert admin.post(f"/api/admin/products/{ONLINE}", json={"packingKind": "hamper_box", "maxLoadG": 2000}).status_code == 200
+    finally:
+        admin.post(f"/api/admin/products/{ONLINE}", json={"packingKind": "item", "lengthMm": None, "breadthMm": None, "heightMm": None,
+                                                         "weightG": None, "maxLoadG": None, "orientation": "any", "fragile": False})

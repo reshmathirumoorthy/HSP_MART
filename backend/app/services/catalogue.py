@@ -20,7 +20,51 @@ CONTENT_KEYS = ("company", "faqs", "categories", "announcement", "navigation", "
 STOCK = ("in_stock", "low_stock", "out_of_stock")
 # Fields owned by columns; never trusted from the content JSON.
 COLUMN_FIELDS = {"id", "slug", "sku", "name", "price", "active", "stockStatus", "minOrderQuantity", "bulkAvailable",
-                 "customizable", "categorySlug", "subcategory", "currency", "category"}
+                 "customizable", "categorySlug", "subcategory", "currency", "category", "dimensions", "packingKind",
+                 "orientation", "fragile", "weightG", "maxLoadG"}
+
+# Physical size: integer mm and g (ISO 80000), order length × breadth × height (ISO 3394).
+DIMENSION_FIELDS = (("lengthMm", "length_mm", "Length"), ("breadthMm", "breadth_mm", "Breadth"), ("heightMm", "height_mm", "Height"))
+SIZE_COLUMNS = ("length_mm", "breadth_mm", "height_mm", "weight_g", "max_load_g", "packing_kind", "orientation", "fragile")
+MAX_DIMENSION_MM = 2000
+MAX_WEIGHT_G = 50_000
+
+
+from .hamper_fit import FACES, REQUIRED_FACES, model_missing  # noqa: E402
+
+
+def _media_url(v) -> bool:
+    return isinstance(v, str) and (v.startswith("/") or v.startswith("https://")) and len(v) < 500
+
+
+def validate_model3d(m) -> dict | None:
+    """content.model3d: {kind: "glb", url} or {kind: "photos", shape: "box"|"round", faces: {front: url, …}}."""
+    if m is None:
+        return None
+    if not isinstance(m, dict) or m.get("kind") not in ("glb", "photos"):
+        fail("3D model must be an uploaded .glb file or a set of side photos.")
+    if m["kind"] == "glb":
+        if not _media_url(m.get("url")):
+            fail("Upload the .glb 3D model file.")
+        return {"kind": "glb", "url": m["url"]}
+    if m.get("shape") not in REQUIRED_FACES:
+        fail("Choose the product's shape: box or round.")
+    faces = m.get("faces") or {}
+    if not isinstance(faces, dict) or any(k not in FACES or not _media_url(v) for k, v in faces.items()):
+        fail("Side photos must be uploaded images.")
+    return {"kind": "photos", "shape": m["shape"], "faces": {k: faces[k] for k in FACES if k in faces}}
+
+
+def dimensions_doc(row: dict) -> dict:
+    """Storefront shape for size and weight; `dimensions` is null until all three sides are known."""
+    dims = [row.get(c) for _, c, _ in DIMENSION_FIELDS]
+    return {
+        "dimensions": {"lengthMm": dims[0], "breadthMm": dims[1], "heightMm": dims[2]} if all(dims) else None,
+        "weightG": row.get("weight_g"), "maxLoadG": row.get("max_load_g"),
+        "packingKind": row.get("packing_kind") or "item", "orientation": row.get("orientation") or "any",
+        "fragile": bool(row.get("fragile")),
+        "hamperReady": not model_missing(row),
+    }
 
 
 def _rupees(paise: int):
@@ -39,6 +83,7 @@ def product_doc(row: dict, category_names: dict[str, str]) -> dict:
         "bulkAvailable": row["bulk_available"], "customizable": row["customizable"],
         "images": content.get("images") or [], "unit": content.get("unit") or "piece",
         "shortDescription": content.get("shortDescription") or "", "description": content.get("description") or "",
+        **dimensions_doc(row),
     }
 
 
@@ -77,6 +122,7 @@ def list_products(conn: Connection, q: str = "", category: str = "", status: str
     w = " and ".join(where)
     rows = all_(conn, f"""select id, sku, slug, name, category_slug, subcategory, price_paise, cost_paise, gst_rate_bps, hsn_code,
                                 min_order_quantity, active, stock_status, customizable, bulk_available, sort_order,
+                                length_mm, breadth_mm, height_mm, weight_g, max_load_g, packing_kind, orientation, fragile,
                                 coalesce(content->'images'->>0, '') as image, updated_at
                          from products where {w} order by sort_order, name limit :lim offset :off""", **params)
     total = one(conn, f"select count(*)::int as n from products where {w}", **{k: v for k, v in params.items() if k not in ("lim", "off")})["n"]
@@ -90,7 +136,7 @@ def _public(row):
 
 def get_product(conn: Connection, product_id: str):
     row = one(conn, "select * from products where id = :id", id=product_id) or fail("Product not found.")
-    return _public(row)
+    return {**_public(row), "hamperMissing": model_missing(row)}
 
 
 SLUG_RE = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
@@ -169,6 +215,25 @@ def _validate(data: dict, categories: set[str], creating: bool) -> dict:
     for k, col in (("active", "active"), ("customizable", "customizable"), ("bulkAvailable", "bulk_available")):
         if k in data:
             out[col] = bool(data[k])
+    for key, col, label in (*DIMENSION_FIELDS, ("weightG", "weight_g", "Weight"), ("maxLoadG", "max_load_g", "Maximum load")):
+        if key in data:
+            v = data[key]
+            if v is not None:
+                limit = MAX_DIMENSION_MM if key.endswith("Mm") else MAX_WEIGHT_G
+                unit = "mm" if key.endswith("Mm") else "g"
+                if not isinstance(v, int) or isinstance(v, bool) or not 1 <= v <= limit:
+                    fail(f"{label} must be a whole number from 1 to {limit} {unit}.")
+            out[col] = v
+    if "packingKind" in data:
+        if data["packingKind"] not in ("item", "hamper_box"):
+            fail("Unknown packing kind.")
+        out["packing_kind"] = data["packingKind"]
+    if "orientation" in data:
+        if data["orientation"] not in ("any", "upright"):
+            fail("Orientation must be any or upright.")
+        out["orientation"] = data["orientation"]
+    if "fragile" in data:
+        out["fragile"] = bool(data["fragile"])
     if "sortOrder" in data:
         out["sort_order"] = int(data.get("sortOrder") or 0)
     if "content" in data:
@@ -178,6 +243,13 @@ def _validate(data: dict, categories: set[str], creating: bool) -> dict:
         imgs = c.get("images", [])
         if not isinstance(imgs, list) or not all(isinstance(i, str) and (i.startswith("/") or i.startswith("https://")) for i in imgs):
             fail("Images must be site paths (/images/…) or https:// URLs.")
+        if "model3d" in c:
+            c = {**c, "model3d": validate_model3d(c["model3d"])}
+            if c["model3d"] is None:
+                c.pop("model3d")
+        hi = c.get("hamperImage")
+        if hi is not None and not (isinstance(hi, str) and (hi.startswith("/") or hi.startswith("https://"))):
+            fail("Hamper view photo must be a site path (/images/…) or an https:// URL.")
         if len(json.dumps(c)) > 200_000:
             fail("Product content is too large.")
         out["content"] = {k: v for k, v in c.items() if k not in COLUMN_FIELDS}
@@ -189,10 +261,24 @@ def _categories(conn) -> set[str]:
     return {c["slug"] for c in (cats["value"] if cats else [])}
 
 
+def _check_hamper_box(conn: Connection, fields: dict, product_id: str | None):
+    """A hamper box needs its internal size and maximum load, so the builder can fit products into it."""
+    current = (one(conn, """select packing_kind, length_mm, breadth_mm, height_mm, max_load_g from products where id = :i""",
+                   i=product_id) or {}) if product_id else {}
+    merged = {**current, **fields}
+    if merged.get("packing_kind") != "hamper_box":
+        return
+    missing = [label for col, label in (("length_mm", "inner length"), ("breadth_mm", "inner breadth"),
+                                         ("height_mm", "inner height"), ("max_load_g", "maximum load")) if not merged.get(col)]
+    if missing:
+        fail(f"A hamper box needs its {', '.join(missing)}.")
+
+
 def save_product(conn: Connection, actor, data: dict, product_id: str | None = None):
     if actor.role not in ("hsp_admin", "hsp_procurement"):
         fail("Only admin or procurement can edit products.")
     fields = _validate(data, _categories(conn), creating=product_id is None)
+    _check_hamper_box(conn, fields, product_id)
     if product_id is None:
         pid = str(data.get("id") or fields["slug"]).strip()
         if not SLUG_RE.fullmatch(pid):
@@ -212,6 +298,9 @@ def save_product(conn: Connection, actor, data: dict, product_id: str | None = N
                   cust=fields.get("customizable", False), bulk=fields.get("bulk_available", True), moq=fields.get("min_order_quantity", 1),
                   active=fields.get("active", False), stock=fields.get("stock_status", "in_stock"), sort=fields.get("sort_order", 1000),
                   content=json.dumps(fields["content"]))
+        size = {k: fields[k] for k in SIZE_COLUMNS if k in fields}
+        if size:
+            row = one(conn, f"update products set {', '.join(f'{k} = :{k}' for k in size)} where id = :pid returning *", pid=pid, **size)
         audit(conn, actor, "product.create", "product", pid, None, {"sku": row["sku"], "pricePaise": row["price_paise"], "active": row["active"]})
     else:
         before = get_product(conn, product_id)

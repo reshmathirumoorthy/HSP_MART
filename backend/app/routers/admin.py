@@ -63,6 +63,8 @@ def order_detail(number: str, _: CurrentUser = Depends(require_staff), conn: Con
         "lines": all_(conn, """select l.id::text, l.product_id, pr.sku, pr.name, l.quantity, l.credited_quantity,
                                       l.unit_price_paise, l.gst_rate_bps, l.personalisation is not null as personalised
                                from order_lines l join products pr on pr.id = l.product_id where l.order_id = :id order by pr.name""", id=oid),
+        "parcel": courier_svc.parcel(all_(conn, """select l.quantity, p.weight_g, p.packing_kind, p.length_mm, p.breadth_mm, p.height_mm
+                                                  from order_lines l join products p on p.id = l.product_id where l.order_id = :id""", id=oid)),
         "payments": all_(conn, """select id::text, provider_order_id, provider_payment_id, amount_paise, refunded_paise,
                                          status::text as status, created_at from payments where order_id = :id order by created_at desc""", id=oid),
         "purchaseOrders": all_(conn, """select po.id::text, po.number, po.status, po.total_cost_paise, s.name as supplier
@@ -526,6 +528,12 @@ def admin_product(product_id: str, _: CurrentUser = Depends(require_staff), conn
 @router.post("/products")
 def create_product(body: dict, user: CurrentUser = Depends(CATALOGUE_EDIT), conn: Connection = Depends(get_conn, scope="function")):
     return {"id": catalogue.save_product(conn, user, body)["id"]}
+
+
+@router.post("/products/{product_id}/media")
+def upload_product_media(product_id: str, file: UploadFile = File(...), user: CurrentUser = Depends(CATALOGUE_EDIT),
+                         conn: Connection = Depends(get_conn, scope="function")):
+    return files.upload_product_media(conn, user, product_id, file.filename or "upload", file.file.read(files.MAX_MODEL_BYTES + 1))
 
 
 @router.post("/products/{product_id}")

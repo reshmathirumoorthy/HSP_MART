@@ -32,6 +32,17 @@ def download(file_id: str, user: CurrentUser | None = Depends(current_user), con
         "x-content-type-options": "nosniff", "cache-control": "private, no-store"})
 
 
+@router.get("/media/{file_id}")
+def media(file_id: str, conn: Connection = Depends(get_conn, scope="function")):
+    """Public product media (side photos, 2D photos, 3D models). Only files uploaded as product media are served."""
+    f = one(conn, "select * from files where id = :id and kind = 'product_media'", id=file_id) if is_uuid(file_id) else None
+    body = get_object(f["storage_key"]) if f else None
+    if body is None:
+        return Response("Not found", status_code=404)
+    return Response(body, media_type=f["content_type"], headers={
+        "x-content-type-options": "nosniff", "cache-control": "public, max-age=31536000, immutable"})
+
+
 @router.post("/webhooks/razorpay")
 async def razorpay_webhook(request: Request, conn: Connection = Depends(get_conn, scope="function")):
     raw = await request.body()

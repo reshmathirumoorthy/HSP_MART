@@ -436,13 +436,25 @@ export function resolveCartItems(lines: CartLine[]): ResolvedCartItem[] {
       productId: line.productId,
       quantity: line.quantity,
       product,
-      lineTotal: product.price * line.quantity,
+      lineTotal: unitPrice(product, customization) * line.quantity,
       unavailable: !isInStock(product),
       customization,
     });
   }
 
   return items;
+}
+
+/**
+ * Unit price of a cart line. A box built in the hamper builder (packingKind "hamper_box") is charged as the box plus
+ * its contents; other hampers keep their own fixed price. The backend re-prices the same way at checkout.
+ */
+export function unitPrice(product: Product, customization?: CartCustomization): number {
+  if (product.packingKind !== "hamper_box" || !customization?.contents?.length) return product.price;
+  return customization.contents.reduce(
+    (sum, c) => sum + (getProductById(c.productId)?.price ?? 0) * c.quantity,
+    product.price,
+  );
 }
 
 export function getCartCount(lines: CartLine[]): number {

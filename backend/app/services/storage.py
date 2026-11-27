@@ -16,6 +16,7 @@ SIGNATURES = [
     ("image/png", "png", b"\x89PNG"),
     ("image/jpeg", "jpg", b"\xff\xd8\xff"),
     ("image/webp", "webp", b"RIFF"),
+    ("model/gltf-binary", "glb", b"glTF"),
 ]
 BLOB_API = "https://blob.vercel-storage.com"
 

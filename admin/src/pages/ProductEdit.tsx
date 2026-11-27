@@ -4,15 +4,27 @@ import { Link, useNavigate, useParams } from "react-router";
 import { api, rupeesToPaise } from "../api";
 import { btn, btnGhost, Card, ErrorText, Field, input, Loading } from "../ui";
 import { imgSrc, useCategories } from "./Products";
+import { Model3dPanel } from "./Model3dPanel";
+import type { Model3d } from "../lib/product3d";
 
 type Product = {
   id: string; sku: string; slug: string; name: string; categorySlug: string; subcategory: string | null; pricePaise: number;
   costPaise: number | null; gstRateBps: number; hsnCode: string | null; minOrderQuantity: number; active: boolean; stockStatus: string;
   customizable: boolean; bulkAvailable: boolean; sortOrder: number; content: Record<string, unknown>;
+  lengthMm: number | null; breadthMm: number | null; heightMm: number | null; weightG: number | null; maxLoadG: number | null;
+  packingKind: "item" | "hamper_box"; orientation: "any" | "upright"; fragile: boolean;
 };
+
+/** ISO 3394 modular package footprints (mm), from the 600 × 400 base module down. */
+const ISO_3394_SIZES: [number, number][] = [[600, 400], [400, 300], [300, 200], [200, 150], [400, 200], [300, 133], [200, 120], [150, 100]];
+
+const SIZE_FIELDS = [
+  ["lengthMm", "Length"], ["breadthMm", "Breadth"], ["heightMm", "Height"],
+] as const;
 
 const EMPTY: Product = { id: "", sku: "", slug: "", name: "", categorySlug: "", subcategory: "", pricePaise: 0, costPaise: null, gstRateBps: 1800,
   hsnCode: "", minOrderQuantity: 1, active: false, stockStatus: "in_stock", customizable: false, bulkAvailable: true, sortOrder: 1000,
+  lengthMm: null, breadthMm: null, heightMm: null, weightG: null, maxLoadG: null, packingKind: "item", orientation: "any", fragile: false,
   content: { shortDescription: "", description: "", images: [], unit: "piece" } };
 
 const rupees = (p: number | null) => (p == null ? "" : String(p / 100));
@@ -39,12 +51,17 @@ function Editor({ initial, creating, canEdit }: { initial: Product; creating: bo
   const [jsonError, setJsonError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const set = <K extends keyof Product>(k: K, v: Product[K]) => { setP({ ...p, [k]: v }); setSaved(false); };
-  const setContent = (k: string, v: unknown) => {
-    const c = { ...safeParse(json), [k]: v };
-    setJson(JSON.stringify(c, null, 2));
+  // Functional update: uploads finish asynchronously and must not overwrite each other's changes.
+  const setContent = (k: string, v: unknown | ((prev: unknown) => unknown)) => {
+    setJson((prev) => {
+      const c = safeParse(prev);
+      return JSON.stringify({ ...c, [k]: typeof v === "function" ? (v as (p: unknown) => unknown)(c[k]) : v }, null, 2);
+    });
     setSaved(false);
   };
   const content = safeParse(json);
+  const num = (v: string) => (v.trim() === "" ? null : Number(v));
+  const isBox = p.packingKind === "hamper_box";
 
   const save = useMutation({
     mutationFn: async () => {
@@ -57,6 +74,8 @@ function Editor({ initial, creating, canEdit }: { initial: Product; creating: bo
         pricePaise: rupeesToPaise(price), costPaise: cost.trim() ? rupeesToPaise(cost) : null, gstRateBps: Number(p.gstRateBps),
         hsnCode: p.hsnCode ?? "", minOrderQuantity: Number(p.minOrderQuantity) || 1, stockStatus: p.stockStatus, active: p.active,
         customizable: p.customizable, bulkAvailable: p.bulkAvailable, sortOrder: Number(p.sortOrder) || 0, content: c,
+        lengthMm: p.lengthMm, breadthMm: p.breadthMm, heightMm: p.heightMm, weightG: p.weightG,
+        maxLoadG: p.packingKind === "hamper_box" ? p.maxLoadG : null, packingKind: p.packingKind, orientation: p.orientation, fragile: p.fragile,
       };
       return creating ? api<{ id: string }>("/admin/products", body) : api(`/admin/products/${p.id}`, body).then(() => ({ id: p.id }));
     },
@@ -156,6 +175,62 @@ function Editor({ initial, creating, canEdit }: { initial: Product; creating: bo
               <Check label="Available in bulk" checked={p.bulkAvailable} onChange={(v) => set("bulkAvailable", v)} disabled={!canEdit} />
               <Field label="Listing order (lower first)"><input className={input} type="number" value={p.sortOrder} onChange={(e) => set("sortOrder", Number(e.target.value))} disabled={!canEdit} /></Field>
             </div>
+          </Card>
+          <Card title="Size and weight">
+            <div className="space-y-3" aria-label="Size and weight">
+              <Check label="This is a hamper box (products are packed inside it)" checked={isBox}
+                onChange={(v) => set("packingKind", v ? "hamper_box" : "item")} disabled={!canEdit} />
+              <p className="text-xs text-muted">
+                {isBox ? "Inner size of the box" : "Outer size of the product"}, length × breadth × height in millimetres (ISO 3394 order).
+              </p>
+              {isBox && (
+                <Field label="ISO 3394 box footprint">
+                  <select className={input} value="" disabled={!canEdit}
+                    onChange={(e) => { const [l, b] = e.target.value.split("x").map(Number); if (l) setP({ ...p, lengthMm: l, breadthMm: b }); setSaved(false); }}>
+                    <option value="">Pick a standard size…</option>
+                    {ISO_3394_SIZES.map(([l, b]) => <option key={`${l}x${b}`} value={`${l}x${b}`}>{l} × {b} mm</option>)}
+                  </select>
+                </Field>
+              )}
+              <div className="grid grid-cols-3 gap-2">
+                {SIZE_FIELDS.map(([k, label]) => (
+                  <Field key={k} label={`${label} (mm)`}>
+                    <input className={input} type="number" min={1} max={2000} step={1} value={p[k] ?? ""} disabled={!canEdit}
+                      onChange={(e) => set(k, num(e.target.value))} />
+                  </Field>
+                ))}
+              </div>
+              <Field label={isBox ? "Empty box weight (g)" : "Weight (g)"}>
+                <input className={input} type="number" min={1} max={50000} step={1} value={p.weightG ?? ""} disabled={!canEdit}
+                  onChange={(e) => set("weightG", num(e.target.value))} />
+              </Field>
+              {isBox && (
+                <Field label="Maximum load (g)">
+                  <input className={input} type="number" min={1} max={50000} step={1} value={p.maxLoadG ?? ""} disabled={!canEdit}
+                    onChange={(e) => set("maxLoadG", num(e.target.value))} />
+                </Field>
+              )}
+              {!isBox && <>
+                <Check label="Keep upright (this way up)" checked={p.orientation === "upright"} onChange={(v) => set("orientation", v ? "upright" : "any")} disabled={!canEdit} />
+                <Check label="Fragile (nothing packed on top)" checked={p.fragile} onChange={(v) => set("fragile", v)} disabled={!canEdit} />
+              </>}
+            </div>
+          </Card>
+          <Card title={isBox ? "Box 3D model" : "2D photo and 3D model"}>
+            <Model3dPanel
+              productId={p.id} creating={creating} canEdit={canEdit} isBox={isBox}
+              dims={{ lengthMm: p.lengthMm ?? undefined, breadthMm: p.breadthMm ?? undefined, heightMm: p.heightMm ?? undefined }}
+              model={content.model3d as Model3d | undefined}
+              onModel={(m) => setContent("model3d", m)}
+              onFace={(f, url) => setContent("model3d", (prev: unknown) => {
+                const m = prev as Model3d | undefined;
+                return m?.kind === "photos" ? { ...m, faces: { ...m.faces, [f]: url } } : { kind: "photos", shape: "box", faces: { [f]: url } };
+              })}
+              image2d={content.hamperImage as string | undefined}
+              onImage2d={(u) => setContent("hamperImage", u)}
+              filler={((content.hamperBox as { filler?: "shred" | "none" } | undefined)?.filler) ?? "shred"}
+              onFiller={(f) => setContent("hamperBox", { ...((content.hamperBox as object) ?? {}), filler: f })}
+            />
           </Card>
           {canEdit && (
             <div className="space-y-2">

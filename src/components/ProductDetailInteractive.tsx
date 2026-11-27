@@ -109,6 +109,12 @@ export function ProductDetailInteractive({ product }: Props) {
         <div className={purchaseStyles.panel}>
           <h1 className={purchaseStyles.title}>{displayName(product.name)}</h1>
           {summary ? <p className={purchaseStyles.summary}>{summary}</p> : null}
+          {product.packingKind === "hamper_box" && product.dimensions ? (
+            <p className={purchaseStyles.summary}>
+              Inside {product.dimensions.lengthMm} × {product.dimensions.breadthMm} × {product.dimensions.heightMm} mm.{" "}
+              <Link href="/hampers/build">Build your own hamper in this box</Link>
+            </p>
+          ) : null}
 
           <div className={purchaseStyles.priceRow}>
             <p className={purchaseStyles.price}>{productPriceLabel(product)}</p>

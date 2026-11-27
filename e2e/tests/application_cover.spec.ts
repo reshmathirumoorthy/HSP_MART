@@ -1,31 +1,34 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from "@playwright/test";
+import { sql } from "../helpers";
 
-// Example test to cover the complete application
-
-test.describe('Application Coverage', () => {
+// Smoke test of the main storefront journeys: navigation, search and add to cart.
+test.describe("Application Coverage", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000'); // Adjust the URL based on your application
+    await page.goto("/");
   });
 
-  test('should navigate through the application', async ({ page }) => {
-    await page.click('text=Home'); // Adjust the selector based on your application
-    await expect(page).toHaveURL('/');
-
-    await page.click('text=Products');
-    await expect(page).toHaveURL('/products');
-
-    await page.click('text=Cart');
-    await expect(page).toHaveURL('/cart');
+  test("navigates through the main pages", async ({ page }) => {
+    const nav = page.getByRole("navigation", { name: "Main navigation" });
+    await nav.getByRole("link", { name: "Products", exact: true }).click();
+    await expect(page).toHaveURL(/\/products/);
+    await nav.getByRole("link", { name: "Home", exact: true }).click();
+    await expect(page).toHaveURL(/\/$/);
+    await page.getByRole("banner").getByRole("button", { name: /Open cart/ }).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
   });
 
-  test('should perform a search', async ({ page }) => {
-    await page.fill('input[name="search"]', 'iPhone');
-    await page.click('button[type="submit"]');
-    await expect(page).toHaveURL('/search?query=iPhone');
+  test("searches from the header", async ({ page }) => {
+    const box = page.getByRole("banner").getByLabel("Search products");
+    await box.fill("pen");
+    await box.press("Enter");
+    await expect(page).toHaveURL(/\/search\?q=pen/);
   });
 
-  test('should add an item to the cart', async ({ page }) => {
-    await page.click('text=Add to Cart');
-    await expect(page).toHaveText('Added to Cart');
+  test("adds an item to the cart", async ({ page }) => {
+    const [p] = await sql`select slug from products where active and price_paise > 0 and min_order_quantity = 1
+                          and not customizable and stock_status = 'in_stock' order by sort_order limit 1`;
+    await page.goto(`/products/${p.slug}`);
+    await page.getByRole("button", { name: "Add to cart" }).first().click();
+    await expect(page.getByText(/Added to cart/).first()).toBeVisible();
   });
 });

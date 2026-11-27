@@ -9,6 +9,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import {
   getCartLineKey,
   getProductById,
+  unitPrice,
   type CartLine,
   type ResolvedCartItem,
 } from "@/lib/cart";
@@ -129,7 +130,7 @@ export function CartItem({
             <Link href={`/products/${product.slug}`} className={styles.name}>
               {product.name}
             </Link>
-            <p className={styles.unit}>{formatPrice(product.price)} each</p>
+            <p className={styles.unit}>{formatPrice(unitPrice(product, customization))} each</p>
 
             {variantLabel ? (
               <p className={styles.variant}>Colour: {variantLabel}</p>

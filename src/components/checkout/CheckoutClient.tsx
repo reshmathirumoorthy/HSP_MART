@@ -215,11 +215,16 @@ export function CheckoutClient() {
         state: data.address.state.trim(),
         pincode: data.address.pincode.trim(),
       },
-      items: resolvedItems.map((item) => ({
-        productId: item.productId,
-        quantity: item.quantity,
-        personalisation: item.customization ? stripInlineMedia(item.customization) : undefined,
-      })),
+      items: resolvedItems.map((item) =>
+        // A built hamper sends its contents; the backend re-checks the fit and prices each product.
+        item.product.packingKind === "hamper_box" && item.customization?.contents?.length
+          ? { productId: item.productId, quantity: item.quantity, hamper: { contents: item.customization.contents } }
+          : {
+              productId: item.productId,
+              quantity: item.quantity,
+              personalisation: item.customization ? stripInlineMedia(item.customization) : undefined,
+            },
+      ),
     })
       .then((result) => {
         if (!result.ok) {

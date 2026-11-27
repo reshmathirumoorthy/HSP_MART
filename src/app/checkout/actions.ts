@@ -6,7 +6,7 @@ export type OnlineOrderInput = {
   clientRef: string;
   customer: { fullName: string; email: string; phone: string };
   address: { line1: string; line2?: string; city: string; state: string; pincode: string };
-  items: { productId: string; quantity: number; personalisation?: unknown }[];
+  items: { productId: string; quantity: number; personalisation?: unknown; hamper?: { contents: { productId: string; quantity: number }[] } }[];
 };
 
 export type PlaceOrderResult = { ok: true; orderNumber: string } | { ok: false; error: string; needLogin?: boolean };

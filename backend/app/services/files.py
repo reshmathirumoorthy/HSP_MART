@@ -72,6 +72,32 @@ def upload_delivery_proof(conn: Connection, user, order_number: str, filename: s
     return row
 
 
+MAX_MODEL_BYTES = 25 * 1024 * 1024
+PRODUCT_MEDIA_TYPES = {"image/png", "image/jpeg", "image/webp", "model/gltf-binary"}
+
+
+def upload_product_media(conn: Connection, user, product_id: str, filename: str, data: bytes) -> dict:
+    """Side photos, 2D photos and 3D models for the hamper builder. Public once uploaded (catalogue imagery)."""
+    if user.role not in ("hsp_admin", "hsp_procurement"):
+        fail("Only admin or procurement can edit products.")
+    if not one(conn, "select 1 as x from products where id = :i", i=product_id):
+        fail("Product not found.")
+    if not data:
+        fail("Choose a file to upload.")
+    kind = sniff(data)
+    if not kind or kind[0] not in PRODUCT_MEDIA_TYPES:
+        fail("Upload a PNG, JPEG or WebP photo, or a .glb 3D model.")
+    limit = MAX_MODEL_BYTES if kind[0] == "model/gltf-binary" else MAX_UPLOAD_BYTES
+    if len(data) > limit:
+        fail(f"Files of this type must be {limit // (1024 * 1024)} MB or smaller.")
+    key, sha = put_object(data, "product-media", kind[1], kind[0])
+    row = one(conn, """insert into files (kind, entity, entity_id, filename, content_type, size_bytes, sha256, storage_key, uploaded_by)
+                       values ('product_media', 'product', :e, :f, :t, :n, :sha, :k, cast(:u as uuid)) returning id::text""",
+              e=product_id, f=safe_name(filename), t=kind[0], n=len(data), sha=sha, k=key, u=user.id)
+    audit(conn, user, "product.media_upload", "product", product_id, None, {"file": row["id"], "type": kind[0]})
+    return {"id": row["id"], "url": f"/api/media/{row['id']}", "contentType": kind[0]}
+
+
 def can_read_file(conn: Connection, user, f) -> bool:
     """Staff; the order's customer; the supplier holding a PO on the order."""
     if user.role in STAFF_ROLES:

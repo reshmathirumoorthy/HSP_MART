@@ -1,0 +1,39 @@
+{
+  "boxes": {
+    "small": { "lengthMm": 250, "breadthMm": 200, "heightMm": 120, "maxLoadG": 2000 },
+    "large": { "lengthMm": 400, "breadthMm": 300, "heightMm": 200, "maxLoadG": 6000 }
+  },
+  "items": {
+    "mug": { "productId": "mug", "lengthMm": 100, "breadthMm": 100, "heightMm": 90, "weightG": 400, "orientation": "upright" },
+    "notebook": { "productId": "notebook", "lengthMm": 210, "breadthMm": 150, "heightMm": 20, "weightG": 300 },
+    "bottle": { "productId": "bottle", "lengthMm": 80, "breadthMm": 80, "heightMm": 160, "weightG": 700, "orientation": "upright" },
+    "rod": { "productId": "rod", "lengthMm": 300, "breadthMm": 50, "heightMm": 50, "weightG": 200 },
+    "brick": { "productId": "brick", "lengthMm": 115, "breadthMm": 90, "heightMm": 100, "weightG": 300 },
+    "tile": { "productId": "tile", "lengthMm": 150, "breadthMm": 150, "heightMm": 60, "weightG": 250 },
+    "heavy": { "productId": "heavy", "lengthMm": 100, "breadthMm": 100, "heightMm": 50, "weightG": 1200 },
+    "jar": { "productId": "jar", "lengthMm": 90, "breadthMm": 90, "heightMm": 120, "weightG": 500, "orientation": "upright", "fragile": true },
+    "tray": { "productId": "tray", "lengthMm": 380, "breadthMm": 280, "heightMm": 30, "weightG": 600 },
+    "pen": { "productId": "pen", "lengthMm": 140, "breadthMm": 15, "heightMm": 15, "weightG": 20 }
+  },
+  "cases": [
+    { "id": "empty", "box": "small", "items": [], "expect": { "ok": true, "reasons": [], "fillPercent": 0, "weightG": 0 } },
+    { "id": "two-items", "box": "small", "items": ["notebook", "pen"],
+      "expect": { "ok": true, "reasons": [], "fillPercent": 16, "weightG": 320, "placed": 2 } },
+    { "id": "mug-and-notebook-do-not-share", "box": "small", "items": ["mug", "notebook"],
+      "expect": { "ok": false, "reasons": ["cannot_pack"], "fillPercent": 37, "weightG": 700, "placed": 1 } },
+    { "id": "too-tall", "box": "small", "items": ["bottle"],
+      "expect": { "ok": false, "reasons": ["too_tall"], "oversized": ["bottle"] } },
+    { "id": "too-large", "box": "small", "items": ["rod"],
+      "expect": { "ok": false, "reasons": ["too_large"], "oversized": ["rod"] } },
+    { "id": "over-weight", "box": "small", "items": ["heavy", "heavy"],
+      "expect": { "ok": false, "reasons": ["over_weight"], "weightG": 2400, "placed": 2 } },
+    { "id": "over-volume", "box": "small", "items": ["brick", "brick", "brick", "brick"],
+      "expect": { "ok": false, "reasons": ["over_volume"], "fillPercent": 100 } },
+    { "id": "cannot-pack", "box": "small", "items": ["tile", "tile"],
+      "expect": { "ok": false, "reasons": ["cannot_pack"], "fillPercent": 65.2, "placed": 1 } },
+    { "id": "bottle-in-large", "box": "large", "items": ["bottle"],
+      "expect": { "ok": true, "reasons": [], "placed": 1 } },
+    { "id": "mixed-large", "box": "large", "items": ["tray", "jar", "jar", "mug", "notebook", "pen", "brick"],
+      "expect": { "ok": true, "reasons": [], "placed": 7, "weightG": 2620 } }
+  ]
+}
